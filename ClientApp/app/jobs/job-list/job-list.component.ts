@@ -3,7 +3,7 @@
 @Component({
     selector: 'job-list',
     templateUrl: './job-list.component.html',
-    styleUrls: ['./job-list.component.css', '../../sharedStyles.css']
+    styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent {
     constructor() {

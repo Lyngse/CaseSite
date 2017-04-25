@@ -1,6 +1,6 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Lato:100,200,300,700,300italic");
-@import url("../../../../wwwroot/assets/font-awesome/css/font-awesome.css");
+@import url("../../wwwroot/assets/font-awesome/css/font-awesome.css");
 /* ------------------------------- */
 /* ----- Global CSS Classes ----- */
 /* -------------------------------- */
@@ -24,7 +24,9 @@ section {
     padding: 80px 0;
 }
 
-
+.content {
+    margin-top: 70px;
+}
 /* ----- Headers ----- */
 h2 {
     font-size: 180%;
@@ -55,4 +57,11 @@ h2:after {
     line-height: 145%;
     width: 70%;
     margin-left: 15%;
+}
+
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    .body-content {
+        padding-top: 50px;
+    }
 }

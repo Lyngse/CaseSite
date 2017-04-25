@@ -3,10 +3,10 @@
 @Component({
     selector: 'job-list',
     templateUrl: './job-list.component.html',
-    styleUrls: ['./job-list.component.css', '../../sharedStyles.css']
+    styleUrls: ['./job-list.component.css']
 })
-export class ExampleComponent {
+export class JobCardComponent {
     constructor() {
-        this.name = 'Sam';
+
     }
 }
