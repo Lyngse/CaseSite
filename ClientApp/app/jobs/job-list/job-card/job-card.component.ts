@@ -1,9 +1,9 @@
 ﻿import { Component } from '@angular/core';
 
 @Component({
-    selector: 'job-list',
-    templateUrl: './job-list.component.html',
-    styleUrls: ['./job-list.component.css']
+    selector: 'job-card',
+    templateUrl: './job-card.component.html',
+    styleUrls: ['./job-card.component.css']
 })
 export class JobCardComponent {
     constructor() {

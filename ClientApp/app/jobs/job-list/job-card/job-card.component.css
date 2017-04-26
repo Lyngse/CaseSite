@@ -1,1 +1,59 @@
-﻿
+﻿.card-box {
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    margin: 10px;
+}
+
+.card-box p {
+    font-size: 14px;
+}
+
+.card-logo img {
+    width: 150px;
+    height: auto;
+}
+
+.card-titel h3 {
+    font-weight: 400;
+}
+
+.card-firm h4 {
+    font-weight: 300;
+}
+
+.card-location p {
+    font-size: 16px
+}
+
+.card-workplace p::after {
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.card-workform p::after {
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+
+.flexbox-nonewline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+
+.flexitem {
+    flex: 0 0 50%;
+}

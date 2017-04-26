@@ -49,7 +49,8 @@
 .social-facebook,
 .social-twitter,
 .social-snapchat,
-.social-instagram {
+.social-instagram,
+.social-linkedin{
     -webkit-transition: color 0.4s;
     transition: color 0.4s;
 }
@@ -67,7 +68,11 @@
 }
 
 .social-instagram:hover {
-    color: #517fa4;
+    color: #8a3ab9;
+}
+
+.social-linkedin:hover {
+    color: #0077b5;
 }
 
 
