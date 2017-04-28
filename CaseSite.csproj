@@ -62,6 +62,7 @@
     <Content Include="wwwroot\assets\font-awesome\scss\_screen-reader.scss" />
     <Content Include="wwwroot\assets\font-awesome\scss\_stacked.scss" />
     <Content Include="wwwroot\assets\font-awesome\scss\_variables.scss" />
+    <Content Include="wwwroot\assets\images\dizy-cow-free-logo.jpg" />
     <Content Include="wwwroot\assets\images\headerImg.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,10 @@
     <None Include="wwwroot\assets\font-awesome\scss\_screen-reader.scss" />
     <None Include="wwwroot\assets\font-awesome\scss\_stacked.scss" />
     <None Include="wwwroot\assets\font-awesome\scss\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientApp\app\login\" />
+    <Folder Include="ClientApp\app\business-manager\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

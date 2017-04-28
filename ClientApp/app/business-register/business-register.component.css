@@ -1,0 +1,22 @@
+﻿.form-feedback {
+    color: #e51c23;
+    font-size: 14px;
+}
+
+.terms-box {
+    width: 80%;
+    height: 500px;
+    display: block;
+    margin-top:50px;
+}
+
+.terms-content {
+    height: calc(-56px + 100%);
+    overflow: scroll;
+    overflow-x: hidden;
+    font-size: 14px;
+}
+
+.terms-cb {
+    font-size: 16px;
+}

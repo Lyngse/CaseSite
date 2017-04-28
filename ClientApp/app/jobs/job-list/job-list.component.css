@@ -1,7 +1,4 @@
 ﻿.list-content {
-    -webkit-box-shadow: 0 8px 10px -6px black;
-    -moz-box-shadow: 0 8px 10px -6px black;
-    box-shadow: 0 8px 10px -6px black;
     margin-bottom: 25px;
     height: auto;
 }

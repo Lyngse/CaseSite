@@ -16,6 +16,13 @@
 
 .card-titel h3 {
     font-weight: 400;
+    margin-bottom: 0;
+}
+
+.card-titel p {
+    font-size: 12px;
+    color: #c1c1c1;
+    font-style: italic;
 }
 
 .card-firm h4 {
