@@ -1,4 +1,4 @@
-﻿<div class="container-fluid">
+﻿<div class="container-fluid" *ngIf="!showEdit">
     <div class="row">
         <div class="panel panel-default list-content">
             <div class="panel-body flexbox-newline">
@@ -19,6 +19,33 @@
                 </div>
                 <div class="flexitem">
                     <job-card></job-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" *ngIf="showEdit">
+    <div class="row">
+        <div class="panel panel-default list-content">
+            <div class="panel-body flexbox-newline">
+                <div class="flexitem">
+                    <job-card showEdit="true"></job-card>
+                </div>
+                <div class="flexitem">
+                    <job-card showEdit="true"></job-card>
+                </div>
+                <div class="flexitem">
+                    <job-card showEdit="true"></job-card>
+                </div>
+                <div class="flexitem">
+                    <job-card showEdit="true"></job-card>
+                </div>
+                <div class="flexitem">
+                    <job-card showEdit="true"></job-card>
+                </div>
+                <div class="flexitem">
+                    <job-card showEdit="true"></job-card>
                 </div>
             </div>
         </div>

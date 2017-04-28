@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'job-list',
@@ -6,6 +6,7 @@
     styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent {
+    @Input() showEdit: boolean;
     constructor() {
 
     }
