@@ -64,3 +64,8 @@
 .flexitem {
     flex: 0 0 50%;
 }
+
+.card-btn {
+    width: 96px;
+    margin-bottom: 10px;
+}

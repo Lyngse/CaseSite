@@ -8,7 +8,8 @@ import {
     FormControl,
     FormGroup,
 } from '@angular/forms';
-import { BusinessRegistration } from '../model/business-registration';
+import { Business } from '../model/business';
+import { BusinessService } from '../services/business.service';
 
 @Component({
     selector: 'business-register',
@@ -16,19 +17,18 @@ import { BusinessRegistration } from '../model/business-registration';
     styleUrls: ['./business-register.component.css'],
 })
 export class BuisnessRegisterComponent {
-
-    constructor() {
+    isAccepted: boolean = false;
+    constructor(private businessService: BusinessService) {
 
     }
 
-    model: BusinessRegistration = new BusinessRegistration();
+    model: Business = new Business();
     @ViewChild('f') form: any;
 
     onSubmit() {
         if (this.form.valid) {
-            console.log("Form submitted!");
-            this.form.reset();
-            //post business og navigate til business manager
+
+            this.businessService.createBusiness(this.model);
         }
     }
 

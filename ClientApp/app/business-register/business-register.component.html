@@ -1,7 +1,7 @@
-﻿<div class="container-fluid">
+﻿<div class="container-fluid contentRow">
     <div class="row">
         <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6" style="margin-top: 50px;">
 
                 <div class="form-group"
                      [ngClass]="{
@@ -80,9 +80,6 @@
                     <input type="file" id="logo" name="logo" [(ngModel)]="model.logo" #logo="ngModel">
                     <p class="help-block" style="font-size:16px;">Upload jeres logo, som vil blive vist på opslåede jobs.</p>
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg" [disabled]="f.invalid && !model.isAccepted" style="margin-bottom:20px">Opret virksomhed</button>
-                </div>
             </div>
             <div class="col-md-6 col-sm-6" style="display:flex;justify-content:center;flex-wrap: wrap;">
                 <div class="terms-box panel panel-warning">
@@ -102,12 +99,15 @@
                 <div class="form-group">
                     <div class="checkbox terms-cb">
                         <label>
-                            <input type="checkbox" name="isAccepted" [(ngModel)]="model.isAccepted"> Accepter handelsbetingelserne
+                            <input type="checkbox" name="isAccepted" [(ngModel)]="isAccepted"> Jeg accepterer handelsbetingelserne
                         </label>
                     </div>
                 </div>               
             </div>
+            <div class="col-md-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="f.invalid || !isAccepted" style="margin-bottom:20px">Opret virksomhed</button>
+            </div>
         </form>
     </div>
 </div>
-               
+              

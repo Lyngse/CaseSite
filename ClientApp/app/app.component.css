@@ -58,3 +58,11 @@ section {
     width: 70%;
     margin-left: 15%;
 }
+
+.line-separator {
+    height: 1px;
+    background: #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}

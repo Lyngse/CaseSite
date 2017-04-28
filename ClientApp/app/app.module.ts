@@ -9,6 +9,7 @@ import { JobSearchComponent } from './jobs/job-search/job-search.component';
 import { JobListComponent } from './jobs/job-list/job-list.component';
 import { JobCardComponent } from './jobs/job-list/job-card/job-card.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
+import { BusinessService } from './services/business.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -26,7 +27,8 @@ import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         AppRoutingModule,
         FormsModule,
-    ]
+    ],
+    providers: [BusinessService]
 })
 export class AppModule {
 }
