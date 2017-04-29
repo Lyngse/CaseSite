@@ -6,6 +6,7 @@ import { JobsComponent } from './jobs/jobs.component';
 import { BuisnessRegisterComponent } from './business-register/business-register.component';
 import { BusinessManagerComponent } from './business-manager/business-manager.component';
 import { LoginComponent } from './login/login.component';
+import { CreateEditJobComponent } from './business-manager/create-edit-job/create-edit-job.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'jobs', component: JobsComponent },
     { path: 'registrervirksomhed', component: BuisnessRegisterComponent },
     { path: 'business', component: BusinessManagerComponent },
+    { path: 'business/createeditjob', component: CreateEditJobComponent },
     { path: 'login', component: LoginComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
@@ -23,4 +25,11 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [FrontpageComponent, JobsComponent, BuisnessRegisterComponent, BusinessManagerComponent, LoginComponent]
+export const routingComponents = [
+    FrontpageComponent,
+    JobsComponent,
+    BuisnessRegisterComponent,
+    BusinessManagerComponent,
+    LoginComponent,
+    CreateEditJobComponent
+]
