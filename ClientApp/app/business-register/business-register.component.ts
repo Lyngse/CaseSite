@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { Business } from '../model/business';
 import { BusinessService } from '../services/business.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
     selector: 'business-register',
@@ -18,7 +19,7 @@ import { BusinessService } from '../services/business.service';
 })
 export class BuisnessRegisterComponent {
     isAccepted: boolean = false;
-    constructor(private businessService: BusinessService) {
+    constructor(private businessService: BusinessService, private accountService: AccountService) {
 
     }
 
@@ -27,8 +28,15 @@ export class BuisnessRegisterComponent {
 
     onSubmit() {
         if (this.form.valid) {
-
-            this.businessService.createBusiness(this.model);
+            this.accountService.registerUser(this.model.username, this.model.password, this.model.email).then((response) => {
+                if (response.ok) {
+                    let userId = response._body;
+                    this.businessService.createBusiness(this.model, userId).then((response) => {
+                        console.log(response);
+                    })
+                }
+            });
+            //this.businessService.createBusiness(this.model);
         }
     }
 

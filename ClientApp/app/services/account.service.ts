@@ -26,6 +26,11 @@ export class AccountService {
             .catch(this.handleError);
     }
 
+    registerUser(username: string, password: string, email: string): Promise<any> {
+        return this.http
+            .post('api/account/registerbusinessuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
+            .toPromise()
+    }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

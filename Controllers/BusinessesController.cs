@@ -49,7 +49,7 @@ namespace CaseSite.Controllers
                 return NotFound();
             }
 
-            return Ok(business);
+            return Ok(new { business = simpleBusinessObject(business), jobs = business.Jobs });
         }
 
         // PUT: api/Businesses/5
@@ -135,7 +135,13 @@ namespace CaseSite.Controllers
 
         private dynamic simpleBusinessObject(Business business)
         {
-            return new { Id = business.Id, Name = business.Name, UserId = business.UserId };
+            return new {
+                id = business.Id,
+                name = business.Name,
+                description = business.Description,
+                username = business.User.UserName,
+                email = business.User.Email
+            };
         }
     }
 }

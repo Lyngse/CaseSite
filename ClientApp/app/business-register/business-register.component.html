@@ -59,7 +59,7 @@
                            id="password"
                            name="password"
                            [(ngModel)]="model.password"
-                           pattern="^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$"
+                           pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
                            required
                            #password="ngModel">
                     <div class="form-feedback"
