@@ -8,7 +8,7 @@ import {
     FormControl,
     FormGroup,
 } from '@angular/forms';
-
+import { Job } from '../../model/job';
 
 @Component({
     selector: 'create-edit-job',
@@ -17,5 +17,15 @@ import {
 })
 export class CreateEditJobComponent {
     constructor() {
+    }
+
+    model: Job = new Job();
+    @ViewChild('f') form: any;
+
+    onSubmit() {
+        if (this.form.valid) {
+
+            //this.businessService.createBusiness(this.model);
+        }
     }
 }
