@@ -8,9 +8,10 @@ using CaseSite.Models;
 namespace CaseSite.Migrations
 {
     [DbContext(typeof(CaseSiteContext))]
-    partial class CaseSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20170428212734_userAndRoles")]
+    partial class userAndRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -23,15 +24,17 @@ namespace CaseSite.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("Email");
+
                     b.Property<byte[]>("Logo");
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("Password");
+
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Business");
                 });
@@ -217,13 +220,6 @@ namespace CaseSite.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("CaseSite.Models.Business", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CaseSite.Models.Job", b =>

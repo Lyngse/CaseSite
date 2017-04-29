@@ -21,9 +21,9 @@ namespace CaseSite.Models
         public int MinNumPersons { get; set; }
 
         public decimal RewardValue { get; set; }
-        //foreing key
+
         public int BusinessId { get; set; }
-        //navigation property
+
         public virtual Business Business { get; set; }
     }
 }

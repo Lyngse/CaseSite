@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using CaseSite.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CaseSite
 {
@@ -31,6 +32,9 @@ namespace CaseSite
             services.AddDbContext<CaseSiteContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CaseSiteContext")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<CaseSiteContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +57,7 @@ namespace CaseSite
             }
             
             app.UseStaticFiles();
-
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -64,6 +68,14 @@ namespace CaseSite
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            createRolesAndUsers();
+        }
+
+        private void createRolesAndUsers()
+        {
+           
+
         }
     }
 }

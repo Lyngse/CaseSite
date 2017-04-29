@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CaseSite.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CaseSite.Controllers
 {
@@ -12,29 +15,34 @@ namespace CaseSite.Controllers
     public class BusinessesController : Controller
     {
         private readonly CaseSiteContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public BusinessesController(CaseSiteContext context)
+        public BusinessesController(CaseSiteContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Businesses
-        [HttpGet]
-        public IEnumerable<Business> GetBusiness()
-        {
-            return _context.Business;
-        }
+        //[HttpGet]
+        //public IEnumerable<Business> GetBusiness()
+        //{
+        //    return _context.Business;
+        //}
 
         // GET: api/Businesses/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetBusiness([FromRoute] int id)
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetBusiness()
         {
-            if (!ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user == null)
             {
-                return BadRequest(ModelState);
+                return NotFound(new { userError = "user not found" });
             }
 
-            var business = await _context.Business.SingleOrDefaultAsync(m => m.Id == id);
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
 
             if (business == null)
             {
@@ -45,36 +53,38 @@ namespace CaseSite.Controllers
         }
 
         // PUT: api/Businesses/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBusiness([FromRoute] int id, [FromBody] Business business)
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> PutBusiness([FromBody] Business business)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != business.Id)
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+
+            var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
+
+            if(serverBusiness == null)
+            {
+                return NotFound();
+            }
+
+            if (serverBusiness.Id != business.Id)
             {
                 return BadRequest();
             }
 
             _context.Entry(business).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BusinessExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            
+            await _context.SaveChangesAsync();
+            
 
             return NoContent();
         }
@@ -87,23 +97,31 @@ namespace CaseSite.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == business.UserId);
+            if (user == null)
+            {
+                return BadRequest(new { usererror = "user not found" });
+            }
+            business.User = user;
             _context.Business.Add(business);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.Id }, business);
+            return CreatedAtAction("GetBusiness", new { id = business.Id }, simpleBusinessObject(business));
         }
 
         // DELETE: api/Businesses/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBusiness([FromRoute] int id)
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DeleteBusiness()
         {
-            if (!ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
             {
-                return BadRequest(ModelState);
+                return NotFound(new { userError = "user not found" });
             }
 
-            var business = await _context.Business.SingleOrDefaultAsync(m => m.Id == id);
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
             if (business == null)
             {
                 return NotFound();
@@ -112,12 +130,12 @@ namespace CaseSite.Controllers
             _context.Business.Remove(business);
             await _context.SaveChangesAsync();
 
-            return Ok(business);
+            return Ok(simpleBusinessObject(business));
         }
 
-        private bool BusinessExists(int id)
+        private dynamic simpleBusinessObject(Business business)
         {
-            return _context.Business.Any(e => e.Id == id);
+            return new { Id = business.Id, Name = business.Name, UserId = business.UserId };
         }
     }
 }

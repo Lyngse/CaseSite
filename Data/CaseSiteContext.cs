@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaseSite.Models
 {
-    public class CaseSiteContext : DbContext
+    public class CaseSiteContext : IdentityDbContext
     {
         public CaseSiteContext (DbContextOptions<CaseSiteContext> options)
             : base(options)
