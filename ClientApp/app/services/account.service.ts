@@ -16,7 +16,13 @@ export class AccountService {
         return this.http
             .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
             .toPromise()
-            .then((res) => res.json().data)
+            .catch(this.handleError);
+    }
+
+    logout(): Promise<any> {
+        return this.http
+            .post('api/account/logout', this.options)
+            .toPromise()
             .catch(this.handleError);
     }
 
