@@ -1,0 +1,29 @@
+﻿<div class="container-fluid contentRow">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 panel panel-default" style="margin-top:50px;"> 
+            <div class="panel-body">
+                <form novalidate (ngSubmit)="onLogin()" #f="ngForm">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <label for="username">Brugernavn</label>
+                            <input type="text" id="username" class="form-control" name="username" [(ngModel)]="username" #username="ngModel" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Adgangskode</label>
+                            <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password" #password="ngModel" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                        <button type="button" class="btn btn-primary btn">Login</button>
+                    </div>
+                </form>
+                <div class="col-sm-6 col-xs-12 text-center">
+                    <button class="btn btn-link">Opret ny bruger</button>
+                </div>
+                <div class="col-sm-6 col-xs-12 text-center">
+                    <button class="btn btn-link">Glemt din adgangskode?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

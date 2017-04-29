@@ -11,6 +11,7 @@ import { JobCardComponent } from './jobs/job-list/job-card/job-card.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 
 import { BusinessService } from './services/business.service';
+import { AccountService } from './services/account.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -29,7 +30,7 @@ import { BusinessService } from './services/business.service';
         AppRoutingModule,
         FormsModule,
     ],
-    providers: [BusinessService]
+    providers: [BusinessService, AccountService]
 })
 export class AppModule {
 }
