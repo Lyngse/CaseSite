@@ -40,7 +40,7 @@ namespace CaseSite
 
             services.Configure<IdentityOptions>(opt =>
             {
-                opt.Cookies.ApplicationCookie.LoginPath = new PathString("/login");
+                opt.Cookies.ApplicationCookie.AutomaticChallenge = false;
             });
 
             services.AddAntiforgery(options => options.FormFieldName = "X-XSRF-TOKEN");
