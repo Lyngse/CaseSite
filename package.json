@@ -38,6 +38,7 @@
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.4",
     "json-loader": "^0.5.4",
+    "momentjs": "^2.0.0",
     "ng2-bs3-modal": "^0.10.4",
     "preboot": "^4.5.2",
     "raw-loader": "^0.5.1",

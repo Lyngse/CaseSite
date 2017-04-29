@@ -19,6 +19,16 @@ export class CreateEditJobComponent {
     constructor() {
     }
 
+
+    jobTypes: string[] = [
+        'Grafisk Opgave',
+        'Video Opgave',
+        'Event Opgave',
+        'Strategisk Opgave',
+        'Målgruppeanalyse',
+        'Dataanalyse'
+    ]
+
     model: Job = new Job();
     @ViewChild('f') form: any;
 

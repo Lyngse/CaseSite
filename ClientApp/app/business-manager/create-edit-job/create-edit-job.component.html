@@ -1,17 +1,57 @@
 ﻿<div class="container-fluid contentRow">
     <div class="row">
-        <div class="col-md-12">
-            <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
-                <div class="form-group"
+        <div class="col-sm-12">
+            <h2>Opret nyt Job</h2>
+            <form novalidate (ngSubmit)="onSubmit()" #f="ngForm" style="padding: 0 15px;">
+                <div class="form-group" style="margin-top:20px;"
                      [ngClass]="{
                          'has-error': title.invalid && (title.dirty || title.touched),
                          'has-success': title.valid && (title.dirty || title.touched)
                          }">
-                    <label for="name" class="control-label">Virksomhedens Navn *</label>
+                    <label for="name" class="control-label">Job titel *</label>
+                    <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
                     <input type="text" id="title" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
-                    <div class="form-feedback" *ngIf="name.errors && (title.dirty || title.touched)">
+                    <div class="form-feedback" *ngIf="title.errors && (title.dirty || title.touched)">
                         <p *ngIf="title.errors.required">Jobbets titel skal udfyldes</p>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobType" class="control-label">Job type *</label>
+                    <select class="form-control" id="jobType" name="jobType" [(ngModel)]="model.jobType">
+                        <option *ngFor="let jt of jobTypes" [value]="jt">{{ jt }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date-format" class="control-label">Deadline *</label>
+                    <input type="text" id="date-format" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="workplace" class="control-label">Arbejds sted *</label>
+                    <select class="form-control" id="workplace" name="workplace" [(ngModel)]="model.workPlace" required>
+                        <option value="1">Hjemme</option>
+                        <option value="2">Ude</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="workform" class="control-label">Arbejds form *</label>
+                    <select class="form-control" id="workform" name="workform" [(ngModel)]="model.workForm" required>
+                        <option value="individual">Individuelt</option>
+                        <option value="group">Gruppe</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="textArea" class="control-label">Job Beskrivelse *</label>
+                    <textarea style="resize:none;" class="form-control" rows="5" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
+                    <span class="help-block" style="font-size:16px;">Forklar hvad jobbet går ud på.</span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg" [disabled]="f.invalid" style="margin-bottom:20px">Opret Job</button>
                 </div>
             </form>
         </div>

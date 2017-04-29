@@ -5,6 +5,6 @@
     maxNumOfPersons: number;
     minNumOfPersons: number;
     rewardValue: number;
-    //workPlace: string;
-    //jobType: string;
+    workPlace: string;
+    jobType: string;
 }

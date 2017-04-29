@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from "@angular/http";
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 
@@ -8,7 +9,7 @@ export class AccountService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private router: Router) {
 
     }
 
@@ -23,6 +24,11 @@ export class AccountService {
         return this.http
             .post('api/account/logout', this.options)
             .toPromise()
+            .then((res) => {
+                if (res.ok == true) {
+                    this.router.navigate(['/']);
+                }
+            })
             .catch(this.handleError);
     }
 

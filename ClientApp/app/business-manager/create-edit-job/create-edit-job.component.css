@@ -1,1 +1,23 @@
-﻿
+﻿.flexbox-nonewline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+
+.flexbox-newline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.flexitem {
+    margin-right: 25px;
+    font-size: 16px;
+}
+
+.form-feedback {
+    color: #e51c23;
+    font-size: 14px;
+}
