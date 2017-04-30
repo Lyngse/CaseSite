@@ -1,1 +1,9 @@
-﻿
+﻿.btn-fab {
+    position: fixed;
+    z-index: 69;
+    top: 90%;
+    right: 3%;
+    color: white;
+    webkit-box-shadow: 1px 8px 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 8px 10px rgba(0, 0, 0, 0.6);
+}

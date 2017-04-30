@@ -71,31 +71,3 @@ section {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-.btn-fab {
-    background-color: #e67e22;
-    position: fixed;
-    z-index: 69;
-    top: 90%;
-    right: 3%;
-    border: none;
-    font-size: 1.5em;
-    color: white;
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    margin: auto;
-    -webkit-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
-    -moz-box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
-    box-shadow: 2px 3px 3px 0px rgba(41, 41, 41, .3);
-}
-
-.btn-fab-icon {
-    font-size: 38px;
-    text-align: center;
-    vertical-align: middle;
-    margin-bottom: 6px;
-}
-
-.btn-fab:hover {
-    background-color: #c8660f;
-}

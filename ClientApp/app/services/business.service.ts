@@ -16,9 +16,15 @@ export class BusinessService {
 
     }
 
-    createBusiness(b: Business): Promise<Business> {
+    createBusiness(b: Business, userId): Promise<any> {
+        let business = {
+            Name: b.name,
+            Logo: b.logo,
+            Description: b.description,
+            UserId: userId
+        }
         return this.http
-            .post('api/businesses/', JSON.stringify(b), this.options)
+            .post('api/businesses/', JSON.stringify(business), this.options)
             .toPromise()
             .then((res) => {
                 if (res.ok == true) {

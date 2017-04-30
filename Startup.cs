@@ -9,6 +9,7 @@ using CaseSite.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CaseSite
 {
@@ -29,6 +30,8 @@ namespace CaseSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
+            
             services.AddMvc();
 
             services.AddDbContext<CaseSiteContext>(options =>
@@ -43,7 +46,7 @@ namespace CaseSite
                 opt.Cookies.ApplicationCookie.AutomaticChallenge = false;
             });
 
-            services.AddAntiforgery(options => options.FormFieldName = "X-XSRF-TOKEN");
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -50,7 +50,7 @@ namespace CaseSite.Controllers
             
         }
 
-        [HttpPost("registerbusiness")]
+        [HttpPost("registerbusinessuser")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterBusiness([FromBody] User obj)
         {

@@ -15,8 +15,6 @@ export class BusinessManagerComponent{
         this.businessService.getBusinessInfo().then((response) => { console.log(response) });
     }
 
-    logout() {
-        this.accountService.logout().then((response) => { console.log(response) });
-    }
+    
 
 }
