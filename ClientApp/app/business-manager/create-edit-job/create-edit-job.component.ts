@@ -27,7 +27,7 @@ export class CreateEditJobComponent {
         'Strategisk Opgave',
         'Målgruppeanalyse',
         'Dataanalyse'
-    ]
+    ];
 
     model: Job = new Job();
     @ViewChild('f') form: any;

@@ -1,4 +1,15 @@
-﻿import { Component } from '@angular/core';
+﻿import {
+    Component,
+    OnInit,
+    Pipe,
+    ViewChild
+} from '@angular/core';
+import {
+    FormControl,
+    FormGroup,
+} from '@angular/forms';
+import { BusinessService } from '../../services/business.service';
+import { Business } from '../../model/business';
 
 @Component({
     selector: 'business-edit',
@@ -6,7 +17,10 @@
     styleUrls: ['./business-edit.component.css']
 })
 export class BusinessEditComponent {
-    constructor() {
+    constructor(private businessService: BusinessService) {
 
     }
+
+    model: Business = new Business();
+    @ViewChild('f') form: any;
 }

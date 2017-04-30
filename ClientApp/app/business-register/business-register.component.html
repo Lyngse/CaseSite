@@ -32,7 +32,7 @@
                             'has-error': email.invalid && (email.dirty || email.touched),
                             'has-success': email.valid && (email.dirty || email.touched)
                         }">
-                    <label for="email" class="control-label">Email *</label>
+                    <label for="email" class="control-label">Kontakt Email *</label>
                     <input type="email"
                            class="form-control"
                            name="email"
@@ -72,13 +72,13 @@
                 <div class="form-group">
                     <label for="textArea" class="control-label">Virksomheds Beskrivelse</label>
                     <textarea style="resize:none;" class="form-control" rows="5" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel"></textarea>
-                    <span class="help-block" style="font-size:16px;">Fortæl godt om din virksomhed og hvad i arbejder med.</span>
+                    <span class="help-block" style="font-size:16px;">Fortæl om virksomheden og hvad i arbejder med.</span>
                 </div>
 
                 <div class="form-group">
                     <label for="logo" class="control-label">Logo</label>
                     <input type="file" id="logo" name="logo" [(ngModel)]="model.logo" #logo="ngModel">
-                    <p class="help-block" style="font-size:16px;">Upload jeres logo, som vil blive vist på opslåede jobs.</p>
+                    <p class="help-block" style="font-size:16px;">Upload virksomhedens logo, som vil blive vist på opslåede jobs.</p>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6" style="display:flex;justify-content:center;flex-wrap: wrap;">

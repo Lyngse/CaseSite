@@ -1,60 +1,132 @@
 ﻿<div class="container-fluid contentRow">
     <div class="row">
         <div class="col-sm-12">
-            <h2>Opret nyt Job</h2>
-            <form novalidate (ngSubmit)="onSubmit()" #f="ngForm" style="padding: 0 15px;">
-                <div class="form-group" style="margin-top:20px;"
-                     [ngClass]="{
+            <h1 class="heading1">Opret nyt Job</h1>
+            <form novalidate (ngSubmit)="onSubmit()" #f="ngForm" style="padding: 0 15px;" class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group" style="margin-top:20px;"
+                         [ngClass]="{
                          'has-error': title.invalid && (title.dirty || title.touched),
                          'has-success': title.valid && (title.dirty || title.touched)
                          }">
-                    <label for="name" class="control-label">Job titel *</label>
-                    <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                    <input type="text" id="title" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
-                    <div class="form-feedback" *ngIf="title.errors && (title.dirty || title.touched)">
-                        <p *ngIf="title.errors.required">Jobbets titel skal udfyldes</p>
+                        <label for="title" class="control-label">Job titel *</label>
+                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                        <input type="text" id="title" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
+                        <div class="form-feedback" *ngIf="title.errors && (title.dirty || title.touched)">
+                            <p *ngIf="title.errors.required">Jobbets titel skal udfyldes</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="jobType" class="control-label">Job type *</label>
-                    <select class="form-control" id="jobType" name="jobType" [(ngModel)]="model.jobType">
-                        <option *ngFor="let jt of jobTypes" [value]="jt">{{ jt }}</option>
-                    </select>
-                </div>
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': jobType.invalid && (jobType.dirty || jobType.touched),
+                         'has-success': jobType.valid && (jobType.dirty || jobType.touched)
+                         }">
+                        <label for="jobType" class="control-label">Job type *</label>
+                        <select class="form-control" id="jobType" name="jobType" [(ngModel)]="model.jobType" #jobType="ngModel" required>
+                            <option *ngFor="let jt of jobTypes" [value]="jt">{{ jt }}</option>
+                        </select>
+                        <div class="form-feedback" *ngIf="jobType.errors && (jobType.dirty || jobType.touched)">
+                            <p *ngIf="jobType.errors.required">Jobbets type skal angives</p>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="date-format" class="control-label">Deadline *</label>
-                    <input type="text" id="date-format" class="form-control" />
-                </div>
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': deadline.invalid && (deadline.dirty || deadline.touched),
+                         'has-success': deadline.valid && (deadline.dirty || deadline.touched)
+                         }">
+                        <label for="deadline" class="control-label">Deadline *</label>
+                        <input type="datetime-local" id="deadline" class="form-control" name="deadline" [(ngModel)]="model.deadline" #deadline="ngModel" required />
+                        <div class="form-feedback" *ngIf="deadline.errors && (deadline.dirty || deadline.touched)">
+                            <p *ngIf="deadline.errors.required">Deadlinen for jobbet skal angives</p>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="workplace" class="control-label">Arbejds sted *</label>
-                    <select class="form-control" id="workplace" name="workplace" [(ngModel)]="model.workPlace" required>
-                        <option value="1">Hjemme</option>
-                        <option value="2">Ude</option>
-                    </select>
-                </div>
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': rewardValue.invalid && (rewardValue.dirty || rewardValue.touched),
+                         'has-success': rewardValue.valid && (rewardValue.dirty || rewardValue.touched)
+                         }">
+                        <label for="rewardValue" class="control-label">Præmie *</label>
+                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required />
+                        <div class="form-feedback" *ngIf="rewardValue.errors && (rewardValue.dirty || rewardValue.touched)">
+                            <p *ngIf="rewardValue.errors.required">Værdien for præmien skal angives</p>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="workform" class="control-label">Arbejds form *</label>
-                    <select class="form-control" id="workform" name="workform" [(ngModel)]="model.workForm" required>
-                        <option value="individual">Individuelt</option>
-                        <option value="group">Gruppe</option>
-                    </select>
-                </div>
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': workPlace.invalid && (workPlace.dirty || workPlace.touched),
+                         'has-success': workPlace.valid && (workPlace.dirty || workPlace.touched)
+                         }">
+                        <label for="workPlace" class="control-label">Arbejds sted *</label>
+                        <select class="form-control" id="workPlace" name="workPlace" [(ngModel)]="model.workPlace" #workPlace="ngModel" required>
+                            <option value="1">Hjemme</option>
+                            <option value="2">Ude</option>
+                        </select>
+                        <div class="form-feedback" *ngIf="workPlace.errors && (workPlace.dirty || workPlace.touched)">
+                            <p *ngIf="workPlace.errors.required">Arbejds stedet for jobbet skal udfyldes</p>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="textArea" class="control-label">Job Beskrivelse *</label>
-                    <textarea style="resize:none;" class="form-control" rows="5" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
-                    <span class="help-block" style="font-size:16px;">Forklar hvad jobbet går ud på.</span>
-                </div>
+                    <!--<div class="form-group">
+                        <label for="workform" class="control-label">Arbejds form *</label>
+                        <select class="form-control" id="workform" name="workform" [(ngModel)]="model.workForm" required>
+                            <option value="individual">Individuelt</option>
+                            <option value="group">Gruppe</option>
+                        </select>
+                    </div>-->
+                    <div class="col-sm-12" style="padding:0;">
+                        <div class="col-sm-5" style="padding:0;">
+                            <div class="form-group"
+                                 [ngClass]="{
+                         'has-error': maxNumOfPersons.invalid && (maxNumOfPersons.dirty || maxNumOfPersons.touched),
+                         'has-success': maxNumOfPersons.valid && (maxNumOfPersons.dirty || maxNumOfPersons.touched)
+                         }">
+                                <label for="maxNumOfPersons" class="control-label">Minimum antal personer *</label>
+                                <input type="number" min="1" max="10" class="form-control" id="maxNumOfPersons" name="maxNumOfPersons" [(ngModel)]="model.maxNumOfPersons" #maxNumOfPersons="ngModel" required />
+                                <div class="form-feedback" *ngIf="maxNumOfPersons.errors && (maxNumOfPersons.dirty || maxNumOfPersons.touched)">
+                                    <p *ngIf="maxNumOfPersons.errors.required">Det minimale antal personer skal angives</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-2 text-center">
+                            <p style="margin-top:10px;">&mdash;</p>
+                        </div>
+                        <div class="col-sm-5" style="padding:0;">
+                            <div class="form-group"
+                                 [ngClass]="{
+                         'has-error': minNumOfPersons.invalid && (minNumOfPersons.dirty || minNumOfPersons.touched),
+                         'has-success': minNumOfPersons.valid && (minNumOfPersons.dirty || minNumOfPersons.touched)
+                         }">
+                                <label for="minNumOfPersons" class="control-label">Maximum antal personer *</label>
+                                <input type="number" min="1" max="10" class="form-control" id="minNumOfPersons" name="minNumOfPersons" [(ngModel)]="model.minNumOfPersons" #minNumOfPersons="ngModel" required />
+                                <div class="form-feedback" *ngIf="minNumOfPersons.errors && (minNumOfPersons.dirty || minNumOfPersons.touched)">
+                                    <p *ngIf="minNumOfPersons.errors.required">Det maksimale antal personer skal angives</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success btn-lg" [disabled]="f.invalid" style="margin-bottom:20px">Opret Job</button>
-                </div>
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': description.invalid && (description.dirty || description.touched),
+                         'has-success': description.valid && (description.dirty || description.touched)
+                         }">
+                        <label for="description" class="control-label">Job Beskrivelse *</label>
+                        <textarea style="resize:none;" class="form-control" rows="5" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
+                        <span class="help-block" style="font-size:16px;">Forklar hvad jobbet går ud på.</span>
+                        <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
+                            <p *ngIf="description.errors.required">Jobbet beskrielse skal udfyldes</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg" [disabled]="f.invalid" style="margin-bottom:20px">Opret Job</button>
+                    </div>
+                </div>  
             </form>
         </div>
     </div>
 </div>
-        

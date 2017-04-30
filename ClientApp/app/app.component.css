@@ -29,6 +29,23 @@ section {
     min-height: calc(100vh - 284.5px);
 }
 /* ----- Headers ----- */
+.heading1 {
+    font-size: 220%;
+    word-spacing: 2px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.heading1::after {
+    display: block;
+    height: 2px;
+    background-color: #e67e22;
+    content: " ";
+    width: 200px;
+    margin-top: 20px;
+}
+
 .heading2 {
     font-size: 180%;
     word-spacing: 2px;
@@ -37,7 +54,7 @@ section {
     letter-spacing: 1px;
 }
 
-.h3 {
+.heading3 {
     font-size: 110%;
     margin-bottom: 15px;
 }
@@ -59,9 +76,6 @@ section {
     width: 70%;
     margin-left: 15%;
 }
-
-
-
 
 .line-separator {
     height: 1px;
