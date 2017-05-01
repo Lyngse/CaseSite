@@ -1,31 +1,54 @@
 ﻿nav.navbar-findcond ul.navbar-nav a.active,
 nav.navbar-findcond ul.navbar-nav a:hover {
-    background: #9a1e1e;
-    border-color: #fff;
+    background: #082a3b;
+    border-color: #006699;
     -webkit-transition: border-color 0.7s;
     transition: border-color 0.7s;
 }
 
 .navbar-right li a {
-    border-bottom: 3px solid #fff;
+    border-bottom: 3px solid #006699;
     padding-top: 23.5px;
+    color: white;
 }
 
 .navbar-right li a:active,
 .navbar-right li a:hover {
-    border-color: orange;
+    border-color: white;
     -webkit-transition: border-color 0.7s;
     transition: border-color 0.7s;
+    background-color: #006699;
 }
 
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-    background-color: #fff;
+    background-color: #006699;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #006699;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-    background-color: #fff;
-    border-color: orange;
+.navbar-custom .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #006699;
+    border-color: white;
     -webkit-transition: border-color 0.7s;
     transition: border-color 0.7s;
+}
+
+.navbar-custom {
+    background-color: #006699;
+    color: #fff;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    padding: 0;
+    background-color: #006699;
+}
+
+.navbar-nav > li > a:focus {
+    background-color: #006699;
+}
+
+.navbar-brand {
+    color: white;
 }

@@ -31,3 +31,34 @@
 .fp-about-item {
     margin-top: 40px;
 }
+
+#fp-some-section {
+    background-image: linear-gradient(to bottom right, #006699, #02ccba);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.info-card {
+    box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+    border-radius: 0.375rem;
+    background-color: white;
+    min-height: 150px;
+    padding: 20px;
+    width: 100%;
+    margin: 0 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.fp-img-section {
+    height: 600px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url(../../../wwwroot/assets/images/test.jpg);
+    display: flex;
+    justify-content: center;
+}

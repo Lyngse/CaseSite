@@ -36,7 +36,7 @@
 .card-workplace p::after {
     display: block;
     height: 2px;
-    background-color: #e67e22;
+    background-color: #006699;
     content: " ";
     width: 100px;
     margin: 0 auto;
@@ -46,7 +46,7 @@
 .card-workform p::after {
     display: block;
     height: 2px;
-    background-color: #e67e22;
+    background-color: #006699;
     content: " ";
     width: 100px;
     margin: 0 auto;
@@ -68,4 +68,44 @@
 .card-btn {
     width: 96px;
     margin-bottom: 10px;
+}
+
+.card {
+    display: inline-block;
+    flex-wrap: wrap;
+    cursor: pointer;
+    min-width: 320px;
+    width: auto;
+    height: 340px;
+    margin-bottom: 20px;
+    box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+    transition: box-shadow 0.3s ease-in-out;
+    border-radius: 0.375rem;
+}
+
+.card:hover {
+    box-shadow: 2px 7px 10px 0px rgba(46,61,73,0.15);
+}
+
+.logo-container {
+    border-top-right-radius: 0.375rem;
+    border-top-left-radius: 0.375rem;
+    height: 33%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color:#006699;
+}
+
+.logo-container img {
+    width: 100px;
+    height: auto;    
+}
+
+.info-container {
+    border-bottom-right-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+    height: 67%;
+    width: 100%;
+    background-color: #fbfbfb;
 }

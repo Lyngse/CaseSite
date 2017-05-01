@@ -1,4 +1,5 @@
 ﻿import { Component, Input } from '@angular/core';
+import { Job } from '../../../model/job';
 
 @Component({
     selector: 'job-card',
@@ -7,6 +8,7 @@
 })
 export class JobCardComponent {
     @Input() showEdit: boolean;
+    @Input() job: Job;
 
     constructor() {
 
