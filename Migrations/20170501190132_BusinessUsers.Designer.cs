@@ -8,9 +8,10 @@ using CaseSite.Models;
 namespace CaseSite.Migrations
 {
     [DbContext(typeof(CaseSiteContext))]
-    partial class CaseSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20170501190132_BusinessUsers")]
+    partial class BusinessUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -45,7 +46,7 @@ namespace CaseSite.Migrations
 
                     b.Property<DateTimeOffset>("Deadline");
 
-                    b.Property<string>("Desciption");
+                    b.Property<string>("Disciption");
 
                     b.Property<int>("MaxNumPersons");
 

@@ -32,7 +32,14 @@ namespace CaseSite
         {
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
             
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                
+            }).AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             services.AddDbContext<CaseSiteContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CaseSiteContext")));
@@ -46,7 +53,7 @@ namespace CaseSite
                 opt.Cookies.ApplicationCookie.AutomaticChallenge = false;
             });
 
-            
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,7 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
+import { JobService } from '../services/job.service';
 
 @Component({
     selector: 'business-manager',
@@ -8,13 +9,17 @@ import { AccountService } from '../services/account.service';
     styleUrls: ['./business-manager.component.css']
 })
 export class BusinessManagerComponent{
-    constructor(private businessService: BusinessService, private accountService: AccountService) {
+    constructor(private businessService: BusinessService, private accountService: AccountService, private jobService: JobService) {
 
     }
     getInfo() {
         this.businessService.getBusinessInfo().then((response) => { console.log(response) });
     }
 
-    
+    ngOnInit() {
+        this.jobService.getJobsForBusiness().then((response) => {
+            console.log(response);
+        })
+    }
 
 }

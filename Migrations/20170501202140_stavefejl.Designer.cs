@@ -8,8 +8,8 @@ using CaseSite.Models;
 namespace CaseSite.Migrations
 {
     [DbContext(typeof(CaseSiteContext))]
-    [Migration("20170429094946_BusinessUsers")]
-    partial class BusinessUsers
+    [Migration("20170501202140_stavefejl")]
+    partial class stavefejl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,7 @@ namespace CaseSite.Migrations
 
                     b.Property<DateTimeOffset>("Deadline");
 
-                    b.Property<string>("Disciption");
+                    b.Property<string>("Desciption");
 
                     b.Property<int>("MaxNumPersons");
 

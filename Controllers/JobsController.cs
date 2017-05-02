@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CaseSite.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CaseSite.Controllers
 {
@@ -13,10 +15,12 @@ namespace CaseSite.Controllers
     public class JobsController : Controller
     {
         private readonly CaseSiteContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public JobsController(CaseSiteContext context)
+        public JobsController(CaseSiteContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Jobs
@@ -84,15 +88,20 @@ namespace CaseSite.Controllers
         // POST: api/Jobs
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PostJob([FromBody] Job job)
+        public async Task<IActionResult> PostJob([FromBody] Job j)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            _context.Job.Add(job);
+            var business = await getBusiness();
+
+            if (business == null)
+                return NotFound();
+
+            j.Business = business;
+            var job = _context.Job.Add(j).Entity;
+            business.Jobs.Add(job);
+            _context.Entry(business).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetJob", new { id = job.Id }, job);
@@ -126,22 +135,26 @@ namespace CaseSite.Controllers
         }
 
         
-        [HttpGet("business/{businessId}")]
-        public async Task<IActionResult> GetJobsFromBusiness([FromRoute] int businessId)
+        [HttpGet("business")]
+        public async Task<IActionResult> GetJobsFromBusiness()
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            var business = await _context.Business.FirstOrDefaultAsync(b => b.Id == businessId);
+            var business = await getBusiness();
 
             if (business == null)
-            {
                 return NotFound();
-            }
-
+            
             return Ok(business.Jobs);
+        }
+
+        private async Task<Business> getBusiness()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return await _context.Business.Include(b => b.Jobs).FirstOrDefaultAsync(b => b.UserId == user.Id);
+
+            
         }
     }
 }

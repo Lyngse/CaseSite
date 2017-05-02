@@ -35,7 +35,7 @@ export class AccountService {
     registerUser(username: string, password: string, email: string): Promise<any> {
         return this.http
             .post('api/account/registerbusinessuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
-            .toPromise()
+            .toPromise();
     }
 
     private handleError(error: any): Promise<any> {

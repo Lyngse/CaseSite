@@ -14,7 +14,7 @@ namespace CaseSite.Models
         
         public string Title { get; set; }
 
-        public string Disciption { get; set; }
+        public string Desciption { get; set; }
 
         public int MaxNumPersons { get; set; }
 

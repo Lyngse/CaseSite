@@ -26,13 +26,6 @@ export class BusinessService {
         return this.http
             .post('api/businesses/', JSON.stringify(business), this.options)
             .toPromise()
-            .then((res) => {
-                if (res.ok == true) {
-                    return res.json().data
-                } else {
-                    console.log("What to do ?")
-                }         
-            })
             .catch(this.handleError);
     }
 
@@ -43,8 +36,8 @@ export class BusinessService {
             .then((res) => {
                 if (res.status == 401) {
                     this.router.navigate(['/login']);
-                } else if (res.ok == true) {
-                    return res.json().data
+                } else if (res.ok) {
+                    return res.json()
                 }
             })
             .catch(this.handleError);

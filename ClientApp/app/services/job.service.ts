@@ -17,14 +17,35 @@ export class JobService {
     }
 
     createJob(j: Job): Promise<Job> {
+        let job = {
+            Deadline: j.deadline,
+            Title: j.title,
+            Description: j.description,
+            MaxNumPersons: j.maxNumOfPersons,
+            MinNumPersons: j.minNumOfPersons,
+            RewardValue: j.rewardValue
+        }
         return this.http
-            .post('api/businesses/', JSON.stringify(j), this.options)
+            .post('api/jobs/', JSON.stringify(job), this.options)
             .toPromise()
             .then((res) => {
                 if (res.ok == true) {
-                    return res.json().data
+                    return res.json()
                 } else {
                     console.log("What to do ?")
+                }
+            })
+            .catch(this.handleError);
+    }
+
+    getJobsForBusiness(): Promise<Job[]> {
+        return this.http
+            .get('api/jobs/business', this.options)
+            .toPromise().then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    //handle
                 }
             })
             .catch(this.handleError);

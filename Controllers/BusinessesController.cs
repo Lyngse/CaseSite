@@ -49,7 +49,7 @@ namespace CaseSite.Controllers
                 return NotFound();
             }
 
-            return Ok(new { business = simpleBusinessObject(business), jobs = business.Jobs });
+            return Ok(simpleBusinessObject(business));
         }
 
         // PUT: api/Businesses/5
