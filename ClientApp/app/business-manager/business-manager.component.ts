@@ -3,7 +3,7 @@ import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { JobService } from '../services/job.service';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig, Toast, ToasterContainerComponent } from 'angular2-toaster';
+import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
 
 @Component({
     selector: 'business-manager',
@@ -19,8 +19,13 @@ export class BusinessManagerComponent{
 
     }
 
-    public config1: ToasterConfig = new ToasterConfig({
-        positionClass: 'toast-top-right'
+    /*public toasterconfig: ToasterConfig =
+
+
+    new ToasterConfig({
+        showCloseButton: true,
+        tapToDismiss: false,
+        timeout: 0
     });
 
     popToast() {
@@ -32,6 +37,10 @@ export class BusinessManagerComponent{
 
         this.toasterService.pop(toast);
     }
+
+    popToast2() {
+        this.toasterService.pop('success', 'Args Title', 'Args Body');
+    }*/
 
     getInfo() {
         this.businessService.getBusinessInfo().then((response) => {

@@ -27,6 +27,7 @@ module.exports = (env) => {
                 'angular2-universal',
                 'angular2-universal-polyfills',
                 'angular2-toaster',
+                'angular2-toaster/toaster.css',
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'es6-shim',
