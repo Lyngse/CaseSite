@@ -16,7 +16,7 @@ export class BusinessManagerComponent{
         this.businessService.getBusinessInfo().then((response) => { console.log(response) });
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
         this.jobService.getJobsForBusiness().then((response) => {
             console.log(response);
         })

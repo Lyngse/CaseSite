@@ -136,6 +136,7 @@ namespace CaseSite.Controllers
 
         
         [HttpGet("business")]
+        [Authorize]
         public async Task<IActionResult> GetJobsFromBusiness()
         {
             if (!ModelState.IsValid)

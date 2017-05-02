@@ -29,7 +29,7 @@ export class CreateEditJobComponent {
     onSubmit() {
         if (this.form.valid) {
 
-            this.jobService.createJob(this.model).then
+            this.jobService.createJob(this.model)
             //this.businessService.createBusiness(this.model);
         }
     }
