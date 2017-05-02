@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component,OnInit } from '@angular/core';
 import { Job } from '../model/job';
 
 @Component({
@@ -10,4 +10,5 @@ export class JobsComponent {
     constructor() {
 
     }
+
 }

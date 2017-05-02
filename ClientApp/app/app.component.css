@@ -35,16 +35,16 @@ section {
     margin-top: 40px;
     margin-bottom: 30px;
     letter-spacing: 1px;
+    border-bottom: 5px solid #006699;
 }
 
-.heading1::after {
+/*.heading1::after {
     display: block;
-    height: 2px;
+    height: 3px;
     background-color: #006699;
     content: " ";
     width: 200px;
-    margin-top: 20px;
-}
+}*/
 
 .heading2 {
     font-size: 180%;
