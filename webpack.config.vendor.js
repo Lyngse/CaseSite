@@ -26,6 +26,7 @@ module.exports = (env) => {
                 '@angular/platform-server',
                 'angular2-universal',
                 'angular2-universal-polyfills',
+                'angular2-toaster',
                 'bootstrap',
                 'bootstrap/dist/css/bootstrap.css',
                 'es6-shim',

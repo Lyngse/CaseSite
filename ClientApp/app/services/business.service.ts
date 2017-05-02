@@ -29,17 +29,10 @@ export class BusinessService {
             .catch(this.handleError);
     }
 
-    getBusinessInfo(): Promise<Business> {
+    getBusinessInfo(): Promise<any> {
         return this.http
             .get('api/businesses', this.options)
             .toPromise()
-            .then((res) => {
-                if (res.status == 401) {
-                    this.router.navigate(['/login']);
-                } else if (res.ok) {
-                    return res.json()
-                }
-            })
             .catch(this.handleError);
     }
 
