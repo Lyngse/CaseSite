@@ -17,8 +17,8 @@ export class BusinessManagerComponent{
     }
 
     ngAfterViewInit() {
-        this.jobService.getJobsForBusiness().then((response) => {
-            console.log(response);
+        this.jobService.getJobsForBusiness().subscribe((data) => {
+            console.log(data);
         })
     }
 

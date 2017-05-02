@@ -1,5 +1,6 @@
 ﻿import { Component,OnInit } from '@angular/core';
 import { Job } from '../model/job';
+import { JobService } from '../services/job.service'
 
 @Component({
     selector: 'jobs',
@@ -7,8 +8,16 @@ import { Job } from '../model/job';
     styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent {
-    constructor() {
+    constructor(private jobService: JobService) {
 
+    }
+
+    ngAfterViewInit() {
+        this.jobService.getAllJobs().subscribe((data) => {
+            console.log(data);
+        }, (err) => {
+            console.log(err);
+        });
     }
 
 }

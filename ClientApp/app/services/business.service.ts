@@ -1,7 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
+
+// Import RxJs required methods
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Business } from '../model/business';
@@ -16,7 +19,7 @@ export class BusinessService {
 
     }
 
-    createBusiness(b: Business, userId): Promise<any> {
+    createBusiness(b: Business, userId): Observable<Business> {
         let business = {
             Name: b.name,
             Logo: b.logo,
@@ -25,26 +28,19 @@ export class BusinessService {
         }
         return this.http
             .post('api/businesses/', JSON.stringify(business), this.options)
-            .toPromise()
+            ..map(res => res.json())
             .catch(this.handleError);
     }
 
-    getBusinessInfo(): Promise<Business> {
+    getBusinessInfo(): Observable<Business> {
         return this.http
             .get('api/businesses', this.options)
-            .toPromise()
-            .then((res) => {
-                if (res.status == 401) {
-                    this.router.navigate(['/login']);
-                } else if (res.ok) {
-                    return res.json()
-                }
-            })
+            .map(res => res.json())
             .catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private handleError(error: any): Observable<any> {
         console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        return Observable.throw(error.json().error || 'Server error')
     }
 }

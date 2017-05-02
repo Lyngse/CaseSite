@@ -22,6 +22,10 @@ namespace CaseSite.Models
 
         public decimal RewardValue { get; set; }
 
+        public string WorkPlace { get; set; }
+
+        public string JobType { get; set; }
+
         public int BusinessId { get; set; }
 
         public virtual Business Business { get; set; }

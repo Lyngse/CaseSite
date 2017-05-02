@@ -49,7 +49,7 @@ namespace CaseSite.Controllers
                 return NotFound();
             }
 
-            return Ok(simpleBusinessObject(business));
+            return Ok(toClientBusiness(business));
         }
 
         // PUT: api/Businesses/5
@@ -106,7 +106,7 @@ namespace CaseSite.Controllers
             _context.Business.Add(business);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBusiness", new { id = business.Id }, simpleBusinessObject(business));
+            return CreatedAtAction("GetBusiness", new { id = business.Id }, toClientBusiness(business));
         }
 
         // DELETE: api/Businesses/5
@@ -130,10 +130,10 @@ namespace CaseSite.Controllers
             _context.Business.Remove(business);
             await _context.SaveChangesAsync();
 
-            return Ok(simpleBusinessObject(business));
+            return Ok(toClientBusiness(business));
         }
 
-        private dynamic simpleBusinessObject(Business business)
+        private dynamic toClientBusiness(Business business)
         {
             return new {
                 id = business.Id,

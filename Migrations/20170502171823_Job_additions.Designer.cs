@@ -8,9 +8,10 @@ using CaseSite.Models;
 namespace CaseSite.Migrations
 {
     [DbContext(typeof(CaseSiteContext))]
-    partial class CaseSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20170502171823_Job_additions")]
+    partial class Job_additions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

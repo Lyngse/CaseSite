@@ -25,9 +25,16 @@ namespace CaseSite.Controllers
 
         // GET: api/Jobs
         [HttpGet]
-        public IEnumerable<Job> GetJob()
+        public IActionResult GetJob()
         {
-            return _context.Job;
+            var jobs = new List<dynamic>();
+
+            foreach (var job in _context.Job.Include(j => j.Business))
+            {
+                jobs.Add(toClientJob(job));
+            }
+
+            return Ok(jobs);
         }
 
         // GET: api/Jobs/5
@@ -104,7 +111,7 @@ namespace CaseSite.Controllers
             _context.Entry(business).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetJob", new { id = job.Id }, job);
+            return Created("", toClientJob(job));
         }
 
         // DELETE: api/Jobs/5
@@ -146,8 +153,15 @@ namespace CaseSite.Controllers
 
             if (business == null)
                 return NotFound();
-            
-            return Ok(business.Jobs);
+
+            var jobs = new List<dynamic>();
+
+            foreach (var job in business.Jobs)
+            {
+                jobs.Add(toClientJob(job));
+            }
+
+            return Ok(jobs);
         }
 
         private async Task<Business> getBusiness()
@@ -156,6 +170,24 @@ namespace CaseSite.Controllers
             return await _context.Business.Include(b => b.Jobs).FirstOrDefaultAsync(b => b.UserId == user.Id);
 
             
+        }
+
+        private dynamic toClientJob(Job j)
+        {
+            return new
+            {
+                id = j.Id,
+                title = j.Title,
+                deadline = j.Deadline,
+                description = j.Description,
+                maxNumOfPersons = j.MaxNumPersons,
+                minNumOfPersons = j.MinNumPersons,
+                rewardValue = j.RewardValue,
+                workPlace = j.WorkPlace,
+                jobType = j.JobType,
+                businessId = j.BusinessId,
+                businessName = j.Business.Name
+            };
         }
     }
 }

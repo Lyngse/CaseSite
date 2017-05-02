@@ -1,8 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
+
+// Import RxJs required methods
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
 
 import { Job } from '../model/job';
 
@@ -16,43 +20,39 @@ export class JobService {
 
     }
 
-    createJob(j: Job): Promise<Job> {
+    getAllJobs(): Observable<Job[]> {
+        return this.http
+            .get('api/jobs', this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    createJob(j: Job): Observable<Job> {
         let job = {
             Deadline: j.deadline,
             Title: j.title,
             Description: j.description,
             MaxNumPersons: j.maxNumOfPersons,
             MinNumPersons: j.minNumOfPersons,
-            RewardValue: j.rewardValue
+            RewardValue: j.rewardValue,
+            WorkPlace: j.workPlace,
+            JobType: j.jobType
         }
         return this.http
-            .post('api/jobs/', JSON.stringify(job), this.options)
-            .toPromise()
-            .then((res) => {
-                if (res.ok == true) {
-                    return res.json()
-                } else {
-                    console.log("What to do ?")
-                }
-            })
+            .post('api/jobs', JSON.stringify(job), this.options)
+            .map(res => res.json())
             .catch(this.handleError);
     }
 
-    getJobsForBusiness(): Promise<Job[]> {
+    getJobsForBusiness(): Observable<Job[]> {
         return this.http
             .get('api/jobs/business', this.options)
-            .toPromise().then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    //handle
-                }
-            })
+            .map(res => res.json())
             .catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private handleError(error: any): Observable<any> {
         console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        return Observable.throw(error.json().error || 'Server error')
     }
 }
