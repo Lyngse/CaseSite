@@ -5,11 +5,11 @@
                 <img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />
             </div>
             <div class="card-titel">
-                <h3>Titel på jobbet</h3>
-                <p>Job Type</p>
+                <h3>{{job.title}}</h3>
+                <p>{{job.jobType}}</p>
             </div>
             <div class="card-firm">
-                <h4>Navn på virksomheden</h4>
+                <h4>{{job.businessName}}</h4>
             </div>
             <div  class="card-location">
                 <p>
@@ -19,20 +19,20 @@
             </div>
             <div class="flexbox-nonewline">
                 <div class="flexitem card-workplace">
-                    <p>Hjemme</p>
+                    <p>{{job.workPlace === "2" ? "ude" : "hjemme"}}</p>
                 </div>
                 <div class="flexitem card-workform">
-                    <p>1 - 4 personer</p>
+                    <p>{{job.minNumOfPersons}} - {{job.maxNumOfPersons}} personer</p>
                 </div>
             </div>
             <div class="flexbox-nonewline">
                 <div class="flexitem card-deadline">
-                    <p>Deadline om 5 dage</p>
+                    <p>{{job.deadline}}</p>
                 </div>
                 <div class="flexitem card-price">
                     <p>
                         <span><i class="fa fa-gift"></i></span>
-                        $1.500
+                        {{job.rewardValue}}
                     </p>
                 </div>
             </div>            

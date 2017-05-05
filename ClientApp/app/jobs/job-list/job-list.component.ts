@@ -10,6 +10,5 @@ export class JobListComponent {
     @Input() showEdit: boolean;
     @Input() jobs: Job[];
     constructor() {
-
     }
 }

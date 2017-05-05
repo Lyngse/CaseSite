@@ -7,4 +7,6 @@
     rewardValue: number;
     workPlace: string;
     jobType: string;
+    businessId: number;
+    businessName: string;
 }

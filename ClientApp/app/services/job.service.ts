@@ -53,6 +53,6 @@ export class JobService {
 
     private handleError(error: any): Observable<any> {
         console.error('An error occurred', error); // for demo purposes only
-        return Observable.throw(error.json().error || 'Server error')
+        return Observable.throw(error.message || error)
     }
 }
