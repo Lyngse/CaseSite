@@ -1,5 +1,6 @@
 ﻿import { Component, Input} from '@angular/core';
 import { Job } from '../../../model/job';
+import * as moment from 'moment';
 
 @Component({
     selector: 'job-card',
@@ -11,5 +12,11 @@ export class JobCardComponent {
     @Input() job: Job;
 
     constructor() {
+    }
+
+    getDeadlineString() {
+        if (this.job) {
+            return this.job.deadline.fromNow();
+        }
     }
 }

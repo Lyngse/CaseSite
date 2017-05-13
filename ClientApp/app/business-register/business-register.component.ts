@@ -28,7 +28,7 @@ export class BuisnessRegisterComponent {
 
     onSubmit() {
         if (this.form.valid) {
-            this.accountService.registerUser(this.model.username, this.model.password, this.model.email).then((response) => {
+            this.accountService.registerUser(this.model.username, this.model.password, this.model.email).subscribe((response) => {
                 if (response.ok) {
                     let userId = response._body;
                     this.businessService.createBusiness(this.model, userId).subscribe((response) => {

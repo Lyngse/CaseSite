@@ -8,6 +8,8 @@ import { JobService } from '../services/job.service'
     styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent {
+    jobs: Job[]
+
     constructor(private jobService: JobService) {
 
     }
@@ -15,6 +17,7 @@ export class JobsComponent {
     ngAfterViewInit() {
         this.jobService.getAllJobs().subscribe((data) => {
             console.log(data);
+            this.jobs = data;
         }, (err) => {
             console.log(err);
         });

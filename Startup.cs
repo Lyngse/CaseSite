@@ -44,7 +44,12 @@ namespace CaseSite
             services.AddDbContext<CaseSiteContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CaseSiteContext")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(o =>
+            {
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 8;
+            })
                 .AddEntityFrameworkStores<CaseSiteContext>()
                 .AddDefaultTokenProviders();
 

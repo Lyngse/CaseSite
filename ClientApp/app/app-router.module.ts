@@ -14,7 +14,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
     { path: 'frontpage', component: FrontpageComponent },
     { path: 'jobs', component: JobsComponent },
-    { path: 'jobs/detail', component: JobDetailComponent },
+    { path: 'jobs/detail/:id', component: JobDetailComponent },
     { path: 'registrervirksomhed', component: BuisnessRegisterComponent },
     { path: 'business', component: BusinessManagerComponent },
     { path: 'business/createeditjob', component: CreateEditJobComponent },

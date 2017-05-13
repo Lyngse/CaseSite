@@ -1,6 +1,9 @@
-﻿export class Job {
+﻿import * as moment from 'moment';
+
+export class Job {
+    id: number;
     title: string;
-    deadline: Date;
+    deadline: moment.Moment;
     description: string;
     maxNumOfPersons: number;
     minNumOfPersons: number;

@@ -19,9 +19,10 @@ export class LoginComponent {
 
     onLogin() {
         if (this.form.valid) {
-            this.accountService.login(this.username, this.password).then((response) => {
+            this.accountService.login(this.username, this.password).subscribe((response) => {
                 if (response.ok == true) {
-                    this.router.navigate(['/business']);
+                    window.location.href = '/business';
+                    //this.router.navigate(['/business']);
                 } else {
                     this.loginFailedMsg = response._body;
                 }

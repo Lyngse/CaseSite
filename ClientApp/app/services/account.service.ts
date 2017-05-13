@@ -1,7 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
@@ -13,33 +14,29 @@ export class AccountService {
 
     }
 
-    login(username: string, password: string): Promise<any> {
+    login(username: string, password: string): Observable<any> {
         return this.http
             .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
-            .toPromise()
+            .map(res => res)
             .catch(this.handleError);
     }
 
-    logout(): Promise<any> {
+    logout(): Observable<any> {
         return this.http
             .post('api/account/logout', this.options)
-            .toPromise()
-            .then((res) => {
-                if (res.ok == true) {
-                    this.router.navigate(['/']);
-                }
-            })
+            .map(res => console.log(res))
             .catch(this.handleError);
     }
 
-    registerUser(username: string, password: string, email: string): Promise<any> {
+    registerUser(username: string, password: string, email: string): Observable<any> {
         return this.http
             .post('api/account/registerbusinessuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
-            .toPromise();
+            .map(res => res.json())
+            .catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private handleError(error: any): Observable<any> {
         console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        return Observable.throw(error.message || error);
     }
 }

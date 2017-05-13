@@ -1,7 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from "@angular/http";
+import { Http, Headers, RequestOptions, Response } from "@angular/http";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -20,16 +21,23 @@ export class JobService {
 
     }
 
+    getJob(id: number): Observable<Job> {
+        return this.http
+            .get('api/jobs/' + id, this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     getAllJobs(): Observable<Job[]> {
         return this.http
             .get('api/jobs', this.options)
-            .map(res => res.json())
+            .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     createJob(j: Job): Observable<Job> {
         let job = {
-            Deadline: j.deadline,
+            Deadline: j.deadline.toDate(),
             Title: j.title,
             Description: j.description,
             MaxNumPersons: j.maxNumOfPersons,
@@ -47,8 +55,16 @@ export class JobService {
     getJobsForBusiness(): Observable<Job[]> {
         return this.http
             .get('api/jobs/business', this.options)
-            .map(res => res.json())
+            .map(res => this.extractData(res))
             .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        var data = res.json() || [];
+        data.forEach((d) => {
+            d.deadline = moment(d.deadline);
+        })
+        return data;
     }
 
     private handleError(error: any): Observable<any> {

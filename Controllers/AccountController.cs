@@ -26,7 +26,7 @@ namespace CaseSite.Controllers
         }
 
         [HttpPost("logout")]
-        //[ValidateAntiForgeryToken]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LogOut()
         {
             await _loginManager.SignOutAsync();
@@ -34,7 +34,7 @@ namespace CaseSite.Controllers
         }
 
         [HttpPost("login")]
-        //[ValidateAntiForgeryToken]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LogIn([FromBody] LogIn loginInfo)
         {
             if (!ModelState.IsValid)
@@ -51,7 +51,6 @@ namespace CaseSite.Controllers
         }
 
         [HttpPost("registerbusinessuser")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterBusiness([FromBody] User obj)
         {
             if (!ModelState.IsValid)
