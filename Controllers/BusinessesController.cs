@@ -7,6 +7,7 @@ using CaseSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Dynamic;
 
 namespace CaseSite.Controllers
 {
@@ -23,17 +24,26 @@ namespace CaseSite.Controllers
             _userManager = userManager;
         }
 
-        // GET: api/Businesses
-        //[HttpGet]
-        //public IEnumerable<Business> GetBusiness()
-        //{
-        //    return _context.Business;
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBusinessFromId([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == id);
 
-        // GET: api/Businesses/5
+            if (business == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(toClientBusiness(business, false));
+        }
+
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetBusiness()
+        public async Task<IActionResult> GetBusinessFromUser()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
@@ -133,15 +143,21 @@ namespace CaseSite.Controllers
             return Ok(toClientBusiness(business));
         }
 
-        private dynamic toClientBusiness(Business business)
+        private dynamic toClientBusiness(Business business, bool incUser = true)
         {
-            return new {
-                id = business.Id,
-                name = business.Name,
-                description = business.Description,
-                username = business.User.UserName,
-                email = business.User.Email
-            };
+            dynamic result = new ExpandoObject();
+            result.id = business.Id;
+            result.name = business.Name;
+            result.description = business.Description;
+            result.contactEmail = business.ContactEmail;
+
+            if (incUser)
+            {
+                result.username = business.User.UserName;
+                result.email = business.User.Email;
+            }
+
+            return result;
         }
     }
 }

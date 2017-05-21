@@ -24,7 +24,7 @@ export class BusinessManagerComponent{
     }
 
     getInfo() {
-        this.businessService.getBusinessInfo()
+        this.businessService.getBusinessFromUser()
             .subscribe((response) => {
                 console.log(response);
         }, (err) => console.log(err));

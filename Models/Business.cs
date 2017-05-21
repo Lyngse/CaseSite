@@ -14,9 +14,11 @@ namespace CaseSite.Models
 
         public string Description { get; set; }
 
-        public byte[] Logo { get; set; }
+        public string LogoUrl { get; set; }
 
         public string UserId { get; set; }
+
+        public string ContactEmail { get; set; }
 
         public virtual IdentityUser User { get; set; }
 

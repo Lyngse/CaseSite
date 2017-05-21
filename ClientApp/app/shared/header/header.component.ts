@@ -16,7 +16,7 @@ export class HeaderComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.businessService.getBusinessInfo().subscribe(res => {
+        this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
         }, err => {
             if (err.status !== 401)

@@ -24,6 +24,7 @@ export class BusinessService {
             Name: b.name,
             Logo: b.logo,
             Description: b.description,
+            ContactEmail: b.email,
             UserId: userId
         }
         return this.http
@@ -32,7 +33,14 @@ export class BusinessService {
             .catch(this.handleError);
     }
 
-    getBusinessInfo(): Observable<Business> {
+    getBusinessFromId(id: number): Observable<Business> {
+        return this.http
+            .get('api/businesses/' + id, this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    getBusinessFromUser(): Observable<Business> {
         return this.http
             .get('api/businesses', this.options)
             .map(res => res.json())

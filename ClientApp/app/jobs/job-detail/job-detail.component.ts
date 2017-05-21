@@ -25,7 +25,11 @@ export class JobDetailComponent implements AfterViewInit {
     ngAfterViewInit() {
         this.route.params.subscribe(params => {
             let id = params['id'];
-            this.jobService.getJob(id).subscribe(res => console.log(res));
+            this.jobService.getJob(id).subscribe(res => {
+                console.log(res);
+                this.businessService.getBusinessFromId(res.businessId).subscribe(res => console.log(res));
+            });
+
         })
         
     }
