@@ -1,6 +1,6 @@
 ﻿import {
     Component,
-    OnInit,
+    AfterViewInit,
     Pipe,
     ViewChild
 } from '@angular/core';
@@ -16,11 +16,27 @@ import { Business } from '../../model/business';
     templateUrl: './business-edit.component.html',
     styleUrls: ['./business-edit.component.css']
 })
-export class BusinessEditComponent {
+export class BusinessEditComponent implements AfterViewInit {
+
+    model: Business = new Business();
+    @ViewChild('f') form: any;
+
     constructor(private businessService: BusinessService) {
 
     }
 
-    model: Business = new Business();
-    @ViewChild('f') form: any;
+    ngAfterViewInit() {
+        this.businessService.getBusinessFromUser().subscribe(res => {
+            this.model = res;
+        });
+    }
+
+    onSubmit() {
+        if (this.form.valid) {
+            this.businessService.updateBusiness(this.model).subscribe(res => {
+                console.log(res);
+            });
+        }
+    }
+    
 }

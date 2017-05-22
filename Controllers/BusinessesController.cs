@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Dynamic;
+using Newtonsoft.Json.Linq;
 
 namespace CaseSite.Controllers
 {
@@ -62,41 +63,47 @@ namespace CaseSite.Controllers
             return Ok(toClientBusiness(business));
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Businesses
         [HttpPut]
         [Authorize]
-        public async Task<IActionResult> PutBusiness([FromBody] Business business)
+        public async Task<IActionResult> PutBusiness([FromBody] JObject obj)
         {
+            Business business = obj["business"].ToObject<Business>();
+            User user = obj["user"].ToObject<User>();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (user == null)
+            if (serverUser == null)
             {
                 return NotFound(new { userError = "user not found" });
             }
 
-            var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
+            serverUser.UserName = user.UserName;
+            serverUser.Email = user.Email;
+
+            await _userManager.UpdateAsync(serverUser);
+
+            var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == serverUser.Id);
 
             if(serverBusiness == null)
             {
                 return NotFound();
             }
 
-            if (serverBusiness.Id != business.Id)
-            {
-                return BadRequest();
-            }
+            serverBusiness.Name = business.Name;
+            serverBusiness.ContactEmail = business.ContactEmail;
+            serverBusiness.Description = business.Description;
+            serverBusiness.LogoUrl = business.LogoUrl;
 
-            _context.Entry(business).State = EntityState.Modified;
+            _context.Entry(serverBusiness).State = EntityState.Modified;
             
             await _context.SaveChangesAsync();
-            
 
-            return NoContent();
+            return Ok(toClientBusiness(serverBusiness));
         }
 
         // POST: api/Businesses

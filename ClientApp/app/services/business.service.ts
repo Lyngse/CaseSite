@@ -19,6 +19,23 @@ export class BusinessService {
 
     }
 
+    updateBusiness(b: Business): Observable<Business> {
+        let business = {
+            Name: b.name,
+            LogoUrl: b.logo,
+            Description: b.description,
+            ContactEmail: b.email,
+        };
+        let user = {
+            UserName: b.username,
+            Email: b.email
+        };
+        return this.http
+            .put('api/businesses/', JSON.stringify({ business: business, user: user }), this.options)
+            .map(res => console.log(res))
+            .catch(this.handleError);
+    }
+
     createBusiness(b: Business, userId): Observable<Business> {
         let business = {
             Name: b.name,
