@@ -7,8 +7,8 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 }
 
 .navbar-right li a {
-    border-bottom: 3px solid #006699;
-    padding-top: 23.5px;
+    border-bottom: 5px solid #006699;
+    padding-top: 25.5px;
     color: white;
 }
 
@@ -20,6 +20,10 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     background-color: #006699;
 }
 
+.navbar-toggle .icon-bar {
+    background-color: white;
+}
+
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
     background-color: #006699;
@@ -28,7 +32,7 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     background-color: #006699;
 }
 
-.navbar-custom .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+.navbar-custom .navbar-nav > .open > a, .navbar-custom .navbar-nav > .open > a:hover, .navbar-custom .navbar-nav > .open > a:focus {
     background-color: #006699;
     border-color: white;
     -webkit-transition: border-color 0.7s;
