@@ -5,8 +5,8 @@ export class Job {
     title: string;
     deadline: moment.Moment;
     description: string;
-    maxNumOfPersons: number;
-    minNumOfPersons: number;
+    maxNumPersons: number;
+    minNumPersons: number;
     rewardValue: number;
     workPlace: string;
     jobType: string;

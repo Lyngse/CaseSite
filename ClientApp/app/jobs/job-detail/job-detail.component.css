@@ -1,1 +1,85 @@
-﻿
+﻿.detail-content {
+    display: flex;   
+    min-height:500px;
+    border: 1px solid #bdbdbd;
+}
+
+.detail-business-info {
+    flex: 0 0 33%;
+    padding: 0 15px;
+    background-color: #F5F5F5;
+}
+
+.detail-job-info {
+    flex: 0 0 67%;
+    padding: 0 15px;
+    background-color: #FAFAFA;
+}
+
+#business-name {
+    font-size: 180%;
+    display:inline-block;
+    border-bottom: 2px solid #336699;
+}
+
+#business-logo {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#business-description {
+}
+
+#business-email {
+    font-size: 75%;
+}
+
+#job-title {
+    font-size: 180%;
+    display: inline-block;
+    border-bottom: 2px solid #336699;
+    margin-bottom: 0;
+}
+
+#job-type {
+    font-size: 75%;
+    color: #9E9E9E;
+}
+
+#job-description {
+    margin: 20px 0;
+}
+
+#job-location {
+    font-size: 75%;
+}
+
+#job-info-title {
+    font-size: 100% !important;
+    display: inline-block;
+}
+
+.job-info {
+    font-size: 75%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#job-workplace {
+    flex: 0 0 50%;
+}
+
+#job-persons {
+    flex: 0 0 50%;
+}
+
+#job-deadline {
+    flex: 0 0 50%;
+}
+
+#job-reward {
+    flex: 0 0 50%;
+}
+

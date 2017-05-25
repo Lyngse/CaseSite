@@ -4,6 +4,7 @@ import { Business } from '../../model/business';
 import { Job } from '../../model/job';
 import { BusinessService } from '../../services/business.service';
 import { JobService } from '../../services/job.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'job-detail',
@@ -27,10 +28,16 @@ export class JobDetailComponent implements AfterViewInit {
             let id = params['id'];
             this.jobService.getJob(id).subscribe(res => {
                 console.log(res);
-                this.businessService.getBusinessFromId(res.businessId).subscribe(res => console.log(res));
+                this.job = res;
+                this.businessService.getBusinessFromId(res.businessId).subscribe(res => this.business = res);
             });
 
-        })
-        
+        })   
+    }
+
+    getDeadlineString() {
+        if (this.job) {
+            return this.job.deadline.fromNow();
+        }
     }
 }

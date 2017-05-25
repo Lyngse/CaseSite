@@ -24,7 +24,7 @@ export class JobService {
     getJob(id: number): Observable<Job> {
         return this.http
             .get('api/jobs/' + id, this.options)
-            .map(res => res.json())
+            .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
@@ -40,8 +40,8 @@ export class JobService {
             Deadline: j.deadline.toDate(),
             Title: j.title,
             Description: j.description,
-            MaxNumPersons: j.maxNumOfPersons,
-            MinNumPersons: j.minNumOfPersons,
+            MaxNumPersons: j.maxNumPersons,
+            MinNumPersons: j.minNumPersons,
             RewardValue: j.rewardValue,
             WorkPlace: j.workPlace,
             JobType: j.jobType
@@ -60,10 +60,16 @@ export class JobService {
     }
 
     private extractData(res: Response) {
-        var data = res.json() || [];
-        data.forEach((d) => {
-            d.deadline = moment(d.deadline);
-        })
+        var data = res.json();
+        if (!data) {
+            return {};
+        } else if (data.length) {
+            data.forEach((d) => {
+                d.deadline = moment(d.deadline);
+            })
+        } else {
+            data.deadline = moment(data.deadline);
+        }
         return data;
     }
 

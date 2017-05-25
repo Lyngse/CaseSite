@@ -25,8 +25,8 @@ section {
 }
 
 .content {
-    margin-top: 60px;
-    min-height: calc(100vh - 284.5px);
+    margin-top: 70px;
+    min-height: calc(100vh - 270px);
 }
 /* ----- Headers ----- */
 .heading1 {
