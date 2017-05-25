@@ -3,7 +3,6 @@ import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { JobService } from '../services/job.service';
 import { Router } from '@angular/router';
-import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
 import { Job } from '../model/job';
 
 @Component({
@@ -12,14 +11,13 @@ import { Job } from '../model/job';
     styleUrls: ['./business-manager.component.css']
 })
 export class BusinessManagerComponent{
-
+    loading: boolean = false;
     jobs: Job[];
 
     constructor(private businessService: BusinessService,
         private accountService: AccountService,
         private jobService: JobService,
-        private router: Router,
-        private toasterService: ToasterService) {
+        private router: Router) {
 
     }
 
@@ -31,10 +29,13 @@ export class BusinessManagerComponent{
     }
 
     ngAfterViewInit() {
+        this.loading = true;
         this.jobService.getJobsForBusiness().subscribe((data) => {
             console.log(data);
             this.jobs = data;
+            this.loading = false;
         }, (err) => {
+            this.loading = false;
             if (err.status === 401)
                 this.router.navigateByUrl("login");
             else

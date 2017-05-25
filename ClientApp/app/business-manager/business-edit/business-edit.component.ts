@@ -17,7 +17,7 @@ import { Business } from '../../model/business';
     styleUrls: ['./business-edit.component.css']
 })
 export class BusinessEditComponent implements AfterViewInit {
-
+    loading: boolean = false;
     model: Business = new Business();
     @ViewChild('f') form: any;
 
@@ -26,15 +26,20 @@ export class BusinessEditComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
+        this.loading = true;
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.model = res;
+            this.loading = false;
         });
     }
 
     onSubmit() {
+        
         if (this.form.valid) {
+            this.loading = true;
             this.businessService.updateBusiness(this.model).subscribe(res => {
                 console.log(res);
+                this.loading = false;
             });
         }
     }

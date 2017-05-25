@@ -10,21 +10,26 @@ import { Business } from '../../model/business';
 })
 export class HeaderComponent implements OnInit {
     business: Business;
+    loading: boolean = false;
 
     constructor(private accountService: AccountService, private businessService: BusinessService) {
 
     }
 
     ngOnInit() {
+        this.loading = true;
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
+            this.loading = false;
         }, err => {
             if (err.status !== 401)
                 console.log(err);
+            this.loading = false;
         });
     }
 
     logout() {
-        this.accountService.logout().subscribe((response) => { console.log(response); window.location.href = '/' });
+        this.loading = true;
+        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; window.location.href = '/' });
     }
 }
