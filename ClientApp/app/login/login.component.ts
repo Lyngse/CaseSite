@@ -8,22 +8,25 @@ import { AccountService } from '../services/account.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    constructor(private accountService: AccountService, private router: Router) {
-
-    }
-
+    loading: boolean = false;
     username: string = "";
     password: string = "";
     loginFailedMsg: string = "";
     @ViewChild('f') form: any;
 
+    constructor(private accountService: AccountService, private router: Router) {
+
+    }
+
     onLogin() {
         if (this.form.valid) {
+            this.loading = true;
             this.accountService.login(this.username, this.password).subscribe((response) => {
                 if (response.ok == true) {
-                    window.location.href = '/business';
-                    //this.router.navigate(['/business']);
+                    this.loading = false;
+                    this.router.navigate(['/business']);
                 } else {
+                    this.loading = false;
                     this.loginFailedMsg = response._body;
                 }
             });

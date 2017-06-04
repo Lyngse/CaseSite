@@ -2,6 +2,7 @@
 import { AccountService } from '../../services/account.service';
 import { BusinessService } from '../../services/business.service';
 import { Business } from '../../model/business';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'shared-header',
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
     business: Business;
     loading: boolean = false;
 
-    constructor(private accountService: AccountService, private businessService: BusinessService) {
+    constructor(private accountService: AccountService, private businessService: BusinessService, private router: Router) {
 
     }
 
@@ -30,6 +31,6 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.loading = true;
-        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; window.location.href = '/' });
+        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; this.router.navigate(['/business']); });
     }
 }

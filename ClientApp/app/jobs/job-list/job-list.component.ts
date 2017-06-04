@@ -1,4 +1,4 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Job } from '../../model/job';
 
 @Component({
@@ -9,6 +9,13 @@ import { Job } from '../../model/job';
 export class JobListComponent {
     @Input() showEdit: boolean;
     @Input() jobs: Job[];
+    @Output() deleteJob = new EventEmitter();
     constructor() {
     }
+
+    handleDeleteJob(id) {
+        this.deleteJob.emit(id);
+    }
+
+    
 }

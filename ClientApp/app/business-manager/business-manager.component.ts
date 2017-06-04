@@ -43,4 +43,17 @@ export class BusinessManagerComponent{
         });
     }
 
+    handleDeleteJob(id) {
+        this.loading = true;
+        this.jobService.deleteJob(id).subscribe((data) => {
+            let index = this.jobs.findIndex(job => {
+                return job.id === id;
+            });
+            if (index > -1)
+                this.jobs.splice(index, 1);
+            this.loading = false;
+        })
+        
+    }
+
 }
