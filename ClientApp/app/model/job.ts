@@ -12,4 +12,8 @@ export class Job {
     jobType: string;
     businessId: number;
     businessName: string;
+
+    constructor() {
+        this.deadline = moment();
+    }
 }

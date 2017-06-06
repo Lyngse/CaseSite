@@ -2,6 +2,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Job } from '../../model/job';
+import * as moment from 'moment';
 
 import { JobService } from '../../services/job.service'
 
@@ -28,11 +29,13 @@ export class CreateEditJobComponent implements AfterViewInit {
     ngAfterViewInit() {
         this.route.params.subscribe(params => {
             let id = params['id'];
-            this.jobService.getJob(id).subscribe(res => {
-                console.log(res);
-                this.model = res;
-                this.jobService.getJob(res.id).subscribe(res => this.model = res);
-            });
+            if (id) {
+                this.jobService.getJob(id).subscribe(res => {
+                    console.log(res);
+                    this.model = res;
+                    //this.jobService.getJob(res.id).subscribe(res => this.model = res);
+                });
+            }
 
         }) 
 
@@ -62,5 +65,10 @@ export class CreateEditJobComponent implements AfterViewInit {
                 })
             }  
         }
+    }
+
+    deadlineChanged(newValue) {
+        this.model.deadline = moment(newValue);
+        console.log(this.model.deadline.format());
     }
 }
