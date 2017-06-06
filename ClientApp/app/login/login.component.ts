@@ -42,4 +42,8 @@ export class LoginComponent implements AfterViewInit {
             });
         }
     }
+
+    newBusiness() {
+        this.router.navigate(['/business/register']);
+    }
 }

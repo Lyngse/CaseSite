@@ -18,17 +18,23 @@ export class AccountService {
             .subscribe(value => this.loggedIn.next(value.json()));
     }
 
+    updateToken() {
+        this.http
+            .get('api/account/updateTokens', this.options)
+            .subscribe();
+    }
+
     login(username: string, password: string): Observable<any> {
         return this.http
             .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
-            .map(res => { this.loggedIn.next(true); return res; })
+            .map(res => { this.loggedIn.next(true); this.updateToken(); return res; })
             .catch(this.handleError);
     }
 
     logout(): Observable<any> {
         return this.http
             .post('api/account/logout', this.options)
-            .map(res => { this.loggedIn.next(false); return res; })
+            .map(res => { this.loggedIn.next(false); this.updateToken(); return res; })
             .catch(this.handleError);
     }
 
