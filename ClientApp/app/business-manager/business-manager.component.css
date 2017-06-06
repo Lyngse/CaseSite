@@ -7,3 +7,21 @@
     webkit-box-shadow: 1px 8px 10px rgba(0, 0, 0, 0.6);
     box-shadow: 1px 8px 10px rgba(0, 0, 0, 0.6);
 }
+
+.bm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid #006699;
+}
+
+.btn-new {
+}
+
+.heading1 {
+    display: block;
+    flex: 1;
+    margin-right: 5px;
+    border-bottom: 0;
+    margin-bottom: 10px;
+}
