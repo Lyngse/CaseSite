@@ -42,4 +42,8 @@ export class LoginComponent implements AfterViewInit {
             });
         }
     }
+
+    registerClick() {
+        this.router.navigateByUrl('register');
+    }
 }

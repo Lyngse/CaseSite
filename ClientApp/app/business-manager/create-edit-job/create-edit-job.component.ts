@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, Pipe, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Job } from '../../model/job';
 
@@ -22,7 +22,7 @@ export class CreateEditJobComponent implements AfterViewInit {
 
     model: Job = new Job();
 
-    constructor(private jobService: JobService, private route: ActivatedRoute) {
+    constructor(private jobService: JobService, private route: ActivatedRoute, private router: Router) {
     }
 
     ngAfterViewInit() {
@@ -45,6 +45,7 @@ export class CreateEditJobComponent implements AfterViewInit {
             if(!this.model.id) {
                 this.jobService.createJob(this.model).subscribe((data) => {
                     console.log(data);
+                    this.router.navigateByUrl('business');
                 }, (err) => {
 
                 });
@@ -54,6 +55,7 @@ export class CreateEditJobComponent implements AfterViewInit {
                     let id = params['id'];
                     this.jobService.updateJob(id, this.model).subscribe((data) => {
                         console.log(data);
+                        this.router.navigateByUrl('business');
                     }, (err) => {
 
                     });
