@@ -25,6 +25,12 @@ namespace CaseSite.Controllers
             _roleManager = roleManager;
         }
 
+        [HttpGet("status")]
+        public IActionResult Status()
+        {
+            return Ok(_loginManager.IsSignedIn(HttpContext.User));
+        }
+
         [HttpPost("logout")]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LogOut()

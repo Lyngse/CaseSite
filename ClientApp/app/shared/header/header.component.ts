@@ -14,10 +14,18 @@ export class HeaderComponent implements OnInit {
     loading: boolean = false;
 
     constructor(private accountService: AccountService, private businessService: BusinessService, private router: Router) {
-
+        accountService.loggedIn.subscribe(newValue => {
+            if (newValue)
+                this.getBusiness();
+            else
+                this.business = null;
+        })
     }
 
     ngOnInit() {
+    }
+
+    getBusiness() {
         this.loading = true;
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
@@ -31,6 +39,6 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.loading = true;
-        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; this.router.navigate(['/business']); });
+        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; this.router.navigate(['/frontpage']); });
     }
 }
