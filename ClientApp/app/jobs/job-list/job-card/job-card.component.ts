@@ -1,4 +1,4 @@
-﻿import { Component, Input} from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Job } from '../../../model/job';
 import * as moment from 'moment';
 
@@ -10,6 +10,7 @@ import * as moment from 'moment';
 export class JobCardComponent {
     @Input() showEdit: boolean;
     @Input() job: Job;
+    @Output() deleteJob = new EventEmitter();
 
     constructor() {
     }
@@ -18,5 +19,9 @@ export class JobCardComponent {
         if (this.job) {
             return this.job.deadline.fromNow();
         }
+    }
+
+    deleteJobClick() {
+        this.deleteJob.emit(this.job.id);
     }
 }

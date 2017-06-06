@@ -21,6 +21,13 @@ export class JobService {
 
     }
 
+    deleteJob(id: number): Observable<Job> {
+        return this.http
+            .delete('api/jobs/' + id, this.options)
+            .map(res => this.extractData(res))
+            .catch(this.handleError);
+    }
+
     getJob(id: number): Observable<Job> {
         return this.http
             .get('api/jobs/' + id, this.options)
@@ -37,7 +44,7 @@ export class JobService {
 
     createJob(j: Job): Observable<Job> {
         let job = {
-            Deadline: j.deadline.toDate(),
+            Deadline: j.deadline,
             Title: j.title,
             Description: j.description,
             MaxNumPersons: j.maxNumPersons,
