@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Pipe, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, Pipe, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Job } from '../../model/job';
 
@@ -9,7 +9,7 @@ import { JobService } from '../../services/job.service'
     templateUrl: './create-edit-job.component.html',
     styleUrls: ['./create-edit-job.component.css']
 })
-export class CreateEditJobComponent {
+export class CreateEditJobComponent implements AfterViewInit {
     jobTypes: string[] = [
         'Grafisk Opgave',
         'Video Opgave',
@@ -22,6 +22,10 @@ export class CreateEditJobComponent {
     model: Job = new Job();
 
     constructor(private jobService: JobService) {
+    }
+
+    ngAfterViewInit() {
+
     }
 
     @ViewChild('f') form: any;

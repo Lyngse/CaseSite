@@ -1,15 +1,15 @@
 ﻿<div class="container-fluid contentRow" style="padding:0;">
-    <h1 class="heading1">Mine Jobs</h1>
+    <div class="bm-header">
+        <h1 class="heading1">Mine Jobs</h1>
+        <button class="btn btn-warning btn-lg btn-fab" routerLink="/business/createeditjob">
+            <i class="fa fa-plus"></i> Nyt Job
+        </button>
+    </div>
     <job-list [showEdit]="true" [jobs]="jobs"></job-list>
     <!--<button class="fab btn-fab">
         <span class="fa fa-plus btn-fab-icon"></span>
     </button>-->
-    <button class="btn btn-warning btn-lg btn-fab" routerLink="/business/createeditjob">
-        <i class="fa fa-plus"></i> Nyt Job
-    </button>
     
-    <button class="btn btn-danger" (click)="getInfo()">Get info</button>
-    <button class="btn btn-primary" (click)="logout()">Log ud</button>
     <!--<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
     <button (click)="popToast()">pop toast</button>-->
 </div>
