@@ -5,7 +5,7 @@
             <i class="fa fa-plus"></i> Nyt Job
         </button>
     </div>
-    <job-list [showEdit]="true" [jobs]="jobs"></job-list>
+    <job-list [showEdit]="true" [jobs]="jobs" (deleteJob)="handleDeleteJob($event)"></job-list>
     <!--<button class="fab btn-fab">
         <span class="fa fa-plus btn-fab-icon"></span>
     </button>-->
