@@ -81,13 +81,13 @@
                         <div class="col-sm-5" style="padding:0;">
                             <div class="form-group"
                                  [ngClass]="{
-                         'has-error': minNumOfPersons.invalid && (minNumOfPersons.dirty || minNumOfPersons.touched),
-                         'has-success': minNumOfPersons.valid && (minNumOfPersons.dirty || minNumOfPersons.touched)
+                         'has-error': minNumPersons.invalid && (minNumPersons.dirty || minNumPersons.touched),
+                         'has-success': minNumPersons.valid && (minNumPersons.dirty || minNumPersons.touched)
                          }">
-                                <label for="minNumOfPersons" class="control-label">Minimum antal personer *</label>
-                                <input type="number" min="1" max="10" class="form-control" id="minNumOfPersons" name="minNumOfPersons" [(ngModel)]="model.minNumOfPersons" #minNumOfPersons="ngModel" required />
-                                <div class="form-feedback" *ngIf="minNumOfPersons.errors && (minNumOfPersons.dirty || minNumOfPersons.touched)">
-                                    <p *ngIf="minNumOfPersons.errors.required">Det minimale antal personer skal angives</p>
+                                <label for="minNumPersons" class="control-label">Minimum antal personer *</label>
+                                <input type="number" min="1" max="10" class="form-control" id="minNumPersons" name="minNumPersons" [(ngModel)]="model.minNumPersons" #minNumPersons="ngModel" required />
+                                <div class="form-feedback" *ngIf="minNumPersons.errors && (minNumPersons.dirty || minNumPersons.touched)">
+                                    <p *ngIf="minNumPersons.errors.required">Det minimale antal personer skal angives</p>
                                 </div>
                             </div>
                         </div>
@@ -97,13 +97,13 @@
                         <div class="col-sm-5" style="padding:0;">
                             <div class="form-group"
                                  [ngClass]="{
-                         'has-error': maxNumOfPersons.invalid && (maxNumOfPersons.dirty || maxNumOfPersons.touched),
-                         'has-success': maxNumOfPersons.valid && (maxNumOfPersons.dirty || maxNumOfPersons.touched)
+                         'has-error': maxNumPersons.invalid && (maxNumPersons.dirty || maxNumPersons.touched),
+                         'has-success': maxNumPersons.valid && (maxNumPersons.dirty || maxNumPersons.touched)
                          }">
-                                <label for="maxNumOfPersons" class="control-label">Maximum antal personer *</label>
-                                <input type="number" min="1" max="10" class="form-control" id="maxNumOfPersons" name="maxNumOfPersons" [(ngModel)]="model.maxNumOfPersons" #maxNumOfPersons="ngModel" required />
-                                <div class="form-feedback" *ngIf="maxNumOfPersons.errors && (maxNumOfPersons.dirty || maxNumOfPersons.touched)">
-                                    <p *ngIf="maxNumOfPersons.errors.required">Det maximale antal personer skal angives</p>
+                                <label for="maxNumPersons" class="control-label">Maximum antal personer *</label>
+                                <input type="number" min="1" max="10" class="form-control" id="maxNumPersons" name="maxNumPersons" [(ngModel)]="model.maxNumPersons" #maxNumPersons="ngModel" required />
+                                <div class="form-feedback" *ngIf="maxNumPersons.errors && (maxNumPersons.dirty || maxNumPersons.touched)">
+                                    <p *ngIf="maxNumPersons.errors.required">Det maximale antal personer skal angives</p>
                                 </div>
                             </div>
                         </div>

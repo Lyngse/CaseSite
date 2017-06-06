@@ -18,6 +18,7 @@ const routes: Routes = [
     { path: 'registrervirksomhed', component: BuisnessRegisterComponent },
     { path: 'business', component: BusinessManagerComponent },
     { path: 'business/createeditjob', component: CreateEditJobComponent },
+    { path: 'business/createeditjob/:id', component: CreateEditJobComponent },
     { path: 'business/businessSettings', component: BusinessEditComponent },
     { path: 'login', component: LoginComponent },
     { path: '**', redirectTo: 'frontpage' }

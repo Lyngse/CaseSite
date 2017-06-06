@@ -52,8 +52,11 @@ export class BusinessManagerComponent{
             if (index > -1)
                 this.jobs.splice(index, 1);
             this.loading = false;
-        })
-        
+        })       
+    }
+
+    handleEditJob(id) {
+        this.router.navigateByUrl("business/createeditjob/" + id);
     }
 
 }

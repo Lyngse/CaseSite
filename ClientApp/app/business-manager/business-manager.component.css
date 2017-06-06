@@ -16,6 +16,8 @@
 }
 
 .btn-new {
+    align-self: flex-end;
+    margin-bottom: 15px;
 }
 
 .heading1 {

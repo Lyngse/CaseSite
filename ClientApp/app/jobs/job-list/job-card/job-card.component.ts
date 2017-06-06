@@ -11,6 +11,7 @@ export class JobCardComponent {
     @Input() showEdit: boolean;
     @Input() job: Job;
     @Output() deleteJob = new EventEmitter();
+    @Output() editJob = new EventEmitter();
 
     constructor() {
     }
@@ -23,5 +24,9 @@ export class JobCardComponent {
 
     deleteJobClick() {
         this.deleteJob.emit(this.job.id);
+    }
+
+    editJobClick() {
+        this.editJob.emit(this.job.id);
     }
 }

@@ -21,6 +21,26 @@ export class JobService {
 
     }
 
+    updateJob(id: number, j: Job): Observable<Job> {
+        let job = {
+            Id: j.id,
+            Title: j.title,
+            Deadline: j.deadline,
+            Description: j.description,
+            MaxNumPersons: j.maxNumPersons,
+            MinNumPersons: j.minNumPersons,
+            RewardValue: j.rewardValue,
+            WorkPlace: j.workPlace,
+            JobType: j.jobType,
+            BusinessId: j.businessId,
+            BusinessName: j.businessName
+        };
+        return this.http
+            .put('api/jobs', JSON.stringify({id: id, job: job }), this.options)
+            .map(res => console.log(res))
+            .catch(this.handleError);
+    }
+
     deleteJob(id: number): Observable<Job> {
         return this.http
             .delete('api/jobs/' + id, this.options)
