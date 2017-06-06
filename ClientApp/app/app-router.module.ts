@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: 'frontpage', component: FrontpageComponent },
     { path: 'jobs', component: JobsComponent },
     { path: 'jobs/detail/:id', component: JobDetailComponent },
-    { path: 'register', component: BuisnessRegisterComponent },
+    { path: 'business/register', component: BuisnessRegisterComponent },
     { path: 'business', component: BusinessManagerComponent },
     { path: 'business/createeditjob', component: CreateEditJobComponent },
     { path: 'business/createeditjob/:id', component: CreateEditJobComponent },

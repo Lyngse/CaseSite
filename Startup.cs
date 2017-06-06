@@ -46,7 +46,6 @@ namespace CaseSite
 
             services.AddIdentity<IdentityUser, IdentityRole>(o =>
             {
-                o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 8;
             })
@@ -64,7 +63,7 @@ namespace CaseSite
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IAntiforgery antiforgery)
         {
-
+            
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -84,7 +83,7 @@ namespace CaseSite
             app.UseIdentity();
             app.Use(next => context =>
             {
-                if (context.Request.Path == "/")
+                if (context.Request.Path == "/" || context.Request.Path == "/api/account/updateTokens")
                 {
                     //send the request token as a JavaScript-readable cookie, and Angular will use it by default
                     var tokens = antiforgery.GetAndStoreTokens(context);

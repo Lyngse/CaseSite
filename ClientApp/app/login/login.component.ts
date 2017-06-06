@@ -43,7 +43,7 @@ export class LoginComponent implements AfterViewInit {
         }
     }
 
-    registerClick() {
-        this.router.navigateByUrl('register');
+    newBusiness() {
+        this.router.navigate(['/business/register']);
     }
 }

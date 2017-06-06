@@ -25,6 +25,13 @@ namespace CaseSite.Controllers
             _roleManager = roleManager;
         }
 
+        //used by startup.cs to update tokens
+        [HttpGet("updateTokens")]
+        public IActionResult updateTokens()
+        {
+            return Ok();
+        }
+
         [HttpGet("status")]
         public IActionResult Status()
         {
