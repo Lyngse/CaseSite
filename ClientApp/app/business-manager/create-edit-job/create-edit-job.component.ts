@@ -20,6 +20,8 @@ export class CreateEditJobComponent implements AfterViewInit {
         'Målgruppeanalyse',
         'Dataanalyse'
     ];
+    edit: Boolean;
+    loading: Boolean = false;
 
     model: Job = new Job();
 
@@ -33,8 +35,10 @@ export class CreateEditJobComponent implements AfterViewInit {
                 this.jobService.getJob(id).subscribe(res => {
                     console.log(res);
                     this.model = res;
-                    //this.jobService.getJob(res.id).subscribe(res => this.model = res);
+                    this.edit = true;
                 });
+            } else {
+                this.edit = false;
             }
 
         }) 
@@ -45,22 +49,23 @@ export class CreateEditJobComponent implements AfterViewInit {
 
     onSubmit() {
         if (this.form.valid) {
-            if(!this.model.id) {
+            this.loading = true;
+            if (!this.model.id) {
+                
                 this.jobService.createJob(this.model).subscribe((data) => {
                     console.log(data);
+                    this.loading = false;
                 }, (err) => {
-
+                    this.loading = false;
                 });
                 //this.businessService.createBusiness(this.model);
             } else {
-                this.route.params.subscribe(params => {
-                    let id = params['id'];
-                    this.jobService.updateJob(id, this.model).subscribe((data) => {
-                        console.log(data);
-                    }, (err) => {
-
-                    });
-                })
+                this.jobService.updateJob(this.model).subscribe((data) => {
+                    console.log(data);
+                    this.loading = false;
+                }, (err) => {
+                    this.loading = false;
+                });
             }  
         }
     }

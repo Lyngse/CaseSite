@@ -21,7 +21,7 @@ export class JobService {
 
     }
 
-    updateJob(id: number, j: Job): Observable<Job> {
+    updateJob(j: Job): Observable<Job> {
         let job = {
             Id: j.id,
             Title: j.title,
@@ -36,8 +36,8 @@ export class JobService {
             BusinessName: j.businessName
         };
         return this.http
-            .put('api/jobs', JSON.stringify({id: id, job: job }), this.options)
-            .map(res => console.log(res))
+            .put('api/jobs', JSON.stringify(job), this.options)
+            .map(res => res.json())
             .catch(this.handleError);
     }
 

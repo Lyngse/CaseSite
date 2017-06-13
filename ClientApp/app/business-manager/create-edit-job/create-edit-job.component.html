@@ -124,10 +124,12 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg" [disabled]="f.invalid" style="margin-bottom:20px">Opret Job</button>
+                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem ændringer' : 'Gem job'}}</button>
                     </div>
                 </div>  
             </form>
         </div>
     </div>
 </div>
+<spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
+<div *ngIf="loading" class="loading-background"></div>

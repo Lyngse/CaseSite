@@ -57,39 +57,36 @@ namespace CaseSite.Controllers
         }
 
         // PUT: api/Jobs/5
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize]
-        public async Task<IActionResult> PutJob([FromRoute] int id, [FromBody] Job job)
+        public async Task<IActionResult> PutJob([FromBody] Job job)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != job.Id)
+            var serverJob = await _context.Job.SingleOrDefaultAsync(j => j.Id == job.Id);
+
+            if(serverJob == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(job).State = EntityState.Modified;
+            serverJob.Deadline = job.Deadline;
+            serverJob.Description = job.Description;
+            serverJob.JobType = job.JobType;
+            serverJob.MaxNumPersons = job.MaxNumPersons;
+            serverJob.MinNumPersons = job.MinNumPersons;
+            serverJob.RewardValue = job.RewardValue;
+            serverJob.Title = job.Title;
+            serverJob.WorkPlace = job.WorkPlace;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!JobExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.Entry(serverJob).State = EntityState.Modified;
+            
+            await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(toClientJob(serverJob));
         }
 
         // POST: api/Jobs
@@ -186,7 +183,7 @@ namespace CaseSite.Controllers
                 workPlace = j.WorkPlace,
                 jobType = j.JobType,
                 businessId = j.BusinessId,
-                businessName = j.Business.Name
+                businessName = j.Business == null ? null : j.Business.Name
             };
         }
     }
