@@ -3,7 +3,7 @@
         <div class="col-sm-6 col-sm-offset-3 panel panel-default" style="margin-top:50px;"> 
             <div class="panel-body">
                 <form novalidate (ngSubmit)="onLogin()" #f="ngForm">
-                    <div class="col-sm-6 col-sm-offset-3">
+                    <div class="col-sm-10 col-sm-offset-1">
                         <div class="form-group">
                             <label for="username" class="control-label">Brugernavn</label>
                             <input type="text" id="username" class="form-control" name="uname" [(ngModel)]="username" #uname="ngModel" required />
@@ -18,7 +18,7 @@
                     </div>
                 </form>
                 <div class="col-sm-6 col-xs-12 text-center">
-                    <button (click)="newBusiness()" class="btn btn-link">Opret ny bruger</button>
+                    <button (click)="newBusiness()" class="btn btn-link">Opret ny virksomhed</button>
                 </div>
                 <div class="col-sm-6 col-xs-12 text-center">
                     <button class="btn btn-link">Glemt din adgangskode?</button>
