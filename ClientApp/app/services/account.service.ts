@@ -18,10 +18,17 @@ export class AccountService {
             .subscribe(value => this.loggedIn.next(value.json()));
     }
 
-    updateToken() {
-        this.http
-            .get('api/account/updateTokens', this.options)
-            .subscribe();
+    resetPassword(userId: string, code: string, newPassword: string): Observable<any> {
+        return this.http
+            .post('api/account/resetpassword/', JSON.stringify({ userId: userId, code: code, newPassword: newPassword }), this.options)
+            .catch(this.handleError);
+    }
+
+    forgotPassword(email: string): Observable<any> {
+        return this.http
+            .post('api/account/forgotpassword/', JSON.stringify(email), this.options)
+            .map(res => res.json)
+            .catch(this.handleError);
     }
 
     login(username: string, password: string): Observable<any> {
@@ -42,6 +49,12 @@ export class AccountService {
         return this.http
             .post('api/account/registerbusinessuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
             .catch(this.handleError);
+    }
+
+    private updateToken() {
+        this.http
+            .get('api/account/updateTokens', this.options)
+            .subscribe();
     }
 
     private handleError(error: any): Observable<any> {

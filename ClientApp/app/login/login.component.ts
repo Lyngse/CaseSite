@@ -46,4 +46,8 @@ export class LoginComponent implements AfterViewInit {
     newBusiness() {
         this.router.navigate(['/business/register']);
     }
+
+    forgotPassword() {
+        this.accountService.forgotPassword("goo@gle.com").subscribe();
+    }
 }

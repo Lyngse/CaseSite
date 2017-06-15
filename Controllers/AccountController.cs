@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CaseSite.Models;
+using MailKit.Net.Smtp;
+using MimeKit;
+using Newtonsoft.Json.Linq;
 
 namespace CaseSite.Controllers
 {
@@ -25,17 +28,56 @@ namespace CaseSite.Controllers
             _roleManager = roleManager;
         }
 
-        //used by startup.cs to update tokens
-        [HttpGet("updateTokens")]
-        public IActionResult updateTokens()
+        [HttpPost("forgotpassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] string email)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = await _userManager.FindByEmailAsync(email);
+            if(user == null)
+            {
+                return Ok();
+            }
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = Url.Action("resetpassword", "login", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            var mimeMessage = new MimeMessage();
+            mimeMessage.From.Add(new MailboxAddress("Email from ASP.Net core 1.1", "frederik.bl@live.dk"));
+            mimeMessage.To.Add(new MailboxAddress("Microsoft ASP.NET core", "frederik.bl@live.dk"));
+            mimeMessage.Subject = "Reset password";
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = "Please reset your password by clicking here: <a href='" + callbackUrl + "'>link</a>";
+            mimeMessage.Body = bodyBuilder.ToMessageBody();
+            using(var client = new SmtpClient())
+            {
+                client.Connect("smtp.live.com", 587, false);
+                client.Authenticate("frederik.bl@live.dk", "3og5er8.0");
+                client.Send(mimeMessage);
+                client.Disconnect(true);
+            }
+            return Ok();
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] JObject obj)
+        {
+            string userId = obj["userId"].ToString();
+            string code = obj["code"].ToString();
+            string newPassword = obj["newPassword"].ToString();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            await _userManager.ResetPasswordAsync(user, code, newPassword);
             return Ok();
         }
 
         [HttpGet("status")]
         public IActionResult Status()
         {
-            return Ok(_loginManager.IsSignedIn(HttpContext.User));
+        return Ok(_loginManager.IsSignedIn(HttpContext.User));
         }
 
         [HttpPost("logout")]
@@ -92,6 +134,13 @@ namespace CaseSite.Controllers
             }
 
             return Ok(user.Id);
+        }
+
+        //used by startup.cs to update tokens
+        [HttpGet("updateTokens")]
+        public IActionResult updateTokens()
+        {
+            return Ok();
         }
 
         //[HttpPost("register/role/{roleName}")]

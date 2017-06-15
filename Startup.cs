@@ -56,7 +56,6 @@ namespace CaseSite
             {
                 opt.Cookies.ApplicationCookie.AutomaticChallenge = false;
             });
-
            
         }
 

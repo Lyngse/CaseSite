@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { CreateEditJobComponent } from './business-manager/create-edit-job/create-edit-job.component';
 import { BusinessEditComponent } from './business-manager/business-edit/business-edit.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
+import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'business/createeditjob/:id', component: CreateEditJobComponent },
     { path: 'business/businessSettings', component: BusinessEditComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'login/resetpassword', component: ResetPasswordComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -38,5 +40,6 @@ export const routingComponents = [
     LoginComponent,
     CreateEditJobComponent,
     BusinessEditComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    ResetPasswordComponent
 ]

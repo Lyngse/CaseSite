@@ -12,6 +12,6 @@ namespace CaseSite.Models
 
         public DbSet<Job> Job { get; set; }
 
-        public DbSet<CaseSite.Models.Business> Business { get; set; }
+        public DbSet<Business> Business { get; set; }
     }
 }
