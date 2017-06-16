@@ -48,6 +48,6 @@ export class LoginComponent implements AfterViewInit {
     }
 
     forgotPassword() {
-        this.accountService.forgotPassword("goo@gle.com").subscribe();
+        this.router.navigate(['/login/forgotpassword']);
     }
 }

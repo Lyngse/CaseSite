@@ -27,7 +27,6 @@ export class AccountService {
     forgotPassword(email: string): Observable<any> {
         return this.http
             .post('api/account/forgotpassword/', JSON.stringify(email), this.options)
-            .map(res => res.json)
             .catch(this.handleError);
     }
 
