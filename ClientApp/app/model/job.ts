@@ -7,8 +7,12 @@ export class Job {
     description: string;
     maxNumPersons: number;
     minNumPersons: number;
+    rewardType: string;
     rewardValue: number;
     workPlace: string;
+    city: string;
+    zip: number;
+    street: string;
     jobType: string;
     businessId: number;
     businessName: string;

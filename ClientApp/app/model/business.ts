@@ -7,6 +7,9 @@
         public password: string = '',
         public description: string = '',
         public logo: string = '',
+        public city: string = '',
+        public street: string = '',
+        public zip: number = null
     ) {
     
     }
