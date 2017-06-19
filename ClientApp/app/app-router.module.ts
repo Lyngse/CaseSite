@@ -11,6 +11,7 @@ import { BusinessEditComponent } from './business-manager/business-edit/business
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ForgotPasswordComponent } from './login/forgotpassword/forgotpassword.component';
+import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'login/resetpassword', component: ResetPasswordComponent },
     { path: 'login/forgotpassword', component: ForgotPasswordComponent },
+    { path: 'hvordandetvirker', component: HowItWorksComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -44,5 +46,6 @@ export const routingComponents = [
     BusinessEditComponent,
     JobDetailComponent,
     ResetPasswordComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    HowItWorksComponent
 ]
