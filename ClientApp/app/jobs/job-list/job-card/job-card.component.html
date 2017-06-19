@@ -55,7 +55,9 @@
                 <div class="card-price">
                     <p class="card-label">Belønning</p>
                     <p style="font-size:14px;">
-                        <span><i class="fa fa-gift"></i></span>
+                        <span *ngIf="job.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
+                        <span *ngIf="job.rewardType === 'Gave'"><i class="fa fa-usd"></i></span>
+                        <span *ngIf="job.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
                         {{job.rewardValue}}
                     </p>
                 </div>

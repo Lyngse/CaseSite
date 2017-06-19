@@ -10,7 +10,7 @@
                          'has-error': title.invalid && (title.dirty || title.touched),
                          'has-success': title.valid && (title.dirty || title.touched)
                          }">
-                        <label for="title" class="control-label">Opgave titel *</label>
+                        <label for="title" class="control-label">Opgavetitel *</label>
                         <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
                         <input type="text" id="title" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
                         <div class="form-feedback" *ngIf="title.errors && (title.dirty || title.touched)">
@@ -23,7 +23,7 @@
                          'has-error': jobType.invalid && (jobType.dirty || jobType.touched),
                          'has-success': jobType.valid && (jobType.dirty || jobType.touched)
                          }">
-                        <label for="jobType" class="control-label">Opgave type *</label>
+                        <label for="jobType" class="control-label">Opgavetype *</label>
                         <select class="form-control" id="jobType" name="jobType" [(ngModel)]="model.jobType" #jobType="ngModel" required>
                             <option *ngFor="let jt of jobTypes" [value]="jt">{{ jt }}</option>
                         </select>
