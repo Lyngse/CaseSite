@@ -51,7 +51,8 @@ export class CreateEditJobComponent implements AfterViewInit {
         if (this.form.valid) {
             this.loading = true;
             if (!this.model.id) {
-                
+                if (this.model.rewardType === 'Anbefaling')
+                    this.model.rewardValue = 0;
                 this.jobService.createJob(this.model).subscribe((data) => {
                     console.log(data);
                     this.loading = false;
@@ -61,6 +62,8 @@ export class CreateEditJobComponent implements AfterViewInit {
                 });
                 //this.businessService.createBusiness(this.model);
             } else {
+                if (this.model.rewardType === 'Anbefaling')
+                    this.model.rewardValue = 0;
                 this.jobService.updateJob(this.model).subscribe((data) => {
                     console.log(data);
                     this.loading = false;

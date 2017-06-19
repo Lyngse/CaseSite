@@ -13,7 +13,7 @@
 
 <div class="container-fluid" *ngIf="showEdit">
     <div class="row">
-        <div class="panel panel-default list-content">
+        <div class="list-content">
             <div class="panel-body flexbox-newline">
                 <div class="flexitem" *ngFor="let job of jobs">
                     <job-card [showEdit]="true" [job]="job" (deleteJob)="handleDeleteJob($event)" (editJob)="handleEditJob($event)"></job-card>

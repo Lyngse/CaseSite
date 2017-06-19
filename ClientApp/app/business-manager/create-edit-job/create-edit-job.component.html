@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="model.rewardType" class="form-group"
+                    <div *ngIf="model.rewardType === 'Honorar' || model.rewardType  === 'Gave'" class="form-group"
                          [ngClass]="{
                          'has-error': rewardValue.invalid && (rewardValue.dirty || rewardValue.touched),
                          'has-success': rewardValue.valid && (rewardValue.dirty || rewardValue.touched)
@@ -127,6 +127,39 @@
                             <p *ngIf="street.errors.required">Vejnavn og nummer skal udfyldes</p>
                         </div>
                     </div>
+
+                    <div *ngIf="model.workPlace ==='2'" class="form-group"
+                         [ngClass]="{
+                         'has-error': applicationDescription.invalid && (applicationDescription.dirty || applicationDescription.touched),
+                         'has-success': applicationDescription.valid && (applicationDescription.dirty || applicationDescription.touched)
+                         }">
+                        <label for="applicationDescription" class="control-label" style="display:flex;align-items:center;">
+                            <span class="fa-stack" style="font-size:10px;">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                            Ansøgnings beskrivelse *
+
+                        </label>
+                        <textarea style="resize:none;" class="form-control" rows="5" id="applicationDescription" name="applicationDescription" [(ngModel)]="model.applicationDescription" #applicationDescription="ngModel" required></textarea>
+                        <span class="help-block" style="font-size:16px;">Forklar hvad ansøgningen til opgaven skal indeholde. Inkluder kontakt information så som e-mail eller telefonnummer.</span>
+                        <div class="form-feedback" *ngIf="applicationDescription.errors && (applicationDescription.dirty || applicationDescription.touched)">
+                            <p *ngIf="applicationDescription.errors.required">Ansøgnings beskrivelsen skal udfyldes</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="model.workPlace ==='1'" class="form-group"
+                            [ngClass]="{
+                        'has-error': solutionEmail.invalid && (solutionEmail.dirty || solutionEmail.touched),
+                        'has-success': solutionEmail.valid && (solutionEmail.dirty || solutionEmail.touched)
+                        }">
+                        <label for="solutionEmail" class="control-label">Kontakt e-mail til løsningsforslag *</label>
+                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                        <input type="email" id="solutionEmail" class="form-control" name="solutionEmail" [(ngModel)]="model.solutionEmail" #solutionEmail="ngModel" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" required />
+                        <div class="form-feedback" *ngIf="solutionEmail.errors && (solutionEmail.dirty || solutionEmail.touched)">
+                            <p *ngIf="solutionEmail.errors.required">Kontakt e-mailen skal udfyldes</p>
+                        </div>
+                    </div>
                     
 
                     <div class="form-group"
@@ -136,9 +169,9 @@
                          }">
                         <label for="description" class="control-label">Opgave beskrivelse *</label>
                         <textarea style="resize:none;" class="form-control" rows="5" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
-                        <span class="help-block" style="font-size:16px;">Forklar hvad jobbet går ud på.</span>
+                        <span class="help-block" style="font-size:16px;">Forklar hvad opgaven går ud på.</span>
                         <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
-                            <p *ngIf="description.errors.required">Opgaves beskrielse skal udfyldes</p>
+                            <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes</p>
                         </div>
                     </div>
 
