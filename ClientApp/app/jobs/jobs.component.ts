@@ -1,5 +1,5 @@
 ﻿import { Component,OnInit } from '@angular/core';
-import { Job } from '../model/job';
+import { Task } from '../model/job';
 import { JobService } from '../services/job.service'
 
 @Component({
@@ -8,7 +8,7 @@ import { JobService } from '../services/job.service'
     styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements OnInit {
-    jobs: Job[]
+    jobs: Task[]
     loading: boolean = false;
 
     constructor(private jobService: JobService) {

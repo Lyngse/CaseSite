@@ -1,19 +1,23 @@
 ﻿import * as moment from 'moment';
 
-export class Job {
+export class Task {
     id: number;
     title: string;
     deadline: moment.Moment;
     description: string;
-    maxNumPersons: number;
-    minNumPersons: number;
+    rewardType: string;
     rewardValue: number;
     workPlace: string;
-    jobType: string;
+    type: string;
+    address: string;
+    zip: number;
+    city: string;
+    creationTime: moment.Moment;
     businessId: number;
     businessName: string;
 
     constructor() {
         this.deadline = moment();
+        this.creationTime = moment();
     }
 }

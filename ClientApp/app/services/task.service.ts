@@ -9,10 +9,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 
-import { Job } from '../model/job';
+import { Task } from '../model/task';
 
 @Injectable()
-export class JobService {
+export class TaskService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
@@ -21,67 +21,74 @@ export class JobService {
 
     }
 
-    updateJob(j: Job): Observable<Job> {
-        let job = {
-            Id: j.id,
-            Title: j.title,
-            Deadline: j.deadline,
-            Description: j.description,
-            MaxNumPersons: j.maxNumPersons,
-            MinNumPersons: j.minNumPersons,
-            RewardValue: j.rewardValue,
-            WorkPlace: j.workPlace,
-            JobType: j.jobType,
-            BusinessId: j.businessId,
-            BusinessName: j.businessName
+    updateJob(t: Task): Observable<Task> {
+        let task = {
+            Id: t.id,
+            Title: t.title,
+            Deadline: t.deadline,
+            Description: t.description,
+            RewardType: t.rewardType,
+            RewardValue: t.rewardValue,
+            WorkPlace: t.workPlace,
+            Type: t.type,
+            Address: t.address,
+            Zip: t.zip,
+            City: t.city,
+            CreationTime: t.creationTime,
+            BusinessId: t.businessId,
+            BusinessName: t.businessName
         };
         return this.http
-            .put('api/jobs', JSON.stringify(job), this.options)
+            .put('api/tasks', JSON.stringify(task), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
-    deleteJob(id: number): Observable<Job> {
+    deleteJob(id: number): Observable<Task> {
         return this.http
-            .delete('api/jobs/' + id, this.options)
+            .delete('api/tasks/' + id, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    getJob(id: number): Observable<Job> {
+    getJob(id: number): Observable<Task> {
         return this.http
-            .get('api/jobs/' + id, this.options)
+            .get('api/tasks/' + id, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    getAllJobs(): Observable<Job[]> {
+    getAllJobs(): Observable<Task[]> {
         return this.http
-            .get('api/jobs', this.options)
+            .get('api/tasks', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    createJob(j: Job): Observable<Job> {
-        let job = {
-            Deadline: j.deadline,
-            Title: j.title,
-            Description: j.description,
-            MaxNumPersons: j.maxNumPersons,
-            MinNumPersons: j.minNumPersons,
-            RewardValue: j.rewardValue,
-            WorkPlace: j.workPlace,
-            JobType: j.jobType
-        }
+    createJob(t: Task): Observable<Task> {
+        let task = {
+            Id: t.id,
+            Title: t.title,
+            Deadline: t.deadline,
+            Description: t.description,
+            RewardType: t.rewardType,
+            RewardValue: t.rewardValue,
+            WorkPlace: t.workPlace,
+            Type: t.type,
+            Address: t.address,
+            Zip: t.zip,
+            City: t.city,
+            CreationTime: t.creationTime
+        };
         return this.http
-            .post('api/jobs', JSON.stringify(job), this.options)
+            .post('api/tasks', JSON.stringify(task), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
-    getJobsForBusiness(): Observable<Job[]> {
+    getJobsForBusiness(): Observable<Task[]> {
         return this.http
-            .get('api/jobs/business', this.options)
+            .get('api/tasks/business', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
@@ -93,9 +100,11 @@ export class JobService {
         } else if (data.length) {
             data.forEach((d) => {
                 d.deadline = moment(d.deadline);
+                d.creationTime = moment(d.creationTime);
             })
         } else {
             data.deadline = moment(data.deadline);
+            data.creationTime = moment(data.creationTime);
         }
         return data;
     }

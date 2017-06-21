@@ -3,7 +3,7 @@ import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { JobService } from '../services/job.service';
 import { Router } from '@angular/router';
-import { Job } from '../model/job';
+import { Task } from '../model/job';
 
 @Component({
     selector: 'business-manager',
@@ -12,7 +12,7 @@ import { Job } from '../model/job';
 })
 export class BusinessManagerComponent{
     loading: boolean = false;
-    jobs: Job[];
+    jobs: Task[];
 
     constructor(private businessService: BusinessService,
         private accountService: AccountService,

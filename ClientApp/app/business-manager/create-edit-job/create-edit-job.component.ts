@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Pipe, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Job } from '../../model/job';
+import { Task } from '../../model/job';
 import * as moment from 'moment';
 
 import { JobService } from '../../services/job.service'
@@ -23,7 +23,7 @@ export class CreateEditJobComponent implements AfterViewInit {
     edit: Boolean;
     loading: Boolean = false;
 
-    model: Job = new Job();
+    model: Task = new Task();
 
     constructor(private jobService: JobService, private route: ActivatedRoute, private router: Router) {
     }

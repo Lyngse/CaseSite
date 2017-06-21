@@ -1,5 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Job } from '../../model/job';
+import { Task } from '../../model/job';
 
 @Component({
     selector: 'job-list',
@@ -8,7 +8,7 @@ import { Job } from '../../model/job';
 })
 export class JobListComponent {
     @Input() showEdit: boolean;
-    @Input() jobs: Job[];
+    @Input() jobs: Task[];
     @Output() deleteJob = new EventEmitter();
     @Output() editJob = new EventEmitter();
     constructor() {

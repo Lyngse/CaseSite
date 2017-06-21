@@ -1,7 +1,7 @@
 ﻿import { Component, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Business } from '../../model/business';
-import { Job } from '../../model/job';
+import { Task } from '../../model/job';
 import { BusinessService } from '../../services/business.service';
 import { JobService } from '../../services/job.service';
 import * as moment from 'moment';
@@ -12,7 +12,7 @@ import * as moment from 'moment';
     styleUrls: ['./job-detail.component.css']
 })
 export class JobDetailComponent implements AfterViewInit {
-    job: Job;
+    job: Task;
     business: Business;
 
     constructor(

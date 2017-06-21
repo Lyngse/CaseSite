@@ -95,9 +95,11 @@ namespace CaseSite.Controllers
             }
 
             serverBusiness.Name = business.Name;
-            serverBusiness.ContactEmail = business.ContactEmail;
             serverBusiness.Description = business.Description;
             serverBusiness.LogoUrl = business.LogoUrl;
+            serverBusiness.Address = business.Address;
+            serverBusiness.City = business.City;
+            serverBusiness.Zip = business.Zip;
 
             _context.Entry(serverBusiness).State = EntityState.Modified;
             
@@ -156,7 +158,9 @@ namespace CaseSite.Controllers
             result.id = business.Id;
             result.name = business.Name;
             result.description = business.Description;
-            result.contactEmail = business.ContactEmail;
+            result.address = business.Address;
+            result.city = business.City;
+            result.zip = business.Zip;
 
             if (incUser)
             {

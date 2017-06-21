@@ -10,7 +10,7 @@ namespace CaseSite.Models
         {
         }
 
-        public DbSet<Job> Job { get; set; }
+        public DbSet<Task> Task { get; set; }
 
         public DbSet<Business> Business { get; set; }
     }

@@ -24,7 +24,9 @@ export class BusinessService {
             Name: b.name,
             LogoUrl: b.logo,
             Description: b.description,
-            ContactEmail: b.email,
+            Address: b.address,
+            Zip: b.zip,
+            City: b.city
         };
         let user = {
             UserName: b.username,
@@ -39,9 +41,11 @@ export class BusinessService {
     createBusiness(b: Business, userId): Observable<Business> {
         let business = {
             Name: b.name,
-            Logo: b.logo,
+            LogoUrl: b.logo,
             Description: b.description,
-            ContactEmail: b.email,
+            Address: b.address,
+            Zip: b.zip,
+            City: b.city,
             UserId: userId
         }
         return this.http

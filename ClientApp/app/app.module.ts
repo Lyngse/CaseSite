@@ -14,7 +14,7 @@ import { ResetPasswordComponent } from './login/resetpassword/resetpassword.comp
 
 import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
-import { JobService } from './services/job.service';
+import { TaskService } from './services/task.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -35,7 +35,7 @@ import { JobService } from './services/job.service';
         FormsModule,
         SpinnerModule
     ],
-    providers: [BusinessService, AccountService, JobService]
+    providers: [BusinessService, AccountService, TaskService]
 })
 export class AppModule {
 }

@@ -1,5 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter} from '@angular/core';
-import { Job } from '../../../model/job';
+import { Task } from '../../../model/job';
 import * as moment from 'moment';
 
 @Component({
@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class JobCardComponent {
     @Input() showEdit: boolean;
-    @Input() job: Job;
+    @Input() job: Task;
     @Output() deleteJob = new EventEmitter();
     @Output() editJob = new EventEmitter();
 
