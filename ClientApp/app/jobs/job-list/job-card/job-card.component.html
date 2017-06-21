@@ -1,12 +1,36 @@
 ﻿<div class="container-fluid">
     <div class="row">
         <div class="text-center card-box">
-            <div class="card-logo">
-                <img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />
+            <div class="card-jobtype">
+                <span *ngIf="job.jobType === 'Grafisk Opgave'" class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
+                    <i class="fa fa-picture-o fa-stack-1x fa-inverse"></i>
+                </span>
+                <span *ngIf="job.jobType === 'Video Opgave'" class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
+                    <i class="fa fa-film fa-stack-1x fa-inverse"></i>
+                </span>
+                <span *ngIf="job.jobType === 'Event Opgave'" class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
+                    <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
+                </span>
+                <span *ngIf="job.jobType === 'Strategisk Opgave'" class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
+                    <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+                </span>
+                <span *ngIf="job.jobType === 'Målgruppeanalyse'" class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
+                    <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+                </span>
+                <span *ngIf="job.jobType === 'Dataanalyse'" class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
+                    <i class="fa fa-bar-chart fa-stack-1x fa-inverse"></i>
+                </span>
+                <!--<img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />-->
+                <p>{{job.jobType}}</p>
             </div>
             <div class="card-titel">
                 <h3>{{job.title}}</h3>
-                <p>{{job.jobType}}</p>
             </div>
             <div class="card-firm">
                 <h4>{{job.businessName}}</h4>
@@ -19,23 +43,25 @@
             </div>
             <div class="flexbox-nonewline">
                 <div class="flexitem card-workplace">
-                    <p>{{job.workPlace === "2" ? "ude" : "hjemme"}}</p>
+                    <p class="card-label">Arbejds lokation</p>
+                    <p class="card-value">{{job.workPlace === "2" ? "Hos virksomheden" : "Hjemme"}}</p>
                 </div>
-                <div class="flexitem card-workform">
-                    <p>{{job.minNumOfPersons}} - {{job.maxNumOfPersons}} personer</p>
+                <div class="flexitem card-deadline">
+                    <p class="card-label">Deadline</p>
+                    <p class="card-value">{{getDeadlineString()}}</p>
                 </div>
             </div>
-            <div class="flexbox-nonewline">
-                <div class="flexitem card-deadline">
-                    <p >{{getDeadlineString()}}</p>
-                </div>
-                <div class="flexitem card-price">
-                    <p>
-                        <span><i class="fa fa-gift"></i></span>
+
+                <div class="card-price">
+                    <p class="card-label">Belønning</p>
+                    <p style="font-size:14px;">
+                        <span *ngIf="job.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
+                        <span *ngIf="job.rewardType === 'Gave'"><i class="fa fa-usd"></i></span>
+                        <span *ngIf="job.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
                         {{job.rewardValue}}
                     </p>
                 </div>
-            </div>            
+           
             <div class="flexbox-nonewline" *ngIf="showEdit">
                 <div class="flexitem">
                     <button (click)="editJobClick()" type="button" class="card-btn btn btn-primary"><i class="fa fa-pencil"></i> Redigér</button>
@@ -47,17 +73,6 @@
         </div>
     </div>
 </div>
-<!--
-<div class="container-fluid">
-    <div class="card">
-        <div class="logo-container">
-            <img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />
-        </div>
-        <div class="info-container">
 
-        </div>
-    </div>
-   
-</div>-->
 
 

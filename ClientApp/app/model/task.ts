@@ -15,6 +15,7 @@ export class Task {
     creationTime: moment.Moment;
     businessId: number;
     businessName: string;
+    contactDescription: string;
 
     constructor() {
         this.deadline = moment();
