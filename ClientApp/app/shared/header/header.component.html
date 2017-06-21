@@ -14,17 +14,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a routerLink="/jobs">Jobs</a></li>
+                <li><a routerLink="/hvordandetvirker">Hvordan det virker</a></li>
+                <li><a routerLink="/tasks">Opgaver</a></li>
                 <li *ngIf="business" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{business.name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a routerLink="/business">Mine Jobs</a></li>
-                        <li><a routerLink="business/businessSettings">Ret Oplysninger</a></li>
+                        <li><a routerLink="/business">Mine opgaver</a></li>
+                        <li><a routerLink="business/businessSettings">Ret oplysninger</a></li>
                         <!--<li class="divider" style="margin:5px 0;"></li>-->
                         <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
-                <li *ngIf="!business"><a routerLink="/login">Login</a></li>
+                <li *ngIf="!business"><a routerLink="/login">Virksomheds login</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

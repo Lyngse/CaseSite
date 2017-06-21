@@ -1,11 +1,11 @@
 ﻿<div class="container-fluid contentRow" style="padding:0;">
     <div class="bm-header">
-        <h1 class="heading1">Mine Jobs</h1>
-        <button class="btn btn-primary btn-lg btn-new" routerLink="/business/createeditjob">
-            <i class="fa fa-plus"></i> Nyt Job
+        <h1 class="heading1">Mine opgaver</h1>
+        <button class="btn btn-primary btn-lg btn-new" routerLink="/business/createedittask">
+            <i class="fa fa-plus"></i> Ny opgave
         </button>
     </div>
-    <job-list [showEdit]="true" [jobs]="jobs" (deleteJob)="handleDeleteJob($event)" (editJob)="handleEditJob($event)"></job-list>
+    <task-list [showEdit]="true" [tasks]="tasks" (deleteTask)="handleDeleteTask($event)" (editTask)="handleEditTask($event)"></task-list>
     <!--<button class="fab btn-fab">
         <span class="fa fa-plus btn-fab-icon"></span>
     </button>-->

@@ -2,9 +2,9 @@
     <div class="row">
         <div class="list-content">
             <div class="panel-body flexbox-newline">
-                <div class="flexitem" *ngFor="let job of jobs">
+                <div class="flexitem" *ngFor="let task of tasks">
                     
-                    <job-card routerLink="/jobs/detail/{{job.id}}" [job]="job" style="cursor:pointer"></job-card>
+                    <task-card routerLink="/tasks/detail/{{task.id}}" [task]="task" style="cursor:pointer"></task-card>
                 </div>
             </div>
         </div>
@@ -15,8 +15,8 @@
     <div class="row">
         <div class="list-content">
             <div class="panel-body flexbox-newline">
-                <div class="flexitem" *ngFor="let job of jobs">
-                    <job-card [showEdit]="true" [job]="job" (deleteJob)="handleDeleteJob($event)" (editJob)="handleEditJob($event)"></job-card>
+                <div class="flexitem" *ngFor="let task of tasks">
+                    <task-card [showEdit]="true" [task]="task" (deleteTask)="handleDeleteTask($event)" (editTask)="handleEditTask($event)"></task-card>
                 </div>
             </div>
         </div>

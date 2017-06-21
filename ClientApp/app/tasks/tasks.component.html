@@ -2,7 +2,7 @@
 <job-list></job-list>-->
 <div class="container-fluid contentRow" style="padding:0;">
     <!--<job-search></job-search>-->
-    <job-list [jobs]="jobs"></job-list>
+    <task-list [tasks]="tasks"></task-list>
 </div>
 <spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
 <div *ngIf="loading" class="loading-background"></div>

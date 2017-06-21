@@ -2,13 +2,13 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { FrontpageComponent } from './frontpage/frontpage.component';
-import { JobsComponent } from './jobs/jobs.component';
+import { TasksComponent } from './tasks/tasks.component';
 import { BuisnessRegisterComponent } from './business-register/business-register.component';
 import { BusinessManagerComponent } from './business-manager/business-manager.component';
 import { LoginComponent } from './login/login.component';
-import { CreateEditJobComponent } from './business-manager/create-edit-job/create-edit-job.component';
+import { CreateEditTaskComponent } from './business-manager/create-edit-task/create-edit-task.component';
 import { BusinessEditComponent } from './business-manager/business-edit/business-edit.component';
-import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
+import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ForgotPasswordComponent } from './login/forgotpassword/forgotpassword.component';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
@@ -16,12 +16,12 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
     { path: 'frontpage', component: FrontpageComponent },
-    { path: 'jobs', component: JobsComponent },
-    { path: 'jobs/detail/:id', component: JobDetailComponent },
+    { path: 'tasks', component: TasksComponent },
+    { path: 'tasks/detail/:id', component: TaskDetailComponent },
     { path: 'business/register', component: BuisnessRegisterComponent },
     { path: 'business', component: BusinessManagerComponent },
-    { path: 'business/createeditjob', component: CreateEditJobComponent },
-    { path: 'business/createeditjob/:id', component: CreateEditJobComponent },
+    { path: 'business/createedittask', component: CreateEditTaskComponent },
+    { path: 'business/createedittask/:id', component: CreateEditTaskComponent },
     { path: 'business/businessSettings', component: BusinessEditComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/resetpassword', component: ResetPasswordComponent },
@@ -38,13 +38,13 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
     FrontpageComponent,
-    JobsComponent,
+    TasksComponent,
     BuisnessRegisterComponent,
     BusinessManagerComponent,
     LoginComponent,
-    CreateEditJobComponent,
+    CreateEditTaskComponent,
     BusinessEditComponent,
-    JobDetailComponent,
+    TaskDetailComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
     HowItWorksComponent

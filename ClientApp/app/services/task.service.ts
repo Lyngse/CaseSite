@@ -21,7 +21,7 @@ export class TaskService {
 
     }
 
-    updateJob(t: Task): Observable<Task> {
+    updateTask(t: Task): Observable<Task> {
         let task = {
             Id: t.id,
             Title: t.title,
@@ -44,28 +44,28 @@ export class TaskService {
             .catch(this.handleError);
     }
 
-    deleteJob(id: number): Observable<Task> {
+    deleteTask(id: number): Observable<Task> {
         return this.http
             .delete('api/tasks/' + id, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    getJob(id: number): Observable<Task> {
+    getTask(id: number): Observable<Task> {
         return this.http
             .get('api/tasks/' + id, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    getAllJobs(): Observable<Task[]> {
+    getAllTasks(): Observable<Task[]> {
         return this.http
             .get('api/tasks', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    createJob(t: Task): Observable<Task> {
+    createTask(t: Task): Observable<Task> {
         let task = {
             Id: t.id,
             Title: t.title,
@@ -86,7 +86,7 @@ export class TaskService {
             .catch(this.handleError);
     }
 
-    getJobsForBusiness(): Observable<Task[]> {
+    getTasksForBusiness(): Observable<Task[]> {
         return this.http
             .get('api/tasks/business', this.options)
             .map(res => this.extractData(res))

@@ -20,15 +20,15 @@
 
                     <div class="form-group"
                          [ngClass]="{
-                         'has-error': jobType.invalid && (jobType.dirty || jobType.touched),
-                         'has-success': jobType.valid && (jobType.dirty || jobType.touched)
+                         'has-error': type.invalid && (type.dirty || type.touched),
+                         'has-success': type.valid && (type.dirty || type.touched)
                          }">
-                        <label for="jobType" class="control-label">Opgavetype *</label>
-                        <select class="form-control" id="jobType" name="jobType" [(ngModel)]="model.jobType" #jobType="ngModel" required>
-                            <option *ngFor="let jt of jobTypes" [value]="jt">{{ jt }}</option>
+                        <label for="type" class="control-label">Opgavetype *</label>
+                        <select class="form-control" id="type" name="type" [(ngModel)]="model.type" #type="ngModel" required>
+                            <option *ngFor="let tt of taskTypes" [value]="tt">{{ tt }}</option>
                         </select>
-                        <div class="form-feedback" *ngIf="jobType.errors && (jobType.dirty || jobType.touched)">
-                            <p *ngIf="jobType.errors.required">Opgavens type skal udfyldes</p>
+                        <div class="form-feedback" *ngIf="type.errors && (type.dirty || type.touched)">
+                            <p *ngIf="type.errors.required">Opgavens type skal udfyldes</p>
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@
                         <label for="deadline" class="control-label">Deadline *</label>
                         <input type="datetime-local" id="deadline" class="form-control" name="deadline" [value]="model.deadline.format('YYYY-MM-DDTHH:mm')" (change)="deadlineChanged($event.target.value)" #deadline  required />
                         <div class="form-feedback" *ngIf="deadline.errors && (deadline.dirty || deadline.touched)">
-                            <p *ngIf="deadline.errors.required">Deadlinen for jobbet skal udfyldes</p>
+                            <p *ngIf="deadline.errors.required">Deadlinen for opgaven skal udfyldes</p>
                         </div>
                     </div>
 
@@ -128,7 +128,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="model.workPlace ==='2'" class="form-group"
+                    <div *ngIf="model.workPlace" class="form-group"
                          [ngClass]="{
                          'has-error': contactDescription.invalid && (contactDescription.dirty || contactDescription.touched),
                          'has-success': contactDescription.valid && (contactDescription.dirty || contactDescription.touched)
@@ -147,21 +147,7 @@
                             <p *ngIf="contactDescription.errors.required">Ansøgnings beskrivelsen skal udfyldes</p>
                         </div>
                     </div>
-
-                    <div *ngIf="model.workPlace ==='1'" class="form-group"
-                            [ngClass]="{
-                        'has-error': solutionEmail.invalid && (solutionEmail.dirty || solutionEmail.touched),
-                        'has-success': solutionEmail.valid && (solutionEmail.dirty || solutionEmail.touched)
-                        }">
-                        <label for="solutionEmail" class="control-label">Kontakt e-mail til løsningsforslag *</label>
-                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                        <input type="email" id="solutionEmail" class="form-control" name="solutionEmail" [(ngModel)]="model.solutionEmail" #solutionEmail="ngModel" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$" required />
-                        <div class="form-feedback" *ngIf="solutionEmail.errors && (solutionEmail.dirty || solutionEmail.touched)">
-                            <p *ngIf="solutionEmail.errors.required">Kontakt e-mailen skal udfyldes</p>
-                        </div>
-                    </div>
                     
-
                     <div class="form-group"
                          [ngClass]="{
                          'has-error': description.invalid && (description.dirty || description.touched),
@@ -176,7 +162,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem ændringer' : 'Gem job'}}</button>
+                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem ændringer' : 'Gem opgave'}}</button>
                     </div>
                 </div>  
             </form>

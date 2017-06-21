@@ -6,9 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { SpinnerModule } from 'angular2-spinner';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { JobSearchComponent } from './jobs/job-search/job-search.component';
-import { JobListComponent } from './jobs/job-list/job-list.component';
-import { JobCardComponent } from './jobs/job-list/job-card/job-card.component';
+import { TaskSearchComponent } from './tasks/task-search/task-search.component';
+import { TaskListComponent } from './tasks/task-list/task-list.component';
+import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 
@@ -23,9 +23,9 @@ import { TaskService } from './services/task.service';
         routingComponents,
         HeaderComponent,
         FooterComponent,
-        JobSearchComponent,
-        JobListComponent,
-        JobCardComponent,
+        TaskSearchComponent,
+        TaskListComponent,
+        TaskCardComponent,
         LoginComponent,
         ResetPasswordComponent
     ],

@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
-import { JobService } from '../services/job.service';
+import { TaskService } from '../services/task.service';
 import { Router } from '@angular/router';
-import { Task } from '../model/job';
+import { Task } from '../model/task';
 
 @Component({
     selector: 'business-manager',
@@ -12,11 +12,11 @@ import { Task } from '../model/job';
 })
 export class BusinessManagerComponent{
     loading: boolean = false;
-    jobs: Task[];
+    tasks: Task[];
 
     constructor(private businessService: BusinessService,
         private accountService: AccountService,
-        private jobService: JobService,
+        private taskService: TaskService,
         private router: Router) {
 
     }
@@ -30,9 +30,9 @@ export class BusinessManagerComponent{
 
     ngAfterViewInit() {
         this.loading = true;
-        this.jobService.getJobsForBusiness().subscribe((data) => {
+        this.taskService.getTasksForBusiness().subscribe((data) => {
             console.log(data);
-            this.jobs = data;
+            this.tasks = data;
             this.loading = false;
         }, (err) => {
             this.loading = false;
@@ -45,12 +45,12 @@ export class BusinessManagerComponent{
 
     handleDeleteJob(id) {
         this.loading = true;
-        this.jobService.deleteJob(id).subscribe((data) => {
-            let index = this.jobs.findIndex(job => {
+        this.taskService.deleteTask(id).subscribe((data) => {
+            let index = this.tasks.findIndex(job => {
                 return job.id === id;
             });
             if (index > -1)
-                this.jobs.splice(index, 1);
+                this.tasks.splice(index, 1);
             this.loading = false;
         })       
     }
