@@ -28,6 +28,8 @@
     height: 200px;
     border-radius: 50%;
     background-color: #006699;
+    border: 3px solid white;
+    box-shadow: 0 0 0 5px #006699, 0 12px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hiw-step-number {
