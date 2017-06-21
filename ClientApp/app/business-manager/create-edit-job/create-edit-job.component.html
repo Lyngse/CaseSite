@@ -130,10 +130,10 @@
 
                     <div *ngIf="model.workPlace ==='2'" class="form-group"
                          [ngClass]="{
-                         'has-error': applicationDescription.invalid && (applicationDescription.dirty || applicationDescription.touched),
-                         'has-success': applicationDescription.valid && (applicationDescription.dirty || applicationDescription.touched)
+                         'has-error': contactDescription.invalid && (contactDescription.dirty || contactDescription.touched),
+                         'has-success': contactDescription.valid && (contactDescription.dirty || contactDescription.touched)
                          }">
-                        <label for="applicationDescription" class="control-label" style="display:flex;align-items:center;">
+                        <label for="contactDescription" class="control-label" style="display:flex;align-items:center;">
                             <span class="fa-stack" style="font-size:10px;">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
@@ -141,10 +141,10 @@
                             Ansøgnings beskrivelse *
 
                         </label>
-                        <textarea style="resize:none;" class="form-control" rows="5" id="applicationDescription" name="applicationDescription" [(ngModel)]="model.applicationDescription" #applicationDescription="ngModel" required></textarea>
+                        <textarea style="resize:none;" class="form-control" rows="5" id="contactDescription" name="contactDescription" [(ngModel)]="model.contactDescription" #contactDescription="ngModel" required></textarea>
                         <span class="help-block" style="font-size:16px;">Forklar hvad ansøgningen til opgaven skal indeholde. Inkluder kontakt information så som e-mail eller telefonnummer.</span>
-                        <div class="form-feedback" *ngIf="applicationDescription.errors && (applicationDescription.dirty || applicationDescription.touched)">
-                            <p *ngIf="applicationDescription.errors.required">Ansøgnings beskrivelsen skal udfyldes</p>
+                        <div class="form-feedback" *ngIf="contactDescription.errors && (contactDescription.dirty || contactDescription.touched)">
+                            <p *ngIf="contactDescription.errors.required">Ansøgnings beskrivelsen skal udfyldes</p>
                         </div>
                     </div>
 
