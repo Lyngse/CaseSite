@@ -12,12 +12,11 @@ export class Job {
     workPlace: string;
     city: string;
     zip: number;
-    street: string;
+    address: string;
     jobType: string;
     businessId: number;
     businessName: string;
     applicationDescription: string;
-    solutionEmail: string;
 
     constructor() {
         this.deadline = moment();

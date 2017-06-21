@@ -117,14 +117,14 @@
                     </div>
                     <div *ngIf="model.workPlace ==='2'" class="form-group"
                          [ngClass]="{
-                         'has-error': street.invalid && (street.dirty || street.touched),
-                         'has-success': street.valid && (street.dirty || street.touched)
+                         'has-error': address.invalid && (address.dirty || address.touched),
+                         'has-success': address.valid && (address.dirty || address.touched)
                          }">
-                        <label for="street" class="control-label">Vejnavn og nummer *</label>
+                        <label for="address" class="control-label">Vejnavn og nummer *</label>
                         <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                        <input type="text" id="street" class="form-control" name="street" [(ngModel)]="model.street" #street="ngModel" required />
-                        <div class="form-feedback" *ngIf="street.errors && (street.dirty || street.touched)">
-                            <p *ngIf="street.errors.required">Vejnavn og nummer skal udfyldes</p>
+                        <input type="text" id="address" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" required />
+                        <div class="form-feedback" *ngIf="address.errors && (address.dirty || address.touched)">
+                            <p *ngIf="address.errors.required">Vejnavn og nummer skal udfyldes</p>
                         </div>
                     </div>
 

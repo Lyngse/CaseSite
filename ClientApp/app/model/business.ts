@@ -8,7 +8,7 @@
         public description: string = '',
         public logo: string = '',
         public city: string = '',
-        public street: string = '',
+        public address: string = '',
         public zip: number = null
     ) {
     
