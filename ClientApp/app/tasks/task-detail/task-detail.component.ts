@@ -37,7 +37,7 @@ export class TaskDetailComponent implements AfterViewInit {
 
     getDeadlineString() {
         if (this.task) {
-            return this.task.deadline.fromNow();
+            return this.task.deadline.format('HH:mm - DD/MM-YYYY');
         }
     }
 }

@@ -1,85 +1,89 @@
 ﻿.detail-content {
     display: flex;   
     min-height:500px;
-    border: 1px solid #bdbdbd;
 }
 
 .detail-business-info {
     flex: 0 0 33%;
     padding: 0 15px;
-    background-color: #F5F5F5;
-}
-
-.detail-job-info {
-    flex: 0 0 67%;
-    padding: 0 15px;
     background-color: #FAFAFA;
 }
 
-#business-name {
-    font-size: 180%;
+.detail-task-info {
+    flex: 0 0 67%;
+    padding: 0 15px;
+    background-color: #FDFDFD;
+}
+
+.business-name {
+    font-size: 150%;
     display:inline-block;
     border-bottom: 2px solid #336699;
 }
 
-#business-logo {
+.business-logo {
     width: 200px;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
-#business-description {
+.business-address {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
 }
 
-#business-email {
-    font-size: 75%;
+.business-description {
 }
 
-#job-title {
-    font-size: 180%;
+.business-email {
+
+}
+
+.task-title {
+    font-size: 150%;
     display: inline-block;
     border-bottom: 2px solid #336699;
     margin-bottom: 0;
 }
 
-#job-type {
-    font-size: 75%;
+.task-type {
+
     color: #9E9E9E;
 }
 
-#job-description {
-    margin: 20px 0;
+.task-description {
+
 }
 
-#job-location {
-    font-size: 75%;
+.task-contactDescription {
+
 }
 
-#job-info-title {
+.task-info-title {
     font-size: 100% !important;
     display: inline-block;
 }
 
-.job-info {
-    font-size: 75%;
+.task-info {
     display: flex;
     flex-wrap: wrap;
 }
 
-#job-workplace {
-    flex: 0 0 50%;
+.task-workplace {
+    flex: 0 0 100%;
 }
 
-#job-persons {
-    flex: 0 0 50%;
+.task-persons {
+    flex: 0 0 100%;
 }
 
-#job-deadline {
-    flex: 0 0 50%;
+.task-deadline {
+    flex: 0 0 100%;
 }
 
-#job-reward {
-    flex: 0 0 50%;
+.task-reward {
+    flex: 0 0 100%;
 }
 

@@ -39,6 +39,6 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.loading = true;
-        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; this.router.navigate(['/frontpage']); });
+        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; this.router.navigate(['/']); });
     }
 }

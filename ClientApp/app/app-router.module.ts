@@ -14,7 +14,7 @@ import { ForgotPasswordComponent } from './login/forgotpassword/forgotpassword.c
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
+    { path: '', redirectTo: 'tasks', pathMatch: 'full' },
     { path: 'frontpage', component: FrontpageComponent },
     { path: 'tasks', component: TasksComponent },
     { path: 'tasks/detail/:id', component: TaskDetailComponent },
@@ -27,7 +27,7 @@ const routes: Routes = [
     { path: 'login/resetpassword', component: ResetPasswordComponent },
     { path: 'login/forgotpassword', component: ForgotPasswordComponent },
     { path: 'hvordandetvirker', component: HowItWorksComponent },
-    { path: '**', redirectTo: 'frontpage' }
+    { path: '**', redirectTo: 'tasks' }
 ];
 
 @NgModule({
