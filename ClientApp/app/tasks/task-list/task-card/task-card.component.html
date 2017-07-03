@@ -54,12 +54,12 @@
 
                 <div class="card-price">
                     <p class="card-label">Belønning</p>
-                    <p style="font-size:14px;">
+                    <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">
                         <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
                         <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-usd"></i></span>
-                        <span *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
                         {{ task.rewardValue }}
                     </p>
+                    <p style="font-size:14px" *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"> Anbefaling</i></p>
                 </div>
            
             <div class="flexbox-nonewline" *ngIf="showEdit">
@@ -67,12 +67,36 @@
                     <button (click)="editTaskClick()" type="button" class="card-btn btn btn-primary"><i class="fa fa-pencil"></i> Redigér</button>
                 </div>
                 <div class="flexitem">
-                    <button (click)="deleteTaskClick()" type="button" class="card-btn btn btn-danger"><i class="fa fa-trash-o"></i> Slet</button>
+                    <button type="button" class="card-btn btn btn-danger" (click)="smModal.show()"><i class="fa fa-trash-o"></i> Slet</button>
+                    <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title pull-left">Small modal</h4>
+                                    <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Er du sikkert på at du vil slette denne opgave?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Nej</button>
+                                    <button (click)="deleteTaskClick()" type="button" class="card-btn btn btn-danger">Ja</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!--Small modal-->
+<!--<button type="button" class="btn btn-primary" (click)="smModal.show()">Small modal</button>-->
+
+
 
 
 

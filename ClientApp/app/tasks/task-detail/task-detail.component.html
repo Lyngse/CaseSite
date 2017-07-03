@@ -11,7 +11,7 @@
            <p class="task-type">- {{ task.type }}</p>
 
            <div class="task-info">
-               <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Ude" : "Hjemme" }}</b></p>
+               <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
                <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
                <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
                <p class="task-reward" style="font-size:14px;">
@@ -19,7 +19,8 @@
                    <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
                    <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-usd"></i></span>
                    <span *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
-                   <b>{{ task.rewardValue }}</b>
+                   <span><b *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">{{ task.rewardValue }}</b></span>
+                   <span><b *ngIf="task.rewardType === 'Anbefaling'">Anbefaling</b></span>
                </p>
            </div>
 

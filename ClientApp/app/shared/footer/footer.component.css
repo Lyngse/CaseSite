@@ -4,14 +4,16 @@
     font-size: 80%;
 }
 
+ul {
+    padding: 0;
+}
+
 .footer-nav {
     list-style: none;
-    float: left;
 }
 
 .social-links {
     list-style: none;
-    float: right;
 }
 
 .footer-nav li,

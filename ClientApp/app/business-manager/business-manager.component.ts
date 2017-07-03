@@ -43,11 +43,11 @@ export class BusinessManagerComponent{
         });
     }
 
-    handleDeleteJob(id) {
+    handleDeleteTask(id) {
         this.loading = true;
         this.taskService.deleteTask(id).subscribe((data) => {
-            let index = this.tasks.findIndex(job => {
-                return job.id === id;
+            let index = this.tasks.findIndex(task => {
+                return task.id === id;
             });
             if (index > -1)
                 this.tasks.splice(index, 1);
@@ -55,8 +55,8 @@ export class BusinessManagerComponent{
         })       
     }
 
-    handleEditJob(id) {
-        this.router.navigateByUrl("business/createeditjob/" + id);
+    handleEditTask(id) {
+        this.router.navigateByUrl("business/createedittask/" + id);
     }
 
 }

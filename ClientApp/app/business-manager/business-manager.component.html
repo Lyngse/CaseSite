@@ -6,12 +6,6 @@
         </button>
     </div>
     <task-list [showEdit]="true" [tasks]="tasks" (deleteTask)="handleDeleteTask($event)" (editTask)="handleEditTask($event)"></task-list>
-    <!--<button class="fab btn-fab">
-        <span class="fa fa-plus btn-fab-icon"></span>
-    </button>-->
-    
-    <!--<toaster-container [toasterconfig]="toasterconfig"></toaster-container>
-    <button (click)="popToast()">pop toast</button>-->
 </div>
 <spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
 <div *ngIf="loading" class="loading-background"></div>
