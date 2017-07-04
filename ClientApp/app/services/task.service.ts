@@ -21,6 +21,13 @@ export class TaskService {
 
     }
 
+    getLatestTasks(): Observable<Task[]> {
+        return this.http
+            .get('api/tasks/getlatest', this.options)
+            .map(res => this.extractData(res))
+            .catch(this.handleError);
+    }
+
     updateTask(t: Task): Observable<Task> {
         let task = {
             Id: t.id,

@@ -1,4 +1,8 @@
-﻿nav.navbar-findcond ul.navbar-nav a.active,
+﻿.navbar {
+    border:1px solid transparent !important;
+}
+
+nav.navbar-findcond ul.navbar-nav a.active,
 nav.navbar-findcond ul.navbar-nav a:hover {
     background: #082a3b;
     border-color: #006699;

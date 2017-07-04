@@ -25,21 +25,34 @@ namespace CaseSite.Controllers
 
         // GET: api/Tasks
         [HttpGet]
-        public IActionResult GetJob()
+        public IActionResult GetTask()
         {
             var tasks = new List<dynamic>();
 
             foreach (var task in _context.Task.Include(j => j.Business))
             {
-                tasks.Add(toClientJob(task));
+                tasks.Add(toClientTask(task));
             }
 
             return Ok(tasks);
         }
 
+        [HttpGet("getlatest")]
+        public IActionResult GetLatestTasks()
+        {
+            var tasks = new List<dynamic>();
+
+            foreach(var task in _context.Task.Include(j => j.Business).OrderBy(t => t.CreationTime).Take(3).ToList())
+            {
+                tasks.Add(toClientTask(task));
+            }
+            return Ok(tasks);
+        }
+
+
         // GET: api/Jobs/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetJob([FromRoute] int id)
+        public async Task<IActionResult> GetTask([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -59,7 +72,7 @@ namespace CaseSite.Controllers
         // PUT: api/Jobs/5
         [HttpPut]
         [Authorize]
-        public async Task<IActionResult> PutJob([FromBody] Models.Task task)
+        public async Task<IActionResult> PutTask([FromBody] Models.Task task)
         {
             if (!ModelState.IsValid)
             {
@@ -91,13 +104,13 @@ namespace CaseSite.Controllers
             
             await _context.SaveChangesAsync();
 
-            return Ok(toClientJob(serverTask));
+            return Ok(toClientTask(serverTask));
         }
 
         // POST: api/Jobs
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PostJob([FromBody] Models.Task t)
+        public async Task<IActionResult> PostTask([FromBody] Models.Task t)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -113,13 +126,13 @@ namespace CaseSite.Controllers
             _context.Entry(business).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return Created("", toClientJob(task));
+            return Created("", toClientTask(task));
         }
 
         // DELETE: api/Jobs/5
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> DeleteJob([FromRoute] int id)
+        public async Task<IActionResult> DeleteTask([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -146,7 +159,7 @@ namespace CaseSite.Controllers
         
         [HttpGet("business")]
         [Authorize]
-        public async Task<IActionResult> GetJobsFromBusiness()
+        public async Task<IActionResult> GetTasksFromBusiness()
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -160,7 +173,7 @@ namespace CaseSite.Controllers
 
             foreach (var task in business.Tasks)
             {
-                tasks.Add(toClientJob(task));
+                tasks.Add(toClientTask(task));
             }
 
             return Ok(tasks);
@@ -174,7 +187,7 @@ namespace CaseSite.Controllers
             
         }
 
-        private dynamic toClientJob(Models.Task t)
+        private dynamic toClientTask(Models.Task t)
         {
             return new
             {
