@@ -26,7 +26,6 @@ export class CreateEditTaskComponent implements AfterViewInit {
     business: Business;
     edit: Boolean;
     loading: Boolean = false;
-
     model: Task = new Task();
 
     constructor(private taskService: TaskService,
