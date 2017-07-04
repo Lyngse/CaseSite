@@ -42,7 +42,7 @@ namespace CaseSite.Controllers
         {
             var tasks = new List<dynamic>();
 
-            foreach(var task in _context.Task.Include(j => j.Business).OrderBy(t => t.CreationTime).Take(3).ToList())
+            foreach(var task in _context.Task.Include(j => j.Business).OrderByDescending(t => t.CreationTime).Take(3).ToList())
             {
                 tasks.Add(toClientTask(task));
             }

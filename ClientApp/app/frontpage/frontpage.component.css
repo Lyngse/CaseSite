@@ -31,14 +31,14 @@
 
 
 .fp-how-it-works {
-    margin-top: 30px;
-    margin-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 50px;
 }
 
 .fp-tasks {
     background-color: #FAFAFA;
-    margin-top: 30px;
-    margin-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 50px;
 }
 
 /* ----- FP-ABOUT -----*/
