@@ -59,7 +59,7 @@ section {
 }*/
 
 .heading2 {
-    font-size: 180%;
+    font-size: 250%;
     word-spacing: 2px;
     text-align: center;
     margin-bottom: 30px;
@@ -83,7 +83,60 @@ section {
     margin-bottom: 30px;
 }
 
-/* ---- Paragraphs ----- */
+/* ----- Buttons ----- */
+.butn:link,
+.butn:visited,
+input[type=submit] {
+    display: inline-block;
+    padding: 10px 30px;
+    text-align: center;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 3px;
+    -webkit-transition: background-color 0.3s, border 0.3s, color 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, border 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.butn-full:link,
+.butn-full:visited,
+input[type=submit] {
+    background-color: #006699;
+    border: 1px solid #006699;
+    color: #fff;
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+}
+
+.butn-ghost-white:link,
+.butn-ghost-white:visited {
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+.butn:hover,
+.butn:active,
+input[type=submit]:hover,
+input[type=submit]:active {
+    background-color: #006699;
+}
+
+.butn-full:hover,
+.butn-full:active {
+    border: 1px solid #006699;
+    background-color: #005580;
+    -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.4);
+}
+
+.butn-ghost-white:hover,
+.butn-ghost-white:active {
+    border: 1px solid #006699;
+    color: #fff;
+}
+
+/* ----- Paragraphs ----- */
 .long-copy {
     line-height: 145%;
     width: 70%;

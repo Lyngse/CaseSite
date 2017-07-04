@@ -11,7 +11,7 @@
     position: absolute;
     width: 100%;
     color: white;
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .hero-text-box h1 {
@@ -42,11 +42,16 @@
 }
 
 /* ----- FP-ABOUT -----*/
+.fp-about {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
 .fp-about-item {
     margin-top: 40px;
 }
 
-#fp-some-section {
+.fp-some-section {
     background-image: linear-gradient(to bottom right, #006699, #02ccba);
     width: 100%;
     height: 100%;

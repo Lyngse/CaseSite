@@ -1,27 +1,35 @@
-﻿<div class="fp-header">
+﻿<div class="contentRow">
+
+</div>
+<div class="fp-header">
     <div class="hero-text-box text-center">
-        <h1>UNIFACTO</h1>
-        <h2>Et eller andet her</h2>
-        <button type="button" class="btn btn-lg btn-primary" style="width:50%;margin-top:40px;">Start dit konsulent arbejde her!</button>
-        <!--<a class="btn btn-full js--scroll-to-plans" href="#">I'm hungry</a>
-        <a class="btn btn-ghost js--scroll-to-start" href="#">Show me more</a>-->
+        <div class="contentRow">
+            <h1>UNIFACTO</h1>
+            <h2>Et eller andet her</h2>
+            <a href="" class="butn butn-ghost-white" style="width:350px;margin-top:40px;">Start dit konsulent arbejde her!</a>
+        </div>
+        
     </div>
 </div>
 
 <div class="fp-how-it-works">
-    <h2 class="heading2">Hvordan virker det?</h2>
-    <div style="display:flex;justify-content:space-around;">
-        <button type="button" class="btn btn-lg btn-primary" style="width:300px">For studerende</button>
-        <button type="button" class="btn btn-lg btn-primary" style="width:300px">For virksomheder</button>
+    <div class="contentRow">
+        <h2 class="heading2">Hvordan virker det?</h2>
+        <div style="display:flex;justify-content:space-around;">
+            <a href="" class="butn butn-full" style="width:300px">For studerende</a>
+            <a href="" class="butn butn-full" style="width:300px">For virksomheder</a>
+        </div>
     </div>
 </div>
 
 <div class="fp-tasks">
-    <h2 class="heading2">Nyeste opgaver</h2>
-    <task-list [tasks]="latestTasks"></task-list>
+    <div class="contentRow">
+        <h2 class="heading2" style="margin-bottom:-20px !important;">Nyeste opgaver</h2>
+        <task-list [tasks]="latestTasks"></task-list>
+    </div>
 </div>
 
-<!--<section id="fp-about">
+<div class="fp-about">
     <div class="container-fluid contentRow">
         <div class="row">
             <h2 class="heading2">What is CaseSite?</h2>
@@ -48,8 +56,8 @@
             </div>
         </div>
     </div>
-</section>
-<section style="max-width: none;" id="fp-some-section">
+</div>
+<!--<section style="max-width: none;" class="fp-some-section">
     <div class="info-card contentRow">
         <h3>INFORMATION FOR YOU + A NICE ICON!!!<i class="fa fa-wheelchair-alt fa-2x" style="margin-left:40px;"></i></h3>
     </div>
