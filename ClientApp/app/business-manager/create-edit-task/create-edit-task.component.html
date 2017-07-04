@@ -38,7 +38,7 @@
                          'has-success': deadline.valid && (deadline.dirty || deadline.touched)
                          }">
                         <label for="deadline" class="control-label">Deadline *</label>
-                        <input type="datetime-local" id="deadline" class="form-control" name="deadline" [value]="model.deadline.format('YYYY-MM-DDTHH:mm')" (change)="deadlineChanged($event.target.value)" #deadline  required />
+                        <input type="datetime-local" id="deadline" class="form-control" name="deadline" [value]="model.deadline.format('YYYY-MM-DDTHH:mm')" (change)="deadlineChanged($event.target.value)" [disabled]="edit" #deadline required />
                         <div class="form-feedback" *ngIf="deadline.errors && (deadline.dirty || deadline.touched)">
                             <p *ngIf="deadline.errors.required">Deadlinen for opgaven skal udfyldes</p>
                         </div>
@@ -50,7 +50,7 @@
                          'has-success': rewardType.valid && (rewardType.dirty || rewardType.touched)
                          }">
                         <label for="rewardType" class="control-label">Belønning *</label>
-                        <select class="form-control" id="rewardType" name="rewardType" [(ngModel)]="model.rewardType" #rewardType="ngModel" required>
+                        <select class="form-control" id="rewardType" name="rewardType" [(ngModel)]="model.rewardType" [disabled]="edit" #rewardType="ngModel" required>
                             <option value="Honorar">Honorar</option>
                             <option value="Gave">Gave</option>
                             <option value="Anbefaling">Anbefaling</option>

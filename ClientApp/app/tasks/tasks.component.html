@@ -1,8 +1,11 @@
 ﻿<!--<job-search></job-search>
 <job-list></job-list>-->
+<button (click)="sort('deadline')">Sorter efter deadline</button>
+<button (click)="sort('alphabetically')">Sorter alfabetisk</button>
+<button (click)="filterByType('Dataanalyse')">Se kun dataanalyser</button>
 <div class="container-fluid contentRow" style="padding:0;">
     <!--<job-search></job-search>-->
-    <task-list [tasks]="tasks"></task-list>
+    <task-list [tasks]="tasksToShow"></task-list>
 </div>
 <spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
 <div *ngIf="loading" class="loading-background"></div>
