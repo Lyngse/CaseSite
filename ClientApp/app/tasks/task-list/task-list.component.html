@@ -2,8 +2,7 @@
     <div class="row">
         <div class="list-content">
             <div class="panel-body flexbox-newline">
-                <div class="flexitem" *ngFor="let task of tasks">
-                    
+                <div class="flexitem" *ngFor="let task of tasks">         
                     <task-card routerLink="/tasks/detail/{{task.id}}" [task]="task" style="cursor:pointer"></task-card>
                 </div>
             </div>

@@ -11,10 +11,13 @@ import { BusinessEditComponent } from './business-manager/business-edit/business
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ForgotPasswordComponent } from './login/forgotpassword/forgotpassword.component';
-import { HowItWorksComponent } from './how-it-works/how-it-works.component';
+import { HowItWorksStudentsComponent } from './how-it-works-students/how-it-works-students.component';
+import { HowItWorksBusinessComponent } from './how-it-works-business/how-it-works-business.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'tasks', pathMatch: 'full' },
+    { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
     { path: 'frontpage', component: FrontpageComponent },
     { path: 'tasks', component: TasksComponent },
     { path: 'tasks/detail/:id', component: TaskDetailComponent },
@@ -26,8 +29,11 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'login/resetpassword', component: ResetPasswordComponent },
     { path: 'login/forgotpassword', component: ForgotPasswordComponent },
-    { path: 'hvordandetvirker', component: HowItWorksComponent },
-    { path: '**', redirectTo: 'tasks' }
+    { path: 'howitworksstudents', component: HowItWorksStudentsComponent },
+    { path: 'howitworksbusiness', component: HowItWorksBusinessComponent },
+    { path: 'about', component: AboutComponent },
+    { path: 'contact', component: ContactComponent },
+    { path: '**', redirectTo: 'frontpage' }
 ];
 
 @NgModule({
@@ -47,5 +53,8 @@ export const routingComponents = [
     TaskDetailComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
-    HowItWorksComponent
+    HowItWorksStudentsComponent,
+    HowItWorksBusinessComponent,
+    AboutComponent,
+    ContactComponent
 ]

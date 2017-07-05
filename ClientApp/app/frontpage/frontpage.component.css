@@ -41,6 +41,20 @@
     padding-bottom: 50px;
 }
 
+.how-it-works-btn {
+    width: 300px;
+}
+
+.how-it-works-btn:first-child {
+    margin-right:20px;
+}
+
+.how-it-works-btns {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* ----- FP-ABOUT -----*/
 .fp-about {
     padding-top: 30px;
@@ -80,4 +94,107 @@
     background-image: url(../../../wwwroot/assets/images/test.jpg);
     display: flex;
     justify-content: center;
+}
+
+.fp-info {
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/images/UCN1.png);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/images/UCN1.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 150px 0;
+    display: flex;
+    align-items: center;
+}
+
+.fp-info-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fp-info-text {
+    color: white;
+    font-size: 150%;
+    display: flex;
+    flex-direction:column;
+}
+
+.fp-info-text1 {
+    align-self: center;
+    text-align: center;
+    width: 65%;
+}
+
+.fp-info-text2 {
+    align-self: center;
+    font-size: 190%;
+}
+
+.fp-info-btn {
+    margin-top: 20px;
+    width: 300px;
+    padding: 20px 50px;
+    font-size: 120%;
+}
+
+.fp-signup {
+    padding: 80px;
+}
+
+.fp-signup-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fp-signup-text {
+    font-size: 180%;
+}
+
+.fp-signup-btn {
+    width: 300px;
+    font-size: 110%;
+}
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+    .how-it-works-btns {
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+    }
+
+    .how-it-works-btn {
+        margin-top: 15px;
+        width: 200px;
+    }
+
+    .heading2 {
+        font-size: 170%;
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .how-it-works-btn {
+        margin-top: 15px;
+        width: 200px;
+    }
+
+    .heading2 {
+        font-size: 250%;
+    }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
 }

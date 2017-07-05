@@ -1,1 +1,28 @@
-﻿
+﻿.about-header {
+    background-image: url(/assets/images/slider-large-3.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.about-title {
+    color: white;
+    font-size:450%;
+    font-weight: 100;
+}
+
+.about-content {
+    padding: 40px 0;
+}
+
+.about-block-title {
+
+}
+
+.about-block-text {
+
+}
+
+

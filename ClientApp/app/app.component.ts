@@ -11,6 +11,11 @@ export class AppComponent {
 
     constructor() {
         moment.locale('da');
+
+    }
+
+    onDeactivate() {
+        document.body.scrollTop = 0;
     }
 
 }

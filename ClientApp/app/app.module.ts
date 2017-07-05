@@ -11,7 +11,9 @@ import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
-import { AlertModule, ModalModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule } from 'ngx-bootstrap';
+
+import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 
@@ -31,15 +33,16 @@ import { TaskService } from './services/task.service';
         TaskCardComponent,
         LoginComponent,
         ResetPasswordComponent,
-        EqualValidator
+        EqualValidator,
+        DanishCurrencyPipe
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         AppRoutingModule,
         FormsModule,
         SpinnerModule,
-        AlertModule.forRoot(),
         ModalModule.forRoot(),
+        TooltipModule.forRoot(),
     ],
     providers: [BusinessService, AccountService, TaskService]
 })
