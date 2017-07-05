@@ -14,21 +14,39 @@
 }
 
 .team-content {
-
+    padding: 80px 0;
+    text-align: center;
 }
 
 .team-person {
-
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .team-person-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
 
+.team-person-img img {
+    width: auto;
+    height: 100%;
 }
 
 .team-person-name {
-
+    font-size: 125%;
+    font-weight: 500;
+    margin: 10px 0 0 0;
 }
 
 .team-person-role {
-
+    font-size: 100%;
+    margin: 0;
 }

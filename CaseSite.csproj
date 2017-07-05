@@ -34,6 +34,9 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot/assets\images\test.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="wwwroot\assets\font-awesome\css\font-awesome.css" />
     <Content Include="wwwroot\assets\font-awesome\css\font-awesome.min.css" />
     <Content Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.eot" />
@@ -71,7 +74,6 @@
     <Content Include="wwwroot\assets\font-awesome\scss\_stacked.scss" />
     <Content Include="wwwroot\assets\font-awesome\scss\_variables.scss" />
     <Content Include="wwwroot\assets\images\dizy-cow-free-logo.jpg" />
-    <Content Include="wwwroot\assets\images\headerImg.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\assets\font-awesome\css\font-awesome.css" />

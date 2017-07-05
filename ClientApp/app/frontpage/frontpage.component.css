@@ -85,17 +85,6 @@
     justify-content: center;
 }
 
-.fp-img-section {
-    height: 600px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-image: url(../../../wwwroot/assets/images/test.jpg);
-    display: flex;
-    justify-content: center;
-}
-
 .fp-info {
     background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/images/UCN1.png);
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/images/UCN1.png);
