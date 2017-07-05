@@ -10,9 +10,14 @@
                          'has-error': title.invalid && (title.dirty || title.touched),
                          'has-success': title.valid && (title.dirty || title.touched)
                          }">
-                        <label for="title" class="control-label">Opgavetitel *</label>
+                        <label for="title" class="control-label">Opgavetitel * 
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Opgavens titel kan max være 25 karatere inkl. mellemrum">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
                         <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                        <input type="text" id="title" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
+                        <input type="text" id="title" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" maxlength="25" required />
                         <div class="form-feedback" *ngIf="title.errors && (title.dirty || title.touched)">
                             <p *ngIf="title.errors.required">Opgavens titel skal udfyldes</p>
                         </div>
@@ -49,7 +54,12 @@
                          'has-error': rewardType.invalid && (rewardType.dirty || rewardType.touched),
                          'has-success': rewardType.valid && (rewardType.dirty || rewardType.touched)
                          }">
-                        <label for="rewardType" class="control-label">Belønning *</label>
+                        <label for="rewardType" class="control-label">Belønning * 
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Hvilke type belønning den bedste løsning eller ansøgning modtager.">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
                         <select class="form-control" id="rewardType" name="rewardType" [(ngModel)]="model.rewardType" [disabled]="edit" #rewardType="ngModel" required>
                             <option value="Honorar">Honorar</option>
                             <option value="Gave">Gave</option>
@@ -65,7 +75,12 @@
                          'has-error': rewardValue.invalid && (rewardValue.dirty || rewardValue.touched),
                          'has-success': rewardValue.valid && (rewardValue.dirty || rewardValue.touched)
                          }">
-                        <label for="rewardValue" class="control-label">Belønningens værdi *</label>
+                        <label for="rewardValue" class="control-label">Belønningens værdi * 
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten Gave eller Honorar">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
                         <input type="number" min="0" max="5000" class="form-control" id="rewardValue" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required />
                         <div class="form-feedback" *ngIf="rewardValue.errors && (rewardValue.dirty || rewardValue.touched)">
                             <p *ngIf="rewardValue.errors.required">Værdien for belønningen skal udfyldes</p>
@@ -134,12 +149,11 @@
                          'has-success': contactDescription.valid && (contactDescription.dirty || contactDescription.touched)
                          }">
                         <label for="contactDescription" class="control-label" style="display:flex;align-items:center;">
-                            <span class="fa-stack" style="font-size:10px;">
+                            Ansøgnings beskrivelse *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Husk at inkludére email eller telefon for de ansøgende at kontakte jer på.">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
-                            Ansøgnings beskrivelse *
-
                         </label>
                         <textarea style="resize:none;" class="form-control" rows="5" id="contactDescription" name="contactDescription" [(ngModel)]="model.contactDescription" #contactDescription="ngModel" required></textarea>
                         <span class="help-block" style="font-size:16px;">Forklar hvad ansøgningen til opgaven skal indeholde. Inkluder kontakt information så som e-mail eller telefonnummer.</span>
@@ -157,7 +171,7 @@
                         <textarea style="resize:none;" class="form-control" rows="5" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
                         <span class="help-block" style="font-size:16px;">Forklar hvad opgaven går ud på.</span>
                         <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
-                            <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes</p>
+                            <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes. Du kan også tilføje links til sider hvor de kan downloade PDF udgaver af en beskrivelse eller lignede.</p>
                         </div>
                     </div>
 

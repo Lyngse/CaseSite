@@ -8,13 +8,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="margin-top:5px;" href="#">CaseSite</a>
+            <a class="navbar-brand" style="margin-top:5px;" href="#">Unifacto</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a routerLink="/hvordandetvirker">Hvordan det virker</a></li>
+                <!--<li><a routerLink="/hvordandetvirker">Hvordan det virker</a></li>-->
+                <li><a routerLink="/tasks">Opgaver</a></li>
                 <!--<li><a routerLink="/tasks">Opgaver</a></li>-->
                 <li *ngIf="business" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{business.name}} <span class="caret"></span></a>

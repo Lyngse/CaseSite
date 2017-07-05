@@ -5,8 +5,8 @@
     <div class="hero-text-box text-center">
         <div class="contentRow">
             <h1>UNIFACTO</h1>
-            <h2>Et eller andet her</h2>
-            <a href="" class="butn butn-ghost-white" style="width:350px;margin-top:40px;">Start dit konsulent arbejde her!</a>
+            <h2 style="font-size:140%;">Studie relevante opgaver af virksomheder</h2>
+            <a routerLink="/tasks" class="butn butn-ghost-white" style="width:350px;margin-top:40px;">Start dit konsulent arbejde her!</a>
         </div>
         
     </div>
@@ -15,9 +15,9 @@
 <div class="fp-how-it-works">
     <div class="contentRow">
         <h2 class="heading2">Hvordan virker det?</h2>
-        <div style="display:flex;justify-content:space-around;">
-            <a href="" class="butn butn-full" style="width:300px">For studerende</a>
-            <a href="" class="butn butn-full" style="width:300px">For virksomheder</a>
+        <div class="how-it-works-btns">
+            <a routerLink="/howitworksstudents" class="butn butn-full how-it-works-btn">For studerende</a>
+            <a routerLink="/howitworksbusiness" class="butn butn-full how-it-works-btn">For virksomheder</a>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<div class="fp-about">
+<!--<div class="fp-about">
     <div class="container-fluid contentRow">
         <div class="row">
             <h2 class="heading2">What is CaseSite?</h2>
@@ -55,6 +55,21 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dictum felis quis urna blandit, a mollis libero dictum. Aenean eleifend lobortis nisi,</p>
             </div>
         </div>
+    </div>
+</div>-->
+<div class="fp-info">
+    <div class="fp-info-content contentRow">
+        <div class="fp-info-text">
+            <p class="fp-info-text1">Opnå studierelevant erhvervserfaring ved at løse kommunikations- og marketingopgaver ...</p>
+            <p class="fp-info-text2">... når det passer dig.</p>
+        </div>
+        <a routerLink="/about" class="butn butn-ghost-white fp-info-btn">Læs mere om Unifacto</a>
+    </div>
+</div>
+<div class="fp-signup">
+    <div class="fp-signup-content contentRow">
+        <p class="fp-signup-text">Mangler du hjælp i din virksomhed fra dygtige studerende?</p>
+        <a routerLink="/business/register" class="butn butn-full fp-signup-btn">Opret dig som virksomhed her</a>
     </div>
 </div>
 <!--<section style="max-width: none;" class="fp-some-section">
