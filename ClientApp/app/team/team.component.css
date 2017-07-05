@@ -1,0 +1,34 @@
+﻿.team-header {
+    background-image: url(/assets/images/slider-large-3.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.team-title {
+    color: white;
+    font-size: 450%;
+    font-weight: 100;
+}
+
+.team-content {
+
+}
+
+.team-person {
+
+}
+
+.team-person-img {
+
+}
+
+.team-person-name {
+
+}
+
+.team-person-role {
+
+}

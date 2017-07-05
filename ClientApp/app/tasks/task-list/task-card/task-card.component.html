@@ -56,7 +56,7 @@
             <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">
                 <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
                 <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-money"></i></span>
-                {{ task.rewardValue | currency:'DKK':true:'1.2-2' }}
+                {{ task.rewardValue | danishcurrency }} kr
             </p>
             <p style="font-size:14px" *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</p>
         </div>  
