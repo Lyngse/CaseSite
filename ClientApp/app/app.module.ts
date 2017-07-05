@@ -15,6 +15,8 @@ import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 
+import { EqualValidator } from './directives/equal-validator.directive';
+
 import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
@@ -31,6 +33,7 @@ import { TaskService } from './services/task.service';
         TaskCardComponent,
         LoginComponent,
         ResetPasswordComponent,
+        EqualValidator,
         DanishCurrencyPipe
     ],
     imports: [

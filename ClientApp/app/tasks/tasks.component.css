@@ -1,1 +1,117 @@
-﻿
+﻿.task-control-bar {
+    background-color: #006699;
+    height: 72px;
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.task-search {
+    margin: 15px;
+    flex: 2;
+    display: flex;
+}
+
+.task-search-input {
+    height: 42px;
+    border: none;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    padding: 0 0 2px 10px;
+    flex: 1;
+}
+
+.task-sort {
+    margin: 15px;
+    flex: 1;
+}
+
+.task-sort-select {
+    height: 42px;
+    border: none;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    padding: 0 0 2px 10px;
+    border-radius: 0;
+}
+
+.btn-filter {
+    white-space: nowrap;
+    border-radius: 0;
+    padding: 10px 16px;
+    font-size: 17px;
+    line-height: 1.3333333;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.1px;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    border: none;
+    height: 42px;
+    flex: 0;
+}
+
+.btn-search {
+    white-space: nowrap;
+    border-radius: 0;
+    padding: 10px 16px;
+    font-size: 17px;
+    line-height: 1.3333333;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0.1px;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    border: none;
+    height: 42px;
+    flex: 0;
+}
+
+.form-content {
+}
+
+.form-item {
+    display: table-cell;
+    width: 100%;
+}
+
+#filterbox {
+    z-index: 999;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+}
+
+.filterbox-content {
+    padding: 19px;
+    background-color: #fff;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.flexbox-nonewline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+
+.flexbox-newline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.flexitem {
+    flex: 0 0 50%;
+}
+
+.flexbox-column {
+    display: flex;
+    flex-direction: column;
+}

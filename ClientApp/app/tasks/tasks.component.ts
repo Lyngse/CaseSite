@@ -9,21 +9,40 @@ import * as moment from 'moment';
     styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+    loading: boolean = false;
     tasks: Task[];
     tasksToShow: Task[];
+    types: string[] = [
+        "Grafisk Opgave",
+        "Video Opgave",
+        "Event Opgave",
+        "Strategisk Opgave",
+        "Målgruppeanalyse",
+        "Dataanalyse"
+    ];
+    rewardTypes: string[] = [
+        "Honorar",
+        "Gave",
+        "Anbefaling"
+    ];
+    workPlaces: string[] = [
+        "Hos virksomheden",
+        "Hjemme"
+    ];
     sortingString: string;
-    loading: boolean = false;
+    filterValues: { search: string, types: string[], rewards: string[], places: string[] } = { search: "", types: [], rewards: [], places: [] };
 
     constructor(private taskService: TaskService) {
-
+        
     }
 
     ngOnInit() {
         this.loading = true;
         this.taskService.getAllTasks().subscribe((data) => {
             console.log(data);
-            this.tasks = data.sort((t1, t2) => { return t1.deadline.diff(t2.deadline) });
+            this.tasks = data;
             this.tasksToShow = this.tasks;
+            this.sort("Dato tilføjet");
             this.loading = false;
         }, (err) => {
             console.log(err);
@@ -31,29 +50,74 @@ export class TasksComponent implements OnInit {
         });
     }
 
+    typeFilter(type, isChecked) {
+        if (isChecked)
+            this.filterValues.types.push(type);
+        else {
+            let index = this.filterValues.types.indexOf(type);
+            this.filterValues.types.splice(index, 1);
+        }
+        this.filter(); 
+    }
+
+    rewardTypeFilter(rType, isChecked) {
+        if (isChecked)
+            this.filterValues.rewards.push(rType);
+        else {
+            let index = this.filterValues.rewards.indexOf(rType);
+            this.filterValues.rewards.splice(index, 1);
+        }
+        this.filter(); 
+    }
+
+    workPlaceFilter(place, isChecked) {
+        let placeId = "";
+        switch (place) {
+            case "Hos virksomheden":
+                placeId = "2";
+                break;
+            case "Hjemme":
+                placeId = "1";
+                break;
+            default:
+        }
+        if (isChecked)
+            this.filterValues.places.push(placeId);
+        else {
+            let index = this.filterValues.places.indexOf(placeId);
+            this.filterValues.places.splice(index, 1);
+        }
+        this.filter(); 
+    }
+
     sort(sortString: string) {
         this.sortingString = sortString;
         switch (sortString) {
-            case 'deadline':
+            case 'Deadline':
                 this.tasksToShow = this.tasksToShow.sort((t1, t2) => { return t1.deadline.diff(t2.deadline); });
                 break;
-            case 'alphabetically':
-                this.tasksToShow = this.tasksToShow.sort((t1, t2) => {
-                    if (t1.title > t2.title) return 1;
-                    if (t1.title < t2.title) return -1;
-                    return 0;
-                });
+            case 'Dato tilføjet':
+                this.tasksToShow = this.tasksToShow.sort((t1, t2) => { return t2.creationTime.diff(t1.creationTime); });
                 break;
+            case 'Værdi af belønning':
+                this.tasksToShow = this.tasksToShow.sort((t1, t2) => { return t2.rewardValue - t1.rewardValue; });
             default:
-                this.tasksToShow = this.tasksToShow.sort((t1, t2) => { return t1.deadline.diff(t2.deadline) });
+                //this.tasksToShow = this.tasksToShow.sort((t1, t2) => { return t2.creationTime.diff(t1.creationTime); });
                 break;
         }
-        
     }
 
-    filterByType(type: string) {
-        console.log(type);
-        this.tasksToShow = this.tasks.filter(t => { return t.type === type; });
+    filter() {
+        let filterTasks = this.tasks;
+        if (this.filterValues.search)
+            filterTasks = filterTasks.filter(t => t.title.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1);
+        if (this.filterValues.types.length > 0)
+            filterTasks = filterTasks.filter(t => this.filterValues.types.indexOf(t.type) > -1);
+        if (this.filterValues.rewards.length > 0) 
+            filterTasks = filterTasks.filter(t => this.filterValues.rewards.indexOf(t.rewardType) > -1);
+        if (this.filterValues.places.length > 0)
+            filterTasks = filterTasks.filter(t => this.filterValues.places.indexOf(t.workPlace) > -1);
+        this.tasksToShow = filterTasks;
         this.sort(this.sortingString);
     }
 
