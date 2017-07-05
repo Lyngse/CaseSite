@@ -115,7 +115,7 @@
 
 .fp-info-text {
     color: white;
-    font-size: 130%;
+    font-size: 150%;
     display: flex;
     flex-direction:column;
 }
@@ -123,14 +123,19 @@
 .fp-info-text1 {
     align-self: center;
     text-align: center;
+    width: 65%;
 }
 
 .fp-info-text2 {
     align-self: center;
+    font-size: 190%;
 }
 
 .fp-info-btn {
+    margin-top: 20px;
     width: 300px;
+    padding: 20px 50px;
+    font-size: 120%;
 }
 
 .fp-signup {

@@ -21,6 +21,11 @@
     margin-bottom: 50px;
 }
 
+.hiw-info {
+    text-align: center;
+    padding: 30px 0;
+}
+
 .hiw-home {
     display: flex;
     justify-content:space-around;
@@ -63,13 +68,19 @@
 }
 
 .hiw-title {
-    font-size: 90%;
+    font-size: 110%;
     color: white;
     text-align: center;
 }
 
 .hiw-description {
     padding: 0 15px;
-    font-size: 80%;
+    font-size: 90%;
     margin-top: 20px;
+}
+
+.hiw-get-started {
+    padding: 40px 0;
+    display: flex;
+    justify-content:center;
 }
