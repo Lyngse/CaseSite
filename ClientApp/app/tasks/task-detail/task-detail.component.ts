@@ -1,4 +1,4 @@
-﻿import { Component, AfterViewInit } from '@angular/core';
+﻿import { Component, AfterViewInit, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Business } from '../../model/business';
 import { Task } from '../../model/task';
@@ -11,7 +11,9 @@ import * as moment from 'moment';
     templateUrl: './task-detail.component.html',
     styleUrls: ['./task-detail.component.css']
 })
-export class TaskDetailComponent implements AfterViewInit {
+export class TaskDetailComponent implements AfterViewInit, OnChanges {
+    @Input('task') inputTask: Task;
+    @Input('business') inputBusiness: Business;
     task: Task;
     business: Business;
 
@@ -23,16 +25,23 @@ export class TaskDetailComponent implements AfterViewInit {
 
     }
 
+    ngOnChanges(changes) {
+        this.task = this.inputTask;
+        this.business = this.inputBusiness;
+        console.log(changes);
+    }
+
     ngAfterViewInit() {
         this.route.params.subscribe(params => {
             let id = params['id'];
-            this.taskService.getTask(id).subscribe(res => {
-                console.log(res);
-                this.task = res;
-                this.businessService.getBusinessFromId(res.businessId).subscribe(res => this.business = res);
-            });
-
-        })   
+            if (id) {
+                this.taskService.getTask(id).subscribe(res => {
+                    console.log(res);
+                    this.task = res;
+                    this.businessService.getBusinessFromId(res.businessId).subscribe(res => this.business = res);
+                });
+            }
+        });
     }
 
     getDeadlineString() {

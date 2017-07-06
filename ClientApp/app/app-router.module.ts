@@ -11,6 +11,7 @@ import { BusinessEditComponent } from './business-manager/business-edit/business
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ForgotPasswordComponent } from './login/forgotpassword/forgotpassword.component';
+import { ChangePasswordComponent } from './login/changepassword/changepassword.component';
 import { HowItWorksStudentsComponent } from './how-it-works-students/how-it-works-students.component';
 import { HowItWorksBusinessComponent } from './how-it-works-business/how-it-works-business.component';
 import { AboutComponent } from './about/about.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'login/resetpassword', component: ResetPasswordComponent },
     { path: 'login/forgotpassword', component: ForgotPasswordComponent },
+    { path: 'login/changepassword', component: ChangePasswordComponent },
     { path: 'howitworksstudents', component: HowItWorksStudentsComponent },
     { path: 'howitworksbusiness', component: HowItWorksBusinessComponent },
     { path: 'about', component: AboutComponent },
@@ -55,6 +57,7 @@ export const routingComponents = [
     TaskDetailComponent,
     ResetPasswordComponent,
     ForgotPasswordComponent,
+    ChangePasswordComponent,
     HowItWorksStudentsComponent,
     HowItWorksBusinessComponent,
     AboutComponent,

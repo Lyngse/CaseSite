@@ -52,7 +52,6 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 });
             } else {
                 this.edit = false;
-                
             }
 
         })
@@ -91,6 +90,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
     getBusiness() {
         this.loading = true;
         this.businessService.getBusinessFromUser().subscribe(res => {
+            this.business = res;
             this.model.address = res.address;
             this.model.city = res.city;
             this.model.zip = res.zip;

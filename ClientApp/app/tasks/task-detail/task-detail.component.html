@@ -11,10 +11,12 @@
            <p class="task-type">- {{ task.type }}</p>
 
            <div class="task-info">
-               <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
-               <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
-               <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
-               <p class="task-reward" style="font-size:14px;">
+               <div *ngIf="task.workplace">
+                   <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
+                   <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
+                   <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
+                </div>
+               <p class="task-reward" style="font-size:14px;" *ngIf="task.rewardType">
                    Belønning ved bedste løsningsforslag:
                    <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
                    <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-money"></i></span>
@@ -23,9 +25,10 @@
                    <span><b *ngIf="task.rewardType === 'Anbefaling'">Anbefaling</b></span>
                </p>
            </div>
-
-           <h3 class="task-info-title">Opgave beskrivelse</h3>
-           <p class="task-description">{{ task.description }}</p>
+           <div *ngIf="task.description">
+               <h3 class="task-info-title">Opgave beskrivelse</h3>
+               <p class="task-description">{{ task.description }}</p>
+           </div>
 
            <h3 class="task-info-title" *ngIf="task.workPlace === '2'">Ansøgnings information</h3>
            <h3 class="task-info-title" *ngIf="task.workPlace === '1'">Aflevering af løsningsforslag</h3>
