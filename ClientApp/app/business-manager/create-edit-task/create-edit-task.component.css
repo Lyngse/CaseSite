@@ -21,3 +21,27 @@
     color: #e51c23;
     font-size: 14px;
 }
+
+.dp-box {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.tp-box {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.datetime-container {
+    display: flex;
+}
+
+@media only screen and (max-width : 700px) {
+    .datetime-container {
+        display: block;
+    }
+}
