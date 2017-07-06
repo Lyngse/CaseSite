@@ -4,14 +4,14 @@
            <h2 class="business-name">{{ business.name }}</h2>
            <img class="business-logo" src="../../../dist/assets/dizy-cow-free-logo.f71d602dad15de2ff4bb3240265b7084.jpg" />
            <p class="business-address">{{ business.address }}, {{ business.zip }} {{ business.city }}</p>
-           <p class="business-description">{{ business.description }}</p>
+           <p class="business-description" [innerHTML]="business.description | formattext"></p>
        </div>
        <div class="detail-task-info">
            <h2 class="task-title">{{ task.title }}</h2>
            <p class="task-type">- {{ task.type }}</p>
 
            <div class="task-info">
-               <div *ngIf="task.workplace">
+               <div *ngIf="task.workPlace">
                    <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
                    <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
                    <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
@@ -27,12 +27,12 @@
            </div>
            <div *ngIf="task.description">
                <h3 class="task-info-title">Opgave beskrivelse</h3>
-               <p class="task-description">{{ task.description }}</p>
+               <p class="task-description" [innerHTML]="task.description | formattext"></p>
            </div>
 
            <h3 class="task-info-title" *ngIf="task.workPlace === '2'">Ansøgnings information</h3>
            <h3 class="task-info-title" *ngIf="task.workPlace === '1'">Aflevering af løsningsforslag</h3>
-           <p class="task-contactDescription">{{ task.contactDescription }}</p>
+           <p class="task-contactDescription" [innerHTML]="task.contactDescription | formattext"></p>
            <p *ngIf="task.workPlace === '2'">Udarbejdelsen af løsningsforslaget kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>
 
            

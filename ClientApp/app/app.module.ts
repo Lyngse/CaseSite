@@ -11,15 +11,17 @@ import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
-import { ModalModule, TooltipModule, TimepickerModule  } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule, TimepickerModule, AlertModule } from 'ngx-bootstrap';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
+import { FormatTextPipe } from './shared/pipes/formatText.pipe';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 
 import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
+import { UtilService } from './services/util.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -34,7 +36,8 @@ import { TaskService } from './services/task.service';
         LoginComponent,
         ResetPasswordComponent,
         EqualValidator,
-        DanishCurrencyPipe
+        DanishCurrencyPipe,
+        FormatTextPipe
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -44,8 +47,9 @@ import { TaskService } from './services/task.service';
         ModalModule.forRoot(),
         TooltipModule.forRoot(),
         TimepickerModule.forRoot(),
+        AlertModule.forRoot()
     ],
-    providers: [BusinessService, AccountService, TaskService]
+    providers: [BusinessService, AccountService, TaskService, UtilService]
 })
 export class AppModule {
 }

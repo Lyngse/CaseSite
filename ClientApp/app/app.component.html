@@ -2,4 +2,9 @@
 <div class="content">
     <router-outlet (deactivate)="onDeactivate()"></router-outlet>
 </div>
+<div class="alert-global">
+    <alert [type]="alert.type" [dismissOnTimeout]="5000" *ngFor=" let alert of alerts">
+        <strong>{{alert.titel}}</strong>{{" " + alert.message}}
+    </alert>
+</div>
 <shared-footer></shared-footer>
