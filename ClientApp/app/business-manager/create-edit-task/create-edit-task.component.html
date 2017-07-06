@@ -169,9 +169,9 @@
                          }">
                         <label for="description" class="control-label">Opgave beskrivelse *</label>
                         <textarea style="resize:none;" class="form-control" rows="5" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
-                        <span class="help-block" style="font-size:16px;">Forklar hvad opgaven går ud på.</span>
+                        <span class="help-block" style="font-size:16px;">Forklar hvad opgaven går ud på. Du kan også tilføje links til sider hvor de kan downloade PDF udgaver af en beskrivelse eller sider indholdene information.</span>
                         <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
-                            <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes. Du kan også tilføje links til sider hvor de kan downloade PDF udgaver af en beskrivelse eller lignede.</p>
+                            <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes.</p>
                         </div>
                     </div>
 

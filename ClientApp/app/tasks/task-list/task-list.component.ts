@@ -1,4 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Task } from '../../model/task';
 
 @Component({
@@ -11,16 +12,11 @@ export class TaskListComponent {
     @Input() tasks: Task[];
     @Output() deleteTask = new EventEmitter();
     @Output() editTask = new EventEmitter();
-    constructor() {
+    constructor(private router: Router) {
     }
 
-    handleDeleteTask(id) {
-        this.deleteTask.emit(id);
+    taskClick(id) {
+        this.router.navigate(['business/createedittask/' + id]);
     }
-
-    handleEditTask(id) {
-        this.editTask.emit(id);
-    }
-
     
 }

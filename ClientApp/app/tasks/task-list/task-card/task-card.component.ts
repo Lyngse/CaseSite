@@ -10,8 +10,6 @@ import * as moment from 'moment';
 export class TaskCardComponent {
     @Input() showEdit: boolean;
     @Input() task: Task;
-    @Output() deleteTask = new EventEmitter();
-    @Output() editTask = new EventEmitter();
 
     constructor() {
     }
@@ -20,13 +18,5 @@ export class TaskCardComponent {
         if (this.task) {
             return this.task.deadline.fromNow();
         }
-    }
-
-    deleteTaskClick() {
-        this.deleteTask.emit(this.task.id);
-    }
-
-    editTaskClick() {
-        this.editTask.emit(this.task.id);
     }
 }

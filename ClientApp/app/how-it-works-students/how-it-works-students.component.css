@@ -29,11 +29,13 @@
 .hiw-home {
     display: flex;
     justify-content:space-around;
+    flex-wrap: wrap;
 }
 
 .hiw-business {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 
@@ -77,10 +79,87 @@
     padding: 0 15px;
     font-size: 90%;
     margin-top: 20px;
+    text-align: center;
 }
 
 .hiw-get-started {
     padding: 40px 0;
     display: flex;
     justify-content:center;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+    .hiw-step-business {
+        flex: 0 0 100%;
+    }
+
+    .hiw-step-home {
+        flex: 0 0 100%;
+    }
+
+    .hiw-header-title {
+        font-size: 200%;
+    }
+
+    .hiw-header {
+        padding: 30px;
+    }
+
+    .heading2 {
+        font-size: 160%;
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .hiw-step-business {
+        flex: 0 0 50%;
+    }
+
+    .hiw-step-home {
+        flex: 0 0 50%;
+    }
+
+    .hiw-header-title {
+        font-size: 250%;
+    }
+
+    .hiw-header {
+        padding: 50px;
+    }
+
+    .heading2 {
+        font-size: 200%;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .hiw-step-business {
+        flex: 0 0 50%;
+    }
+
+    .hiw-step-home {
+        flex: 0 0 50%;
+    }
+
+    .hiw-header-title {
+        font-size: 400%;
+    }
+
+    .heading2 {
+        font-size: 250%;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .hiw-step-business {
+        flex: 0 0 25%;
+    }
+
+    .hiw-step-home {
+        flex: 0 0 33.3%;
+    }
 }

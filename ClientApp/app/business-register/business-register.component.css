@@ -4,10 +4,10 @@
 }
 
 .terms-box {
-    width: 80%;
+    width: 90%;
     height: 500px;
     display: block;
-    margin-top:50px;
+    margin-top:75px;
 }
 
 .terms-content {
@@ -19,4 +19,19 @@
 
 .terms-cb {
     font-size: 16px;
+}
+
+.tc-title {
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.tc-header {
+    font-weight: 500;
+    font-size: 110%;
+}
+
+.tc-subheader {
+    font-style: italic;
+    font-weight: 300;
 }
