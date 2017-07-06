@@ -18,6 +18,12 @@ export class AccountService {
             .subscribe(value => this.loggedIn.next(value.json()));
     }
 
+    changePassword(currentPassword: string, newPassword: string): Observable<any> {
+        return this.http
+            .post('api/account/changepassword/', JSON.stringify({ currentPassword: currentPassword, newPassword: newPassword }), this.options)
+            .catch(this.handleError);
+    }
+
     resetPassword(userId: string, code: string, newPassword: string): Observable<any> {
         return this.http
             .post('api/account/resetpassword/', JSON.stringify({ userId: userId, code: code, newPassword: newPassword }), this.options)

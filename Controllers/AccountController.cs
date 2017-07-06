@@ -10,6 +10,7 @@ using CaseSite.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CaseSite.Controllers
 {
@@ -26,6 +27,29 @@ namespace CaseSite.Controllers
             _userManager = userManager;
             _loginManager = loginManager;
             _roleManager = roleManager;
+        }
+
+        [HttpPost("changepassword")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword([FromBody] JObject obj)
+        {
+            string currentPassword = obj["currentPassword"].ToString();
+            string newPassword = obj["newPassword"].ToString();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+            var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { passwordError = "password change failed" });
+            }
+            return Ok();
         }
 
         [HttpPost("forgotpassword")]
@@ -47,7 +71,7 @@ namespace CaseSite.Controllers
             mimeMessage.To.Add(new MailboxAddress("Microsoft ASP.NET core", "frederik.bl@live.dk"));
             mimeMessage.Subject = "Reset password";
             var bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = "Please reset your password by clicking here: <a href='" + callbackUrl + "'>link</a>";
+            bodyBuilder.HtmlBody = "Nulstil dit kodeord igennem dette <a href='" + callbackUrl + "'>link</a>";
             mimeMessage.Body = bodyBuilder.ToMessageBody();
             using(var client = new SmtpClient())
             {
