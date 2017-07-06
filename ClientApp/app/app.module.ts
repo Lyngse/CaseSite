@@ -10,7 +10,7 @@ import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
-import { ModalModule, TooltipModule, TimepickerModule, AlertModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule } from 'ngx-bootstrap';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -45,7 +45,8 @@ import { UtilService } from './services/util.service';
         ModalModule.forRoot(),
         TooltipModule.forRoot(),
         TimepickerModule.forRoot(),
-        AlertModule.forRoot()
+        DatepickerModule.forRoot(),
+        AlertModule.forRoot(),
     ],
     providers: [BusinessService, AccountService, TaskService, UtilService]
 })

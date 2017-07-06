@@ -37,16 +37,32 @@
                         </div>
                     </div>
 
-                    <div class="form-group"
+                    <!--<div class="form-group"
                          [ngClass]="{
                          'has-error': deadline.invalid && (deadline.dirty || deadline.touched),
                          'has-success': deadline.valid && (deadline.dirty || deadline.touched)
                          }">
                         <label for="deadline" class="control-label">Deadline *</label>
-                        <input type="datetime-local" id="deadline" class="form-control" name="deadline" [value]="model.deadline.format('YYYY-MM-DDTHH:mm')" (change)="deadlineChanged($event.target.value)" [disabled]="edit" #deadline required />
+                        <input type="datetime-local" id="deadline" class="form-control" name="deadline" [value]="model.deadline.format('YYYY-MM-DDTHH:mm')" (change)="deadlineChanged()" [disabled]="edit" #deadline required />
                         <div class="form-feedback" *ngIf="deadline.errors && (deadline.dirty || deadline.touched)">
                             <p *ngIf="deadline.errors.required">Deadlinen for opgaven skal udfyldes</p>
                         </div>
+                    </div>-->
+                    <p style="margin-bottom: 5px;font-weight: bold;">Dato og tid for opgavens deadline *</p>
+                    <div class="form-group datetime-container">
+                        <div class="dp-box">
+                            <datepicker name="date" id="sd" #sd="ngModel" [(ngModel)]="selectedDate" [minDate]="now" [showWeeks]="true" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></datepicker>
+                        </div>
+                        <div class="tp-box">                        
+                            <p>Timer - Minutter</p>
+                            <timepicker name="time" id="st" #st="ngModel" [(ngModel)]="selectedTime" [showMeridian]="ismeridian" (ngModelChange)="deadlineChanged($event)"[disabled]="edit"></timepicker>
+                            <div style="padding:30px;background-color: #fafafa;border-radius:5px;display:flex;align-items:center;flex-direction:column;">
+                                Valgte deadline <br /> <b>{{ model.deadline.format('DD/MM-YYYY - HH:mm') }}</b>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="form-feedback" *ngIf="statusMessage">
+                        <p>{{statusMessage}}</p>
                     </div>
 
                     <div class="form-group"
@@ -150,13 +166,13 @@
                          }">
                         <label for="contactDescription" class="control-label" style="display:flex;align-items:center;">
                             Ansøgnings beskrivelse *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Husk at inkludére email eller telefon for de ansøgende at kontakte jer på.">
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad ansøgningen til opgaven skal indeholde. Inkluder kontakt information så som e-mail eller telefonnummer, for de ansøgende at kontakte jer på.">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
                         </label>
-                        <textarea style="resize:none;" class="form-control" rows="5" id="contactDescription" name="contactDescription" [(ngModel)]="model.contactDescription" #contactDescription="ngModel" required></textarea>
-                        <span class="help-block" style="font-size:16px;">Forklar hvad ansøgningen til opgaven skal indeholde. Inkluder kontakt information så som e-mail eller telefonnummer.</span>
+                        <textarea style="resize:none;" class="form-control" rows="8" id="contactDescription" name="contactDescription" [(ngModel)]="model.contactDescription" #contactDescription="ngModel" required></textarea>
+                        <span class="help-block" style="font-size:16px;"></span>
                         <div class="form-feedback" *ngIf="contactDescription.errors && (contactDescription.dirty || contactDescription.touched)">
                             <p *ngIf="contactDescription.errors.required">Ansøgnings beskrivelsen skal udfyldes</p>
                         </div>
@@ -167,16 +183,20 @@
                          'has-error': description.invalid && (description.dirty || description.touched),
                          'has-success': description.valid && (description.dirty || description.touched)
                          }">
-                        <label for="description" class="control-label">Opgave beskrivelse *</label>
-                        <textarea style="resize:none;" class="form-control" rows="5" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
-                        <span class="help-block" style="font-size:16px;">Forklar hvad opgaven går ud på. Du kan også tilføje links til sider hvor de kan downloade PDF udgaver af en beskrivelse eller sider indholdene information.</span>
+                        <label for="description" class="control-label">Opgave beskrivelse *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad opgaven går ud på. Du kan også tilføje links til sider hvor de kan downloade PDF udgaver af en beskrivelse eller sider indholdene information.">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
+                        <textarea style="resize:none;" class="form-control" rows="8" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
                         <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
                             <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes.</p>
                         </div>
                     </div>
-
+                    <p *ngIf="!edit">OBS! - Når du har oprettet en ny opgave, kan du ikke længere ændre i opgavens deadline, belønnings type eller belønnings værdi. Sørg derfor at disse oplysninger er korrekte før der trykkes på 'Opret opgave'.</p>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem ændringer' : 'Gem opgave'}}</button>
+                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem opgave' : 'Opret opgave'}}</button>
                     </div>
                 </div>  
             </form>

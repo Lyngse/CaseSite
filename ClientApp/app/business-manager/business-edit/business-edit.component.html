@@ -68,7 +68,7 @@
 
                 <div class="form-group">
                     <label for="textArea" class="control-label">Virksomheds Beskrivelse</label>
-                    <textarea style="resize:none;" class="form-control" rows="5" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel"></textarea>
+                    <textarea style="resize:none;" class="form-control" rows="8" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel"></textarea>
                     <span class="help-block" style="font-size:16px;">Fortæl om virksomheden og hvad I arbejder med.</span>
                 </div>
 
@@ -82,5 +82,28 @@
                 </div>
             </div>    
         </form>
+        <div class="col-md-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;">
+            <p>Hvis du ønsker at ændre adgangskoden til denne virksomhed kan det gøres <button (click)="smModal.show()" type="button" class="btn btn-primary">Her</button></p>
+        </div>
+    </div>
+</div>
+
+<div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Small modal</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>De ændreinger du kan have lavet vil ikke blive gemt, hvis du forlader denne side. Ønsker du at gå til siden for at ændre din adgangskode?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Nej</button>
+                <button routerLink="/login/changepassword" type="button" class="card-btn btn btn-primary">Ja</button>
+            </div>
+        </div>
     </div>
 </div>

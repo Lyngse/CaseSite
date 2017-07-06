@@ -16,10 +16,15 @@ import { TaskService } from '../../services/task.service'
     styleUrls: ['./create-edit-task.component.css']
 })
 export class CreateEditTaskComponent implements AfterViewInit {
+    public ismeridian: boolean = false;
+    now: Date = new Date();
+    selectedTime: Date = new Date();
+    selectedDate: Date = new Date();
+    statusMessage: string;
     taskTypes: string[] = [
         'Grafisk Opgave',
         'Video Opgave',
-        'Event Opgave',
+        'Event Opgave', 
         'Strategisk Opgave',
         'Målgruppeanalyse',
         'Dataanalyse'
@@ -112,8 +117,17 @@ export class CreateEditTaskComponent implements AfterViewInit {
         });
     }
 
-    deadlineChanged(newValue) {
-        this.model.deadline = moment(newValue);
-        console.log(this.model.deadline.format());
+    deadlineChanged(something) {
+        console.log("im here!");
+        let _date: moment.Moment = moment(this.selectedDate).startOf("day");
+        let _time: moment.Moment = moment(this.selectedTime);
+        _date.add(_time.hours(), "h").add(_time.minutes(), "m");
+        if (_date.isAfter(moment())) {
+            this.model.deadline = _date;
+            this.statusMessage = '';
+        }
+        else {
+            this.statusMessage = "Tiden for din deadline skal ligge før nuværende tidspunkt på dagen";
+        }   
     }
 }
