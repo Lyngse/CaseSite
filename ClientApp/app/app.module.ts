@@ -10,7 +10,8 @@ import { TaskSearchComponent } from './tasks/task-search/task-search.component';
 import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
-import { ModalModule, TooltipModule } from 'ngx-bootstrap';
+import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
+import { ModalModule, TooltipModule, TimepickerModule  } from 'ngx-bootstrap';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 
@@ -31,6 +32,7 @@ import { TaskService } from './services/task.service';
         TaskListComponent,
         TaskCardComponent,
         LoginComponent,
+        ResetPasswordComponent,
         EqualValidator,
         DanishCurrencyPipe
     ],
@@ -41,6 +43,7 @@ import { TaskService } from './services/task.service';
         SpinnerModule,
         ModalModule.forRoot(),
         TooltipModule.forRoot(),
+        TimepickerModule.forRoot(),
     ],
     providers: [BusinessService, AccountService, TaskService]
 })
