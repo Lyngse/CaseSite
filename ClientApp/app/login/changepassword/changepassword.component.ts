@@ -1,5 +1,7 @@
 ﻿import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
+import { UtilService } from '../../services/util.service';
 
 @Component({
     selector: 'changepassword',
@@ -7,12 +9,11 @@ import { AccountService } from '../../services/account.service';
     styleUrls: ['./changepassword.component.css']
 })
 export class ChangePasswordComponent implements AfterViewInit {
-
     currentPassword: string = "";
     newPassword: string = "";
     confirmPassword: string = "";
 
-    constructor(private accountService: AccountService) {
+    constructor(private accountService: AccountService, private utilService: UtilService, private router: Router) {
 
     }
 
@@ -20,8 +21,18 @@ export class ChangePasswordComponent implements AfterViewInit {
     }
 
     onSubmit() {
+        this.utilService.loading.next(true);
         this.accountService.changePassword(this.currentPassword, this.newPassword).subscribe(res => {
-            console.log(res);
+            this.utilService.loading.next(false);
+            if (res.ok === true) {
+                this.utilService.alert.next({ type: "success", titel: "Success", message: "Kodeord blev ændret" });
+                this.router.navigate(['/business']);
+            } else {
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
+            }
+        }, err => {
+            this.utilService.loading.next(false);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
         });
     }
 }

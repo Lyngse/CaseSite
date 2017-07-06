@@ -9,17 +9,21 @@ import * as moment from 'moment';
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-
+    loading = false;
     alerts = [];
 
     constructor(private utilService: UtilService) {
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
-            console.log(newValue);
-            if (newValue.message && newValue.titel && newValue.type) {
+            if (newValue.titel && newValue.type) {
                 this.alerts.push(newValue);
             }
-            
+        });
+        utilService.loading.subscribe(newValue => {
+            if (newValue)
+                this.loading = true;
+            else
+                this.loading = false;
         });
     }
 

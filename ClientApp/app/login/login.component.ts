@@ -1,6 +1,7 @@
 ﻿import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
+import { UtilService } from '../services/util.service';
 
 @Component({
     selector: 'login',
@@ -14,7 +15,7 @@ export class LoginComponent implements AfterViewInit {
     loginFailedMsg: string = "";
     @ViewChild('f') form: any;
 
-    constructor(private accountService: AccountService, private router: Router) {
+    constructor(private accountService: AccountService, private utilService: UtilService, private router: Router) {
         this.accountService.loggedIn.subscribe(newValue => {
             if (newValue)
                 this.router.navigate(['/business']);
@@ -27,17 +28,19 @@ export class LoginComponent implements AfterViewInit {
 
     onLogin() {
         if (this.form.valid) {
-            this.loading = true;
+            this.utilService.loading.next(true);
             this.accountService.login(this.username, this.password).subscribe((response) => {
+                this.utilService.loading.next(false);
                 if (response.ok == true) {
-                    this.loading = false;
+                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Login lykkedes" });
                     this.router.navigate(['/business']);
                 } else {
-                    this.loading = false;
-                    this.loginFailedMsg = response._body;
+                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
+                    console.log(response._body);
                 }
             }, (err) => {
-                this.loading = false;
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
                 console.log(err.json());
             });
         }

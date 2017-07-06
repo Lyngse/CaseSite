@@ -9,6 +9,7 @@ import {
     FormGroup,
 } from '@angular/forms';
 import { BusinessService } from '../../services/business.service';
+import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
 
 @Component({
@@ -17,29 +18,34 @@ import { Business } from '../../model/business';
     styleUrls: ['./business-edit.component.css']
 })
 export class BusinessEditComponent implements AfterViewInit {
-    loading: boolean = false;
     model: Business = new Business();
     @ViewChild('f') form: any;
 
-    constructor(private businessService: BusinessService) {
+    constructor(private businessService: BusinessService, private utilService: UtilService) {
 
     }
 
     ngAfterViewInit() {
-        this.loading = true;
+        this.utilService.loading.next(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.model = res;
-            this.loading = false;
+            this.utilService.loading.next(false);
+        }, err => {
+            this.utilService.loading.next(false);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" })
         });
     }
 
     onSubmit() {
-        
         if (this.form.valid) {
-            this.loading = true;
+            this.utilService.loading.next(true);
             this.businessService.updateBusiness(this.model).subscribe(res => {
                 console.log(res);
-                this.loading = false;
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "success", titel: "Success", message: "Oplysninger blev ændret" });
+            }, err => {
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "danger", titel: "Fail", message: "Oplysninger blev ikke ændret" });
             });
         }
     }

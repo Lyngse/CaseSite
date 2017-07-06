@@ -7,5 +7,3 @@
     </div>
     <task-list [showEdit]="true" [tasks]="tasks" (deleteTask)="handleDeleteTask($event)" (editTask)="handleEditTask($event)"></task-list>
 </div>
-<spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
-<div *ngIf="loading" class="loading-background"></div>

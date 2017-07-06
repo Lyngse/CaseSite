@@ -1,6 +1,8 @@
 ﻿import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AccountService } from '../../services/account.service';
+import { UtilService } from '../../services/util.service';
 
 @Component({
     selector: 'resetpassword',
@@ -13,7 +15,7 @@ export class ResetPasswordComponent implements AfterViewInit {
     code: string;
     newPassword: string;
 
-    constructor(private activatedRoute: ActivatedRoute, private accountService: AccountService) {
+    constructor(private activatedRoute: ActivatedRoute, private utilService: UtilService, private accountService: AccountService, private router: Router) {
 
     }
 
@@ -25,8 +27,18 @@ export class ResetPasswordComponent implements AfterViewInit {
     }
 
     onSubmit() {
+        this.utilService.loading.next(true);
         this.accountService.resetPassword(this.userId, this.code, this.newPassword).subscribe(res => {
-            console.log(res);
+            this.utilService.loading.next(false);
+            if (res.ok === true) {
+                this.utilService.alert.next({ type: "success", titel: "Success", message: "Kodeord blev ændret" });
+                this.router.navigate(['/login']);
+            } else {
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
+            }
+        }, err => {
+            this.utilService.loading.next(false);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
         });
     }
 }

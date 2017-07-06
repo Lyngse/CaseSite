@@ -1,6 +1,7 @@
 ﻿import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../../services/account.service';
+import { UtilService } from '../../services/util.service';
 
 @Component({
     selector: 'forgotpassword',
@@ -12,7 +13,7 @@ export class ForgotPasswordComponent implements AfterViewInit {
     statusMessage: string;
     @ViewChild('f') form: any;
     loading: boolean = false;
-    constructor(private router: Router, private accountService: AccountService) {
+    constructor(private router: Router, private utilService: UtilService, private accountService: AccountService) {
 
     }
 
@@ -21,17 +22,18 @@ export class ForgotPasswordComponent implements AfterViewInit {
     }
 
     onSubmit() {
-        this.loading = true;
+        this.utilService.loading.next(true);
         this.accountService.forgotPassword(this.newEmail).subscribe(res => {
-            console.log(res);
+            this.utilService.loading.next(false);
             if (res.status == 200) {
-                this.statusMessage = "Reset link er sendt til " + this.newEmail;
+                this.utilService.alert.next({ type: "success", titel: "Success", message: "Reset link er sendt til " + this.newEmail });
                 this.form.reset();
-                this.loading = false;
             } else {
-                this.statusMessage = "Der skete en fejl.";
-                this.loading = false;
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kodeordet blev ikke resat" });
             }
+        }, err => {
+            this.utilService.loading.next(false);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kodeordet blev ikke resat" });
         });
     }
 }

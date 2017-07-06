@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { SpinnerModule } from 'angular2-spinner';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { TaskSearchComponent } from './tasks/task-search/task-search.component';
 import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
@@ -30,7 +29,6 @@ import { UtilService } from './services/util.service';
         routingComponents,
         HeaderComponent,
         FooterComponent,
-        TaskSearchComponent,
         TaskListComponent,
         TaskCardComponent,
         LoginComponent,

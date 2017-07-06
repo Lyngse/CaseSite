@@ -1,6 +1,7 @@
 ﻿import { Component,OnInit } from '@angular/core';
 import { Task } from '../model/task';
 import { TaskService } from '../services/task.service'
+import { UtilService } from '../services/util.service';
 import * as moment from 'moment';
 
 @Component({
@@ -9,7 +10,6 @@ import * as moment from 'moment';
     styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-    loading: boolean = false;
     tasks: Task[];
     tasksToShow: Task[];
     types: string[] = [
@@ -32,21 +32,21 @@ export class TasksComponent implements OnInit {
     sortingString: string;
     filterValues: { search: string, types: string[], rewards: string[], places: string[] } = { search: "", types: [], rewards: [], places: [] };
 
-    constructor(private taskService: TaskService) {
+    constructor(private taskService: TaskService, private utilService: UtilService) {
         
     }
 
     ngOnInit() {
-        this.loading = true;
+        this.utilService.loading.next(true);
         this.taskService.getAllTasks().subscribe((data) => {
             console.log(data);
             this.tasks = data;
             this.tasksToShow = this.tasks;
             this.sort("Dato tilføjet");
-            this.loading = false;
+            this.utilService.loading.next(false);
         }, (err) => {
             console.log(err);
-            this.loading = false;
+            this.utilService.loading.next(false);
         });
     }
 

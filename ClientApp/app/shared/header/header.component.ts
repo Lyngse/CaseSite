@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { BusinessService } from '../../services/business.service';
+import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
 import { Router } from '@angular/router';
 
@@ -11,9 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
     business: Business;
-    loading: boolean = false;
 
-    constructor(private accountService: AccountService, private businessService: BusinessService, private router: Router) {
+    constructor(private utilService: UtilService, private accountService: AccountService, private businessService: BusinessService, private router: Router) {
         accountService.loggedIn.subscribe(newValue => {
             if (newValue)
                 this.getBusiness();
@@ -26,19 +26,28 @@ export class HeaderComponent implements OnInit {
     }
 
     getBusiness() {
-        this.loading = true;
+        this.utilService.loading.next(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
-            this.loading = false;
+            this.utilService.loading.next(false);
         }, err => {
+            this.utilService.loading.next(true);
             if (err.status !== 401)
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
                 console.log(err);
-            this.loading = false;
         });
     }
 
     logout() {
-        this.loading = true;
-        this.accountService.logout().subscribe((response) => { console.log(response); this.loading = false; this.router.navigate(['/']); });
+        this.utilService.loading.next(true);
+        this.accountService.logout().subscribe((response) => {
+            console.log(response);
+            this.utilService.loading.next(false);
+            this.router.navigate(['/']
+            );
+        }, err => {
+            this.utilService.loading.next(true);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
+        });
     }
 }
