@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { UtilService } from './services/util.service';
 import * as moment from 'moment';
 
 @Component({
@@ -9,9 +10,17 @@ import * as moment from 'moment';
 })
 export class AppComponent {
 
-    constructor() {
-        moment.locale('da');
+    alerts = [];
 
+    constructor(private utilService: UtilService) {
+        moment.locale('da');
+        utilService.alert.subscribe(newValue => {
+            console.log(newValue);
+            if (newValue.message && newValue.titel && newValue.type) {
+                this.alerts.push(newValue);
+            }
+            
+        });
     }
 
     onDeactivate() {
