@@ -45,26 +45,45 @@
                     </div>
                 </div>
 
-                <!--<div class="form-group"
-                     [ngClass]="{
-                            'has-error': password.invalid && (password.dirty || password.touched),
-                            'has-success': password.valid && (password.dirty || password.touched)
-                        }">
-                    <label for="password" class="control-label">Adgangskode *</label>
-                    <input type="password"
-                           class="form-control"
-                           id="password"
-                           name="password"
-                           [(ngModel)]="model.password"
-                           pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$"
-                           required
-                           #password="ngModel">
-                    <div class="form-feedback"
-                         *ngIf="password.errors && (password.dirty || password.touched)">
-                        <p *ngIf="password.errors.required">Password is required</p>
-                        <p *ngIf="password.errors.pattern">Kodeordet skal være minimum 8 tegn og indeholde et tal</p>
+                <div class="col-sm-5" style="padding:0;">
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': city.invalid && (city.dirty || city.touched),
+                         'has-success': city.valid && (city.dirty || city.touched)
+                         }">
+                        <label for="city" class="control-label">By *</label>
+                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                        <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
+                        <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+                            <p *ngIf="city.errors.required">Byen skal udfyldes</p>
+                        </div>
                     </div>
-                </div>-->
+                </div>
+                <div class="col-sm-5 col-sm-offset-2" style="padding:0;">
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': zip.invalid && (zip.dirty || zip.touched),
+                         'has-success': zip.valid && (zip.dirty || zip.touched)
+                         }">
+                        <label for="zip" class="control-label">Postnummer *</label>
+                        <input type="number" min="0" max="5000" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
+                        <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
+                            <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                     [ngClass]="{
+                         'has-error': address.invalid && (address.dirty || address.touched),
+                         'has-success': address.valid && (address.dirty || address.touched)
+                         }">
+                    <label for="address" class="control-label">Vejnavn og nummer *</label>
+                    <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                    <input type="text" id="address" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" required />
+                    <div class="form-feedback" *ngIf="address.errors && (address.dirty || address.touched)">
+                        <p *ngIf="address.errors.required">Vejnavn og nummer skal udfyldes</p>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="textArea" class="control-label">Virksomheds Beskrivelse</label>

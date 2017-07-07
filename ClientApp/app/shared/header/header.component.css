@@ -13,19 +13,22 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     transition: border-color 0.7s;
 }
 
-.navbar-right li a {
+.navbar-right li a,
+.navbar-left li a {
     border-bottom: 5px solid #006699;
     padding-top: 25.5px;
     color: white;
 }
 
 .navbar-right li a:active,
-.navbar-right li a:hover {
-    border-color: white;
-    -webkit-transition: border-color 0.7s;
-    transition: border-color 0.7s;
-    background-color: #006699;
-}
+.navbar-right li a:hover,
+.navbar-left li a:active,
+.navbar-left li a:hover {
+        border-color: white;
+        -webkit-transition: border-color 0.7s;
+        transition: border-color 0.7s;
+        background-color: #006699;
+    }
 
 .navbar-toggle .icon-bar {
     background-color: white;

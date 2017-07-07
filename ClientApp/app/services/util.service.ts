@@ -5,4 +5,17 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 export class UtilService {
     public alert: BehaviorSubject<{ type: string, titel: string, message: string }> = new BehaviorSubject({ type: null, titel: null, message: null });
     public loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public static readonly taskTypes = [
+        "Strategi",
+        "Tektforfatning",
+        "Grafik of design",
+        "Online marketing og kommunikation",
+        "PR",
+        "Events",
+        "Branding",
+        "Målgruppeanalyse",
+        "markedsanalyse",
+        "Video/Billede",
+        "Andet"
+    ];
 }

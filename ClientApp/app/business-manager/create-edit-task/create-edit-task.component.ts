@@ -22,14 +22,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
     selectedTime: Date = new Date();
     selectedDate: Date = new Date();
     statusMessage: string;
-    taskTypes: string[] = [
-        'Grafisk Opgave',
-        'Video Opgave',
-        'Event Opgave', 
-        'Strategisk Opgave',
-        'Målgruppeanalyse',
-        'Dataanalyse'
-    ];
+    taskTypes: string[] = UtilService.taskTypes;
     business: Business;
     edit: Boolean;
     model: Task = new Task();
@@ -45,7 +38,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.getBusiness();
             else
                 this.business = null;
-        })
+        });
     }
 
     ngAfterViewInit() {
@@ -132,7 +125,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
             this.statusMessage = '';
         }
         else {
-            this.statusMessage = "Tiden for din deadline skal ligge før nuværende tidspunkt på dagen";
+            this.statusMessage = "Tiden for din deadline skal ligge efter nuværende tidspunkt";
         }   
     }
 }

@@ -6,13 +6,33 @@
 .detail-business-info {
     flex: 0 0 33%;
     padding: 0 15px;
-    background-color: #FAFAFA;
+    background-color: #DDDDDD;
 }
 
 .detail-task-info {
     flex: 0 0 67%;
     padding: 0 15px;
-    background-color: #FDFDFD;
+    background-color: #F1F1F1;
+}
+
+@media only screen and (max-width : 767px){
+    .detail-content {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: 500px;
+    }
+
+    .detail-business-info {
+        flex: 0 0 100%;
+        padding: 0 15px;
+        background-color: #DDDDDD;
+    }
+
+    .detail-task-info {
+        flex: 0 0 100%;
+        padding: 0 15px;
+        background-color: #F1F1F1;
+    }
 }
 
 .business-name {
