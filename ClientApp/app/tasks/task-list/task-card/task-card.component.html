@@ -1,29 +1,9 @@
 ﻿
 <div class="text-center card-box">
     <div class="card-jobtype">
-        <span *ngIf="task.type === 'Grafisk Opgave'" class="fa-stack fa-lg">
+        <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
             <i class="fa fa-picture-o fa-stack-1x fa-inverse"></i>
-        </span>
-        <span *ngIf="task.type === 'Video Opgave'" class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
-            <i class="fa fa-film fa-stack-1x fa-inverse"></i>
-        </span>
-        <span *ngIf="task.type === 'Event Opgave'" class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
-            <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
-        </span>
-        <span *ngIf="task.type === 'Strategisk Opgave'" class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
-            <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
-        </span>
-        <span *ngIf="task.type === 'Målgruppeanalyse'" class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
-            <i class="fa fa-users fa-stack-1x fa-inverse"></i>
-        </span>
-        <span *ngIf="task.type === 'Dataanalyse'" class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
-            <i class="fa fa-bar-chart fa-stack-1x fa-inverse"></i>
         </span>
         <!--<img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />-->
         <p>{{ task.type }}</p>

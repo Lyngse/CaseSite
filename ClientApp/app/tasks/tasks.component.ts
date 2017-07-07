@@ -12,14 +12,7 @@ import * as moment from 'moment';
 export class TasksComponent implements OnInit {
     tasks: Task[];
     tasksToShow: Task[];
-    types: string[] = [
-        "Grafisk Opgave",
-        "Video Opgave",
-        "Event Opgave",
-        "Strategisk Opgave",
-        "Målgruppeanalyse",
-        "Dataanalyse"
-    ];
+    types: string[] = UtilService.taskTypes;
     rewardTypes: string[] = [
         "Honorar",
         "Gave",
@@ -109,7 +102,10 @@ export class TasksComponent implements OnInit {
     filter() {
         let filterTasks = this.tasks;
         if (this.filterValues.search)
-            filterTasks = filterTasks.filter(t => t.title.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1);
+            filterTasks = filterTasks.filter(t =>
+                t.title.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1
+                ||
+                t.businessName.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1);
         if (this.filterValues.types.length > 0)
             filterTasks = filterTasks.filter(t => this.filterValues.types.indexOf(t.type) > -1);
         if (this.filterValues.rewards.length > 0) 
