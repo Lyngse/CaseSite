@@ -128,4 +128,5 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+  <ProjectExtensions><VisualStudio><UserProperties tsconfig_1json__JSONSchema="http://json.schemastore.org/typings" /></VisualStudio></ProjectExtensions>
 </Project>

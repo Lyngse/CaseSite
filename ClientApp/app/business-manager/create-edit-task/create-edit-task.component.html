@@ -97,7 +97,7 @@
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
                         </label>
-                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required />
+                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required [disabled]="edit" />
                         <div class="form-feedback" *ngIf="rewardValue.errors && (rewardValue.dirty || rewardValue.touched)">
                             <p *ngIf="rewardValue.errors.required">Værdien for belønningen skal udfyldes</p>
                         </div>

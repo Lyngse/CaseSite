@@ -18,7 +18,7 @@ import { TaskService } from '../../services/task.service'
 export class CreateEditTaskComponent implements AfterViewInit {
     public ismeridian: boolean = false;
     now: Date = new Date();
-    isEdit: Date = new Date();
+    isEdit: Date;
     selectedTime: Date = new Date();
     selectedDate: Date = new Date();
     statusMessage: string;

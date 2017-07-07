@@ -35,7 +35,7 @@ import { UtilService } from './services/util.service';
         ResetPasswordComponent,
         EqualValidator,
         DanishCurrencyPipe,
-        FormatTextPipe
+        FormatTextPipe,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -47,6 +47,7 @@ import { UtilService } from './services/util.service';
         TimepickerModule.forRoot(),
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
+
     ],
     providers: [BusinessService, AccountService, TaskService, UtilService]
 })
