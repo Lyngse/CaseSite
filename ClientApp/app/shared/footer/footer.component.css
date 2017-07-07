@@ -8,6 +8,18 @@ ul {
     padding: 0;
 }
 
+ul li a {
+    text-decoration: none;
+    border: 0;
+    color: #888;
+    -webkit-transition: color 0.4s;
+    transition: color 0.4s;
+}
+
+ul li a:hover {
+    color: white;
+}
+
 .footer-nav {
     list-style: none;
 }
@@ -82,4 +94,19 @@ footer p {
     color: #888;
     text-align: center;
     margin-top: 20px;
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) and (max-width : 479px) {
+    .footer-nav li,
+    .social-links li {
+        display: block;
+        margin-right: 0;
+        margin: 5px 0;
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) and (max-width : 767px) {
+    
 }

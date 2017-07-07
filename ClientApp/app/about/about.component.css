@@ -77,12 +77,20 @@
     .team-person {
         flex: 0 0 100%;
     }
+
+    .about-title {
+        font-size: 260%;
+    }
 }
 
 /* Extra Small Devices, Phones */
 @media only screen and (min-width : 480px) and (max-width : 767px) {
     .team-person {
         flex: 0 0 50%;
+    }
+
+    .about-title {
+        font-size: 350%;
     }
 }
 
