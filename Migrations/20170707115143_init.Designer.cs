@@ -8,8 +8,8 @@ using CaseSite.Models;
 namespace CaseSite.Migrations
 {
     [DbContext(typeof(CaseSiteContext))]
-    [Migration("20170619161727_address-added")]
-    partial class addressadded
+    [Migration("20170707115143_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

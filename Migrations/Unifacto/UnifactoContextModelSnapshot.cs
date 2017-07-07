@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using CaseSite.Models;
 
-namespace CaseSite.Migrations
+namespace CaseSite.Migrations.Unifacto
 {
-    [DbContext(typeof(CaseSiteContext))]
-    [Migration("20170428212734_userAndRoles")]
-    partial class userAndRoles
+    [DbContext(typeof(UnifactoContext))]
+    partial class UnifactoContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -22,47 +21,63 @@ namespace CaseSite.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Address");
+
+                    b.Property<string>("City");
+
                     b.Property<string>("Description");
 
-                    b.Property<string>("Email");
-
-                    b.Property<byte[]>("Logo");
+                    b.Property<string>("LogoUrl");
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("UserId");
 
-                    b.Property<string>("Username");
+                    b.Property<int>("Zip");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Business");
                 });
 
-            modelBuilder.Entity("CaseSite.Models.Job", b =>
+            modelBuilder.Entity("CaseSite.Models.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Address");
+
                     b.Property<int>("BusinessId");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("ContactDescription");
+
+                    b.Property<DateTimeOffset>("CreationTime");
 
                     b.Property<DateTimeOffset>("Deadline");
 
-                    b.Property<string>("Disciption");
+                    b.Property<string>("Description");
 
-                    b.Property<int>("MaxNumPersons");
-
-                    b.Property<int>("MinNumPersons");
+                    b.Property<string>("RewardType");
 
                     b.Property<decimal>("RewardValue");
 
                     b.Property<string>("Title");
 
+                    b.Property<string>("Type");
+
+                    b.Property<string>("WorkPlace");
+
+                    b.Property<int>("Zip");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessId");
 
-                    b.ToTable("Job");
+                    b.ToTable("Task");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -222,10 +237,17 @@ namespace CaseSite.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CaseSite.Models.Job", b =>
+            modelBuilder.Entity("CaseSite.Models.Business", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CaseSite.Models.Task", b =>
                 {
                     b.HasOne("CaseSite.Models.Business", "Business")
-                        .WithMany("Jobs")
+                        .WithMany("Tasks")
                         .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

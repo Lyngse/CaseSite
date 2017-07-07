@@ -162,32 +162,38 @@ namespace CaseSite.Controllers
 
         //used by startup.cs to update tokens
         [HttpGet("updateTokens")]
-        public IActionResult updateTokens()
+        public async  Task<IActionResult> updateTokens()
         {
+            if (!await _roleManager.RoleExistsAsync("business"))
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "business";
+                var result = await _roleManager.CreateAsync(role);
+            }
             return Ok();
         }
 
-        //[HttpPost("register/role/{roleName}")]
-        //public async Task<IActionResult> createRole([FromRoute] string roleName)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    if (await _roleManager.RoleExistsAsync(roleName))
-        //    {
-        //        ModelState.AddModelError("RoleError", "Role already exists");
-        //        return BadRequest(ModelState);
-        //    }
-        //    IdentityRole role = new IdentityRole();
-        //    role.Name = roleName;
-        //    var result = await _roleManager.CreateAsync(role);
-        //    if (!result.Succeeded)
-        //    {
-        //        return BadRequest(result.Errors);
-        //    }
-        //    return Ok();
-        //}
+        [HttpPost("register/role/{roleName}")]
+        public async Task<IActionResult> createRole([FromRoute] string roleName)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (await _roleManager.RoleExistsAsync(roleName))
+            {
+                ModelState.AddModelError("RoleError", "Role already exists");
+                return BadRequest(ModelState);
+            }
+            IdentityRole role = new IdentityRole();
+            role.Name = roleName;
+            var result = await _roleManager.CreateAsync(role);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok();
+        }
 
     }
 }

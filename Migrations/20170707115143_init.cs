@@ -5,15 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CaseSite.Migrations
 {
-    public partial class userAndRoles : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "password",
-                table: "Business",
-                newName: "Password");
-
+            //return;
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -89,6 +85,31 @@ namespace CaseSite.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Business",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    LogoUrl = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    Zip = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Business", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Business_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -153,6 +174,47 @@ namespace CaseSite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Task",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(nullable: true),
+                    BusinessId = table.Column<int>(nullable: false),
+                    City = table.Column<string>(nullable: true),
+                    ContactDescription = table.Column<string>(nullable: true),
+                    CreationTime = table.Column<DateTimeOffset>(nullable: false),
+                    Deadline = table.Column<DateTimeOffset>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    RewardType = table.Column<string>(nullable: true),
+                    RewardValue = table.Column<decimal>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    WorkPlace = table.Column<string>(nullable: true),
+                    Zip = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Task", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Task_Business_BusinessId",
+                        column: x => x.BusinessId,
+                        principalTable: "Business",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Business_UserId",
+                table: "Business",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Task_BusinessId",
+                table: "Task",
+                column: "BusinessId");
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -194,6 +256,9 @@ namespace CaseSite.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Task");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -209,15 +274,13 @@ namespace CaseSite.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Business");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.RenameColumn(
-                name: "Password",
-                table: "Business",
-                newName: "password");
         }
     }
 }

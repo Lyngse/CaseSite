@@ -16,10 +16,10 @@ namespace CaseSite.Controllers
     [Route("api/Businesses")]
     public class BusinessesController : Controller
     {
-        private readonly CaseSiteContext _context;
+        private readonly UnifactoContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public BusinessesController(CaseSiteContext context, UserManager<IdentityUser> userManager)
+        public BusinessesController(UnifactoContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

@@ -3,10 +3,13 @@
     <router-outlet (deactivate)="onDeactivate()"></router-outlet>
 </div>
 <shared-footer></shared-footer>
+
 <div class="alert-global">
-    <alert [type]="alert.type" [dismissOnTimeout]="5000" *ngFor=" let alert of alerts">
-        <strong>{{alert.titel + ": "}}</strong>{{alert.message}}
-    </alert>
+    <div [@flyInOut]="'in'" *ngFor=" let alert of alerts">
+        <alert [type]="alert.type"   >
+            <strong>{{alert.titel + ": "}}</strong>{{alert.message}}
+        </alert>
+    </div>
 </div>
 <spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
 <div *ngIf="loading" class="loading-background"></div>

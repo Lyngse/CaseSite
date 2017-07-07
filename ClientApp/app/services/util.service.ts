@@ -8,7 +8,7 @@ export class UtilService {
     public static readonly taskTypes = [
         "Strategi",
         "Tektforfatning",
-        "Grafik of design",
+        "Grafik og design",
         "Online marketing og kommunikation",
         "PR",
         "Events",

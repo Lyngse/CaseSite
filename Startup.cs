@@ -41,15 +41,15 @@ namespace CaseSite
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            services.AddDbContext<CaseSiteContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("CaseSiteContext")));
+            services.AddDbContext<UnifactoContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UnifactoContext")));
 
             services.AddIdentity<IdentityUser, IdentityRole>(o =>
             {
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 8;
             })
-                .AddEntityFrameworkStores<CaseSiteContext>()
+                .AddEntityFrameworkStores<UnifactoContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(opt =>

@@ -14,10 +14,10 @@ namespace CaseSite.Controllers
     [Route("api/Tasks")]
     public class TasksController : Controller
     {
-        private readonly CaseSiteContext _context;
+        private readonly UnifactoContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public TasksController(CaseSiteContext context, UserManager<IdentityUser> userManager)
+        public TasksController(UnifactoContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
