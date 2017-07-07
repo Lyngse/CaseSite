@@ -13,6 +13,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 5px solid #006699;
+    margin: 0 15px;
 }
 
 .btn-new {
@@ -26,4 +27,5 @@
     margin-right: 5px;
     border-bottom: 0;
     margin-bottom: 10px;
+    margin: 40px 15px 10px 15px;
 }

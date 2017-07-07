@@ -18,6 +18,7 @@ import { TaskService } from '../../services/task.service'
 export class CreateEditTaskComponent implements AfterViewInit {
     public ismeridian: boolean = false;
     now: Date = new Date();
+    isEdit: Date = new Date();
     selectedTime: Date = new Date();
     selectedDate: Date = new Date();
     statusMessage: string;
@@ -56,6 +57,10 @@ export class CreateEditTaskComponent implements AfterViewInit {
                     this.utilService.loading.next(false);
                     this.model = res;
                     this.edit = true;
+                    this.isEdit = res.deadline.toDate();
+                    this.now = res.deadline.toDate();
+                    this.selectedDate = res.deadline.toDate();
+                    this.selectedTime = res.deadline.toDate();
                 });
             } else {
                 this.edit = false;

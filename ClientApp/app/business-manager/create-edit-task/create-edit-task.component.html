@@ -51,11 +51,11 @@
                     <p style="margin-bottom: 5px;font-weight: bold;">Dato og tid for opgavens deadline *</p>
                     <div class="form-group datetime-container">
                         <div class="dp-box">
-                            <datepicker name="date" id="sd" #sd="ngModel" [(ngModel)]="selectedDate" [minDate]="now" [showWeeks]="true" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></datepicker>
+                            <datepicker name="date" id="sd" #sd="ngModel" [(ngModel)]="selectedDate" [minDate]="now" [maxDate]="isEdit" [showWeeks]="true" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></datepicker>
                         </div>
                         <div class="tp-box">                        
                             <p>Timer - Minutter</p>
-                            <timepicker name="time" id="st" #st="ngModel" [(ngModel)]="selectedTime" [showMeridian]="ismeridian" (ngModelChange)="deadlineChanged($event)"[disabled]="edit"></timepicker>
+                            <timepicker name="time" id="st" #st="ngModel" [(ngModel)]="selectedTime" [showMeridian]="ismeridian" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></timepicker>
                             <div style="padding:30px;background-color: #fafafa;border-radius:5px;display:flex;align-items:center;flex-direction:column;">
                                 Valgte deadline <br /> <b>{{ model.deadline.format('DD/MM-YYYY - HH:mm') }}</b>
                             </div>
@@ -203,4 +203,5 @@
         </div>
     </div>
 </div>
+<h2 class="heading2">Live preview af opgaven</h2>
 <task-detail [task]="model" [business]="business"></task-detail>

@@ -19,7 +19,6 @@ export class FrontpageComponent implements AfterViewInit {
         this.utilService.loading.next(true);
         this.taskService.getLatestTasks().subscribe(res => {
             this.utilService.loading.next(false);
-            console.log(res);
             this.latestTasks = res;
         })
     }

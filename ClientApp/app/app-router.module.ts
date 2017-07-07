@@ -16,7 +16,7 @@ import { HowItWorksStudentsComponent } from './how-it-works-students/how-it-work
 import { HowItWorksBusinessComponent } from './how-it-works-business/how-it-works-business.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
-import { TeamComponent } from './team/team.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -36,7 +36,7 @@ const routes: Routes = [
     { path: 'howitworksbusiness', component: HowItWorksBusinessComponent },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'team', component: TeamComponent },
+    { path: 'terms', component: TermsComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -62,5 +62,5 @@ export const routingComponents = [
     HowItWorksBusinessComponent,
     AboutComponent,
     ContactComponent,
-    TeamComponent
+    TermsComponent
 ]

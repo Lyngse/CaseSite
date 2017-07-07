@@ -1,7 +1,7 @@
 ﻿<div class="container-fluid contentRow">
     <div class="row">
-        <h3 class="heading1">Redigér virksomhedens oplysninger</h3>
-        <form novalidate (ngSubmit)="onSubmit()" #f="ngForm" class="panel panel-default">
+        <h3 class="heading1" style="margin-right:15px;margin-left:15px;">Redigér virksomhedens oplysninger</h3>
+        <form novalidate (ngSubmit)="onSubmit()" #f="ngForm" class="panel panel-default" style="margin-right:15px;margin-left:15px;">
             <div class="panel-body">
                 <div class="form-group"
                      [ngClass]="{
@@ -82,8 +82,8 @@
                 </div>
             </div>    
         </form>
-        <div class="col-md-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;">
-            <p>Hvis du ønsker at ændre adgangskoden til denne virksomhed kan det gøres <button (click)="smModal.show()" type="button" class="btn btn-primary">Her</button></p>
+        <div class="col-md-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;flex-direction:column;align-items:center;">
+            <p style="text-align:center;">Hvis du ønsker at ændre adgangskoden til denne virksomhed kan det gøres <b><a style="cursor:pointer;" (click)="smModal.show()">her</a></b>.</p>
         </div>
     </div>
 </div>

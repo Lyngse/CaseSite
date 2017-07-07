@@ -39,7 +39,6 @@ export class TasksComponent implements OnInit {
     ngOnInit() {
         this.utilService.loading.next(true);
         this.taskService.getAllTasks().subscribe((data) => {
-            console.log(data);
             this.tasks = data;
             this.tasksToShow = this.tasks;
             this.sort("Dato tilføjet");

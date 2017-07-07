@@ -1,11 +1,10 @@
 ﻿.task-control-bar {
     background-color: #006699;
-    height: 72px;
     width: 100%;
     margin-top: 25px;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
@@ -37,6 +36,7 @@
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     padding: 0 0 2px 10px;
     border-radius: 0;
+    min-width: 200px;
 }
 
 .btn-filter {
