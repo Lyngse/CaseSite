@@ -8,15 +8,13 @@
 nav.navbar-findcond ul.navbar-nav a.active,
 nav.navbar-findcond ul.navbar-nav a:hover {
     background: #082a3b;
-    border-color: #006699;
-    -webkit-transition: border-color 0.7s;
-    transition: border-color 0.7s;
+    -webkit-transition: background-color 0.7s;
+    transition: background-color 0.7s;
 }
 
 .navbar-right li a,
 .navbar-left li a {
-    border-bottom: 5px solid #006699;
-    padding-top: 25.5px;
+    padding-top: 20.5px;
     color: white;
 }
 
@@ -24,27 +22,26 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 .navbar-right li a:hover,
 .navbar-left li a:active,
 .navbar-left li a:hover {
-        border-color: white;
-        -webkit-transition: border-color 0.7s;
-        transition: border-color 0.7s;
-        background-color: #006699;
-    }
+    background-color: #005580;
+}
 
 .navbar-toggle .icon-bar {
     background-color: white;
 }
 
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-    background-color: #006699;
+.dropdown-menu > li > a {
+    padding: 15px 15px;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #005580;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-    background-color: #006699;
+    background-color: #005580;
 }
 
 .navbar-custom .navbar-nav > .open > a, .navbar-custom .navbar-nav > .open > a:hover, .navbar-custom .navbar-nav > .open > a:focus {
-    background-color: #006699;
-    border-color: white;
+    background-color: #005580;
     -webkit-transition: border-color 0.7s;
     transition: border-color 0.7s;
 }

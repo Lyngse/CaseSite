@@ -5,23 +5,28 @@
     background-position: center;
     background-attachment: fixed;
     height: 70vh;
+    display:flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .hero-text-box {
     position: absolute;
     width: 100%;
     color: white;
-    margin-top: 100px;
 }
 
 .hero-text-box h1 {
     margin-top: 0;
     margin-bottom: 10px;
     color: #fff;
-    font-size: 440%;
+    font-size: 500%;
     word-spacing: 4px;
     letter-spacing: 1px; 
     font-weight: 100;
+    border-bottom: 5px solid white;
+    border-top: 5px solid white;
+    display: inline-block;
 }
 
 .hero-text-box h2 {
@@ -32,16 +37,67 @@
 .btn-header {
     width: 350px;
     margin-top: 40px;
+    padding: 25px 30px;
+    font-weight: 500;
+    font-size: 120%;
 }
 
 
 .fp-how-it-works {
     padding-top: 30px;
     padding-bottom: 50px;
+    background-color: #EEEEEE;
+}
+
+.fp-hiw-container {
+    display:flex;
+}
+
+.fp-hiw-card {
+    display: flex;
+    border-radius: 5px;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 25px;
+    flex: 1 1 50%;
+    margin: 25px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.fp-hiw-card:hover {
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.4);
+}
+
+.fp-hiw-icon {
+    color: #006699;
+    flex: 0 0 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fp-hiw-icon i {
+    
+}
+
+.fp-hiw-info {
+    flex: 0 0 75%;
+    padding-left: 15px;
+}
+
+.fp-hiw-title {
+    font-size: 150%;
+    color: #006699;
+    font-weight: 500;
+}
+
+.fp-hiw-text {
+
 }
 
 .fp-tasks {
-    background-color: #FAFAFA;
     padding-top: 30px;
     padding-bottom: 50px;
 }
@@ -96,7 +152,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    padding: 150px 0;
+    padding: 120px 0;
     display: flex;
     align-items: center;
 }
@@ -133,6 +189,106 @@
     font-size: 120%;
 }
 
+.fp-social {
+    padding-top: 30px;
+    padding-bottom: 50px;
+    background-color: #EEEEEE;
+}
+
+.fp-social-container {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.fp-social-btn {
+    background-color: white;
+    border-radius: 150px;
+    cursor: pointer;
+    font-size: 2.0rem;
+    height: 150px;
+    line-height: 150px;
+    margin: 0 20px;
+    position: relative;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 150px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.fp-social-btn span {
+    border-radius: 0;
+    display: block;
+    height: 0;
+    left: 50%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 0;
+}
+
+.fp-social-btn i {
+    background: none;
+    height: 150px;
+    line-height: 150px;
+    position: absolute;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 3.6rem;
+    z-index: 10;
+}
+
+
+.social-facebook {
+    color: #3b5998;
+}
+
+.social-instagram {
+    color: #8a3ab9;
+}
+
+.social-linkedin {
+    color: #0077b5;
+}
+
+.fp-social-btn:hover .social-facebook,
+.fp-social-btn:hover .social-instagram,
+.fp-social-btn:hover .social-linkedin {
+    color: white;
+}
+
+
+
+.fp-social-btn:hover span {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    margin: -75px;
+}
+
+.fp-social-facebook span {
+    background-color: #3b5998;
+}
+
+.fp-social-linkedin span {
+    background-color: #0077b5;
+}
+
+.fp-social-instagram span {
+    background-color: #8a3ab9;
+}
+
 .fp-signup {
     padding: 80px 0;
 }
@@ -146,12 +302,30 @@
 .fp-signup-text {
     font-size: 180%;
     text-align: center;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .fp-signup-btn {
+    margin-top: 20px;
     width: 300px;
     font-size: 110%;
 }
+
+@media only screen and (max-width : 360px) {
+    .fp-hiw-card {
+        flex-direction: column;
+    }
+
+    .fp-hiw-icon {
+        margin-bottom: 15px;
+    }
+
+    .fp-hiw-info {
+        padding: 0;
+    }
+}
+
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) and (max-width : 479px) {
     .how-it-works-btns {
@@ -182,7 +356,7 @@
     }
 
     .fp-header {
-        height: 50vh;
+        height: 70vh;
     }
 
     .how-it-works-btn:first-child {
@@ -206,6 +380,22 @@
         font-size: 120%;
         width: 90%;
     }
+
+    .fp-hiw-container {
+        flex-wrap: wrap;
+    }
+
+    .fp-hiw-card {
+        flex: 1 1 100%;
+    }
+
+    .fp-social-container {
+        flex-direction: column;
+    }
+
+    .fp-social-btn {
+        margin: 10px 20px;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -217,6 +407,14 @@
 
     .heading2 {
         font-size: 250%;
+    }
+
+    .fp-signup-text {
+        font-size: 140%;
+    }
+
+    .fp-social-btn {
+        margin: 0 5px;
     }
 
 }

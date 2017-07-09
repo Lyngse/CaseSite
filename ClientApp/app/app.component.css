@@ -40,8 +40,8 @@ section {
 }
 
 .content {
-    margin-top: 66px;
-    min-height: calc(100vh - 270px);
+    margin-top: 56px;
+    min-height: calc(100vh - 254px);
 }
 
 @media (max-width: 767px) {
