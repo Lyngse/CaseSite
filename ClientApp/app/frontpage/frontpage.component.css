@@ -310,6 +310,7 @@
     margin-top: 20px;
     width: 300px;
     font-size: 110%;
+    padding: 20px 30px;
 }
 
 @media only screen and (max-width : 360px) {
@@ -415,6 +416,14 @@
 
     .fp-social-btn {
         margin: 0 5px;
+    }
+
+    .fp-hiw-container {
+        flex-wrap: wrap;
+    }
+
+    .fp-hiw-card {
+        flex: 1 1 100%;
     }
 
 }
