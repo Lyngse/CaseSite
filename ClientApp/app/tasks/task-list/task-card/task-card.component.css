@@ -100,7 +100,7 @@
     margin-bottom: 20px;
     box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
     transition: box-shadow 0.3s ease-in-out;
-    border-radius: 0.375rem;
+    border-radius: 5px;
 }
 
 .card:hover {
@@ -128,4 +128,90 @@
     height: 67%;
     width: 100%;
     background-color: #fbfbfb;
+}
+
+
+.task-card {
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease-in-out;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.task-card:hover {
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.4);
+}
+
+.task-card-top {
+    display: flex;
+    align-items:center;
+    padding: 5px 5px 0 5px;
+}
+
+.task.task-card-logo {
+    height: 100px;
+    width: 100px;
+}
+
+.task-card-logo img {
+    width: 100px;
+    height: auto;
+}
+
+.task-card-business {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.task-card-business-name {
+    font-size: 125%;
+    margin: 0;
+}
+
+.task-card-business-city {
+    font-size: 14px;
+    margin: 0;
+}
+
+.task-card-mid {
+    display: flex;  
+    align-items: center;
+    flex-direction: column;
+    padding: 0 5px 5px 5px;
+}
+
+.task-card-task-title {
+    font-size: 135%;
+    margin: 0;
+}
+
+.task-card-task-type {
+    font-size: 14px;
+    margin: 0;
+}
+
+.task-card-bot {
+    padding: 0 5px 5px 5px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    height: 40px;
+    background-color: #006699;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.task-card-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 33%;
+}
+
+
+.task-card-detail p {
+    margin: 0;
 }

@@ -104,6 +104,9 @@ footer p {
         margin-right: 0;
         margin: 5px 0;
     }
+    footer {
+        padding: 20px 10px;
+    }
 }
 
 /* Extra Small Devices, Phones */

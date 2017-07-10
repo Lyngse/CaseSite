@@ -1,44 +1,32 @@
 ﻿.detail-content {
     display: flex;   
     min-height:500px;
+    margin: 20px 0;
 }
 
 .detail-business-info {
     flex: 0 0 33%;
     padding: 0 15px;
-    background-color: #DDDDDD;
 }
 
 .detail-task-info {
     flex: 0 0 67%;
-    padding: 0 15px;
-    background-color: #F1F1F1;
+    padding: 15px;
+    border: 1px solid #E0E0E0;
 }
 
-@media only screen and (max-width : 767px){
-    .detail-content {
-        display: flex;
-        flex-direction: column-reverse;
-        min-height: 500px;
-    }
-
-    .detail-business-info {
-        flex: 0 0 100%;
-        padding: 0 15px;
-        background-color: #DDDDDD;
-    }
-
-    .detail-task-info {
-        flex: 0 0 100%;
-        padding: 0 15px;
-        background-color: #F1F1F1;
-    }
+.business-sidebar {
+    border: 1px solid #E0E0E0;
 }
 
-.business-name {
-    font-size: 150%;
-    display:inline-block;
-    border-bottom: 2px solid #336699;
+.business-sidebar-top {
+
+}
+
+.business-sidebar-bot {
+    background-color: #757575;
+    padding: 5px;
+    color: white;
 }
 
 .business-logo {
@@ -48,37 +36,62 @@
     margin: 0 auto;
 }
 
+.business-name {
+    font-size: 120%;
+    text-align: center;
+    margin: 0;
+}
+
 .business-address {
     margin-top: 15px;
     text-align: center;
+    font-size: 12px;
+    margin: 0;
+}
+
+.business-description-box {
+    margin-top: 10px;
+    border: 1px solid #E0E0E0;
+}
+
+.business-description-box-top {
+    background-color: #006699;
+    padding: 10px;
+    color: white;
+}
+
+.business-description-box-title {
+    margin: 0;
+    font-size: 110%;
+    padding: 5px;
+}
+
+.business-description-box-bot {
+    padding: 10px;
     font-size: 14px;
 }
 
 .business-description {
 }
 
-.business-email {
-
-}
 
 .task-title {
-    font-size: 150%;
+    font-size: 250%;
     display: inline-block;
-    border-bottom: 2px solid #336699;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .task-type {
-
     color: #9E9E9E;
+    font-size: 110%;
 }
 
 .task-description {
-
+    font-size: 14px;
 }
 
 .task-contactDescription {
-
+    font-size: 14px;
 }
 
 .task-info-title {
@@ -89,13 +102,10 @@
 .task-info {
     display: flex;
     flex-wrap: wrap;
+    font-size: 14px;
 }
 
 .task-workplace {
-    flex: 0 0 100%;
-}
-
-.task-persons {
     flex: 0 0 100%;
 }
 
@@ -107,3 +117,20 @@
     flex: 0 0 100%;
 }
 
+@media only screen and (max-width : 767px) {
+    .detail-content {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: 500px;
+    }
+
+    .detail-business-info {
+        margin-top: 20px;
+        flex: 0 0 100%;
+        padding: 0;
+    }
+
+    .detail-task-info {
+        flex: 0 0 100%;
+    }
+}

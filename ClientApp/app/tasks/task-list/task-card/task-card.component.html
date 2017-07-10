@@ -1,11 +1,10 @@
 ﻿
-<div class="text-center card-box">
+<!--<div class="text-center card-box">
     <div class="card-jobtype">
         <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
             <i class="fa fa-picture-o fa-stack-1x fa-inverse"></i>
         </span>
-        <!--<img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />-->
         <p>{{ task.type }}</p>
     </div>
     <div class="card-titel">
@@ -31,44 +30,55 @@
         </div>
     </div>
 
-        <div class="card-price">
-            <p class="card-label">Belønning</p>
+    <div class="card-price">
+        <p class="card-label">Belønning</p>
+        <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">
+            <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
+            <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-money"></i></span>
+            {{ task.rewardValue | danishcurrency }} kr
+        </p>
+        <p style="font-size:14px" *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</p>
+    </div>  
+           
+</div>-->
+
+<div class="task-card">
+    <div class="task-card-top">
+        <div class="task-card-logo">
+            <img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />
+        </div>
+        <div class="task-card-business">
+            <p class="task-card-business-name">{{ task.businessName }}</p>
+            <p class="task-card-business-city">
+                <span><i class="fa fa-map-marker"></i></span>
+                {{ task.city  }}
+            </p>
+        </div>
+    </div>
+    <div class="task-card-mid">
+        <div class="task-card-task">
+            <p class="task-card-task-title">{{ task.title }}</p>
+            <p class="task-card-task-type">- {{ task.type }}</p>
+        </div>      
+    </div>
+    <div class="task-card-bot">
+        <div class="task-card-detail">
+            <p>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</p>
+        </div>
+        <div class="task-card-detail">
             <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">
                 <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
                 <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-money"></i></span>
                 {{ task.rewardValue | danishcurrency }} kr
             </p>
             <p style="font-size:14px" *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</p>
-        </div>  
-           
-    <div class="flexbox-nonewline" *ngIf="showEdit">
-        <div class="flexitem">
-            <button (click)="editTaskClick()" type="button" class="card-btn btn btn-primary"><i class="fa fa-pencil"></i> Redigér</button>
         </div>
-        <div class="flexitem">
-            <button type="button" class="card-btn btn btn-danger" (click)="smModal.show()"><i class="fa fa-trash-o"></i> Slet</button>
-            <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title pull-left">Small modal</h4>
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Er du sikkert på at du vil slette denne opgave?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Nej</button>
-                            <button (click)="deleteTaskClick()" type="button" class="card-btn btn btn-danger">Ja</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="task-card-detail">
+            <p>{{ getDeadlineString() }}</p>
         </div>
     </div>
 </div>
+
 
 
 <!--Small modal-->

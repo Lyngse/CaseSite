@@ -1,11 +1,23 @@
 ﻿<div class="container-fluid contentRow" *ngIf="task && business">
    <div class="detail-content">
        <div class="detail-business-info">
-           <h2 class="business-name">{{ business.name }}</h2>
-           <img class="business-logo" src="../../../dist/assets/dizy-cow-free-logo.f71d602dad15de2ff4bb3240265b7084.jpg" />
-           <p class="business-address">{{ business.address }}, {{ business.zip }} {{ business.city }}</p>
-           <h3 class="task-info-title">Virksomhedsbeskrivelse</h3>
-           <p class="business-description" [innerHTML]="business.description | formattext"></p>
+           <div class="business-sidebar">
+               <div class="business-sidebar-top">
+                   <img class="business-logo" src="../../../dist/assets/dizy-cow-free-logo.f71d602dad15de2ff4bb3240265b7084.jpg" />
+               </div>
+               <div class="business-sidebar-bot">
+                   <p class="business-name">{{ business.name }}</p>
+                   <p class="business-address">{{ business.address }}, {{ business.zip }} {{ business.city }}</p>
+               </div>
+           </div>
+           <div class="business-description-box">
+               <div class="business-description-box-top">
+                   <p class="business-description-box-title">Virksomhedsbeskrivelse</p>
+               </div>
+               <div class="business-description-box-bot">
+                   <p class="business-description" [innerHTML]="business.description | formattext"></p>
+               </div>
+           </div>        
        </div>
        <div class="detail-task-info">
            <h2 class="task-title">{{ task.title }}</h2>

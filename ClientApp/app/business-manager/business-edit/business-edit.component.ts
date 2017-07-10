@@ -36,6 +36,18 @@ export class BusinessEditComponent implements AfterViewInit {
         });
     }
 
+    fileChange(event) {
+        debugger;
+        let fileList: FileList = event.target.files;
+        console.log(fileList);
+        if (fileList.length > 0) {
+            let file: File = fileList[0];
+            let formData: FormData = new FormData();
+            formData.append('uploadFile', file, file.name);
+            console.log(file);
+        }
+    }
+
     onSubmit() {
         if (this.form.valid) {
             this.utilService.loading.next(true);
