@@ -13,6 +13,7 @@ import { Business } from '../model/business';
 import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { UtilService } from '../services/util.service';
+import { BlobService } from '../services/blob.service';
 
 @Component({
     selector: 'business-register',
@@ -23,12 +24,22 @@ export class BuisnessRegisterComponent {
     isAccepted: boolean = false;
     loading = false;
     loginFailedMsg: string = "";
-    constructor(private utilService: UtilService, private businessService: BusinessService, private accountService: AccountService, private router: Router) {
+    formData: FormData = new FormData();
+    model: Business = new Business();
+    @ViewChild('f') form: any;
+
+    constructor(private utilService: UtilService, private businessService: BusinessService, private accountService: AccountService, private router: Router, private blobService: BlobService) {
 
     }
 
-    model: Business = new Business();
-    @ViewChild('f') form: any;
+
+    fileChange(event) {
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            let file: File = fileList[0];
+            this.formData.append('uploadFile', file, file.name);
+        }
+    }
 
     onSubmit() {
         if (this.form.valid) {
@@ -40,8 +51,16 @@ export class BuisnessRegisterComponent {
                     this.businessService.createBusiness(this.model, userId).subscribe((response) => {
                         this.utilService.loading.next(false);
                         if (response.id) {
-                            this.utilService.alert.next({ type: "success", titel: "Success", message: "Oprettelse lykkedes" });
-                            this.router.navigate(['/login']);
+                            this.blobService.uploadLogo(this.formData).subscribe(res => {
+                                this.utilService.loading.next(false);
+                                if (res.ok == true) {
+                                    this.router.navigate(['/login']);
+                                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Oprettelse lykkedes" });
+                                }
+                            }, err => {
+                                this.utilService.loading.next(false);
+                                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved upload af logo" });
+                            });
                         }
                     }, err => {
                         //slet user!

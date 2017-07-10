@@ -201,6 +201,7 @@ namespace CaseSite.Controllers
                 type = t.Type,
                 businessId = t.BusinessId,
                 businessName = t.Business == null ? null : t.Business.Name,
+                businessLogoUrl = t.Business == null ? null : t.Business.LogoUrl,
                 address = t.Address,
                 zip = t.Zip,
                 city = t.City,

@@ -149,10 +149,14 @@
     padding: 5px 5px 0 5px;
 }
 
-.task.task-card-logo {
+.task-card-logo {
     height: 100px;
     width: 100px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .task-card-logo img {
     width: 100px;
@@ -160,6 +164,7 @@
 }
 
 .task-card-business {
+    margin-left: 10px;
     display: flex;
     justify-content: center;
     flex-direction: column;

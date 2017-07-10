@@ -45,7 +45,9 @@
 <div class="task-card">
     <div class="task-card-top">
         <div class="task-card-logo">
-            <img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />
+            <!--<img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />-->
+            <img *ngIf="task.businessLogoUrl" [src]="task.businessLogoUrl" />
+            <i *ngIf="!task.businessLogoUrl" class="fa fa-picture-o fa-4x" aria-hidden="true"></i>
         </div>
         <div class="task-card-business">
             <p class="task-card-business-name">{{ task.businessName }}</p>

@@ -12,6 +12,7 @@ import { BusinessService } from '../../services/business.service';
 import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
 import { BlobService } from '../../services/blob.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'business-edit',
@@ -21,9 +22,10 @@ import { BlobService } from '../../services/blob.service';
 export class BusinessEditComponent implements AfterViewInit {
     model: Business = new Business();
     @ViewChild('f') form: any;
+    logoChanged: boolean = false;
     formData: FormData = new FormData();
 
-    constructor(private businessService: BusinessService, private utilService: UtilService, private blobService: BlobService) {
+    constructor(private businessService: BusinessService, private utilService: UtilService, private blobService: BlobService, private router: Router) {
 
     }
 
@@ -39,12 +41,11 @@ export class BusinessEditComponent implements AfterViewInit {
     }
 
     fileChange(event) {
+        this.logoChanged = true;
         let fileList: FileList = event.target.files;
-        console.log(fileList);
         if (fileList.length > 0) {
             let file: File = fileList[0];
             this.formData.append('uploadFile', file, file.name);
-            console.log(this.formData);
         }
     }
 
@@ -55,12 +56,18 @@ export class BusinessEditComponent implements AfterViewInit {
                 console.log(res);
                 this.blobService.uploadLogo(this.formData).subscribe(res => {
                     console.log(res);
+                    this.utilService.loading.next(false);          
+                    if (res.ok == true) {
+                        this.router.navigate(['/business']);
+                        this.utilService.alert.next({ type: "success", titel: "Success", message: "Oplysninger blev ændret" });
+                    }
+                }, err => {
                     this.utilService.loading.next(false);
-                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Oplysninger blev ændret" });
-                })
+                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved upload af logo" });
+                });
             }, err => {
                 this.utilService.loading.next(false);
-                this.utilService.alert.next({ type: "danger", titel: "Fail", message: "Oplysninger blev ikke ændret" });
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Oplysninger blev ikke ændret" });
                 });
             
         }

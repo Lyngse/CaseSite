@@ -42,9 +42,7 @@ export class TaskService {
             Address: t.address,
             Zip: t.zip,
             City: t.city,
-            CreationTime: t.creationTime,
-            BusinessId: t.businessId,
-            BusinessName: t.businessName
+            CreationTime: t.creationTime
         };
         return this.http
             .put('api/tasks', JSON.stringify(task), this.options)

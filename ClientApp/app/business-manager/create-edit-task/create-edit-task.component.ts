@@ -57,6 +57,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 });
             } else {
                 this.edit = false;
+                this.model.rewardValue = 0;
             }
 
         })
