@@ -53,7 +53,7 @@ export class BusinessEditComponent implements AfterViewInit {
             this.utilService.loading.next(true);
             this.businessService.updateBusiness(this.model).subscribe(res => {
                 console.log(res);
-                this.blobService.uploadLogo(this.formData).subscribe(res => {
+                this.blobService.uploadLogo(this.formData, this.model.id).subscribe(res => {
                     console.log(res);
                     this.utilService.loading.next(false);
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Oplysninger blev ændret" });

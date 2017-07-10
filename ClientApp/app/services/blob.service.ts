@@ -18,9 +18,9 @@ export class BlobService {
 
     }
 
-    uploadLogo(file: FormData): Observable<any> {
+    uploadLogo(file: FormData, id: number): Observable<any> {
         return this.http
-            .post('api/blob/uploadlogo', file, this.options)
+            .post('api/blob/uploadlogo/' + id, file, this.options)
             .catch(this.handleError)
     }
 
