@@ -13,6 +13,7 @@ import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
 import { BlobService } from '../../services/blob.service';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'business-edit',
@@ -24,8 +25,13 @@ export class BusinessEditComponent implements AfterViewInit {
     @ViewChild('f') form: any;
     logoChanged: boolean = false;
     formData: FormData = new FormData();
+    filePreviewPath: SafeUrl;
 
-    constructor(private businessService: BusinessService, private utilService: UtilService, private blobService: BlobService, private router: Router) {
+    constructor(private businessService: BusinessService,
+        private utilService: UtilService,
+        private blobService: BlobService,
+        private router: Router,
+        private sanitizer: DomSanitizer) {
 
     }
 
@@ -46,6 +52,7 @@ export class BusinessEditComponent implements AfterViewInit {
         if (fileList.length > 0) {
             let file: File = fileList[0];
             this.formData.append('uploadFile', file, file.name);
+            this.filePreviewPath = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file)));
         }
     }
 

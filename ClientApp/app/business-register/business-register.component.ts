@@ -14,6 +14,7 @@ import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { UtilService } from '../services/util.service';
 import { BlobService } from '../services/blob.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'business-register',
@@ -27,8 +28,14 @@ export class BuisnessRegisterComponent {
     formData: FormData = new FormData();
     model: Business = new Business();
     @ViewChild('f') form: any;
+    filePreviewPath: SafeUrl;
 
-    constructor(private utilService: UtilService, private businessService: BusinessService, private accountService: AccountService, private router: Router, private blobService: BlobService) {
+    constructor(private utilService: UtilService,
+        private businessService: BusinessService,
+        private accountService: AccountService,
+        private router: Router,
+        private blobService: BlobService,
+        private sanitizer: DomSanitizer) {
 
     }
 
@@ -38,6 +45,7 @@ export class BuisnessRegisterComponent {
         if (fileList.length > 0) {
             let file: File = fileList[0];
             this.formData.append('uploadFile', file, file.name);
+            this.filePreviewPath = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file)));
         }
     }
 
