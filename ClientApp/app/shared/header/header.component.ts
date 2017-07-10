@@ -4,6 +4,7 @@ import { BusinessService } from '../../services/business.service';
 import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'shared-header',
@@ -24,6 +25,8 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    
 
     getBusiness() {
         this.utilService.loading.next(true);

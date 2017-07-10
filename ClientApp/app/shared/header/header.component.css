@@ -11,6 +11,12 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     transition: background-color 0.7s;
 }
 
+.navbar-right li,
+.navbar-left li {
+    cursor: pointer;
+}
+
+
 .navbar-right li a,
 .navbar-left li a {
     padding-top: 20.5px;
