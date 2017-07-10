@@ -31,18 +31,12 @@ namespace CaseSite.Controllers
         }
 
         // POST api/values
-        [HttpPost("uploadLogo")]
+        [HttpPost("uploadLogo/{id}")]
         [Authorize]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Post([FromRoute] int id)
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (user == null)
-            {
-                return NotFound(new { userError = "user not found" });
-            }
-
-            var business = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == id);
 
             if (business == null)
             {
