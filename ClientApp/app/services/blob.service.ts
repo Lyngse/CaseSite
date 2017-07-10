@@ -11,17 +11,16 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class BlobService {
 
-    private headers = new Headers({ 'Content-Type': 'application/json' });
+    private headers = new Headers();
     options = new RequestOptions({ headers: this.headers });
 
     constructor(private http: Http, private router: Router) {
 
     }
 
-    uploadLogo(file: FormData, bId: number): Observable<any> {
+    uploadLogo(file: FormData): Observable<any> {
         return this.http
-            .post('api/blob/uploadlogo/' + bId, file, this.options)
-            .map(res => res.json())
+            .post('api/blob/uploadlogo', file, this.options)
             .catch(this.handleError)
     }
 

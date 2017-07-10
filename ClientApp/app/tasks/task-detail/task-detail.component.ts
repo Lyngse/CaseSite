@@ -28,6 +28,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     ngOnChanges(changes) {
         this.task = this.inputTask;
         this.business = this.inputBusiness;
+        console.log(this.business);
     }
 
     ngAfterViewInit() {

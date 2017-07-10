@@ -96,7 +96,6 @@ namespace CaseSite.Controllers
 
             serverBusiness.Name = business.Name;
             serverBusiness.Description = business.Description;
-            serverBusiness.LogoUrl = business.LogoUrl;
             serverBusiness.Address = business.Address;
             serverBusiness.City = business.City;
             serverBusiness.Zip = business.Zip;
@@ -161,6 +160,7 @@ namespace CaseSite.Controllers
             result.address = business.Address;
             result.city = business.City;
             result.zip = business.Zip;
+            result.logoUrl = business.LogoUrl;
 
             if (incUser)
             {

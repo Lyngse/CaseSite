@@ -6,7 +6,7 @@
     email: string;
     password: string;
     description: string;
-    logo: string;
+    logoUrl: string;
     address: string;
     zip: number;
     city: string;
