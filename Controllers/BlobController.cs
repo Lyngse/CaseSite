@@ -22,8 +22,8 @@ namespace CaseSite.Controllers
         }
 
         // POST api/values
-        [HttpPost]
-        public async Task<IActionResult> Post()
+        [HttpPost("uploadLogo/{id}")]
+        public async Task<IActionResult> Post([FromRoute] int id)
         {
             var httpRequest = HttpContext.Request;
             if(httpRequest.Form.Files.Count > 0)
@@ -31,6 +31,9 @@ namespace CaseSite.Controllers
                 var file = httpRequest.Form.Files[0];
                 CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
                 await container.CreateIfNotExistsAsync();
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(id + @"\logo");
+                await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+                return Ok(blockBlob.Uri.AbsoluteUri);
             }
             return Ok();
         }
