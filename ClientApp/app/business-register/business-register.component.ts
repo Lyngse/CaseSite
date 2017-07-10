@@ -51,7 +51,7 @@ export class BuisnessRegisterComponent {
                     this.businessService.createBusiness(this.model, userId).subscribe((response) => {
                         this.utilService.loading.next(false);
                         if (response.id) {
-                            this.blobService.uploadLogo(this.formData).subscribe(res => {
+                            this.blobService.uploadLogo(this.formData, response.id).subscribe(res => {
                                 this.utilService.loading.next(false);
                                 if (res.ok == true) {
                                     this.router.navigate(['/login']);

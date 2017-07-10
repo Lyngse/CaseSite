@@ -25,6 +25,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
     taskTypes: string[] = UtilService.taskTypes;
     business: Business;
     edit: Boolean;
+    minuteStep: number = 1;
     model: Task = new Task();
 
     constructor(private taskService: TaskService,
@@ -117,7 +118,6 @@ export class CreateEditTaskComponent implements AfterViewInit {
     }
 
     deadlineChanged(something) {
-        console.log("im here!");
         let _date: moment.Moment = moment(this.selectedDate).startOf("day");
         let _time: moment.Moment = moment(this.selectedTime);
         _date.add(_time.hours(), "h").add(_time.minutes(), "m");

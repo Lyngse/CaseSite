@@ -53,9 +53,9 @@
                         <div class="dp-box">
                             <datepicker name="date" id="sd" #sd="ngModel" [(ngModel)]="selectedDate" [minDate]="now" [maxDate]="isEdit" [showWeeks]="true" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></datepicker>
                         </div>
-                        <div class="tp-box">                        
+                        <div class="tp-box" style="margin-top: 10px;">                        
                             <p>Timer - Minutter</p>
-                            <timepicker name="time" id="st" #st="ngModel" [(ngModel)]="selectedTime" [showMeridian]="ismeridian" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></timepicker>
+                            <timepicker name="time" id="st" #st="ngModel" [(ngModel)]="selectedTime" [showMeridian]="ismeridian"  [minuteStep]="minuteStep" (ngModelChange)="deadlineChanged($event)" [disabled]="edit"></timepicker>
                             <div style="padding:30px;background-color: #fafafa;border-radius:5px;display:flex;align-items:center;flex-direction:column;">
                                 Valgte deadline <br /> <b>{{ model.deadline.format('DD/MM-YYYY - HH:mm') }}</b>
                             </div>
