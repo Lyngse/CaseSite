@@ -11,6 +11,7 @@ import {
 import { BusinessService } from '../../services/business.service';
 import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
+import { BlobService } from '../../services/blob.service';
 
 @Component({
     selector: 'business-edit',
@@ -20,8 +21,9 @@ import { Business } from '../../model/business';
 export class BusinessEditComponent implements AfterViewInit {
     model: Business = new Business();
     @ViewChild('f') form: any;
+    formData: FormData = new FormData();
 
-    constructor(private businessService: BusinessService, private utilService: UtilService) {
+    constructor(private businessService: BusinessService, private utilService: UtilService, private blobService: BlobService) {
 
     }
 
@@ -37,14 +39,12 @@ export class BusinessEditComponent implements AfterViewInit {
     }
 
     fileChange(event) {
-        debugger;
         let fileList: FileList = event.target.files;
         console.log(fileList);
         if (fileList.length > 0) {
             let file: File = fileList[0];
-            let formData: FormData = new FormData();
-            formData.append('uploadFile', file, file.name);
-            console.log(file);
+            this.formData.append('uploadFile', file, file.name);
+            console.log(this.formData);
         }
     }
 
@@ -53,12 +53,16 @@ export class BusinessEditComponent implements AfterViewInit {
             this.utilService.loading.next(true);
             this.businessService.updateBusiness(this.model).subscribe(res => {
                 console.log(res);
-                this.utilService.loading.next(false);
-                this.utilService.alert.next({ type: "success", titel: "Success", message: "Oplysninger blev ændret" });
+                this.blobService.uploadLogo(this.formData).subscribe(res => {
+                    console.log(res);
+                    this.utilService.loading.next(false);
+                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Oplysninger blev ændret" });
+                })
             }, err => {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fail", message: "Oplysninger blev ikke ændret" });
-            });
+                });
+            
         }
     }
     

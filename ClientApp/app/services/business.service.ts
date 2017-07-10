@@ -22,7 +22,7 @@ export class BusinessService {
     updateBusiness(b: Business): Observable<Business> {
         let business = {
             Name: b.name,
-            LogoUrl: b.logo,
+            LogoUrl: b.logoUrl,
             Description: b.description,
             Address: b.address,
             Zip: b.zip,
@@ -34,14 +34,13 @@ export class BusinessService {
         };
         return this.http
             .put('api/businesses/', JSON.stringify({ business: business, user: user }), this.options)
-            .map(res => console.log(res))
             .catch(this.handleError);
     }
 
     createBusiness(b: Business, userId): Observable<Business> {
         let business = {
             Name: b.name,
-            LogoUrl: b.logo,
+            LogoUrl: b.logoUrl,
             Description: b.description,
             Address: b.address,
             Zip: b.zip,
