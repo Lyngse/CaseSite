@@ -21,6 +21,7 @@ import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
 import { UtilService } from './services/util.service';
+import { BlobService } from './services/blob.service'
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -49,7 +50,7 @@ import { UtilService } from './services/util.service';
         AlertModule.forRoot(),
 
     ],
-    providers: [BusinessService, AccountService, TaskService, UtilService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService]
 })
 export class AppModule {
 }

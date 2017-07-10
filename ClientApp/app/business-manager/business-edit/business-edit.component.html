@@ -94,7 +94,7 @@
                 <div class="form-group">
                     <label for="logo" class="control-label">Logo</label>
                     <input type="file" id="logo" name="logo" value="Upload logo" [(ngModel)]="model.logo" (change)="fileChange($event)" #logo="ngModel">
-                    <p class="help-block" style="font-size:16px;">Upload virksomhedens logo, som vil blive vist på opslåede jobs.</p>
+                    <p class="help-block" style="font-size:16px;">Upload virksomhedens logo, som vil blive vist på opslåede opgaver.</p>
                 </div>
                 <div class="col-md-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;">
                     <button type="submit" class="btn btn-success btn-lg" [disabled]="f.invalid || !f.dirty" style="margin-bottom:20px">Gem</button>
