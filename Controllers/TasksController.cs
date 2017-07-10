@@ -7,6 +7,7 @@ using CaseSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 
 namespace CaseSite.Controllers
 {
@@ -29,7 +30,7 @@ namespace CaseSite.Controllers
         {
             var tasks = new List<dynamic>();
 
-            foreach (var task in _context.Task.Include(j => j.Business))
+            foreach (var task in _context.Task.Include(j => j.Business).Where(t => t.Deadline > DateTimeOffset.Now))
             {
                 tasks.Add(toClientTask(task));
             }
