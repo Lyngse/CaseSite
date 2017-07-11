@@ -68,6 +68,7 @@ export class BuisnessRegisterComponent {
                             }, err => {
                                 this.utilService.loading.next(false);
                                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved upload af logo" });
+                                this.utilService.alert.next({ type: "success", titel: "Success", message: "Din virksomhed er blevet oprettet, prøv oprettelsen af logo under 'Ret oplysninger'." });
                             });
                         }
                     }, err => {
