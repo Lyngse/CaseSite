@@ -140,7 +140,7 @@
                          'has-success': zip.valid && (zip.dirty || zip.touched)
                          }">
                             <label for="zip" class="control-label">Postnummer *</label>
-                            <input type="number" min="0" max="5000" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
+                            <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
                             <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
                                 <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
                             </div>
