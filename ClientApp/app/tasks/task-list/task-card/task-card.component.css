@@ -160,7 +160,8 @@
 
 .task-card-logo img {
     width: 75px;
-    height: auto;
+    height: 75px;
+    object-fit: scale-down;
 }
 
 .task-card-business {

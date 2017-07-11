@@ -97,7 +97,7 @@
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
                         </label>
-                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required [disabled]="edit" />
+                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" step="any" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required [disabled]="edit" />
                         <div class="form-feedback" *ngIf="rewardValue.errors && (rewardValue.dirty || rewardValue.touched)">
                             <p *ngIf="rewardValue.errors.required">Værdien for belønningen skal udfyldes</p>
                         </div>
@@ -111,7 +111,7 @@
                         <label for="workPlace" class="control-label">Hvordan skal opgaven løses? *</label>
                         <select class="form-control" id="workPlace" name="workPlace" [(ngModel)]="model.workPlace" #workPlace="ngModel" required>
                             <option value="1">Løsningen udarbejdes hjemme hos den studerende</option>
-                            <option value="2">Løsningen udarbejdes hos jer</option>
+                            <option value="2">Løsningen udarbejdes hos virksomheden</option>
                         </select>
                         <div class="form-feedback" *ngIf="workPlace.errors && (workPlace.dirty || workPlace.touched)">
                             <p *ngIf="workPlace.errors.required">Arbejdsstedet for opgaven skal udfyldes</p>
@@ -119,33 +119,32 @@
                     </div>
 
                     <p *ngIf="model.workPlace ==='2'">Firmaadressen hvor opgaven skal udføres</p>
-                    <div *ngIf="model.workPlace ==='2'" class="col-sm-5" style="padding:0;">
-                        <div class="form-group"
-                             [ngClass]="{
-                         'has-error': city.invalid && (city.dirty || city.touched),
-                         'has-success': city.valid && (city.dirty || city.touched)
-                         }">
-                            <label for="city" class="control-label">By *</label>
-                            <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                            <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
-                            <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
-                                <p *ngIf="city.errors.required">Byen skal udfyldes</p>
-                            </div>
+
+                    <div class="form-group" *ngIf="model.workPlace ==='2'"
+                            [ngClass]="{
+                        'has-error': city.invalid && (city.dirty || city.touched),
+                        'has-success': city.valid && (city.dirty || city.touched)
+                        }">
+                        <label for="city" class="control-label">By *</label>
+                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                        <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
+                        <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+                            <p *ngIf="city.errors.required">Byen skal udfyldes</p>
                         </div>
                     </div>
-                    <div *ngIf="model.workPlace ==='2'" class="col-sm-5 col-sm-offset-2" style="padding:0;">
-                        <div class="form-group"
-                             [ngClass]="{
-                         'has-error': zip.invalid && (zip.dirty || zip.touched),
-                         'has-success': zip.valid && (zip.dirty || zip.touched)
-                         }">
-                            <label for="zip" class="control-label">Postnummer *</label>
-                            <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
-                            <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
-                                <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
-                            </div>
+
+                    <div class="form-group" *ngIf="model.workPlace ==='2'"
+                            [ngClass]="{
+                        'has-error': zip.invalid && (zip.dirty || zip.touched),
+                        'has-success': zip.valid && (zip.dirty || zip.touched)
+                        }">
+                        <label for="zip" class="control-label">Postnummer *</label>
+                        <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
+                        <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
+                            <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
                         </div>
                     </div>
+
                     <div *ngIf="model.workPlace ==='2'" class="form-group"
                          [ngClass]="{
                          'has-error': address.invalid && (address.dirty || address.touched),
@@ -194,7 +193,7 @@
                             <p *ngIf="description.errors.required">Opgavebeskrivelsen skal udfyldes</p>
                         </div>
                     </div>
-                    <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'.</p>
+                    <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'. Hvis problemer skulle opstå, så kontakt os på info@unifacto.com.</p>
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem opgave' : 'Opret opgave'}}</button>
                     </div>

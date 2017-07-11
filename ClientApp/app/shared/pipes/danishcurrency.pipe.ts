@@ -8,6 +8,10 @@ export class DanishCurrencyPipe implements PipeTransform {
         let valueToReturn = '';
         let substring1;
         value = value + '';
+
+        if (value.indexOf('.') > -1) {
+            value = value.replace('.', '');
+        }
         if (value.length > 3) {
             for (let i = value.length; 2 < i; i = i - 3) {
                 substring1 = '';

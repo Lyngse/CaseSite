@@ -73,6 +73,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 if (this.model.rewardType === 'Anbefaling')
                     this.model.rewardValue = 0;
                 this.taskService.createTask(this.model).subscribe((data) => {
+                    console.log(data);
                     this.utilService.loading.next(false);
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
                     this.router.navigateByUrl('business');

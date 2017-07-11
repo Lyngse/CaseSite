@@ -45,33 +45,31 @@
                     </div>
                 </div>
 
-                <div class="col-sm-5" style="padding:0;">
-                    <div class="form-group"
-                         [ngClass]="{
-                         'has-error': city.invalid && (city.dirty || city.touched),
-                         'has-success': city.valid && (city.dirty || city.touched)
-                         }">
-                        <label for="city" class="control-label">By *</label>
-                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                        <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
-                        <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
-                            <p *ngIf="city.errors.required">Byen skal udfyldes</p>
-                        </div>
+                <div class="form-group"
+                        [ngClass]="{
+                        'has-error': city.invalid && (city.dirty || city.touched),
+                        'has-success': city.valid && (city.dirty || city.touched)
+                        }">
+                    <label for="city" class="control-label">By *</label>
+                    <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                    <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
+                    <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+                        <p *ngIf="city.errors.required">Byen skal udfyldes</p>
                     </div>
                 </div>
-                <div class="col-sm-5 col-sm-offset-2" style="padding:0;">
-                    <div class="form-group"
-                         [ngClass]="{
-                         'has-error': zip.invalid && (zip.dirty || zip.touched),
-                         'has-success': zip.valid && (zip.dirty || zip.touched)
-                         }">
-                        <label for="zip" class="control-label">Postnummer *</label>
-                        <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
-                        <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
-                            <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
-                        </div>
+
+                <div class="form-group"
+                        [ngClass]="{
+                        'has-error': zip.invalid && (zip.dirty || zip.touched),
+                        'has-success': zip.valid && (zip.dirty || zip.touched)
+                        }">
+                    <label for="zip" class="control-label">Postnummer *</label>
+                    <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
+                    <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
+                        <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
                     </div>
                 </div>
+
                 <div class="form-group"
                      [ngClass]="{
                          'has-error': address.invalid && (address.dirty || address.touched),

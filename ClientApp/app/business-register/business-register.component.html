@@ -49,33 +49,31 @@
                     </div>
                 </div>
 
-                <div class="col-sm-5" style="padding:0;">
-                    <div class="form-group"
-                         [ngClass]="{
-                         'has-error': city.invalid && (city.dirty || city.touched),
-                         'has-success': city.valid && (city.dirty || city.touched)
-                         }">
-                        <label for="city" class="control-label">By *</label>
-                        <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
-                        <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
-                        <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
-                            <p *ngIf="city.errors.required">Byen skal udfyldes</p>
-                        </div>
+                <div class="form-group"
+                        [ngClass]="{
+                        'has-error': city.invalid && (city.dirty || city.touched),
+                        'has-success': city.valid && (city.dirty || city.touched)
+                        }">
+                    <label for="city" class="control-label">By *</label>
+                    <!--<em class="form-feedback" *ngIf="title.errors.required">Skal udfyldes</em>-->
+                    <input type="text" id="city" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
+                    <div class="form-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+                        <p *ngIf="city.errors.required">Byen skal udfyldes</p>
                     </div>
                 </div>
-                <div class="col-sm-5 col-sm-offset-2" style="padding:0;">
-                    <div class="form-group"
-                         [ngClass]="{
-                         'has-error': zip.invalid && (zip.dirty || zip.touched),
-                         'has-success': zip.valid && (zip.dirty || zip.touched)
-                         }">
-                        <label for="zip" class="control-label">Postnummer *</label>
-                        <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
-                        <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
-                            <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
-                        </div>
+
+                <div class="form-group"
+                        [ngClass]="{
+                        'has-error': zip.invalid && (zip.dirty || zip.touched),
+                        'has-success': zip.valid && (zip.dirty || zip.touched)
+                        }">
+                    <label for="zip" class="control-label">Postnummer *</label>
+                    <input type="number" min="0" max="9999" class="form-control" id="zip" name="zip" [(ngModel)]="model.zip" #zip="ngModel" required />
+                    <div class="form-feedback" *ngIf="zip.errors && (zip.dirty || zip.touched)">
+                        <p *ngIf="zip.errors.required">Postnummeret skal udfyldes</p>
                     </div>
                 </div>
+
                 <div class="form-group"
                      [ngClass]="{
                          'has-error': address.invalid && (address.dirty || address.touched),
@@ -171,28 +169,28 @@
                         <p class="tc-header">Oprettelse og fjernelse af virksomhed:</p>
                         <ul>
                             <li>I bekræfter at jeres indtastede oplysninger er korrekte for virksomheden og at den eksisterer.</li>
-                            <li>Hvis I ønsker at fjerne virksomhedsprofilen kan dette først ske efter, at alle igangværende opgaver er udløbet. For derefter at tage kontakt til Unifacto.</li>
+                            <li>Hvis I ønsker at fjerne virksomhedsprofilen kan dette først ske efter, at alle igangværende opgaver er udløbet.</li>
                         </ul>
                         <p class="tc-header">Oprettelse af opgave:</p>
                         <ul>
                             <li>Opgaven skal være kommunikations- og marketingsrelateret.</li>
-                            <li>Gavekortet skal kunne bruges uafhængigt af køn og alder.</li>
-                            <li>Transaktions- og forsendelsesomkostninger skal I dække, og det skal ikke indgå i værdien af pengepræmien eller gavekortet.</li>
+                            <li>Gavekortet skal kunne bruges og have relevans uafhængigt af køn og alder.</li>
+                            <li>Transaktions- og forsendelsesomkostninger dækkes af virksomheden, og det skal ikke indgå i værdien af pengepræmien eller gavekortet.</li>
                             <li>I kan ikke slette opgaven efter oprettelsen.</li>
-                            <li>I kan ikke ændre honoraret, gavekortets værdi eller deadlinen efter oprettelsen af opgaven.</li>
+                            <li>I kan ikke ændre pengepræmien, gavekortets værdi eller deadlinen efter oprettelsen af opgaven. Såfremt der opstår fejl eller problemer med oprettelsen, kontakt da venligst supporten på info@unifacto.com. </li>
                         </ul>
                         <p class="tc-header">Deadlinen er overskredet:</p>
                         <p class="tc-subheader">Udarbejdelse af opgaven hjemme hos den studerende</p>
                         <ul>
-                            <li>Pengepræmien, gavekortet eller anbefalingen skal gives til den studerende inden for 14 dage efter modtagelsen af løsningsforslagene.</li>
-                            <li>Efter modtagelse af løsningsforslagene har I syv arbejdsdage til at finde det bedste løsningsforslag og orientere Unifacto om hvem der udarbejdede det bedste løsningsforslag, samt antallet af løsningsforslag.</li>
+                            <li>Pengepræmien, gavekortet eller anbefalingen skal være den studerende i hænde inden for 10 arbejdsdage efter modtagelsen af løsningsforslagene.</li>
+                            <li>Efter deadlinen af løsningsforslagene har I fem arbejdsdage til at finde det bedste løsningsforslag og orientere den studerende, med det bedste løsningsforslag, om jeres valg. Desuden skal Unifacto orienteres om hvem der udarbejdede det bedste løsningsforslag samt antallet af løsningsforslag.</li>
                             <li>Uanset antallet af løsningsforslag og indholdet af dem skal der gives en belønning.</li>
                         </ul>
                         <p class="tc-subheader">Udarbejdelse af opgaven hos jer</p>
                         <ul>
-                            <li>Ved ansøgninger om at udarbejde løsningsforslaget hos jer, skal I vælge en eller flere kandidater inden for 7 dage. Unifacto skal orienteres om hvem den/de udvalgte kandidater er, samt skal der tilsendes en kort beskrivelse af udarbejdelsesforløbet, når det er afsluttet, til os.</li>
-                            <li>Honoraret, gavekortet eller anbefalingen skal gives til den/de udvalgte kandidater inden for 14 dage efter at udarbejdelsesforløbet er afsluttet.</li>
-                            <li>Hvis I udvælger en kandidat som skal arbejde hos jer, skal aftalerne og belønningen overholdes mellem jer og den studerende.</li>
+                            <li>Ved ansøgninger om at udarbejde løsningsforslaget hos jer, skal I vælge en eller flere ansøgere inden for fem dage efter deadlinen. Unifacto skal orienteres om hvem den/de udvalgte studerende er, samt skal der tilsendes en kort beskrivelse af udarbejdelsesforløbet, når det er afsluttet, til os.</li>
+                            <li>Pengepræmien, gavekortet eller anbefalingen skal gives til den/de udvalgte studerende inden for 10 arbejdsdage efter at udarbejdelsesforløbet er afsluttet.</li>
+                            <li>Hvis I udvælger en studerende som skal udføre en opgave hos jer, skal aftalerne og belønningen overholdes mellem jer og den studerende.</li>
                         </ul>
                         <p class="tc-header">Markedsføring:</p>
                         <ul>
