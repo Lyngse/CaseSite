@@ -140,13 +140,15 @@
                             <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                         </span>
                     </label>
-                    <textarea style="resize:none;" class="form-control" rows="5" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel" maxlength="700" required></textarea>
+                    <textarea style="resize:none;" class="form-control" rows="8" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel" maxlength="700" required></textarea>
+                    <span *ngIf="model.description" style="float: right">{{model.description.length}} / 700</span>
                     <span class="help-block" style="font-size:16px;">Fortæl om virksomheden og hvad I arbejder med. Maksimalt 700 tegn inkl. mellemrum.</span>
                     <div class="form-feedback"
                          *ngIf="description.errors && (description.dirty || description.touched)">
                         <p *ngIf="description.errors.required">Giv venligst en kort beskrivelse af din virksomhed</p>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
                         <label for="logo" class="control-label">Logo</label>

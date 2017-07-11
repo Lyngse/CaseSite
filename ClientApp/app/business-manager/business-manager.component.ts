@@ -33,6 +33,7 @@ export class BusinessManagerComponent{
         this.taskService.getTasksForBusiness().subscribe((data) => {
             this.utilService.loading.next(false);
             this.tasks = data;
+            this.tasks.reverse();
         }, (err) => {
             this.utilService.loading.next(false);
 

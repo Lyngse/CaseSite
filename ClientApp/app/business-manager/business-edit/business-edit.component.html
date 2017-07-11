@@ -83,11 +83,27 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="textArea" class="control-label">Virksomhedsbeskrivelse</label>
-                    <textarea style="resize:none;" class="form-control" rows="8" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel"></textarea>
-                    <span class="help-block" style="font-size:16px;">Fortæl om virksomheden og hvad I arbejder med.</span>
+                <div class="form-group"
+                     [ngClass]="{
+                            'has-error': description.invalid && (description.dirty || description.touched),
+                            'has-success': description.valid && (description.dirty || description.touched)
+                        }">
+                    <label for="textArea" class="control-label">
+                        Virksomhedsbeskrivelse *
+                        <span class="fa-stack" style="font-size:10px;" tooltip="Beskriv din virksomhed med maksimalt 700 tegn inkl. mellemrum">
+                            <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                            <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </label>
+                    <textarea style="resize:none;" class="form-control" rows="8" id="textArea" name="description" [(ngModel)]="model.description" #description="ngModel" maxlength="700" required></textarea>
+                    <span *ngIf="model.description" style="float: right">{{model.description.length}} / 700</span>
+                    <span class="help-block" style="font-size:16px;">Fortæl om virksomheden og hvad I arbejder med. Maksimalt 700 tegn inkl. mellemrum.</span>
+                    <div class="form-feedback"
+                         *ngIf="description.errors && (description.dirty || description.touched)">
+                        <p *ngIf="description.errors.required">Giv venligst en kort beskrivelse af din virksomhed</p>
+                    </div>
                 </div>
+
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
                         <label for="logo" class="control-label">Logo</label>
