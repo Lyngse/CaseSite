@@ -67,16 +67,16 @@ namespace CaseSite.Controllers
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callbackUrl = Url.Action("resetpassword", "login", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
             var mimeMessage = new MimeMessage();
-            mimeMessage.From.Add(new MailboxAddress("Email from ASP.Net core 1.1", "frederik.bl@live.dk"));
-            mimeMessage.To.Add(new MailboxAddress("Microsoft ASP.NET core", "frederik.bl@live.dk"));
-            mimeMessage.Subject = "Reset password";
+            mimeMessage.From.Add(new MailboxAddress("Unifacto Noreply", "noreply@unifacto.com"));
+            mimeMessage.To.Add(new MailboxAddress("customer", email));
+            mimeMessage.Subject = "Nulstil kodeord til Unifacto";
             var bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = "Nulstil dit kodeord igennem dette <a href='" + callbackUrl + "'>link</a>";
+            bodyBuilder.HtmlBody = "Nulstil dit kodeord til Unifacto igennem dette <a href='" + callbackUrl + "'>link</a>";
             mimeMessage.Body = bodyBuilder.ToMessageBody();
             using(var client = new SmtpClient())
             {
-                client.Connect("smtp.live.com", 587, false);
-                client.Authenticate("frederik.bl@live.dk", "3og5er8.0");
+                client.Connect("smtp.office365.com", 587, false);
+                client.Authenticate("noreply@unifacto.com", "Isbil42panda");
                 client.Send(mimeMessage);
                 client.Disconnect(true);
             }
