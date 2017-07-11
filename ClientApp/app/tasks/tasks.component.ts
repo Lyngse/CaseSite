@@ -37,7 +37,6 @@ export class TasksComponent implements OnInit {
             this.sort("Dato tilføjet");
             this.utilService.loading.next(false);
         }, (err) => {
-            console.log(err);
             this.utilService.loading.next(false);
         });
     }

@@ -111,7 +111,6 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.router.navigateByUrl("login");
             } else {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
-                console.log(err);
             }
             
         });

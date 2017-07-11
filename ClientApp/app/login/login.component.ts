@@ -36,12 +36,10 @@ export class LoginComponent implements AfterViewInit {
                     this.router.navigate(['/business']);
                 } else {
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
-                    console.log(response._body);
                 }
             }, (err) => {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
-                console.log(err.json());
             });
         }
     }

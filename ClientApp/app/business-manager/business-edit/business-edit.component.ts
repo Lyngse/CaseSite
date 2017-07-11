@@ -62,7 +62,6 @@ export class BusinessEditComponent implements AfterViewInit {
             this.businessService.updateBusiness(this.model).subscribe(res => {
                 console.log(res);
                 this.blobService.uploadLogo(this.formData, this.model.id).subscribe(res => {
-                    console.log(res);
                     this.utilService.loading.next(false);          
                     if (res.ok == true) {
                         this.router.navigate(['/business']);

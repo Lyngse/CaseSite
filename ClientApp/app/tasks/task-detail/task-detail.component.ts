@@ -28,7 +28,6 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     ngOnChanges(changes) {
         this.task = this.inputTask;
         this.business = this.inputBusiness;
-        console.log(this.business);
     }
 
     ngAfterViewInit() {
@@ -36,7 +35,6 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
             let id = params['id'];
             if (id) {
                 this.taskService.getTask(id).subscribe(res => {
-                    console.log(res);
                     this.task = res;
                     this.businessService.getBusinessFromId(res.businessId).subscribe(res => this.business = res);
                 });

@@ -45,6 +45,10 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     background-color: #005580;
 }
 
+.active-link {
+    background-color: #005580 !important;
+}
+
 .navbar-custom .navbar-nav > .open > a, .navbar-custom .navbar-nav > .open > a:hover, .navbar-custom .navbar-nav > .open > a:focus {
     background-color: #005580;
     -webkit-transition: border-color 0.7s;

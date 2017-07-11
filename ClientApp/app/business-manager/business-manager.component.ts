@@ -25,7 +25,6 @@ export class BusinessManagerComponent{
     getInfo() {
         this.businessService.getBusinessFromUser()
             .subscribe((response) => {
-                console.log(response);
         }, (err) => console.log(err));
     }
 
@@ -42,7 +41,6 @@ export class BusinessManagerComponent{
                 this.router.navigateByUrl("login");
             } else {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
-                console.log(err);
             }
         });
     }

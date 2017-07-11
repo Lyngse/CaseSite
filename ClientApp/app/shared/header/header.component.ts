@@ -37,14 +37,12 @@ export class HeaderComponent implements OnInit {
             this.utilService.loading.next(true);
             if (err.status !== 401)
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
-                console.log(err);
         });
     }
 
     logout() {
         this.utilService.loading.next(true);
         this.accountService.logout().subscribe((response) => {
-            console.log(response);
             this.utilService.loading.next(false);
             this.router.navigate(['/']
             );
