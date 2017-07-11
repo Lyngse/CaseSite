@@ -72,6 +72,9 @@ export class CreateEditTaskComponent implements AfterViewInit {
             if (!this.model.id) {
                 if (this.model.rewardType === 'Anbefaling')
                     this.model.rewardValue = 0;
+                else 
+                    this.model.rewardValue = this.formatRewardValue(this.model.rewardValue);
+                
                 this.taskService.createTask(this.model).subscribe((data) => {
                     console.log(data);
                     this.utilService.loading.next(false);
@@ -85,6 +88,9 @@ export class CreateEditTaskComponent implements AfterViewInit {
             } else {
                 if (this.model.rewardType === 'Anbefaling')
                     this.model.rewardValue = 0;
+                else
+                    this.model.rewardValue = this.formatRewardValue(this.model.rewardValue);
+
                 this.taskService.updateTask(this.model).subscribe((data) => {
                     this.utilService.loading.next(false);
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
@@ -115,6 +121,13 @@ export class CreateEditTaskComponent implements AfterViewInit {
             }
             
         });
+    }
+
+    formatRewardValue(rewardValue: number) {
+        let rv = rewardValue.toString();
+        rv = rv.replace('.', '');
+        console.log(rv);
+        return +rv;
     }
 
     deadlineChanged(something) {
