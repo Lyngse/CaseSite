@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-sm-4 col-xs-12 task-sort">
                     <select class="form-control task-sort-select" (change)="sort($event.target.value)">
-                        <option>Dato tilføjet</option>
+                        <option>Senest tilføjet</option>
                         <option>Deadline</option>
                         <option>Værdi af belønning</option>
                     </select>
@@ -25,7 +25,7 @@
                 <div class="collapse" id="filterbox">
                     <div class="col-xs-12 filterbox-content">
                         <div class="col-sm-6 col-xs-12" style="padding:0;">
-                            <h4>Job type</h4>
+                            <h4>Opgavetype</h4>
                             <div class="form-group flexbox-newline">
                                 <div class="checkbox flexitem" *ngFor="let type of types">
                                     <label><input (change)="typeFilter(type, $event.target.checked)" type="checkbox"/>{{type}}</label>
@@ -34,7 +34,7 @@
                             
                         </div>
                             <div class="col-sm-3 col-xs-6" style="padding:0;">
-                                <h4>Præmie type</h4>
+                                <h4>Belønningstype</h4>
                                 <div class="form-group flexbox-column">
                                     <div class="checkbox" *ngFor="let rType of rewardTypes">
                                         <label><input (change)="rewardTypeFilter(rType, $event.target.checked)" type="checkbox" id="foo">{{rType}}</label>
@@ -43,7 +43,7 @@
 
                             </div>
                             <div class="col-sm-3 col-xs-6" style="padding:0;">
-                                <h4>Arbejds sted</h4>
+                                <h4>Arbejdssted</h4>
                                 <div class="form-group flexbox-column">
                                     <div class="checkbox" *ngFor="let place of workPlaces">
                                         <label><input (change)="workPlaceFilter(place, $event.target.checked)" type="checkbox" id="foo">{{place}}</label>

@@ -70,7 +70,7 @@
                          'has-error': rewardType.invalid && (rewardType.dirty || rewardType.touched),
                          'has-success': rewardType.valid && (rewardType.dirty || rewardType.touched)
                          }">
-                        <label for="rewardType" class="control-label">Belønning * 
+                        <label for="rewardType" class="control-label">Belønningstypen * 
                             <span class="fa-stack" style="font-size:10px;" tooltip="Hvilke type belønning den bedste løsning eller ansøgning modtager.">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
@@ -82,7 +82,7 @@
                             <option value="Anbefaling">Anbefaling</option>
                         </select>
                         <div class="form-feedback" *ngIf="rewardType.errors && (rewardType.dirty || rewardType.touched)">
-                            <p *ngIf="rewardType.errors.required">Belønnings typen skal udfyldes</p>
+                            <p *ngIf="rewardType.errors.required">Belønningstypen skal udfyldes</p>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                          'has-success': rewardValue.valid && (rewardValue.dirty || rewardValue.touched)
                          }">
                         <label for="rewardValue" class="control-label">Belønningens værdi * 
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten Gave eller Honorar">
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten gaven eller honoraret">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
@@ -108,17 +108,17 @@
                          'has-error': workPlace.invalid && (workPlace.dirty || workPlace.touched),
                          'has-success': workPlace.valid && (workPlace.dirty || workPlace.touched)
                          }">
-                        <label for="workPlace" class="control-label">Hvor opgaven skal løses *</label>
+                        <label for="workPlace" class="control-label">Hvordan skal opgaven løses? *</label>
                         <select class="form-control" id="workPlace" name="workPlace" [(ngModel)]="model.workPlace" #workPlace="ngModel" required>
-                            <option value="1">Hjemme</option>
-                            <option value="2">Hos virksomheden</option>
+                            <option value="1">Løsningen udarbejdes hjemme hos den studerende</option>
+                            <option value="2">Løsningen udarbejdes hos jer</option>
                         </select>
                         <div class="form-feedback" *ngIf="workPlace.errors && (workPlace.dirty || workPlace.touched)">
-                            <p *ngIf="workPlace.errors.required">Arbejds stedet for opgaven skal udfyldes</p>
+                            <p *ngIf="workPlace.errors.required">Arbejdsstedet for opgaven skal udfyldes</p>
                         </div>
                     </div>
 
-                    <p *ngIf="model.workPlace ==='2'">Adressen hvor opgaven skal udføres</p>
+                    <p *ngIf="model.workPlace ==='2'">Firmaadressen hvor opgaven skal udføres</p>
                     <div *ngIf="model.workPlace ==='2'" class="col-sm-5" style="padding:0;">
                         <div class="form-group"
                              [ngClass]="{
@@ -165,8 +165,8 @@
                          'has-success': contactDescription.valid && (contactDescription.dirty || contactDescription.touched)
                          }">
                         <label for="contactDescription" class="control-label" style="display:flex;align-items:center;">
-                            Ansøgnings beskrivelse *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad ansøgningen til opgaven skal indeholde. Inkluder kontakt information så som e-mail eller telefonnummer, for de ansøgende at kontakte jer på.">
+                            Hvordan indsendes løsningsforslagene? *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvordan løsningsforslagene skal sendes til jer. Eksempelvis ”Løsningsforslagene skal sendes til…” Derudover kan der tilføjes en mail eller telefonnummer, såfremt I ønsker, at de studerende skal kunne kontakte jer med spørgsmål">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
@@ -174,7 +174,7 @@
                         <textarea style="resize:none;" class="form-control" rows="8" id="contactDescription" name="contactDescription" [(ngModel)]="model.contactDescription" #contactDescription="ngModel" required></textarea>
                         <span class="help-block" style="font-size:16px;"></span>
                         <div class="form-feedback" *ngIf="contactDescription.errors && (contactDescription.dirty || contactDescription.touched)">
-                            <p *ngIf="contactDescription.errors.required">Ansøgnings beskrivelsen skal udfyldes</p>
+                            <p *ngIf="contactDescription.errors.required">'Hvordan indsendes løsningsforslagene?' skal udfyldes</p>
                         </div>
                     </div>
                     
@@ -183,18 +183,18 @@
                          'has-error': description.invalid && (description.dirty || description.touched),
                          'has-success': description.valid && (description.dirty || description.touched)
                          }">
-                        <label for="description" class="control-label">Opgave beskrivelse *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad opgaven går ud på. Du kan også tilføje links til sider hvor de kan downloade PDF udgaver af en beskrivelse eller sider indholdene information.">
+                        <label for="description" class="control-label">Opgavebeskrivelse *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad opgaven går ud på. I kan evt. tilføje links til sider, hvor studerende kan downloade PDF-udgaver af en beskrivelse eller sider med mere information">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
                         </label>
                         <textarea style="resize:none;" class="form-control" rows="8" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
                         <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
-                            <p *ngIf="description.errors.required">Opgaves beskrivelsen skal udfyldes.</p>
+                            <p *ngIf="description.errors.required">Opgavebeskrivelsen skal udfyldes</p>
                         </div>
                     </div>
-                    <p *ngIf="!edit">OBS! - Når du har oprettet en ny opgave, kan du ikke længere ændre i opgavens deadline, belønnings type eller belønnings værdi. Sørg derfor at disse oplysninger er korrekte før der trykkes på 'Opret opgave'.</p>
+                    <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'.</p>
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem opgave' : 'Opret opgave'}}</button>
                     </div>

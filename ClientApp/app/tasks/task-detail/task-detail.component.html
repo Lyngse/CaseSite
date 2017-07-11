@@ -43,8 +43,8 @@
                <p class="task-description" [innerHTML]="task.description | formattext"></p>
            </div>
 
-           <h3 class="task-info-title" *ngIf="task.workPlace === '2'">Ansøgnings information</h3>
-           <h3 class="task-info-title" *ngIf="task.workPlace === '1'">Aflevering af løsningsforslag</h3>
+           <h3 class="task-info-title" *ngIf="task.workPlace === '2'">Hvor sender jeg min ansøgning?</h3>
+           <h3 class="task-info-title" *ngIf="task.workPlace === '1'">Hvor sender jeg mit løsningsforslag?</h3>
            <p class="task-contactDescription" [innerHTML]="task.contactDescription | formattext"></p>
            <p *ngIf="task.workPlace === '2'">Udarbejdelsen af løsningsforslaget kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>
 

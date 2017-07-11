@@ -42,8 +42,14 @@
            
 </div>-->
 
-<div class="task-card">
+<div class="task-card"> 
     <div class="task-card-top">
+        <div class="task-card-task">
+            <p class="task-card-task-title">{{ task.title }}</p>
+            <p class="task-card-task-type">- {{ task.type }}</p>
+        </div>      
+    </div>
+    <div class="task-card-mid">
         <div class="task-card-logo">
             <!--<img src="../../../../../wwwroot/assets/images/dizy-cow-free-logo.jpg" />-->
             <img *ngIf="task.businessLogoUrl" [src]="task.businessLogoUrl" />
@@ -56,12 +62,6 @@
                 {{ task.city  }}
             </p>
         </div>
-    </div>
-    <div class="task-card-mid">
-        <div class="task-card-task">
-            <p class="task-card-task-title">{{ task.title }}</p>
-            <p class="task-card-task-type">- {{ task.type }}</p>
-        </div>      
     </div>
     <div class="task-card-bot">
         <div class="task-card-detail">

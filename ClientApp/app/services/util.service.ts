@@ -14,7 +14,7 @@ export class UtilService {
         "Events",
         "Branding",
         "Målgruppeanalyse",
-        "markedsanalyse",
+        "Markedsanalyse",
         "Video/Billede",
         "Andet"
     ];
