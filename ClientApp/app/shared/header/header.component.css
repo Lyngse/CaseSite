@@ -72,3 +72,15 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 .navbar-brand {
     color: white;
 }
+
+.navbar-header {
+    position: relative;
+}
+
+.beta-text {
+    color: #FF5722;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    transform: rotate(25deg);
+}
