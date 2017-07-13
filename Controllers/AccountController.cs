@@ -138,8 +138,9 @@ namespace CaseSite.Controllers
             }
             if (!await _roleManager.RoleExistsAsync("business"))
             {
-                ModelState.AddModelError("RoleError", "Role not found");
-                return BadRequest(ModelState);
+                IdentityRole role = new IdentityRole();
+                role.Name = "business";
+                await _roleManager.CreateAsync(role);
             }
             IdentityUser user = new IdentityUser();
             user.UserName = obj.UserName;
@@ -162,14 +163,8 @@ namespace CaseSite.Controllers
 
         //used by startup.cs to update tokens
         [HttpGet("updateTokens")]
-        public async  Task<IActionResult> updateTokens()
+        public IActionResult updateTokens()
         {
-            if (!await _roleManager.RoleExistsAsync("business"))
-            {
-                IdentityRole role = new IdentityRole();
-                role.Name = "business";
-                var result = await _roleManager.CreateAsync(role);
-            }
             return Ok();
         }
 
