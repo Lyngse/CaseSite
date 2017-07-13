@@ -14,12 +14,24 @@
     font-weight: 100;
 }
 
+.hiw-background {
+    background: -moz-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,102,153,1)), color-stop(100%, rgba(0,119,179,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* ie10+ */
+    background: linear-gradient(179deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006699', endColorstr='#0077b3',GradientType=0 ); /* ie6-9 */
+    padding: 20px 0;
+    color: white;
+}
+
 .hiw-content {
-    padding: 40px 0;
 }
 
 .hiw-headers {
     margin-bottom: 50px;
+    padding-top: 40px;
 }
 
 .hiw-info {
@@ -33,14 +45,16 @@
 
 .hiw-home {
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     flex-wrap: wrap;
+    padding-bottom: 40px;
 }
 
 .hiw-business {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    padding-bottom: 40px;
 }
 
 
@@ -64,7 +78,7 @@
     border-radius: 50%;
     background-color: #006699;
     border: 3px solid white;
-    box-shadow: 0 0 0 5px #006699, 0 12px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 5px #009de6, 0 12px 10px rgba(0, 0, 0, 0.3);
 }
 
 .hiw-step-number {
@@ -85,6 +99,7 @@
     font-size: 90%;
     margin-top: 20px;
     text-align: center;
+    width: 240px;
 }
 
 .hiw-get-started {

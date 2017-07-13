@@ -82,17 +82,6 @@ section {
     margin-bottom: 15px;
 }
 
-.heading2:after {
-    display: block;
-    height: 2px;
-    background-color: #006699;
-    content: " ";
-    width: 200px;
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
 /* ----- Buttons ----- */
 .butn:link,
 .butn:visited,
