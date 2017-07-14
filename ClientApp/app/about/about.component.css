@@ -81,6 +81,11 @@
     margin: 0;
 }
 
+.team-person-contact {
+    font-size: 100%;
+    margin: 0;
+}
+
 /* Custom, iPhone Retina */
 @media only screen and (min-width : 320px) and (max-width : 479px) {
     .team-person {
