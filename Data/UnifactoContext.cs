@@ -13,5 +13,7 @@ namespace CaseSite.Models
         public DbSet<Task> Task { get; set; }
 
         public DbSet<Business> Business { get; set; }
+
+        public DbSet<Student> Student { get; set; }
     }
 }

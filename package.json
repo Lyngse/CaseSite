@@ -43,6 +43,7 @@
     "momentjs": "^2.0.0",
     "ng2-bs3-modal": "^0.10.4",
     "ngx-bootstrap": "^1.7.1",
+    "ngx-facebook": "^2.4.0",
     "preboot": "^4.5.2",
     "raw-loader": "^0.5.1",
     "rxjs": "^5.3.0",

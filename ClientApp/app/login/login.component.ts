@@ -48,6 +48,10 @@ export class LoginComponent implements AfterViewInit {
         this.router.navigate(['/business/register']);
     }
 
+    fblogin() {
+        this.accountService.loginFacebook();
+    }
+
     forgotPassword() {
         this.router.navigate(['/login/forgotpassword']);
     }

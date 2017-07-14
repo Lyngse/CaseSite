@@ -11,6 +11,8 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Dynamic;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaseSite.Controllers
 {
@@ -21,12 +23,14 @@ namespace CaseSite.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _loginManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UnifactoContext _context;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> loginManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> loginManager, RoleManager<IdentityRole> roleManager, UnifactoContext context)
         {
             _userManager = userManager;
             _loginManager = loginManager;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [HttpPost("changepassword")]
@@ -127,6 +131,56 @@ namespace CaseSite.Controllers
             }
             return Ok();
             
+        }
+
+        [HttpPost("fblogin")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> FacebookLogin(string facebookId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var student = await _context.Student.SingleOrDefaultAsync(s => s.FacebookId == facebookId);
+            if(student == null)
+            {
+                Response.StatusCode = 404;
+                return BadRequest(new { usererror = "User not found" });
+            }
+            return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, User = student.User });
+        }
+
+        [HttpPost("registerstudentuser")]
+        public async Task<IActionResult> RegisterStudent([FromBody] string firstname, string lastname, string email)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!await _roleManager.RoleExistsAsync("student"))
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "student";
+                await _roleManager.CreateAsync(role);
+            }
+            IdentityUser user = new IdentityUser();
+            user.UserName = firstname + lastname;
+            user.Email = email;
+            var password = "Default123321tluafeD";
+
+            var result = await _userManager.CreateAsync(user, password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "student");
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok(user.Id);
         }
 
         [HttpPost("registerbusinessuser")]

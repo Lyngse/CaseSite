@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { FacebookService, InitParams, LoginResponse, LoginStatus, LoginOptions } from 'ngx-facebook';
 
 @Injectable()
 export class AccountService {
@@ -11,11 +12,20 @@ export class AccountService {
     options = new RequestOptions({ headers: this.headers });
     public loggedIn: BehaviorSubject<Boolean> = new BehaviorSubject(false);
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private fb: FacebookService) {
         this.http
             .get('api/account/status', this.options)
             .catch(this.handleError)
             .subscribe(value => this.loggedIn.next(value.json()));
+
+        let initParams: InitParams = {
+            appId: '113893632577611',
+            xfbml: true,
+            cookie: true,
+            version: 'v2.9'
+        };
+
+        fb.init(initParams);
     }
 
     changePassword(currentPassword: string, newPassword: string): Observable<any> {
@@ -54,6 +64,73 @@ export class AccountService {
         return this.http
             .post('api/account/registerbusinessuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
             .catch(this.handleError);
+    }
+
+    fblogin(): Promise<any> {
+        return this.fb.getLoginStatus()
+            .then((res) => {
+                if (res.authResponse)
+                    return this.loginWithFacebook(res.authResponse.userID);
+                else {
+                    const options: LoginOptions = {
+                        scope: 'public_profile,email',
+                        return_scopes: true
+                    };
+                    return this.fb.login(options)
+                        .then((res) => {
+                            if (res.authResponse)
+                                return this.loginWithFacebook(res.authResponse.userID);
+                            else
+                                return Promise.reject("error logging in");
+                        })
+                        .catch(this.handleError);
+                }
+            })
+            .catch(this.handleError);
+    }
+
+    loginWithFacebook(facebookId: string): Promise<any> {
+        return this.http
+            .post('api/account' + 'fblogin', JSON.stringify({facebookId: facebookId }), this.options)
+            .toPromise()
+            .then((res) => { let result = res.json(); result.facebookId = facebookId; })
+            .catch((err) => {
+                if (err.status === 406) {
+                    return this.fb.api('/me?fields=id,last_name,first_name,email')
+                        .then((res) => {
+                            return this.fbRegister(res.id, res.first_name, res.last_name, res.email);
+                        })
+                        .catch(this.handleError);
+                } else {
+                    return this.handleError(err);
+                }
+            });
+    }
+
+    fbRegister(facebookId: string, firstname: string, lastname: string, email: string): Promise<any> {
+        return this.http
+            .post('api/student' + 'registerstudent', JSON.stringify({
+                facebookId: facebookId,
+                firtname: firstname,
+                lastname: lastname,
+                email: email
+            }), this.options)
+            .toPromise()
+            .catch(this.handleError);
+    }
+
+    
+
+    loginFacebook(): void {
+        const options: LoginOptions = {
+            scope: 'public_profile,user_friends,email,pages_show_list',
+            return_scopes: true,
+            enable_profile_selector: true
+        };
+        this.fb.login(options)
+            .then((response: LoginResponse) => console.log(response))
+            .catch((error: any) => console.error(error));
+
     }
 
     private updateToken() {
