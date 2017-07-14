@@ -95,7 +95,7 @@ export class AccountService {
             .toPromise()
             .then((res) => { let result = res.json(); result.facebookId = facebookId; })
             .catch((err) => {
-                if (err.status === 406) {
+                if (err.status === 404) {
                     return this.fb.api('/me?fields=id,last_name,first_name,email')
                         .then((res) => {
                             return this.fbRegister(res.id, res.first_name, res.last_name, res.email);

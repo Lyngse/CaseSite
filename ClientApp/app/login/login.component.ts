@@ -49,7 +49,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     fblogin() {
-        this.accountService.loginFacebook();
+        this.accountService.fblogin();
     }
 
     forgotPassword() {
