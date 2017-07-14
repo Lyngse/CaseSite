@@ -36,6 +36,23 @@
     font-weight: 300;
 }
 
+.img-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.img-container img {
+    width: 250px;
+    height: auto;
+}
+
 @media only screen and (min-width : 320px) and (max-width : 479px) {
     .terms-box {
         width: 100%;

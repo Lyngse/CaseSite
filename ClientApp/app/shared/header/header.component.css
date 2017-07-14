@@ -78,9 +78,15 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 }
 
 .beta-text {
-    color: #FF5722;
+    color: #FFC107;
     position: absolute;
     top: 10px;
     left: 50px;
     transform: rotate(25deg);
+}
+
+@media only screen and (max-width: 768px){
+    .beta-text{
+        left: 65px;
+    }
 }

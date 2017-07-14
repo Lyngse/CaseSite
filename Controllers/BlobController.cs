@@ -32,7 +32,6 @@ namespace CaseSite.Controllers
 
         // POST api/values
         [HttpPost("uploadLogo/{id}")]
-        [Authorize]
         public async Task<IActionResult> Post([FromRoute] int id)
         {
 
