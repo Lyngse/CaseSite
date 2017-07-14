@@ -166,3 +166,15 @@ spinner {
     left: 0px;
     z-index: 1000
 }
+
+.background-primary {
+    background-color: #006699;
+}
+
+.background-secondary {
+    background-color: #FF9800;
+}
+
+.color-white {
+    color: white;
+}

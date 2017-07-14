@@ -2,7 +2,7 @@
    <div class="detail-content">
        <div class="detail-business-info">
            <div class="business-sidebar">
-               <div class="business-sidebar-top">
+               <div class="business-sidebar-top" *ngIf="business.logoUrl">
                    <img class="business-logo" [src]="business.logoUrl" />
                </div>
                <div class="business-sidebar-bot">
