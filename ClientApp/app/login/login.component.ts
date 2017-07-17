@@ -2,6 +2,7 @@
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
 import { UtilService } from '../services/util.service';
+import { Student } from '../model/student';
 
 @Component({
     selector: 'login',
@@ -14,16 +15,22 @@ export class LoginComponent implements AfterViewInit {
     password: string = "";
     loginFailedMsg: string = "";
     @ViewChild('f') form: any;
+    student: Student;
 
     constructor(private accountService: AccountService, private utilService: UtilService, private router: Router) {
         this.accountService.loggedIn.subscribe(newValue => {
             if (newValue)
                 this.router.navigate(['/business']);
         });
+        this.student = this.accountService.loggedStudent.getValue();
+        this.accountService.loggedStudent.subscribe(newValue => {
+            this.student = newValue;
+            console.log(this.student);
+        });
     }
 
     ngAfterViewInit() {
-        
+        this.accountService.updateStudent();
     }
 
     onLogin() {
@@ -49,7 +56,20 @@ export class LoginComponent implements AfterViewInit {
     }
 
     fblogin() {
-        this.accountService.fblogin();
+        this.accountService.fblogin().then((res) => {
+            console.log(res);
+            this.student = res;
+        });
+    }
+
+    fblogout() {
+        this.accountService.fblogout();
+    }
+
+    getUserImage() {
+        if (this.student) {
+            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
+        }
     }
 
     forgotPassword() {

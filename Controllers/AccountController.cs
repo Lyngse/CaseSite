@@ -142,7 +142,7 @@ namespace CaseSite.Controllers
             {
                 return BadRequest(new { usererror = "User not found"});
             }
-            return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, User = student.User });
+            return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, UserId = student.UserId, FacebookId = facebookId });
         }
 
         [HttpPost("registerstudentuser")]

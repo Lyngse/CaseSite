@@ -24,6 +24,7 @@ import { TaskService } from './services/task.service';
 import { UtilService } from './services/util.service';
 import { BlobService } from './services/blob.service';
 import { FacebookService } from 'ngx-facebook';
+import { StudentService } from './services/student.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -53,7 +54,7 @@ import { FacebookService } from 'ngx-facebook';
         FacebookModule.forRoot()
 
     ],
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, FacebookService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, FacebookService, StudentService]
 })
 export class AppModule {
 }

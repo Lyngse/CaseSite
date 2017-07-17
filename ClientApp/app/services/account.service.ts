@@ -5,12 +5,14 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { FacebookService, InitParams, LoginResponse, LoginStatus, LoginOptions } from 'ngx-facebook';
+import { Student } from '../model/student'
 
 @Injectable()
 export class AccountService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
     public loggedIn: BehaviorSubject<Boolean> = new BehaviorSubject(false);
+    public loggedStudent: BehaviorSubject<Student> = new BehaviorSubject(new Student);
 
     constructor(private http: Http, private router: Router, private fb: FacebookService) {
         this.http
@@ -69,9 +71,9 @@ export class AccountService {
     fblogin(): Promise<any> {
         return this.fb.getLoginStatus()
             .then((res) => {
-                console.log(res);
-                if (res.authResponse)
+                if (res.authResponse) {
                     return this.loginWithFacebook(res.authResponse.userID);
+                }
                 else {
                     const options: LoginOptions = {
                         scope: 'public_profile,email',
@@ -92,9 +94,9 @@ export class AccountService {
 
     loginWithFacebook(facebookId: string): Promise<any> {
         return this.http
-            .post('api/account/fblogin', JSON.stringify({facebookId: facebookId }), this.options)
+            .post('api/account/fblogin', facebookId, this.options)
             .toPromise()
-            .then((res) => { let result = res.json(); result.facebookId = facebookId; console.log(res); })
+            .then((res) => { res.json(); console.log(res); })
             .catch((err) => {
                 if (err.status == 400) {
                     return this.fb.api('/me?fields=id,last_name,first_name,email')
@@ -133,11 +135,27 @@ export class AccountService {
     }  
 
     fbRegisterStudentUser(firstname: string, lastname: string, email: string): Observable<any> {
-        let username = /*firstname + lastname*/ "SorenLyng";
+        let username = firstname + lastname;
         let password = "s0MecRazyP4sswOrd12";
         return this.http
             .post('api/account/registerstudentuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
             .catch(this.handleError);
+    }
+
+    fblogout(): Promise<any> {
+        return this.fb.logout()
+            .then(res => this.loggedStudent.next(new Student))
+            .catch(this.handleError);
+    }
+
+    updateStudent(): Promise<any> {
+        return this.fb.getLoginStatus()
+            .then((res) => {
+                if (res.authResponse)
+                    return this.loginWithFacebook(res.authResponse.userID);
+                else
+                    return false;
+            })
     }
     
     loginFacebook(): void {
