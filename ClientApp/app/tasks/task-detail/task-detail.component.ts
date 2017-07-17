@@ -36,7 +36,6 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
             if (id) {
                 this.taskService.getTask(id).subscribe(res => {
                     this.task = res;
-                    console.log(res);
                     this.businessService.getBusinessFromId(res.businessId).subscribe(res => this.business = res);
                 });
             }

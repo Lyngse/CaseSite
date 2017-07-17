@@ -31,8 +31,8 @@
                 </div>
                <p class="task-reward" style="font-size:14px;" *ngIf="task.rewardType">
                    Belønning ved bedste løsningsforslag:
-                   <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
-                   <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-money"></i></span>
+                   <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-money"></i></span>
+                   <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-gift"></i></span>
                    <span *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
                    <span><b *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">{{ task.rewardValue | danishcurrency }} kr</b></span>
                    <span><b *ngIf="task.rewardType === 'Anbefaling'">Anbefaling</b></span>
