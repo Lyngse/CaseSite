@@ -56,10 +56,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     fblogin() {
-        this.accountService.fblogin().then((res) => {
-            console.log(res);
-            this.student = res;
-        });
+        this.accountService.fblogin();
     }
 
     fblogout() {

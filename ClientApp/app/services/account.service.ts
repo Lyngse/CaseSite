@@ -96,7 +96,7 @@ export class AccountService {
         return this.http
             .post('api/account/fblogin', facebookId, this.options)
             .toPromise()
-            .then((res) => { res.json(); console.log(res); })
+            .then((res) => { let result = res.json(); this.loggedStudent.next(result) })
             .catch((err) => {
                 if (err.status == 400) {
                     return this.fb.api('/me?fields=id,last_name,first_name,email')

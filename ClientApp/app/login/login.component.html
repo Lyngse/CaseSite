@@ -28,7 +28,7 @@
         </div>
     </div>
 </div>
-<div class="contentRow" *ngIf="student != null">
+<div class="contentRow" *ngIf="student.id">
     <p>{{ student.firstname }} {{ student.lastname}}</p>
     <img [src]="getUserImage()" style="width: 50px; height: 50px;" />
     <button type="button" class="btn btn-primary" (click)="fblogout()">Log ud</button>
