@@ -69,6 +69,7 @@ export class AccountService {
     fblogin(): Promise<any> {
         return this.fb.getLoginStatus()
             .then((res) => {
+                console.log(res);
                 if (res.authResponse)
                     return this.loginWithFacebook(res.authResponse.userID);
                 else {
@@ -91,36 +92,54 @@ export class AccountService {
 
     loginWithFacebook(facebookId: string): Promise<any> {
         return this.http
-            .post('api/account' + 'fblogin', JSON.stringify({facebookId: facebookId }), this.options)
+            .post('api/account/fblogin', JSON.stringify({facebookId: facebookId }), this.options)
             .toPromise()
-            .then((res) => { let result = res.json(); result.facebookId = facebookId; })
+            .then((res) => { let result = res.json(); result.facebookId = facebookId; console.log(res); })
             .catch((err) => {
-                if (err.status === 404) {
+                if (err.status == 400) {
                     return this.fb.api('/me?fields=id,last_name,first_name,email')
                         .then((res) => {
-                            return this.fbRegister(res.id, res.first_name, res.last_name, res.email);
+                            this.fbRegister(res.id, res.first_name, res.last_name, res.email);
                         })
                         .catch(this.handleError);
                 } else {
-                    return this.handleError(err);
+                   this.handleError(err);
                 }
             });
     }
 
-    fbRegister(facebookId: string, firstname: string, lastname: string, email: string): Promise<any> {
+    fbRegister(facebookId: string, firstname: string, lastname: string, email: string) {
+        this.fbRegisterStudentUser(firstname, lastname, email).subscribe((response) => {
+            if (response.ok) {
+                let userId = response._body;
+                this.fbRegisterStudent(facebookId, firstname, lastname, email, userId).subscribe((res) => {
+                    console.log(res);
+                })
+            }
+        })
+    }
+
+    fbRegisterStudent(facebookId: string, firstname: string, lastname: string, email: string, userId: number): Observable<any> {
         return this.http
-            .post('api/student' + 'registerstudent', JSON.stringify({
+            .post('api/student/registerstudent', JSON.stringify({
                 facebookId: facebookId,
                 firtname: firstname,
                 lastname: lastname,
-                email: email
+                email: email,
+                userId: userId
             }), this.options)
-            .toPromise()
+            .map(res => console.log(res))
+            .catch(this.handleError);
+    }  
+
+    fbRegisterStudentUser(firstname: string, lastname: string, email: string): Observable<any> {
+        let username = /*firstname + lastname*/ "SorenLyng";
+        let password = "s0MecRazyP4sswOrd12";
+        return this.http
+            .post('api/account/registerstudentuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
             .catch(this.handleError);
     }
-
     
-
     loginFacebook(): void {
         const options: LoginOptions = {
             scope: 'public_profile,user_friends,email,pages_show_list',

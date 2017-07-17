@@ -135,23 +135,18 @@ namespace CaseSite.Controllers
 
         [HttpPost("fblogin")]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> FacebookLogin(string facebookId)
+        public async Task<IActionResult> FacebookLogin([FromBody] string facebookId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var student = await _context.Student.SingleOrDefaultAsync(s => s.FacebookId == facebookId);
             if(student == null)
             {
-                Response.StatusCode = 404;
-                return BadRequest(new { usererror = "User not found" });
+                return BadRequest(new { usererror = "User not found"});
             }
             return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, User = student.User });
         }
 
         [HttpPost("registerstudentuser")]
-        public async Task<IActionResult> RegisterStudent([FromBody] string firstname, string lastname, string email)
+        public async Task<IActionResult> RegisterStudent([FromBody] User obj)
         {
             if (!ModelState.IsValid)
             {
@@ -164,11 +159,10 @@ namespace CaseSite.Controllers
                 await _roleManager.CreateAsync(role);
             }
             IdentityUser user = new IdentityUser();
-            user.UserName = firstname + lastname;
-            user.Email = email;
-            var password = "Default123321tluafeD";
+            user.UserName = obj.UserName;
+            user.Email = obj.Email;
 
-            var result = await _userManager.CreateAsync(user, password);
+            var result = await _userManager.CreateAsync(user, obj.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);
