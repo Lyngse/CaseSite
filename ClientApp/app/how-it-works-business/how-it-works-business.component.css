@@ -1,4 +1,60 @@
-﻿.link {
+﻿.hiw-register,
+.hiw-tasktypes,
+.hiw-work{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hiw-price {
+    margin-top: 80px;
+}
+
+.text {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 80px;
+    text-align: center;
+}
+
+.picture {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.picture1 {
+    background-image: url("../../../wwwroot/assets/images/hiw1.jpg");
+}
+
+.picture2 {
+    background-image: url("../../../wwwroot/assets/images/UCN2.png");
+}
+
+.picture3 {
+    background-image: url("../../../wwwroot/assets/images/UCN1.png");
+}
+
+.picture1,
+.picture2,
+.picture3 {
+    width: 300px;
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border-radius: 50%;
+    border: 1px solid black;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+.link {
     color: #FF9800;
     text-decoration: none;
 }
@@ -137,6 +193,28 @@
     .hiw-info {
         width: 90%;
     }
+
+    .text {
+        flex: 1 1 100%;
+        padding: 0 10px;
+    }
+
+    .picture {
+        flex: 1 1 100%;
+    }
+
+    .hiw-register,
+    .hiw-tasktypes,
+    .hiw-work {
+        margin-top: 20px;
+        flex-direction: column;
+    }
+
+    .hiw-tasktypes {
+        flex-direction: column-reverse;
+    }
+
+
 }
 
 /* Extra Small Devices, Phones */
@@ -160,6 +238,24 @@
     .hiw-info {
         width: 90%;
     }
+
+    .text {
+        flex: 1 1 100%;
+    }
+
+    .picture {
+        flex: 1 1 100%;
+    }
+
+    .hiw-register,
+    .hiw-tasktypes,
+    .hiw-work {
+        flex-direction: column;
+    }
+
+    .hiw-tasktypes {
+        flex-direction:column-reverse;
+    }
 }
 
 /* Small Devices, Tablets */
@@ -175,6 +271,11 @@
     .heading2 {
         font-size: 250%;
     }
+
+    .text {
+        padding: 0 10px;
+    }
+
 }
 
 /* Medium Devices, Desktops */
