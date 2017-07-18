@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AccountService } from '../../services/account.service';
 import { BusinessService } from '../../services/business.service';
+import { BlobService } from '../../services/blob.service';
 import { UtilService } from '../../services/util.service';
 import { Business } from '../../model/business';
 import { Task } from '../../model/task';
@@ -27,13 +28,17 @@ export class CreateEditTaskComponent implements AfterViewInit {
     edit: Boolean;
     minuteStep: number = 1;
     model: Task = new Task();
+    formData: FormData = new FormData();
+    filesChanged: boolean = false;
+    @ViewChild('f') form: any;
 
     constructor(private taskService: TaskService,
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
         private businessService: BusinessService,
-        private utilService: UtilService) {
+        private utilService: UtilService,
+        private blobService: BlobService) {
         accountService.loggedIn.subscribe(newValue => {
             if (newValue)
                 this.getBusiness();
@@ -64,7 +69,16 @@ export class CreateEditTaskComponent implements AfterViewInit {
         })
     }
 
-    @ViewChild('f') form: any;
+    fileChange(event) {
+        this.filesChanged = true;
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            for (let i = 0; i < fileList.length; i++) {
+                let file: File = fileList[i];
+                this.formData.append('uploadFile', file, file.name);
+            }
+        }
+    }
 
     onSubmit() {
         if (this.form.valid) {
@@ -77,9 +91,25 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 
                 this.taskService.createTask(this.model).subscribe((data) => {
                     console.log(data);
-                    this.utilService.loading.next(false);
-                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
-                    this.router.navigateByUrl('business');
+                    if (data.id) {
+                        this.blobService.uploadFiles(this.formData, data.id).subscribe((res) => {
+                            if (res.ok) {
+                                this.utilService.loading.next(false);
+                                this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
+                                this.router.navigateByUrl('business');
+                            } else {
+                                this.utilService.loading.next(false);
+                                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
+                            }
+                        }, (err) => {
+                            this.utilService.loading.next(false);
+                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
+                        });
+                    } else {
+                        this.utilService.loading.next(false);
+                        this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgave ikke oprettet" });
+                    }
+                    
                 }, (err) => {
                     this.utilService.loading.next(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgave ikke oprettet" });
@@ -92,9 +122,20 @@ export class CreateEditTaskComponent implements AfterViewInit {
                     this.model.rewardValue = this.formatRewardValue(this.model.rewardValue);
 
                 this.taskService.updateTask(this.model).subscribe((data) => {
-                    this.utilService.loading.next(false);
-                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
-                    this.router.navigateByUrl('business');
+                    this.blobService.uploadFiles(this.formData, this.model.id).subscribe((res) => {
+                        if (res.ok) {
+                            this.utilService.loading.next(false);
+                            this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
+                            this.router.navigateByUrl('business');
+                        } else {
+                            this.utilService.loading.next(false);
+                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
+                        }
+                    }, (err) => {
+                            this.utilService.loading.next(false);
+                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
+                        })
+
                 }, (err) => {
                     this.utilService.loading.next(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgaven blev ikke opdateret" });

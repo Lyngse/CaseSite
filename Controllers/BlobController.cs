@@ -10,6 +10,7 @@ using CaseSite.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -39,7 +40,7 @@ namespace CaseSite.Controllers
 
             if (business == null)
             {
-                return NotFound(new { businessError = "business not found" });
+                return NotFound(new { businessError = "Business not found" });
             }
 
             var httpRequest = HttpContext.Request;
@@ -65,6 +66,68 @@ namespace CaseSite.Controllers
                 return Ok(business.LogoUrl);
             }
             return NotFound();
+        }
+
+        [HttpPost("uploadFiles/{taskId}")]
+        public async Task<IActionResult> PostFile([FromRoute] int taskId)
+        {
+            var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
+            if (task == null)
+            {
+                return NotFound(new { taskError = "Task not found" });
+            }
+
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == task.BusinessId);
+            if (business == null)
+            {
+                return NotFound(new { businessError = "Business not found" });
+            }           
+
+            var httpRequest = HttpContext.Request;
+            if (httpRequest.Form.Files.Count > 0)
+            {
+                foreach (var file in httpRequest.Form.Files)
+                {
+                    CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
+                    await container.CreateIfNotExistsAsync();
+                    CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/tasks/" + task.Id + @"/" + file.FileName);
+                    await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+                    
+                }
+                return Ok();
+            }
+
+            return NotFound();
+        }
+
+        [HttpDelete("deleteFile")]
+        public async Task<IActionResult> DeleteFile([FromBody] int taskId, string fileName)
+        {
+            var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
+            if(task == null)
+            {
+                return NotFound(new { taskError = "Task not found" });
+            }
+
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == task.BusinessId);
+            if(business == null)
+            {
+                return NotFound(new { businessError = "Business not found" });
+            }
+
+            CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
+            await container.CreateIfNotExistsAsync();
+            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+
+            CloudBlockBlob blobToDelete = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetBlockBlobReference(fileName);
+            if(blobToDelete == null)
+            {
+                return NotFound(new { fileError = "File not found" });
+            }
+            await blobToDelete.DeleteAsync();
+            return Ok();
         }
         
     }

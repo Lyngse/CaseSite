@@ -13,6 +13,7 @@ export class BlobService {
 
     private headers = new Headers();
     options = new RequestOptions({ headers: this.headers });
+    
 
     constructor(private http: Http, private router: Router) {
 
@@ -22,6 +23,18 @@ export class BlobService {
         return this.http
             .post('api/blob/uploadlogo/' + id, file, this.options)
             .catch(this.handleError)
+    }
+
+    uploadFiles(files: FormData, taskId: number): Observable<any> {
+        return this.http
+            .post('api/blob/uploadfiles/' + taskId, files, this.options)
+            .catch(this.handleError);
+    }
+
+    deleteFile(taskId: number, fileName: string): Observable<any> {
+        return this.http
+            .delete('api/blob/deletefile' + JSON.stringify({ taskId: taskId, fileName: fileName }), this.options)
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Observable<any> {
