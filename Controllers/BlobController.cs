@@ -44,7 +44,7 @@ namespace CaseSite.Controllers
             }
 
             var httpRequest = HttpContext.Request;
-            if(httpRequest.Form.Files.Count > 0)
+            if (httpRequest.Form.Files.Count > 0)
             {
                 var file = httpRequest.Form.Files[0];
                 CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
@@ -81,7 +81,7 @@ namespace CaseSite.Controllers
             if (business == null)
             {
                 return NotFound(new { businessError = "Business not found" });
-            }           
+            }
 
             var httpRequest = HttpContext.Request;
             if (httpRequest.Form.Files.Count > 0)
@@ -94,7 +94,7 @@ namespace CaseSite.Controllers
 
                     CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/tasks/" + task.Id + @"/" + file.FileName);
                     await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
-                    
+
                 }
                 return Ok();
             }
@@ -102,8 +102,37 @@ namespace CaseSite.Controllers
             return NotFound();
         }
 
-        [HttpDelete("deleteFile")]
+        //Denne er post da angular 2 ikek har support til at kunne sende fileName med i body
+        [HttpPost("deletefile")]
         public async Task<IActionResult> DeleteFile([FromBody] int taskId, string fileName)
+        {
+            var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
+            if (task == null)
+            {
+                return NotFound(new { taskError = "Task not found" });
+            }
+
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == task.BusinessId);
+            if (business == null)
+            {
+                return NotFound(new { businessError = "Business not found" });
+            }
+
+            CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
+            await container.CreateIfNotExistsAsync();
+            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+
+            CloudBlockBlob blobToDelete = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetBlockBlobReference(fileName);
+            if (blobToDelete == null)
+            {
+                return NotFound(new { fileError = "File not found" });
+            }
+            await blobToDelete.DeleteAsync();
+            return Ok();
+        }
+
+        [HttpGet("getfiles/{taskId}")]
+        public async Task<IActionResult> GetFiles([FromRoute] int taskId)
         {
             var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
             if(task == null)
@@ -114,20 +143,18 @@ namespace CaseSite.Controllers
             var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == task.BusinessId);
             if(business == null)
             {
-                return NotFound(new { businessError = "Business not found" });
+                return NotFound(new { businessError = "Busineess not found" });
             }
-
             CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
-            await container.CreateIfNotExistsAsync();
             CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
-
-            CloudBlockBlob blobToDelete = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetBlockBlobReference(fileName);
-            if(blobToDelete == null)
+            var blobs = (await taskFilesDirectory.ListBlobsSegmentedAsync(true, BlobListingDetails.All, 500, null, null, null)).Results;
+    
+            if (blobs == null)
             {
-                return NotFound(new { fileError = "File not found" });
+                return NotFound(new { fileError = "File(s) not found" });
             }
-            await blobToDelete.DeleteAsync();
-            return Ok();
+
+            return Ok(blobs);
         }
         
     }

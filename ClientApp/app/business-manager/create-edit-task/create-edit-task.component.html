@@ -199,6 +199,17 @@
                         <input type="file" multiple id="fileInput" name="fileInput" value="Upload filer" (change)="fileChange($event)">
                         <p class="help-block" style="font-size:16px;">Upload filer til opgaven. Dette kunne være en mere detaljeret opgavebeskrivelse med diverse billeder og links.</p>
                     </div>
+                    <div class="uploaded-files" *ngIf="edit && files">
+                        <div class="file-pill" *ngFor="let file of files">
+                            <div class="file-pill-text">
+                                <p>{{file.fileName}}</p>
+                            </div>
+                            <div class="file-pill-icon" (click)="deleteFile(file.fileName)" tooltip="Slet filen" placement="bottom">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
 
                     <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'. Hvis problemer skulle opstå, så kontakt os på info@unifacto.com.</p>
                     <div class="text-center">

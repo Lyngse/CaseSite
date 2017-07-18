@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class BlobService {
 
-    private headers = new Headers();
+    private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
     
 
@@ -22,7 +22,7 @@ export class BlobService {
     uploadLogo(file: FormData, id: number): Observable<any> {
         return this.http
             .post('api/blob/uploadlogo/' + id, file, this.options)
-            .catch(this.handleError)
+            .catch(this.handleError);
     }
 
     uploadFiles(files: FormData, taskId: number): Observable<any> {
@@ -33,7 +33,14 @@ export class BlobService {
 
     deleteFile(taskId: number, fileName: string): Observable<any> {
         return this.http
-            .delete('api/blob/deletefile' + JSON.stringify({ taskId: taskId, fileName: fileName }), this.options)
+            .post('api/blob/deletefile', JSON.stringify({ taskId: taskId, fileName: fileName }), this.options)
+            .catch(this.handleError);
+    }
+
+    getFiles(taskId: number): Observable<any> {
+        return this.http
+            .get('api/blob/getfiles/' + taskId, this.options)
+            .map(res => res.json())
             .catch(this.handleError);
     }
 

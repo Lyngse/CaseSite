@@ -31,6 +31,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
     formData: FormData = new FormData();
     filesChanged: boolean = false;
     @ViewChild('f') form: any;
+    files: any;
 
     constructor(private taskService: TaskService,
         private route: ActivatedRoute,
@@ -61,6 +62,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                     this.selectedDate = res.deadline.toDate();
                     this.selectedTime = res.deadline.toDate();
                 });
+                this.getFiles(id);
             } else {
                 this.edit = false;
                 this.model.rewardValue = 0;
@@ -162,6 +164,32 @@ export class CreateEditTaskComponent implements AfterViewInit {
             }
             
         });
+    }
+
+    deleteFile(fileName: string) {
+        this.blobService.deleteFile(this.model.id, fileName).subscribe(res => {
+            if (res.ok) {
+                this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet fra opgaven "});
+            }
+        });
+    }
+
+    getFiles(id) {
+        this.utilService.loading.next(true);
+        this.blobService.getFiles(id).subscribe(res => {
+            this.files = res;
+            this.files.forEach((f) => {
+                f.fileName = this.formatFileName(f.name)
+            });
+            console.log(this.files);
+            this.utilService.loading.next(false);
+        }, (err) => {
+            this.utilService.loading.next(false);
+            });
+    }
+
+    formatFileName(filePath: string) {
+        return filePath.slice(filePath.lastIndexOf('/') + 1, filePath.length);
     }
 
     formatRewardValue(rewardValue: number) {
