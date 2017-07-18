@@ -29,6 +29,35 @@
 .hiw-content {
 }
 
+
+.reward {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.reward-icons {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reward-icons i {
+    margin: 10px;
+}
+
+.reward-text {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    text-align: center;
+}
+
 .hiw-headers {
     margin-bottom: 50px;
     padding-top: 40px;
