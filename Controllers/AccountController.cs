@@ -147,7 +147,16 @@ namespace CaseSite.Controllers
         public IActionResult ExternalLogin(string provider)
         {
             // Request a redirect to the external login provider.
-            
+
+            var properties = _loginManager.ConfigureExternalAuthenticationProperties(provider, "/api/account/externallogincallback");
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet("externallogin")]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider)
+        {
+            // Request a redirect to the external login provider.
             
             var properties = _loginManager.ConfigureExternalAuthenticationProperties(provider, "/api/account/externallogincallback");
             return Challenge(properties, provider);
@@ -155,8 +164,12 @@ namespace CaseSite.Controllers
 
         [HttpGet("externallogincallback")]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLoginCallback()
+        public async Task<IActionResult> ExternalLoginCallback(string error_description = null)
         {
+            if(error_description != null)
+            {
+                return BadRequest(error_description);
+            }
             var info = await _loginManager.GetExternalLoginInfoAsync();
             var result = await _loginManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
             if (result.Succeeded)
@@ -172,8 +185,13 @@ namespace CaseSite.Controllers
                     role.Name = "student";
                     await _roleManager.CreateAsync(role);
                 }
-                var email = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
-                
+                var emailClaim = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
+
+                //if (emailClaim == null)
+                //    return BadRequest("No email");
+
+                var email = emailClaim.Value;
+
                 var user = new IdentityUser { UserName = email, Email = email };
                 var result2 = await _userManager.CreateAsync(user);
                 if (result2.Succeeded)

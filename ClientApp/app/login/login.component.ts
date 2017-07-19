@@ -64,4 +64,10 @@ export class LoginComponent implements AfterViewInit {
     forgotPassword() {
         this.router.navigate(['/login/forgotpassword']);
     }
+
+    fblogout() {
+        this.accountService.logout().subscribe(res => {
+            console.log(res);
+        })
+    }
 }
