@@ -147,17 +147,8 @@ namespace CaseSite.Controllers
         public IActionResult ExternalLogin(string provider)
         {
             // Request a redirect to the external login provider.
-
-            var properties = _loginManager.ConfigureExternalAuthenticationProperties(provider, "/api/account/externallogincallback");
-            return Challenge(properties, provider);
-        }
-
-        [HttpGet("externallogin")]
-        [AllowAnonymous]
-        public IActionResult ExternalLogin(string provider)
-        {
-            // Request a redirect to the external login provider.
-            
+            if (Request.Cookies["Identity.External"] != null)
+                return RedirectToAction(nameof(ExternalLoginCallback));
             var properties = _loginManager.ConfigureExternalAuthenticationProperties(provider, "/api/account/externallogincallback");
             return Challenge(properties, provider);
         }
@@ -187,8 +178,8 @@ namespace CaseSite.Controllers
                 }
                 var emailClaim = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
 
-                //if (emailClaim == null)
-                //    return BadRequest("No email");
+                if (emailClaim == null)
+                    return BadRequest("No email");
 
                 var email = emailClaim.Value;
 
