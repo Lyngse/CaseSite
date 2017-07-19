@@ -48,7 +48,7 @@ namespace CaseSite.Controllers
                 var file = httpRequest.Form.Files[0];
                 CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
                 await container.CreateIfNotExistsAsync();
-                CloudBlobDirectory logoDirectory = container.GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("logo");
+                CloudBlobDirectory logoDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("logo");
 
                 var blobs = (await logoDirectory.ListBlobsSegmentedAsync(true, BlobListingDetails.None, 500, null, null, null)).Results;
 
@@ -57,7 +57,7 @@ namespace CaseSite.Controllers
                     await ((CloudBlob)blob).DeleteIfExistsAsync();
                 }
 
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference(business.Id + @"/logo/" + file.FileName);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/logo/" + file.FileName);
                 await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
                 business.LogoUrl = blockBlob.Uri.ToString();
                 _context.Entry(business).State = EntityState.Modified;
