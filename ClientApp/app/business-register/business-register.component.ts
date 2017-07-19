@@ -25,10 +25,11 @@ export class BuisnessRegisterComponent {
     isAccepted: boolean = false;
     loading = false;
     loginFailedMsg: string = "";
-    formData: FormData = new FormData();
+    formData: FormData;
     model: Business = new Business();
     @ViewChild('f') form: any;
     filePreviewPath: SafeUrl;
+    logoAdded: boolean = false;
 
     constructor(private utilService: UtilService,
         private businessService: BusinessService,
@@ -39,12 +40,16 @@ export class BuisnessRegisterComponent {
 
     }
 
+    ngOnInit() {
+        this.formData = new FormData();
+    }
 
     fileChange(event) {
         let fileList: FileList = event.target.files;
         if (fileList.length > 0) {
             let file: File = fileList[0];
             this.formData.append('uploadFile', file, file.name);
+            this.logoAdded = true;
             this.filePreviewPath = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file)));
         }
     }
@@ -56,8 +61,8 @@ export class BuisnessRegisterComponent {
                 if (response.ok) {
                     let userId = response._body;
                     this.businessService.createBusiness(this.model, userId).subscribe((response) => {
-                        this.utilService.loading.next(false);
-                        if (response.id) {
+
+                        if (this.logoAdded) {
                             this.blobService.uploadLogo(this.formData, response.id).subscribe(res => {
                                 this.utilService.loading.next(false);
                                 if (res.ok == true) {
@@ -72,6 +77,10 @@ export class BuisnessRegisterComponent {
                                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Din virksomhed er blevet oprettet, prøv oprettelsen af logo under 'Ret oplysninger'" });
                                 this.router.navigate(['/login']);
                             });
+                        } else {
+                            this.utilService.loading.next(false);
+                            this.router.navigate(['/login']);
+                            this.utilService.alert.next({ type: "success", titel: "Success", message: "Oprettelse lykkedes" });
                         }
                     }, err => {
                         //slet user!

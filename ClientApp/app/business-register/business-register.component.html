@@ -22,9 +22,10 @@
                          'has-success': username.valid && (username.dirty || username.touched)
                          }">
                     <label for="username" class="control-label">Brugernavn *</label>
-                    <input type="text" id="username" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+                    <input type="text" id="username" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required pattern="^[a-zA-Z0-9_]+" />
                     <div class="form-feedback" *ngIf="username.errors && (username.dirty || username.touched)">
                         <p *ngIf="username.errors.required">Brugernavn skal udfyldes</p>
+                        <p *ngIf="username.errors.pattern">Brugernavnet må kun bestå af bogstaver (ikke æ, ø eller å), tal og underscore</p>
                     </div>
                 </div>
 
