@@ -91,7 +91,7 @@ namespace CaseSite.Controllers
         {
             dynamic result = new ExpandoObject();
             result.id = student.Id;
-            result.firname = student.Firstname;
+            result.firstname = student.Firstname;
             result.lastname = student.Lastname;
             result.facebookId = student.FacebookId;
 

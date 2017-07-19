@@ -152,16 +152,6 @@ namespace CaseSite.Controllers
             return Challenge(properties, provider);
         }
 
-        [HttpGet("externallogin")]
-        [AllowAnonymous]
-        public IActionResult ExternalLogin(string provider)
-        {
-            // Request a redirect to the external login provider.
-            
-            var properties = _loginManager.ConfigureExternalAuthenticationProperties(provider, "/api/account/externallogincallback");
-            return Challenge(properties, provider);
-        }
-
         [HttpGet("externallogincallback")]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string error_description = null)

@@ -6,13 +6,13 @@ import { UtilService } from '../services/util.service';
 import { Student } from '../model/student';
 
 @Component({
-    selector: 'student-profile',
-    templateUrl: './student-profile.component.html',
-    styleUrls: ['./student-profile.component.css']
+    selector: 'upload-solution',
+    templateUrl: './upload-solution.component.html',
+    styleUrls: ['./upload-solution.component.css']
 })
-export class StudentProfileComponent implements AfterViewInit {
+export class UploadSolutionComponent implements AfterViewInit {
     student: Student;
-    
+
     constructor(private router: Router, private studentService: StudentService, private accountService: AccountService, private utilService: UtilService) {
         this.accountService.loggedIn.subscribe(newValue => {
             if (newValue === "student")
@@ -26,9 +26,5 @@ export class StudentProfileComponent implements AfterViewInit {
     ngAfterViewInit() {
     }
 
-    getUserImage() {
-        if (this.student) {
-            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=large";
-        }
-    }
+
 }
