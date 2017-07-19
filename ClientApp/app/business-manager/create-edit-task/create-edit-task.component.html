@@ -195,16 +195,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="fileInput" class="control-label">Logo</label>
+                        <label for="fileInput" class="control-label">Upload filer</label>
                         <input type="file" multiple id="fileInput" name="fileInput" value="Upload filer" (change)="fileChange($event)">
-                        <p class="help-block" style="font-size:16px;">Upload filer til opgaven. Dette kunne være en mere detaljeret opgavebeskrivelse med diverse billeder og links.</p>
+                        <p class="help-block" style="font-size:16px;">Upload filer til opgaven. Dette kunne være en mere detaljeret opgavebeskrivelse med diverse billeder og links.<span *ngIf="!edit">Hvis der skal uplaodes flere filer eller nogle skal slettes, kan dette sket på redigeringssiden for opgaven.</span> </p>
                     </div>
-                    <div class="uploaded-files" *ngIf="edit && files">
-                        <div class="file-pill" *ngFor="let file of files">
+                    <div class="uploaded-files" *ngIf="edit && attachmentNames">
+                        <div class="file-pill" *ngFor="let an of attachmentNames">
                             <div class="file-pill-text">
-                                <p>{{file.fileName}}</p>
+                                <p>{{an}}</p>
                             </div>
-                            <div class="file-pill-icon" (click)="deleteFile(file.fileName)" tooltip="Slet filen" placement="bottom">
+                            <div class="file-pill-icon" (click)="deleteAttachment(an)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
                                 <i class="fa fa-times"></i>
                             </div>
                         </div>
@@ -212,7 +212,7 @@
                     </div>
 
                     <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'. Hvis problemer skulle opstå, så kontakt os på info@unifacto.com.</p>
-                    <div class="text-center">
+                    <div class="text-center" style="margin-top:10px;">
                         <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? (!f.dirty || f.invalid) && !filesChanged : f.invalid && !filesChanged" style="margin-bottom:20px">{{edit ? 'Gem opgave' : 'Opret opgave'}}</button>
                     </div>
                 </div>  
