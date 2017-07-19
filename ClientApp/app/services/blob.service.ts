@@ -25,23 +25,30 @@ export class BlobService {
             .catch(this.handleError);
     }
 
-    uploadFiles(files: FormData, taskId: number): Observable<any> {
+    uploadAttachments(files: FormData, taskId: number): Observable<any> {
         return this.http
-            .post('api/blob/uploadfiles/' + taskId, files, this.options)
+            .post('api/blob/uploadattachments/' + taskId, files, this.options)
             .catch(this.handleError);
     }
 
-    deleteFile(taskId: number, fileName: string): Observable<any> {
+    deleteAttachment(taskId: number, fileName: string): Observable<any> {
         var localHeader = new Headers({ 'Content-Type': 'application/json' });
 
         return this.http
-            .post('api/blob/deletefile', JSON.stringify({ taskId: taskId, fileName: fileName }), new RequestOptions({ headers: localHeader }))
+            .post('api/blob/deleteattachment', JSON.stringify({ taskId: taskId, fileName: fileName }), new RequestOptions({ headers: localHeader }))
             .catch(this.handleError);
     }
 
-    getFiles(taskId: number): Observable<any> {
+    getAttachments(taskId: number): Observable<any> {
         return this.http
-            .get('api/blob/getfiles/' + taskId, this.options)
+            .get('api/blob/getattachments/' + taskId, this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    getAttachmentNames(taskId: number): Observable<any> {
+        return this.http
+            .get('api/blob/getattachmentnames/' + taskId, this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }

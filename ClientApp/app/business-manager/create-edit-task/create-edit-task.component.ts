@@ -31,7 +31,8 @@ export class CreateEditTaskComponent implements AfterViewInit {
     formData: FormData = new FormData();
     filesChanged: boolean = false;
     @ViewChild('f') form: any;
-    files: any;
+    attachments: any;
+    attachmentNames: any;
 
     constructor(private taskService: TaskService,
         private route: ActivatedRoute,
@@ -62,7 +63,8 @@ export class CreateEditTaskComponent implements AfterViewInit {
                     this.selectedDate = res.deadline.toDate();
                     this.selectedTime = res.deadline.toDate();
                 });
-                this.getFiles(id);
+                //this.getAttachments(id);
+                this.getAttachmentNames(id);
             } else {
                 this.edit = false;
                 this.model.rewardValue = 0;
@@ -94,7 +96,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.taskService.createTask(this.model).subscribe((data) => {
                     console.log(data);
                     if (data.id) {
-                        this.blobService.uploadFiles(this.formData, data.id).subscribe((res) => {
+                        this.blobService.uploadAttachments(this.formData, data.id).subscribe((res) => {
                             if (res.ok) {
                                 this.utilService.loading.next(false);
                                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
@@ -124,7 +126,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                     this.model.rewardValue = this.formatRewardValue(this.model.rewardValue);
 
                 this.taskService.updateTask(this.model).subscribe((data) => {
-                    this.blobService.uploadFiles(this.formData, this.model.id).subscribe((res) => {
+                    this.blobService.uploadAttachments(this.formData, this.model.id).subscribe((res) => {
                         if (res.ok) {
                             this.utilService.loading.next(false);
                             this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
@@ -166,27 +168,39 @@ export class CreateEditTaskComponent implements AfterViewInit {
         });
     }
 
-    deleteFile(fileName: string) {
-        this.blobService.deleteFile(this.model.id, fileName).subscribe(res => {
+    deleteAttachment(fileName: string) {
+        this.blobService.deleteAttachment(this.model.id, fileName).subscribe(res => {
             if (res.ok) {
-                this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet fra opgaven "});
+                this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet fra opgaven" });
+                this.getAttachmentNames(this.model.id);
             }
         });
     }
 
-    getFiles(id) {
+    /*getAttachments(id) {
         this.utilService.loading.next(true);
-        this.blobService.getFiles(id).subscribe(res => {
-            this.files = res;
-            this.files.forEach((f) => {
+        this.blobService.getAttachments(id).subscribe(res => {
+            this.attachments = res;
+            this.attachments.forEach((f) => {
                 f.fileName = this.formatFileName(f.name)
             });
-            console.log(this.files);
+            //console.log(this.attachments);
             this.utilService.loading.next(false);
         }, (err) => {
             this.utilService.loading.next(false);
             });
+    }*/
+
+    getAttachmentNames(id) {
+        this.blobService.getAttachmentNames(id).subscribe(res => {
+            this.attachmentNames = res;
+            for (let i = 0; i < this.attachmentNames.length; i++) {
+                this.attachmentNames[i] = this.formatFileName(this.attachmentNames[i]);
+            }
+        });  
     }
+
+
 
     formatFileName(filePath: string) {
         return filePath.slice(filePath.lastIndexOf('/') + 1, filePath.length);
