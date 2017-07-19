@@ -18,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { UploadSolutionComponent } from './upload-solution/upload-solution.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -39,6 +40,7 @@ const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'terms', component: TermsComponent },
     { path: 'student', component: StudentProfileComponent },
+    { path: 'uploadsolution', component: UploadSolutionComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -66,4 +68,5 @@ export const routingComponents = [
     ContactComponent,
     TermsComponent,
     StudentProfileComponent,
+    UploadSolutionComponent,
 ]

@@ -1,65 +1,73 @@
-﻿<div class="contentRow">
+﻿<div class="contentRow" *ngIf="student">
     <div class="profile">
         <div class="profile-info">
             <div class="profile-info-box">
-                <div class="profile-info-img">
-                    <img />
-                </div>
+                <img class="profile-img" [src]="getUserImage()"/>
                 <div class="profile-info-name">
-                    <p></p>
+                    <p>{{student.firstname}} {{student.lastname}}</p>
                 </div>
             </div>
         </div>
         <div class="profile-tasks">
             <div class="profile-table">
                 <h2>Aktuelle opgaver</h2>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Titel</th>
-                                <th>Deadline</th>
-                                <th>Belønning</th>
-                                <th>Din besvarelse</th>
-                                <th>Vundet?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Markedsanalyse for Europa</td>
-                                <td>22/3-2017 - 22:00</td>
-                                <td><i class="fa fa-gift"></i> Gave</td>
-                                <td><i class="fa fa-file-text"></i></td>
-                                <td><i class="fa fa-trophy"></i></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Deadline</th>
+                            <th>Belønning</th>
+                            <th>Din besvarelse</th>
+                            <th>Vundet?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Markedsanalyse for Europa</td>
+                            <td>22/3-2017 - 22:00</td>
+                            <td class="reward"><i class="fa fa-gift"></i> Gave</td>
+                            <td class="solution"><i class="fa fa-file-text"></i></td>
+                            <td class="win"><i class="fa fa-trophy"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Markedsanalyse for Europa</td>
+                            <td>22/3-2017 - 22:00</td>
+                            <td class="reward"><i class="fa fa-gift"></i> Gave</td>
+                            <td class="solution"><i class="fa fa-file-text"></i></td>
+                            <td class="win"><i class="fa fa-trophy"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="profile-table">
                 <h2>Tidligere opgaver</h2>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Titel</th>
-                                <th>Deadline</th>
-                                <th>Belønning</th>
-                                <th>Din besvarelse</th>
-                                <th>Vundet?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Markedsanalyse for Europa</td>
-                                <td>22/3-2017 - 22:00</td>
-                                <td><i class="fa fa-gift"></i> Gave</td>
-                                <td><i class="fa fa-file-text"></i></td>
-                                <td><i class="fa fa-trophy"></i></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Deadline</th>
+                            <th>Belønning</th>
+                            <th>Din besvarelse</th>
+                            <th>Vundet?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Markedsanalyse for Europa</td>
+                            <td>22/3-2017 - 22:00</td>
+                            <td class="reward"><i class="fa fa-gift"></i> Gave</td>
+                            <td class="solution"><i class="fa fa-file-text"></i></td>
+                            <td class="win"><i class="fa fa-trophy"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Markedsanalyse for Europa</td>
+                            <td>22/3-2017 - 22:00</td>
+                            <td class="reward"><i class="fa fa-gift"></i> Gave</td>
+                            <td class="solution"><i class="fa fa-file-text"></i></td>
+                            <td class="win"><i class="fa fa-trophy"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
