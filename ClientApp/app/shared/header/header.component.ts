@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
             this.business = res;
             this.utilService.loading.next(false);
         }, err => {
-            this.utilService.loading.next(true);
+            this.utilService.loading.next(false);
             if (err.status !== 401)
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
         });
