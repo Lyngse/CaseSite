@@ -53,6 +53,8 @@ namespace CaseSite.Controllers
                 return NotFound(new { userError = "user not found" });
             }
 
+
+
             var business = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
 
             if (business == null)

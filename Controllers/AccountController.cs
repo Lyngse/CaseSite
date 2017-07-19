@@ -13,6 +13,8 @@ using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.Dynamic;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
+using Microsoft.AspNetCore.Cors;
 
 namespace CaseSite.Controllers
 {
@@ -103,9 +105,16 @@ namespace CaseSite.Controllers
         }
 
         [HttpGet("status")]
-        public IActionResult Status()
+        public async Task<IActionResult> Status()
         {
-        return Ok(_loginManager.IsSignedIn(HttpContext.User));
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user == null)
+                return Ok(new { role = "void" });
+            else if (await _userManager.IsInRoleAsync(user, "business"))
+                return Ok(new { role = "business" });
+            else if (await _userManager.IsInRoleAsync(user, "student"))
+                return Ok(new { role = "student" });
+            return Ok(new { role = "void" });
         }
 
         [HttpPost("logout")]
@@ -133,48 +142,63 @@ namespace CaseSite.Controllers
             
         }
 
-        [HttpPost("fblogin")]
-        [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> FacebookLogin([FromBody] string facebookId)
+        [HttpGet("externallogin")]
+        [AllowAnonymous]
+        public IActionResult ExternalLogin(string provider)
         {
-            var student = await _context.Student.SingleOrDefaultAsync(s => s.FacebookId == facebookId);
-            if(student == null)
-            {
-                return BadRequest(new { usererror = "User not found"});
-            }
-            return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, UserId = student.UserId, FacebookId = facebookId });
+            // Request a redirect to the external login provider.
+            
+            
+            var properties = _loginManager.ConfigureExternalAuthenticationProperties(provider, "/api/account/externallogincallback");
+            return Challenge(properties, provider);
         }
 
-        [HttpPost("registerstudentuser")]
-        public async Task<IActionResult> RegisterStudent([FromBody] User obj)
+        [HttpGet("externallogincallback")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback()
         {
-            if (!ModelState.IsValid)
+            var info = await _loginManager.GetExternalLoginInfoAsync();
+            var result = await _loginManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+            if (result.Succeeded)
             {
-                return BadRequest(ModelState);
+                return Redirect("/login");
             }
-            if (!await _roleManager.RoleExistsAsync("student"))
+            else
             {
-                IdentityRole role = new IdentityRole();
-                role.Name = "student";
-                await _roleManager.CreateAsync(role);
+                // If the user does not have an account, then ask the user to create an account.
+                if (!await _roleManager.RoleExistsAsync("student"))
+                {
+                    IdentityRole role = new IdentityRole();
+                    role.Name = "student";
+                    await _roleManager.CreateAsync(role);
+                }
+                var email = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
+                
+                var user = new IdentityUser { UserName = email, Email = email };
+                var result2 = await _userManager.CreateAsync(user);
+                if (result2.Succeeded)
+                {
+                    result2 = await _userManager.AddLoginAsync(user, info);
+                    if (result2.Succeeded)
+                    {
+                        result2 = await _userManager.AddToRoleAsync(user, "student");
+                        if (result2.Succeeded)
+                        {
+                            await _loginManager.SignInAsync(user, isPersistent: false);
+                            var student = new Student();
+                            student.Firstname = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Value;
+                            student.Lastname = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Value;
+                            student.FacebookId = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+                            student.UserId = user.Id;
+                            var result3 = await new StudentController(_context, _userManager).PostStudent(student);
+                            if (result3 != "success")
+                                return BadRequest(result);
+                            return Redirect("/login");
+                        }
+                    }
+                }
+                return BadRequest(result2.Errors);
             }
-            IdentityUser user = new IdentityUser();
-            user.UserName = obj.UserName;
-            user.Email = obj.Email;
-
-            var result = await _userManager.CreateAsync(user, obj.Password);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "student");
-            if (!roleResult.Succeeded)
-            {
-                return BadRequest(result.Errors);
-            }
-
-            return Ok(user.Id);
         }
 
         [HttpPost("registerbusinessuser")]
@@ -240,3 +264,48 @@ namespace CaseSite.Controllers
 
     }
 }
+
+
+//[HttpPost("fblogin")]
+//[IgnoreAntiforgeryToken]
+//public async Task<IActionResult> FacebookLogin([FromBody] string facebookId)
+//{
+//    var student = await _context.Student.SingleOrDefaultAsync(s => s.FacebookId == facebookId);
+//    if(student == null)
+//    {
+//        return BadRequest(new { usererror = "User not found"});
+//    }
+//    return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, UserId = student.UserId, FacebookId = facebookId });
+//}
+
+//[HttpPost("registerstudentuser")]
+//public async Task<IActionResult> RegisterStudent([FromBody] User obj)
+//{
+//    if (!ModelState.IsValid)
+//    {
+//        return BadRequest(ModelState);
+//    }
+//    if (!await _roleManager.RoleExistsAsync("student"))
+//    {
+//        IdentityRole role = new IdentityRole();
+//        role.Name = "student";
+//        await _roleManager.CreateAsync(role);
+//    }
+//    IdentityUser user = new IdentityUser();
+//    user.UserName = obj.UserName;
+//    user.Email = obj.Email;
+
+//    var result = await _userManager.CreateAsync(user, obj.Password);
+//    if (!result.Succeeded)
+//    {
+//        return BadRequest(result.Errors);
+//    }
+
+//    IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "student");
+//    if (!roleResult.Succeeded)
+//    {
+//        return BadRequest(result.Errors);
+//    }
+
+//    return Ok(user.Id);
+//}

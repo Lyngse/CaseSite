@@ -48,7 +48,6 @@ namespace CaseSite
             {
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 8;
-                o.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ-";
             })
                 .AddEntityFrameworkStores<UnifactoContext>()
                 .AddDefaultTokenProviders();
@@ -78,7 +77,6 @@ namespace CaseSite
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            
             app.UseStaticFiles();
             app.UseIdentity();
             app.Use(next => context =>
@@ -90,6 +88,11 @@ namespace CaseSite
                     context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions { HttpOnly = false });
                 }
                 return next(context);
+            });
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = "113893632577611",
+                AppSecret = "4d86a81233ef0d34e622cab263fc9755"
             });
             app.UseMvc(routes =>
             {

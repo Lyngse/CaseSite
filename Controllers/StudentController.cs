@@ -64,16 +64,16 @@ namespace CaseSite.Controllers
         }
 
         [HttpPost("registerstudent")]
-        public async Task<IActionResult> PostStudent([FromBody] Student student)
+        public async Task<string> PostStudent([FromBody] Student student)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return "BadRequest";
             }
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == student.UserId);
             if (user == null)
             {
-                return BadRequest(new { usererror = "User not found" });
+                return "User not found";
             }
             var serverStudent = await _context.Student.SingleOrDefaultAsync(s => s.FacebookId == student.FacebookId);
             if(serverStudent == null)
@@ -82,9 +82,9 @@ namespace CaseSite.Controllers
                 _context.Student.Add(student);
                 await _context.SaveChangesAsync();
 
-                return CreatedAtAction("GetStudent", new { id = student.Id }, toClientStudent(student));
+                return "success";
             }
-            return BadRequest(new { usererror = "Student already exists" });    
+            return "Student already exists";    
         }
 
         private dynamic toClientStudent(Student student, bool incUser = true)

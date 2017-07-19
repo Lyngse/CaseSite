@@ -1,6 +1,7 @@
 ﻿import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
+import { StudentService } from '../services/student.service';
 import { UtilService } from '../services/util.service';
 import { Student } from '../model/student';
 
@@ -15,22 +16,21 @@ export class LoginComponent implements AfterViewInit {
     password: string = "";
     loginFailedMsg: string = "";
     @ViewChild('f') form: any;
-    student: Student;
+    student: Student = new Student();
 
-    constructor(private accountService: AccountService, private utilService: UtilService, private router: Router) {
+    constructor(private accountService: AccountService, private studentService: StudentService, private utilService: UtilService, private router: Router) {
         this.accountService.loggedIn.subscribe(newValue => {
-            if (newValue)
+            if (newValue === "business")
                 this.router.navigate(['/business']);
-        });
-        this.student = this.accountService.loggedStudent.getValue();
-        this.accountService.loggedStudent.subscribe(newValue => {
-            this.student = newValue;
-            console.log(this.student);
+            if (newValue === "student")
+                this.studentService.getStudentFromUser().subscribe(res => {
+                    console.log(res);
+                    this.student = res;
+                });
         });
     }
 
     ngAfterViewInit() {
-        this.accountService.updateStudent();
     }
 
     onLogin() {
@@ -53,14 +53,6 @@ export class LoginComponent implements AfterViewInit {
 
     newBusiness() {
         this.router.navigate(['/business/register']);
-    }
-
-    fblogin() {
-        this.accountService.fblogin();
-    }
-
-    fblogout() {
-        this.accountService.fblogout();
     }
 
     getUserImage() {

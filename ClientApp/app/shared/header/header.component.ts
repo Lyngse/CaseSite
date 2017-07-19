@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
     constructor(private utilService: UtilService, private accountService: AccountService, private businessService: BusinessService, private router: Router) {
         accountService.loggedIn.subscribe(newValue => {
-            if (newValue)
+            if (newValue === "business")
                 this.getBusiness();
             else
                 this.business = null;

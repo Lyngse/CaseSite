@@ -11,7 +11,6 @@ import { TaskCardComponent } from './tasks/task-list/task-card/task-card.compone
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule } from 'ngx-bootstrap';
-import { FacebookModule } from 'ngx-facebook';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -23,7 +22,6 @@ import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
 import { UtilService } from './services/util.service';
 import { BlobService } from './services/blob.service';
-import { FacebookService } from 'ngx-facebook';
 import { StudentService } from './services/student.service';
 
 @NgModule({
@@ -51,10 +49,9 @@ import { StudentService } from './services/student.service';
         TimepickerModule.forRoot(),
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
-        FacebookModule.forRoot()
 
     ],
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, FacebookService, StudentService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, StudentService]
 })
 export class AppModule {
 }
