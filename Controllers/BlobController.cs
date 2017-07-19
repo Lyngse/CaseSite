@@ -104,7 +104,7 @@ namespace CaseSite.Controllers
 
         //Denne er post da angular 2 ikek har support til at kunne sende fileName med i body
         [HttpPost("deletefile")]
-        public async Task<IActionResult> DeleteFile([FromBody]JObject obj)
+        public async Task<IActionResult> DeleteFile([FromBody] JObject obj)
         {
             int taskId = (int)obj["taskId"];
             string fileName = (string)obj["fileName"];

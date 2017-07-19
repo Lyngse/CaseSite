@@ -14,8 +14,6 @@ namespace CaseSite.Models
 
         public string Lastname { get; set; }
 
-        public string Email { get; set; }
-
         public string FacebookId { get; set; }
 
         public string UserId { get; set; }
