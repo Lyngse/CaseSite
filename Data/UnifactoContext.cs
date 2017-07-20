@@ -15,5 +15,21 @@ namespace CaseSite.Models
         public DbSet<Business> Business { get; set; }
 
         public DbSet<Student> Student { get; set; }
+
+        public DbSet<Solution> Solution { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<Task>()
+                .HasMany(p => p.Solutions)
+                .WithOne(i => i.Task)
+                .HasForeignKey(s => s.TaskId);
+
+            modelBuilder.Entity<Task>()
+                .HasOne(p => p.WinnerSolution);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

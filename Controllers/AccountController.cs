@@ -159,9 +159,14 @@ namespace CaseSite.Controllers
         {
             if(error_description != null)
             {
-                return BadRequest(error_description);
+                return Redirect("/login?error=" + error_description);
             }
             var info = await _loginManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                Response.Cookies.Delete("Identity.External");
+                return RedirectToAction(nameof(ExternalLogin), new { provider = "Facebook" });
+            }
             var result = await _loginManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
             if (result.Succeeded)
             {
@@ -179,7 +184,7 @@ namespace CaseSite.Controllers
                 var emailClaim = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
 
                 if (emailClaim == null)
-                    return BadRequest("No email");
+                    return Redirect("/login?error=noemail");
 
                 var email = emailClaim.Value;
 
@@ -201,12 +206,12 @@ namespace CaseSite.Controllers
                             student.UserId = user.Id;
                             var result3 = await new StudentController(_context, _userManager).PostStudent(student);
                             if (result3 != "success")
-                                return BadRequest(result);
+                                return Redirect("/login?error=" + result3);
                             return Redirect("/login");
                         }
                     }
                 }
-                return BadRequest(result2.Errors);
+                return Redirect("/login?error=" + result2.Errors);
             }
         }
 

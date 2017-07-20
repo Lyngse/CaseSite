@@ -20,7 +20,7 @@ namespace CaseSite.Models
 
         public virtual IdentityUser User { get; set; }
 
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<Solution> Solutions { get; set; }
 
     }
 }

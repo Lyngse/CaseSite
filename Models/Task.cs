@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,6 +34,14 @@ namespace CaseSite.Models
         public string Type { get; set; }
 
         public DateTimeOffset CreationTime { get; set; }
+
+        
+        [ForeignKey("SolutionId")]
+        public int? WinnerSolutionId { get; set; }
+        
+        public virtual Solution WinnerSolution { get; set; }
+
+        public virtual ICollection<Solution> Solutions { get; set; } 
 
         public int BusinessId { get; set; }
 
