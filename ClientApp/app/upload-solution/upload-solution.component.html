@@ -9,13 +9,15 @@
     <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!formData">Upload</button>
 
     <h2>Håndter uploadede løsningsforslag</h2>
-    <div class="uploaded-files" *ngIf="edit && attachmentNames">
-        <div class="file-pill" *ngFor="let s of solutions">
-            <div class="file-pill-text">
-                <p>{{s}}</p>
-            </div>
-            <div class="file-pill-icon" (click)="deleteSolution(s)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
-                <i class="fa fa-times"></i>
+    <div class="uploaded-files" *ngIf="solutions">
+        <div class="display:flex"*ngFor="let s of solutions">
+            <div class="file-pill">
+                <a class="file-pill-text" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
+                    <p>{{s.fileName}}</p>
+                </a>
+                <div class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
+                    <i class="fa fa-times"></i>
+                </div>
             </div>
         </div>
     </div>

@@ -56,12 +56,14 @@ export class BlobService {
     uploadSolution(files: FormData, taskId: number, studentId: number): Observable<any> {
         return this.http
             .post('api/blob/uploadsolution/' + taskId + '/' + studentId, files, this.options)
+            .map(res => res)
             .catch(this.handleError);
     }
 
     deleteSolution(taskId: number, studentId: number, fileName: string): Observable<any> {
+        var localHeader = new Headers({ 'Content-Type': 'application/json' });
         return this.http
-            .post('api/blob/deletesolution', JSON.stringify({ taskId: taskId, studentId: studentId, fileName: fileName }), this.options)
+            .post('api/blob/deletesolution', JSON.stringify({ taskId: taskId, studentId: studentId, fileName: fileName }), new RequestOptions({ headers: localHeader }))
             .catch(this.handleError);
     }
 

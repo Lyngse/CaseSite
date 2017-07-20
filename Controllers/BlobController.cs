@@ -193,7 +193,7 @@ namespace CaseSite.Controllers
         }
 
         [HttpPost("uploadsolution/{taskId}/{studentId}")]
-        public async Task<IActionResult> PostSolution([FromRoute] int taskId, [FromRoute] int studentId)
+        public async Task<IActionResult> UploadSolution([FromRoute] int taskId, [FromRoute] int studentId)
         {
 
             var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
@@ -270,7 +270,7 @@ namespace CaseSite.Controllers
             return Ok();
         }
         [HttpGet("getsolutions/{taskId}/{studentId}")]
-        public async Task<IActionResult> GetSolutions([FromRoute] int taskId, int studentId)
+        public async Task<IActionResult> GetSolutions([FromRoute] int taskId, [FromRoute]int studentId)
         {
             var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
             if (task == null)
