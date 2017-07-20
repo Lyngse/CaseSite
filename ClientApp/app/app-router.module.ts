@@ -40,7 +40,7 @@ const routes: Routes = [
     { path: 'contact', component: ContactComponent },
     { path: 'terms', component: TermsComponent },
     { path: 'student', component: StudentProfileComponent },
-    { path: 'uploadsolution', component: UploadSolutionComponent },
+    { path: 'student/uploadsolution/:taskId', component: UploadSolutionComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 

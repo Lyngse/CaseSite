@@ -62,11 +62,17 @@
                    
                </div>
            </div>
+
+
            
        </div>
    </div>
     <div style="display:flex;justify-content:center;margin-top:5px;">
         <p style="font-size:12px;font-style:italic;color:#BDBDBD;">Unifacto står udelukkende for kontakten mellem den studerende og virksomheden. Virksomheden står selv for udleveringen af belønningen.</p>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:5px;">
+        <button *ngIf="student" type="button" class="btn btn-primary btn-lg" (click)="gotoUploadSolution(task.id)">Upload et løsningsforslag</button>
+        <button *ngIf="!student" type="button" class="btn btn-primary btn-lg" routerLink="/login">Log ind for at uploade løsningsforslag</button>
     </div>
 </div>
 
