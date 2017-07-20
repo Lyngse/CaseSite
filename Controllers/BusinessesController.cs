@@ -65,6 +65,27 @@ namespace CaseSite.Controllers
             return Ok(toClientBusiness(business));
         }
 
+        [HttpGet("withtasks")]
+        [Authorize]
+        public async Task<IActionResult> GetBusinessWithTasks()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+
+            var business = await _context.Business.Include(b => b.Tasks).SingleOrDefaultAsync(b => b.UserId == user.Id);
+
+            if (business == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(toClientBusiness(business));
+        }
+
         // PUT: api/Businesses
         [HttpPut]
         [Authorize]
@@ -153,7 +174,7 @@ namespace CaseSite.Controllers
             return Ok(toClientBusiness(business));
         }
 
-        private dynamic toClientBusiness(Business business, bool incUser = true)
+        static public dynamic toClientBusiness(Business business, bool incUser = true, bool join = true)
         {
             dynamic result = new ExpandoObject();
             result.id = business.Id;
@@ -163,6 +184,16 @@ namespace CaseSite.Controllers
             result.city = business.City;
             result.zip = business.Zip;
             result.logoUrl = business.LogoUrl;
+
+            var tasks = new List<dynamic>();
+            if(business.Tasks != null && join)
+            {
+                foreach (var task in business.Tasks)
+                {
+                    tasks.Add(TasksController.toClientTask(task, join: false));
+                }
+            }
+            result.tasks = tasks;
 
             if (incUser)
             {

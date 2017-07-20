@@ -87,13 +87,23 @@ namespace CaseSite.Controllers
             return "Student already exists";    
         }
 
-        private dynamic toClientStudent(Student student, bool incUser = true)
+        static public dynamic toClientStudent(Student student, bool incUser = true, bool join = true)
         {
             dynamic result = new ExpandoObject();
             result.id = student.Id;
             result.firstname = student.Firstname;
             result.lastname = student.Lastname;
             result.facebookId = student.FacebookId;
+
+            var solutions = new List<dynamic>();
+            if(student.Solutions != null && join)
+            {
+                foreach (var solution in student.Solutions)
+                {
+                    solutions.Add(SolutionController.toClientSolution(solution, join: false));
+                }
+            }
+            result.solutions = solutions;
 
 
             if (incUser)

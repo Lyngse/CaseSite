@@ -71,6 +71,13 @@ export class TaskService {
             .catch(this.handleError);
     }
 
+    getTaskWithBusiness(taskId: number): Observable<Task> {
+        return this.http
+            .get('api/tasks/withbusiness/' + taskId, this.options)
+            .map(res => this.extractData(res))
+            .catch(this.handleError);
+    }
+
     createTask(t: Task): Observable<Task> {
         let task = {
             Id: t.id,
@@ -93,12 +100,7 @@ export class TaskService {
             .catch(this.handleError);
     }
 
-    getTasksForBusiness(): Observable<Task[]> {
-        return this.http
-            .get('api/tasks/business', this.options)
-            .map(res => this.extractData(res))
-            .catch(this.handleError);
-    }
+
 
     private extractData(res: Response) {
         var data = res.json();

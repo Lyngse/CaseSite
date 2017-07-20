@@ -43,7 +43,7 @@ namespace CaseSite.Controllers
         {
             var tasks = new List<dynamic>();
 
-            foreach(var task in _context.Task.Include(j => j.Business).OrderByDescending(t => t.CreationTime).Where(t => t.Deadline > DateTimeOffset.Now).Take(3).ToList())
+            foreach (var task in _context.Task.Include(j => j.Business).OrderByDescending(t => t.CreationTime).Where(t => t.Deadline > DateTimeOffset.Now).Take(3).ToList())
             {
                 tasks.Add(toClientTask(task));
             }
@@ -68,6 +68,19 @@ namespace CaseSite.Controllers
             }
 
             return Ok(task);
+        }
+
+        [HttpGet("withbusiness/{taskId}")]
+        public async Task<IActionResult> GetTaskWithBusiness([FromRoute] int taskId)
+        {
+            var task = await _context.Task.Include(t => t.Business).SingleOrDefaultAsync(m => m.Id == taskId);
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(toClientTask(task));
         }
 
         // PUT: api/Jobs/5
@@ -152,44 +165,30 @@ namespace CaseSite.Controllers
             return Ok(task);
         }
 
+        private async Task<Business> getBusiness()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return await _context.Business.Include(b => b.Tasks).FirstOrDefaultAsync(b => b.UserId == user.Id);
+        }
+
         private bool JobExists(int id)
         {
             return _context.Task.Any(e => e.Id == id);
         }
 
-        
-        [HttpGet("business")]
-        [Authorize]
-        public async Task<IActionResult> GetTasksFromBusiness()
+        static public dynamic toClientTask(Models.Task t, bool join = true)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var business = await getBusiness();
-
-            if (business == null)
-                return NotFound();
-
-            var tasks = new List<dynamic>();
-
-            foreach (var task in business.Tasks)
-            {
-                tasks.Add(toClientTask(task));
-            }
-
-            return Ok(tasks);
-        }
-
-        private async Task<Business> getBusiness()
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            return await _context.Business.Include(b => b.Tasks).FirstOrDefaultAsync(b => b.UserId == user.Id);
-
             
-        }
+            var solutions = new List<dynamic>();
+            if(t.Solutions != null && join)
+            {
+                foreach (var Solution in t.Solutions)
+                {
+                    solutions.Add(SolutionController.toClientSolution(Solution));
+                }
+            }
+            
 
-        private dynamic toClientTask(Models.Task t)
-        {
             return new
             {
                 id = t.Id,
@@ -201,13 +200,15 @@ namespace CaseSite.Controllers
                 workPlace = t.WorkPlace,
                 type = t.Type,
                 businessId = t.BusinessId,
-                businessName = t.Business == null ? null : t.Business.Name,
-                businessLogoUrl = t.Business == null ? null : t.Business.LogoUrl,
+                business = t.Business == null || !join ? null : BusinessesController.toClientBusiness(t.Business, incUser: false, join: false),
                 address = t.Address,
                 zip = t.Zip,
                 city = t.City,
                 creationTime = t.CreationTime,
-                contactDescription = t.ContactDescription
+                contactDescription = t.ContactDescription,
+                winnerSolutionId = t.WinnerSolutionId,
+                winnerSolution = t.WinnerSolution == null || !join ? null : SolutionController.toClientSolution(t.WinnerSolution, join: false),
+                solutions = solutions
             };
         }
     }

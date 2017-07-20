@@ -53,6 +53,13 @@ export class BusinessService {
             .catch(this.handleError);
     }
 
+    getBusinessWithTasks(): Observable<Business> {
+        return this.http
+            .get('api/businesses/withtasks', this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     getBusinessFromId(id: number): Observable<Business> {
         return this.http
             .get('api/businesses/' + id, this.options)

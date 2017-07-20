@@ -53,23 +53,19 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
             let id = params['id'];
             if (id) {
                 this.utilService.loading.next(true);
-                this.taskService.getTask(id).subscribe(res => {
-                    if (res.id) {
+                this.taskService.getTaskWithBusiness(id).subscribe(res => {
+                    if (res.id && res.business) {
                         this.task = res;
-                        this.businessService.getBusinessFromId(res.businessId).subscribe(res => {
-                            if (res.id) {
-                                this.business = res
-                                this.getAttachments(id);
-                            } else {
-                                this.utilService.loading.next(false);
-                                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde den tilknyttede virksomhed" });
-                            }                          
-                        });
+                        this.business = res.business;
+                        this.getAttachments(res.business.id);
                     } else {
                         this.utilService.loading.next(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                     }
                     
+                }, (err) => {
+                    this.utilService.loading.next(false);
+                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                 });
             }
         });

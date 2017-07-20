@@ -104,7 +104,7 @@ export class TasksComponent implements OnInit {
             filterTasks = filterTasks.filter(t =>
                 t.title.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1
                 ||
-                t.businessName.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1);
+                t.business.name.toLowerCase().search(this.filterValues.search.toLowerCase()) > -1);
         if (this.filterValues.types.length > 0)
             filterTasks = filterTasks.filter(t => this.filterValues.types.indexOf(t.type) > -1);
         if (this.filterValues.rewards.length > 0) 

@@ -39,6 +39,7 @@ export class BusinessEditComponent implements AfterViewInit {
         this.utilService.loading.next(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.model = res;
+            console.log(res);
             this.utilService.loading.next(false);
         }, err => {
             this.utilService.loading.next(false);

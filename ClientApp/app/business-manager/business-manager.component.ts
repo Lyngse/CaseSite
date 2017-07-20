@@ -30,9 +30,9 @@ export class BusinessManagerComponent{
 
     ngAfterViewInit() {
         this.utilService.loading.next(true);
-        this.taskService.getTasksForBusiness().subscribe((data) => {
+        this.businessService.getBusinessWithTasks().subscribe((data) => {
             this.utilService.loading.next(false);
-            this.tasks = data;
+            this.tasks = data.tasks;
             this.tasks.reverse();
         }, (err) => {
             this.utilService.loading.next(false);
