@@ -1,11 +1,14 @@
 ﻿import { Component, AfterViewInit, Input, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from '../../model/business';
 import { Task } from '../../model/task';
+import { Student } from '../../model/student';
 import { BusinessService } from '../../services/business.service';
 import { TaskService } from '../../services/task.service';
 import { BlobService } from '../../services/blob.service';
 import { UtilService } from '../../services/util.service';
+import { StudentService } from '../../services/student.service';
+import { AccountService } from '../../services/account.service';
 import * as moment from 'moment';
 
 @Component({
@@ -19,15 +22,25 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     task: Task;
     business: Business;
     attachments: any;
+    student: Student;
 
     constructor(
         private businessService: BusinessService,
         private taskService: TaskService,
         private route: ActivatedRoute,
         private utilService: UtilService,
-        private blobService: BlobService
+        private blobService: BlobService,
+        private studentService: StudentService,
+        private accountService: AccountService,
+        private router: Router
     ) {
-
+        this.accountService.loggedIn.subscribe(newValue => {
+            if (newValue === "student")
+                this.studentService.getStudentFromUser().subscribe(res => {
+                    console.log(res);
+                    this.student = res;
+                });
+        });
     }
 
     ngOnChanges(changes) {
@@ -83,5 +96,9 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
         if (this.task) {
             return this.task.deadline.format('HH:mm - DD/MM-YYYY');
         }
+    }
+
+    gotoUploadSolution(taskId) {
+        this.router.navigate(['/student/uploadsolution/' + taskId]);
     }
 }

@@ -1,11 +1,23 @@
 ﻿<div class="contentRow">
     <h2>Upload løsningsforslag</h2>
     <div class="form-group">
-        <label for="exampleInputFile">File input</label>
-        <input type="file" id="exampleInputFile">
+        <label for="fileInput">Upload filer til dit løsningsforslag</label>
+        <input type="file" multiple id="fileInput" name="fileInput" value="Upload filer" (change)="fileChange($event)">
         <p class="help-block">Example block-level help text here.</p>
     </div>
 
-    <button type="button" class="btn btn-success">Upload</button>
+    <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!formData">Upload</button>
+
+    <h2>Håndter uploadede løsningsforslag</h2>
+    <div class="uploaded-files" *ngIf="edit && attachmentNames">
+        <div class="file-pill" *ngFor="let s of solutions">
+            <div class="file-pill-text">
+                <p>{{s}}</p>
+            </div>
+            <div class="file-pill-icon" (click)="deleteSolution(s)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+    </div>
 
 </div>

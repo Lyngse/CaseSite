@@ -53,6 +53,25 @@ export class BlobService {
             .catch(this.handleError);
     }
 
+    uploadSolution(files: FormData, taskId: number, studentId: number): Observable<any> {
+        return this.http
+            .post('api/blob/uploadsolution/' + taskId + '/' + studentId, files, this.options)
+            .catch(this.handleError);
+    }
+
+    deleteSolution(taskId: number, studentId: number, fileName: string): Observable<any> {
+        return this.http
+            .post('api/blob/deletesolution', JSON.stringify({ taskId: taskId, studentId: studentId, fileName: fileName }), this.options)
+            .catch(this.handleError);
+    }
+
+    getSolutions(taskId: number, studentId: number): Observable<any> {
+        return this.http
+            .get('api/blob/getsolutions/' + taskId + '/' + studentId, this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     private handleError(error: any): Observable<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Observable.throw(error.message || error)
