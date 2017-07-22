@@ -26,8 +26,11 @@ namespace CaseSite.Controllers
         }
 
         [HttpPost("createsolution")]
-        public async Task<IActionResult> CreateSolution(int studentId, int taskId)
+        public async Task<IActionResult> CreateSolution([FromBody] JObject obj)
         {
+            int studentId = (int)obj["studentId"];
+            int taskId = (int)obj["taskId"];
+
             var student = await _context.Student.SingleOrDefaultAsync(s => s.Id == studentId);
             if(student == null)
             {
@@ -40,21 +43,27 @@ namespace CaseSite.Controllers
                 return NotFound(new { taskError = "Task not found" });
             }
 
-            Solution solution = new Solution();
-            solution.Student = student;
-            solution.StudentId = student.Id;
-            solution.Task = task;
-            solution.TaskId = task.Id;
-            solution = _context.Solution.Add(solution).Entity;
-            student.Solutions.Add(solution);
-            task.Solutions.Add(solution);
-            _context.Entry(student).State = EntityState.Modified;
-            _context.Entry(task).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var serverSolution = await _context.Solution.SingleOrDefaultAsync(s => s.StudentId == studentId && s.TaskId == taskId);
+            if(serverSolution == null)
+            {
+                Solution solution = new Solution();
+                solution.Student = student;
+                solution.StudentId = student.Id;
+                solution.Task = task;
+                solution.TaskId = task.Id;
+                solution = _context.Solution.Add(solution).Entity;
+                student.Solutions.Add(solution);
+                task.Solutions.Add(solution);
+                _context.Entry(student).State = EntityState.Modified;
+                _context.Entry(task).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
 
-            return Created("", toClientSolution(solution));
 
+                return Created("", toClientSolution(solution));
+            }
+            return Ok();
         }
+
 
         [HttpGet("gettasksolutions/{taskId}")]
         public async Task<IActionResult> GetTaskSolutions([FromRoute] int taskId)
@@ -91,8 +100,7 @@ namespace CaseSite.Controllers
                 return NotFound(new { studentError = "Student not found" });
             }
 
-
-            return NotFound(new { notAllowed = "Not allowed" });
+            return Ok(solutions);
         }
 
         private async Task<Student> getStudent()

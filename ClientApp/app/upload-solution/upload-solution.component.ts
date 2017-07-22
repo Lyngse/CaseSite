@@ -4,6 +4,7 @@ import { AccountService } from '../services/account.service';
 import { StudentService } from '../services/student.service';
 import { UtilService } from '../services/util.service';
 import { BlobService } from '../services/blob.service';
+import { SolutionService } from '../services/solution.service';
 import { Student } from '../model/student';
 
 @Component({
@@ -24,17 +25,19 @@ export class UploadSolutionComponent implements AfterViewInit {
         private accountService: AccountService,
         private utilService: UtilService,
         private blobService: BlobService,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private solutionService: SolutionService) {
         this.accountService.loggedIn.subscribe(newValue => {
             if (newValue === "student")
                 this.studentService.getStudentFromUser().subscribe(res => {
                     console.log(res);
                     this.student = res;
                     if (this.taskId && this.student.id && !this.solutionsLoaded) {
-                        this.getSolutions();
+                        this.getSolutionFiles();
                     }
                 });
         });
+        this.solutionService
     }
 
     ngAfterViewInit() {
@@ -61,7 +64,10 @@ export class UploadSolutionComponent implements AfterViewInit {
 
     uploadSolution() {
         this.utilService.loading.next(true);
-        this.blobService.uploadSolution(this.formData, this.taskId, this.student.id).subscribe(res => {
+        this.solutionService.createSolution(this.student.id, this.taskId).subscribe(res => {
+            console.log(res);
+        });
+        this.blobService.uploadSolutionFiles(this.formData, this.taskId, this.student.id).subscribe(res => {
             console.log(res);
             if (res.ok) {
                 this.utilService.loading.next(false);
@@ -77,9 +83,9 @@ export class UploadSolutionComponent implements AfterViewInit {
             });
     }
 
-    getSolutions() {
+    getSolutionFiles() {
         this.utilService.loading.next(true);
-        this.blobService.getSolutions(this.taskId, this.student.id).subscribe(res => {
+        this.blobService.getSolutionFiles(this.taskId, this.student.id).subscribe(res => {
             if (res != null) {
                 this.utilService.loading.next(false);
                 this.solutions = res;
@@ -97,11 +103,11 @@ export class UploadSolutionComponent implements AfterViewInit {
 
     deleteSolution(fileName: string) {
         this.utilService.loading.next(true);
-        this.blobService.deleteSolution(this.taskId, this.student.id, fileName).subscribe(res => {
+        this.blobService.deleteSolutionFile(this.taskId, this.student.id, fileName).subscribe(res => {
             if (res.ok) {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet" });
-                this.getSolutions();
+                this.getSolutionFiles();
             } else {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, filen kunne ikke slettes" });
