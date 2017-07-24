@@ -1,18 +1,20 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, AfterViewInit } from '@angular/core';
 import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { TaskService } from '../services/task.service';
 import { UtilService } from '../services/util.service';
 import { Router } from '@angular/router';
 import { Task } from '../model/task';
+import * as moment from 'moment';
 
 @Component({
     selector: 'business-manager',
     templateUrl: './business-manager.component.html',
     styleUrls: ['./business-manager.component.css']
 })
-export class BusinessManagerComponent{
-    tasks: Task[];
+export class BusinessManagerComponent implements AfterViewInit {
+    tasks: Task[] = [];
+    pastTasks: Task[] = [];
 
     constructor(private businessService: BusinessService,
         private accountService: AccountService,
@@ -31,9 +33,19 @@ export class BusinessManagerComponent{
     ngAfterViewInit() {
         this.utilService.loading.next(true);
         this.businessService.getBusinessWithTasks().subscribe((data) => {
+            if (data.tasks.length > 0) {
+
+                let now = moment();
+                console.log(data.tasks);
+                data.tasks.forEach(t => {
+                    if (t.deadline.isAfter(now))
+                        this.tasks.push(t);
+                    else
+                        this.pastTasks.push(t);
+                });
+            }
             this.utilService.loading.next(false);
-            this.tasks = data.tasks;
-            this.tasks.reverse();
+
         }, (err) => {
             this.utilService.loading.next(false);
 
@@ -48,6 +60,10 @@ export class BusinessManagerComponent{
 
     handleEditTask(id) {
         this.router.navigateByUrl("business/createedittask/" + id);
+    }
+
+    gotoSolutionsView(taskId) {
+        this.router.navigateByUrl("business/solutions/" + taskId);
     }
 
 }
