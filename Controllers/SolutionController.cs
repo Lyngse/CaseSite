@@ -82,7 +82,8 @@ namespace CaseSite.Controllers
 
             if(task.BusinessId == business.Id)
             {
-                return Ok(task);
+                task.Solutions = await _context.Solution.Where(s => s.TaskId == task.Id).ToListAsync();
+                return Ok(task.Solutions);
             }
 
             return NotFound(new { notAllowed = "Not allowed" });
