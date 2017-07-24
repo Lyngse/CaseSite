@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using System.IO.Compression;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -300,6 +301,50 @@ namespace CaseSite.Controllers
             }
 
             return Ok(blobs);
+        }
+
+        [HttpPost("downloadSolutionAsZip")]
+        public async Task<IActionResult> DownloadSolutionAsZip([FromBody] JObject obj)
+        {
+            int taskId = (int)obj["taskId"];
+            int studentId = (int)obj["studentId"];
+
+            var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
+            if (task == null)
+            {
+                return NotFound(new { taskError = "Task not found" });
+            }
+
+            var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == task.BusinessId);
+            if (business == null)
+            {
+                return NotFound(new { businessError = "Busineess not found" });
+            }
+
+            var student = await _context.Student.SingleOrDefaultAsync(s => s.Id == studentId);
+            if (student == null)
+            {
+                return NotFound(new { studentError = "Student not found" });
+            }
+
+            CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
+            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetDirectoryReference("solutions").GetDirectoryReference(student.Id.ToString());
+            var blobs = (await taskFilesDirectory.ListBlobsSegmentedAsync(true, BlobListingDetails.All, 500, null, null, null)).Results;
+
+            List<string> fileNames = new List<string>();
+            foreach (var blob in blobs)
+            {
+                string name = (blob as CloudBlob).Name.Remove(0, (blob as CloudBlob).Name.LastIndexOf('/'));
+                fileNames.Add(name);
+            }
+
+            foreach (var fileName in fileNames)
+            {
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/tasks/" + task.Id + @"/solutions/" + student.Id + @"/" + fileName);
+
+            }
+
+            return Ok();
         }
     }
 }

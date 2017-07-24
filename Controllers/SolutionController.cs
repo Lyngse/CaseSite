@@ -82,8 +82,7 @@ namespace CaseSite.Controllers
 
             if(task.BusinessId == business.Id)
             {
-
-                return Ok(task.Solutions);
+                return Ok(task);
             }
 
             return NotFound(new { notAllowed = "Not allowed" });
