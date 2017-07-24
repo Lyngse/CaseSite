@@ -39,6 +39,12 @@ namespace CaseSite.Controllers
                 return NotFound();
             }
 
+            student.Solutions = await _context.Solution.Where(s => s.StudentId == student.Id).ToListAsync();
+            foreach (var s in student.Solutions)
+            {
+                s.Task = await _context.Task.SingleOrDefaultAsync(t => t.Id == s.TaskId);
+            }
+
             return Ok(toClientStudent(student, false));
         }
 
@@ -58,6 +64,12 @@ namespace CaseSite.Controllers
             if (student == null)
             {
                 return NotFound();
+            }
+
+            student.Solutions = await _context.Solution.Where(s => s.StudentId == student.Id).ToListAsync();
+            foreach (var s in student.Solutions)
+            {
+                s.Task = await _context.Task.SingleOrDefaultAsync(t => t.Id == s.TaskId);
             }
 
             return Ok(toClientStudent(student));

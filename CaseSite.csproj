@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot/assets\images\test.jpg" />
+    <Content Remove="wwwroot/dist.zip" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="wwwroot\assets\font-awesome\css\font-awesome.css" />

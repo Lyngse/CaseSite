@@ -2,7 +2,9 @@
 import { AccountService } from '../../services/account.service';
 import { BusinessService } from '../../services/business.service';
 import { UtilService } from '../../services/util.service';
+import { StudentService } from '../../services/student.service';
 import { Business } from '../../model/business';
+import { Student } from '../../model/student';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 
@@ -13,20 +15,32 @@ import * as $ from 'jquery';
 })
 export class HeaderComponent implements OnInit {
     business: Business;
+    student: Student;
 
-    constructor(private utilService: UtilService, private accountService: AccountService, private businessService: BusinessService, private router: Router) {
+    constructor(private utilService: UtilService, private accountService: AccountService, private businessService: BusinessService, private router: Router, private studentService: StudentService) {
         accountService.loggedIn.subscribe(newValue => {
             if (newValue === "business")
                 this.getBusiness();
             else
                 this.business = null;
-        })
+        });
+        this.accountService.loggedIn.subscribe(newValue => {
+            if (newValue === "student")
+                this.studentService.getStudentFromUser().subscribe(res => {
+                    console.log(res);
+                    this.student = res;
+                });
+        });
     }
 
     ngOnInit() {
     }
 
-    
+    getUserImage() {
+        if (this.student) {
+            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
+        }
+    }
 
     getBusiness() {
         this.utilService.loading.next(true);

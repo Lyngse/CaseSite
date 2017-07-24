@@ -41,7 +41,16 @@
                         <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
-                <li *ngIf="!business"><a routerLink="/login">Virksomhedslogin</a></li>
+                <li *ngIf="!business && !student"><a routerLink="/login">Log ind</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right nav-student">
+                <li *ngIf="student" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img [src]="getUserImage()" class="student-img" /> {{student.firstname}} {{student.lastname}} <span class="caret"></span></a>
+                    <ul class="dropdown-menu nav-student-dropdown" role="menu">
+                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/student">Mine løsningsforslag</a></li>
+                        <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

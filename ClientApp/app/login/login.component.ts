@@ -69,12 +69,6 @@ export class LoginComponent implements AfterViewInit {
         this.router.navigate(['/business/register']);
     }
 
-    getUserImage() {
-        if (this.student) {
-            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
-        }
-    }
-
     forgotPassword() {
         this.router.navigate(['/login/forgotpassword']);
     }
