@@ -170,7 +170,7 @@ namespace CaseSite.Controllers
             var result = await _loginManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
             if (result.Succeeded)
             {
-                return Redirect("/login");
+                return Redirect("/student");
             }
             else
             {

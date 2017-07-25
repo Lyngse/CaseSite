@@ -43,7 +43,7 @@
                 </li>
                 <li *ngIf="!business && !student"><a routerLink="/login">Log ind</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right nav-student">
+            <ul *ngIf="student" class="nav navbar-nav navbar-right nav-student">
                 <li *ngIf="student" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img [src]="getUserImage()" class="student-img" /> {{student.firstname}} {{student.lastname}} <span class="caret"></span></a>
                     <ul class="dropdown-menu nav-student-dropdown" role="menu">

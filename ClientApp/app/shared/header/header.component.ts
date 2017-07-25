@@ -19,17 +19,25 @@ export class HeaderComponent implements OnInit {
 
     constructor(private utilService: UtilService, private accountService: AccountService, private businessService: BusinessService, private router: Router, private studentService: StudentService) {
         accountService.loggedIn.subscribe(newValue => {
-            if (newValue === "business")
+            if (newValue === "business") {
                 this.getBusiness();
-            else
+                this.student = null;
+            }
+            else if (newValue === "student") {
                 this.business = null;
-        });
-        this.accountService.loggedIn.subscribe(newValue => {
-            if (newValue === "student")
                 this.studentService.getStudentFromUser().subscribe(res => {
                     console.log(res);
                     this.student = res;
                 });
+            }
+            else {
+                this.business = null;
+                this.student = null;
+            }
+                
+        });
+        this.accountService.loggedIn.subscribe(newValue => {
+            
         });
     }
 
