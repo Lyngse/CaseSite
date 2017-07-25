@@ -41,6 +41,12 @@ export class SolutionService {
             .catch(this.handleError);
     }
 
+    selectWinner(taskId: number, studentId: number): Observable<any> {
+        return this.http
+            .post('api/solutions/selectwinner', JSON.stringify({ taskId: taskId, studentId: studentId }), this.options)
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         var data = res.json();
         if (!data) {

@@ -87,7 +87,7 @@ namespace CaseSite.Controllers
             
             foreach (var t in tasks)
             {
-                t.Solutions = await _context.Solution.Where(s => s.Id == t.Id).ToListAsync();
+                t.Solutions = await _context.Solution.Where(s => s.TaskId == t.Id).ToListAsync();
                 foreach (var s in t.Solutions)
                 {
                     s.Student = await _context.Student.SingleOrDefaultAsync(st => st.Id == s.StudentId);
