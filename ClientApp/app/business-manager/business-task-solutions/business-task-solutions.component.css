@@ -57,3 +57,9 @@ td, th {
 .task-reward {
     flex: 0 0 100%;
 }
+
+.modal-buttons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}

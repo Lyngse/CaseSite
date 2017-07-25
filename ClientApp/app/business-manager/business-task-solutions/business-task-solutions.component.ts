@@ -21,7 +21,6 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
     task: Task;
     solutions: Solution[] = [];
     winnerSolution: Solution;
-    winnerChosen: boolean;
 
     constructor(private businessService: BusinessService,
         private route: ActivatedRoute,
@@ -42,21 +41,7 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
         this.route.params.subscribe(params => {
             let id = params['id'];
             if (id) {
-                this.utilService.loading.next(true);
-                this.taskService.getTask(id).subscribe(res => {
-                    this.utilService.loading.next(false);
-                    this.task = res;
-                    console.log(this.task);
-                    this.solutionService.getTaskSolutions(id).subscribe(data => {
-                        this.utilService.loading.next(false);
-                        this.solutions = data;
-                        for (let i = 0; i < this.solutions.length; i++) {
-                            if (this.task.winnerSolutionId != null)
-                                this.winnerChosen = true; 
-                            else this.winnerChosen = false;
-                        }
-                    });
-                });
+                this.getTasksAndSolutions(id);
             }
         });
     }
@@ -88,9 +73,9 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
         this.utilService.loading.next(true);
         this.solutionService.selectWinner(this.task.id, studentId).subscribe(res => {
             if (res.ok) {
+                this.getTasksAndSolutions(this.task.id);
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "sucess", titel: "Succes", message: "Vinder af opgaven er blevet valgt" });
-                this.winnerChosen = true;
             } else {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
@@ -99,5 +84,18 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
             });
+    }
+
+    getTasksAndSolutions(id) {
+        this.utilService.loading.next(true);
+        this.taskService.getTask(id).subscribe(res => {
+            this.utilService.loading.next(false);
+            this.task = res;
+            console.log(this.task);
+            this.solutionService.getTaskSolutions(id).subscribe(data => {
+                this.utilService.loading.next(false);
+                this.solutions = data;
+            });
+        });
     }
 }

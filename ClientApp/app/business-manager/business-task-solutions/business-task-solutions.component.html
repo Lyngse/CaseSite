@@ -1,4 +1,4 @@
-﻿<div class="contentRow" *ngIf="business">
+﻿<div class="contentRow" *ngIf="business && task">
     <div class="business-and-description">
         <div class="business-logo">
             <img class="business-img" [src]="business.logoUrl" />
@@ -35,10 +35,36 @@
                 <tr *ngFor="let s of solutions">
                     <td> {{s.student.firstname}} {{s.student.lastname}} </td>
                     <td> {{s.student.user.email}} </td>
-                    <td> <label *ngIf="!winnerChosen"><button (click)="submitWinner(s.studentId)">Vælg som vinder</button></label> <label *ngIf="task.winnerSolutionId == s.id"><a> This is the winner </a></label> <label *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"><a>  </a></label> </td>
+                    <td> 
+                        <div *ngIf="task.winnerSolutionId == null">
+                            <button type="button" class="btn btn-primary" (click)="smModal.show()">Vælg som vinder</button>
+
+                                <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title pull-left">Small modal</h4>
+                                                <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Er dette den rette vinder? <br />
+                                                {{s.student.firstname}} {{s.student.lastname}} <br />
+                                                <div class="modal-buttons">
+                                                    <button type="button" class="btn btn-primary" (click)="submitWinner(s.studentId)"> Ja </button>
+                                                    <button type="button" class="btn btn-danger" (click)="smModal.hide()"> Nej </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <label *ngIf="task.winnerSolutionId == s.id"><a> This is the winner </a></label> <label *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"><a>  </a></label>    
+                        </td>
                     <td> Link til download </td>
                 </tr>
             </tbody>
-        </table>
+        </table> 
     </div>
 </div>
