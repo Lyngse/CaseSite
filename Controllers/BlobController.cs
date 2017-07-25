@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System.IO.Compression;
+using System.IO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -341,7 +342,10 @@ namespace CaseSite.Controllers
             foreach (var fileName in fileNames)
             {
                 CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/tasks/" + task.Id + @"/solutions/" + student.Id + @"/" + fileName);
-
+                using(var memoryStream = new MemoryStream())
+                {
+                    await blockBlob.DownloadToStreamAsync(memoryStream);
+                }
             }
 
             return Ok();
