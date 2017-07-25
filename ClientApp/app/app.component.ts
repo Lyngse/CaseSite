@@ -8,6 +8,7 @@ import {
     transition
 } from '@angular/core';
 import { UtilService } from './services/util.service';
+import { CookieService } from 'angular2-cookie/core';
 import * as moment from 'moment';
 
 @Component({
@@ -28,8 +29,9 @@ import * as moment from 'moment';
 export class AppComponent {
     loading = false;
     alerts = [];
+    acceptCookie = false;
 
-    constructor(private utilService: UtilService) {
+    constructor(private utilService: UtilService, private cookieService: CookieService) {
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
             if (newValue.titel && newValue.type) {
@@ -43,6 +45,19 @@ export class AppComponent {
             else
                 this.loading = false;
         });
+        if (this.cookieService.get("AcceptCookies") != "Accept") {
+            this.acceptCookie = false;
+        } else {
+            this.acceptCookie = true;
+        }
+        
+    }
+
+    setCookie() {
+        let value: string = "Accept";
+        let key: string = "AcceptCookies";
+        this.acceptCookie = true;
+        this.cookieService.put(key, value);
     }
 
     onDeactivate() {
