@@ -115,7 +115,7 @@ namespace CaseSite.Controllers
                     solutions.Add(SolutionController.toClientSolution(solution, join: false));
                 }
             }
-            result.solutions = solutions;
+            result.solutions = student.Solutions;
 
 
             if (incUser)

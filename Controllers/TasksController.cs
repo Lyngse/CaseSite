@@ -208,7 +208,7 @@ namespace CaseSite.Controllers
                 contactDescription = t.ContactDescription,
                 winnerSolutionId = t.WinnerSolutionId,
                 winnerSolution = t.WinnerSolution == null || !join ? null : SolutionController.toClientSolution(t.WinnerSolution, join: false),
-                solutions = solutions
+                solutions = t.Solutions
             };
         }
     }

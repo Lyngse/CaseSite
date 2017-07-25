@@ -83,7 +83,12 @@ namespace CaseSite.Controllers
 
             if(task.BusinessId == business.Id)
             {
-                task.Solutions = await _context.Solution.Where(s => s.TaskId == task.Id).ToListAsync();
+                var solutions = await _context.Solution.Where(s => s.TaskId == task.Id).ToListAsync();
+                if(solutions == null)
+                {
+                    return NotFound(new { solutionError = "Solutions not found" });
+                }
+                task.Solutions = solutions;
                 return Ok(task.Solutions);
             }
 

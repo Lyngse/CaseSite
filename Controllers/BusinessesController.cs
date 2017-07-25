@@ -84,15 +84,16 @@ namespace CaseSite.Controllers
             }
 
             var tasks = business.Tasks;
-            
             foreach (var t in tasks)
             {
                 t.Solutions = await _context.Solution.Where(s => s.TaskId == t.Id).ToListAsync();
                 foreach (var s in t.Solutions)
-                {
+                { 
                     s.Student = await _context.Student.SingleOrDefaultAsync(st => st.Id == s.StudentId);
                 }
             }
+            
+            business.Tasks = tasks;
 
             return Ok(toClientBusiness(business));
         }
