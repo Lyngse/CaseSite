@@ -56,7 +56,7 @@ export class BusinessManagerComponent implements AfterViewInit {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
             }
         });
-    }
+    }    
 
     handleEditTask(id) {
         this.router.navigateByUrl("business/createedittask/" + id);

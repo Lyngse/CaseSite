@@ -1,1 +1,44 @@
-﻿
+﻿<div class="contentRow" *ngIf="business">
+    <div class="business-and-description">
+        <div class="business-logo">
+            <img class="business-img" [src]="business.logoUrl" />
+        </div> 
+        <div class="task-info">
+            <h2> {{task.title}} </h2>
+            <p> {{task.type}} </p>
+            <div *ngIf="task.workPlace">
+                <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
+                <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
+                <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
+            </div>
+            <p class="task-reward" style="font-size:14px;" *ngIf="task.rewardType">
+                Belønning ved bedste løsningsforslag:
+                <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-money"></i></span>
+                <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-gift"></i></span>
+                <span *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
+                <span><b *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">{{ task.rewardValue | danishcurrency }} kr</b></span>
+                <span><b *ngIf="task.rewardType === 'Anbefaling'">Anbefaling</b></span>
+            </p>
+        </div>
+    </div> 
+    <div class="solutions-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Navn på indsender</th>
+                    <th>Email på indsender</th>
+                    <th>Status på indsendelse</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of solutions">
+                    <td> {{s.student.firstname}} </td>
+                    <td> {{s.student.email}} </td>
+                    <td> Vundet? </td>
+                    <td> Link til download </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
