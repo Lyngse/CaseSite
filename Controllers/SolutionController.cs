@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Dynamic;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace CaseSite.Controllers
 {
@@ -90,7 +91,7 @@ namespace CaseSite.Controllers
         }
 
         [HttpGet("getstudentsolutions")]
-        public async Task<IActionResult> GetStudentSolutions ()
+        public async Task<IActionResult> GetStudentSolutions()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var student = await _context.Student.FirstOrDefaultAsync(s => s.UserId == user.Id);
@@ -101,6 +102,67 @@ namespace CaseSite.Controllers
             }
 
             return Ok(solutions);
+        }
+
+        [HttpPost("selectwinner")]
+        public async Task<IActionResult> SelectWinner([FromBody] JObject obj)
+        {
+            int taskId = (int)obj["taskId"];
+            int studentId = (int)obj["studentId"];
+
+            var student = await _context.Student.SingleOrDefaultAsync(s => s.Id == studentId);
+            if (student == null)
+            {
+                return NotFound(new { studentError = "Student not found" });
+            }
+
+            var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
+            if (task == null)
+            {
+                return NotFound(new { taskError = "Task not found" });
+            }
+
+            var solutions = await _context.Solution.Where(s => s.TaskId == task.Id).ToListAsync();
+            if(solutions == null)
+            {
+                return NotFound(new { solutionError = "No solutions found" });
+            }
+            DateTime now = DateTime.Now;
+            if (task.Deadline < now)
+            {
+                bool isWinnerSelected = false;
+                foreach (var s in solutions)
+                {
+                    if (s.Task.WinnerSolutionId != null)
+                    {
+                        isWinnerSelected = true;
+                        return NotFound(new { solutionError = "Winner have already been selected" });
+                    }
+                }
+                if (isWinnerSelected == false)
+                {
+                    var solution = await _context.Solution.SingleOrDefaultAsync(s => s.StudentId == student.Id && s.TaskId == task.Id);
+                    if (solution == null)
+                    {
+                        return NotFound(new { solutionError = "Solution not found" });
+                    }
+
+                    task.WinnerSolutionId = solution.Id;
+                    task.WinnerSolution = solution;
+                    _context.Entry(task).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound(new { solutionError = "Winner have already been selected" });
+                }
+            }
+            else
+            {
+                return NotFound(new { deadlineError = "Deadline not passed" });
+            }
+
         }
 
         private async Task<Student> getStudent()
