@@ -20,6 +20,8 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
     business: Business;
     task: Task;
     solutions: Solution[] = [];
+    winnerSolution: Solution;
+    winnerChosen: boolean;
 
     constructor(private businessService: BusinessService,
         private route: ActivatedRoute,
@@ -44,9 +46,15 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
                 this.taskService.getTask(id).subscribe(res => {
                     this.utilService.loading.next(false);
                     this.task = res;
+                    console.log(this.task);
                     this.solutionService.getTaskSolutions(id).subscribe(data => {
                         this.utilService.loading.next(false);
                         this.solutions = data;
+                        for (let i = 0; i < this.solutions.length; i++) {
+                            if (this.task.winnerSolutionId != null)
+                                this.winnerChosen = true; 
+                            else this.winnerChosen = false;
+                        }
                     });
                 });
             }
@@ -74,5 +82,22 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
         if (this.task) {
             return this.task.deadline.format('HH:mm - DD/MM-YYYY');
         }
+    }
+
+    submitWinner(studentId) {
+        this.utilService.loading.next(true);
+        this.solutionService.selectWinner(this.task.id, studentId).subscribe(res => {
+            if (res.ok) {
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "sucess", titel: "Succes", message: "Vinder af opgaven er blevet valgt" });
+                this.winnerChosen = true;
+            } else {
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
+            }
+        }, (err) => {
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
+            });
     }
 }

@@ -33,9 +33,9 @@
             </thead>
             <tbody>
                 <tr *ngFor="let s of solutions">
-                    <td> {{s.student.firstname}} </td>
-                    <td> {{s.student.email}} </td>
-                    <td> Vundet? </td>
+                    <td> {{s.student.firstname}} {{s.student.lastname}} </td>
+                    <td> {{s.student.user.email}} </td>
+                    <td> <label *ngIf="!winnerChosen"><button (click)="submitWinner(s.studentId)">Vælg som vinder</button></label> <label *ngIf="task.winnerSolutionId == s.id"><a> This is the winner </a></label> <label *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"><a>  </a></label> </td>
                     <td> Link til download </td>
                 </tr>
             </tbody>
