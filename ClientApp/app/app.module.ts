@@ -17,6 +17,7 @@ import { FormatTextPipe } from './shared/pipes/formatText.pipe';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 
+import { CookieService } from 'angular2-cookie/services';
 import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
@@ -52,7 +53,8 @@ import { SolutionService } from './services/solution.service';
         AlertModule.forRoot(),
 
     ],
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, StudentService, SolutionService]
+
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService]
 })
 export class AppModule {
 }
