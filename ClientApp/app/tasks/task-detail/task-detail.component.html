@@ -48,12 +48,12 @@
            <p class="task-contactDescription" [innerHTML]="task.contactDescription | formattext"></p>
            <p *ngIf="task.workPlace === '2'">Udarbejdelsen af løsningsforslaget kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>
 
-           <h3 class="task-info-title" *ngIf="files">Tilknyttede filer</h3>
-           <div class="uploaded-files" *ngIf="files">
-               <div style="display:flex;" *ngFor="let file of files">
-                   <a class="file-pill" href="{{file.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
+           <h3 class="task-info-title" *ngIf="attachments">Tilknyttede filer</h3>
+           <div class="uploaded-files" *ngIf="attachments">
+               <div style="display:flex;" *ngFor="let a of attachments">
+                   <a class="file-pill" href="{{a.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
                        <div class="file-pill-text">
-                           <p>{{file.fileName}}</p>
+                           <p>{{a.fileName}}</p>
                        </div>
                        <div class="file-pill-icon" >
                            <i class="fa fa-download"></i>

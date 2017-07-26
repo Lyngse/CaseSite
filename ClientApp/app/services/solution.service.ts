@@ -27,6 +27,13 @@ export class SolutionService {
             .catch(this.handleError);
     }
 
+    getSolution(id: number): Observable<Solution> {
+        return this.http
+            .post('api/solutions/getsolution/' + id, this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     getTaskSolutions(taskId: number): Observable<Solution[]> {
         return this.http
             .get('api/solutions/gettasksolutions/' + taskId, this.options)

@@ -65,6 +65,17 @@ namespace CaseSite.Controllers
             return Ok();
         }
 
+        [HttpGet("getsolution/{id}")]
+        public async Task<IActionResult> GetSolution([FromRoute] int id)
+        {
+            var solution = await _context.Solution.SingleOrDefaultAsync(s => s.Id == id);
+            if(solution == null)
+            {
+                return NotFound(new { solutionError = "Solution not found" });
+            }
+
+            return Ok(solution);
+        }
 
         [HttpGet("gettasksolutions/{taskId}")]
         public async Task<IActionResult> GetTaskSolutions([FromRoute] int taskId)

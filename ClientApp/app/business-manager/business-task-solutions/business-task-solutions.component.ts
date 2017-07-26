@@ -86,6 +86,10 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
             });
     }
 
+    gotoDownload(studentId: number) {
+        this.router.navigate(["business/solutions/" + this.task.id + "/download/" + studentId]);
+    }
+
     getTasksAndSolutions(id) {
         this.utilService.loading.next(true);
         this.taskService.getTask(id).subscribe(res => {

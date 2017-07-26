@@ -1,4 +1,25 @@
-﻿.business-and-description {
+﻿.download-link {
+    color: #006699;
+    cursor: pointer;
+}
+
+.download-link:hover{
+    color: #004466;
+    text-decoration: none;
+}
+
+.download-link:visited,
+.download-link:focus,
+.download-link:active {
+    text-decoration: none;
+    color: #006699;
+}
+
+.win {
+    color: #FFEB3B;
+}
+    
+.business-and-description {
     display: flex;
     align-content: center;
 }

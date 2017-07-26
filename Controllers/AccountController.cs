@@ -108,12 +108,14 @@ namespace CaseSite.Controllers
         public async Task<IActionResult> Status()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            if(user == null)
+            if (user == null)
                 return Ok(new { role = "void" });
             else if (await _userManager.IsInRoleAsync(user, "business"))
                 return Ok(new { role = "business" });
             else if (await _userManager.IsInRoleAsync(user, "student"))
                 return Ok(new { role = "student" });
+            else if (await _userManager.IsInRoleAsync(user, "admin"))
+                return Ok(new { role = "admin" });
             return Ok(new { role = "void" });
         }
 
@@ -247,6 +249,38 @@ namespace CaseSite.Controllers
             return Ok(user.Id);
         }
 
+        [HttpPost("registeradminuser")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] User obj)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!await _roleManager.RoleExistsAsync("admin"))
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "admin";
+                await _roleManager.CreateAsync(role);
+            }
+
+            IdentityUser user = new IdentityUser();
+            user.UserName = obj.UserName;
+            user.Email = obj.Email;
+
+            var result = await _userManager.CreateAsync(user, obj.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+            IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "admin");
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok(user.Id);
+        }
+
         //used by startup.cs to update tokens
         [HttpGet("updateTokens")]
         public IActionResult updateTokens()
@@ -278,48 +312,3 @@ namespace CaseSite.Controllers
 
     }
 }
-
-
-//[HttpPost("fblogin")]
-//[IgnoreAntiforgeryToken]
-//public async Task<IActionResult> FacebookLogin([FromBody] string facebookId)
-//{
-//    var student = await _context.Student.SingleOrDefaultAsync(s => s.FacebookId == facebookId);
-//    if(student == null)
-//    {
-//        return BadRequest(new { usererror = "User not found"});
-//    }
-//    return Json(new { Id = student.Id, Firstname = student.Firstname, Lastname = student.Lastname, Tasks = student.Tasks, UserId = student.UserId, FacebookId = facebookId });
-//}
-
-//[HttpPost("registerstudentuser")]
-//public async Task<IActionResult> RegisterStudent([FromBody] User obj)
-//{
-//    if (!ModelState.IsValid)
-//    {
-//        return BadRequest(ModelState);
-//    }
-//    if (!await _roleManager.RoleExistsAsync("student"))
-//    {
-//        IdentityRole role = new IdentityRole();
-//        role.Name = "student";
-//        await _roleManager.CreateAsync(role);
-//    }
-//    IdentityUser user = new IdentityUser();
-//    user.UserName = obj.UserName;
-//    user.Email = obj.Email;
-
-//    var result = await _userManager.CreateAsync(user, obj.Password);
-//    if (!result.Succeeded)
-//    {
-//        return BadRequest(result.Errors);
-//    }
-
-//    IdentityResult roleResult = await _userManager.AddToRoleAsync(user, "student");
-//    if (!roleResult.Succeeded)
-//    {
-//        return BadRequest(result.Errors);
-//    }
-
-//    return Ok(user.Id);
-//}

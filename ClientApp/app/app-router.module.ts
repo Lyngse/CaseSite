@@ -20,6 +20,7 @@ import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { UploadSolutionComponent } from './upload-solution/upload-solution.component';
+import { DownloadSolutionComponent } from './business-manager/download-solution/download-solution.component'
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -31,7 +32,8 @@ const routes: Routes = [
     { path: 'business/createedittask', component: CreateEditTaskComponent },
     { path: 'business/createedittask/:id', component: CreateEditTaskComponent },
     { path: 'business/businessSettings', component: BusinessEditComponent },
-    { path: 'business/solutions/:id', component: BusinessTaskSolutionsComponent},
+    { path: 'business/solutions/:id', component: BusinessTaskSolutionsComponent },
+    { path: 'business/solutions/:taskId/download/:studentId', component: DownloadSolutionComponent },
     { path: 'login', component: LoginComponent },
     { path: 'login/resetpassword', component: ResetPasswordComponent },
     { path: 'login/forgotpassword', component: ForgotPasswordComponent },
@@ -58,6 +60,7 @@ export const routingComponents = [
     BuisnessRegisterComponent,
     BusinessManagerComponent,
     BusinessTaskSolutionsComponent,
+    DownloadSolutionComponent,
     LoginComponent,
     CreateEditTaskComponent,
     BusinessEditComponent,

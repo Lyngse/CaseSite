@@ -15,7 +15,7 @@
                         <th>Deadline</th>
                         <th>Belønning</th>
                         <th>Løsningsforslag</th>
-                        <th>Fundet vinder?</th>
+                        <th>Rediger</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,7 +25,7 @@
                         <td class="reward" *ngIf="t.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ t.rewardValue | danishcurrency }} kr</td>
                         <td class="reward" *ngIf="t.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ t.rewardValue | danishcurrency }} kr</td>
                         <td class="reward" *ngIf="t.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
-                        <td>TBA</td>
+                        <td class="edit"><i class="fa fa-pencil" (click)="handleEditTask(t.id)"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -49,8 +49,8 @@
                             <td class="reward" *ngIf="pt.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="pt.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="pt.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
-                            <td><a (click)="gotoSolutionsView(pt.id)">Link til løsninger</a></td>
-                            <td *ngIf="pt.winnerSolutionId">{{ pt.winnerSolutionId }}</td>
+                            <td><a class="solutions" (click)="gotoSolutionsView(pt.id)">Se løsningsforslag</a></td>
+                            <td *ngIf="pt.winnerSolutionId"><p class="winner-link" (click)="gotoWinnerSolutionDownload(pt.winnnerSolutionId)">Gå til download</p></td>
                             <td *ngIf="!pt.winnerSolutionId">TBA</td>
                         </tr>
                     </tbody>

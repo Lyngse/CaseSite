@@ -60,9 +60,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <label *ngIf="task.winnerSolutionId == s.id"><a> This is the winner </a></label> <label *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"><a>  </a></label>    
+                            <p *ngIf="task.winnerSolutionId == s.id">Vinder <i class="fa fa-trophy win"></i></p>
+                            <p *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"></p>    
                         </td>
-                    <td> Link til download </td>
+                    <td> <a class="download-link" (click)="gotoDownload(s.student.id)">Download løsningsforslag</a></td>
                 </tr>
             </tbody>
         </table> 

@@ -21,22 +21,81 @@
     margin-bottom: 15px;
 }
 
+.winner-link {
+    color: #006699;
+    cursor: pointer;
+}
+
+.winner-link:hover {
+    color: #004466;
+}
+
 .heading1 {
     display: block;
     flex: 1;
     margin-right: 5px;
     border-bottom: 0;
     margin-bottom: 10px;
-    margin: 40px 15px 10px 15px;
+    margin: 40px 15px 10px 0;
 }
 
 .profile-tasks {
-    flex: 1 1 70%;
+    padding: 0 15px;
 }
+
+.solutions {
+    color: #006699;
+    cursor: pointer;
+}
+
+.solutions:hover {
+    color: #004466;
+    text-decoration: none;
+}
+
+    .solutions:visited,
+    .solutions:active,
+    .solutions:focus {
+        text-decoration: none;
+        color: #006699;
+    }
 
 table {
     width: 100%;
     border-collapse: collapse;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+        background: #fff;
+    }
+
+th {
+    background: #006699;
+    color: #fafafa;
+    font-weight: bold;
+}
+
+.reward {
+}
+
+.solution {
+    text-align: center;
+    cursor: pointer;
+}
+
+.win {
+    text-align: center;
+    color: #FFEB3B;
+}
+
+.notwin {
+    text-align: center;
+    color: #F44336;
 }
 
 .title {
@@ -48,8 +107,97 @@ table {
     color: #006699;
 }
 
+.edit {
+    color: #006699;
+    cursor: pointer;
+}
+
 td, th {
     padding: 6px;
     border-bottom: 1px solid #ccc;
     text-align: left;
+}
+
+
+@media only screen and (max-width : 479px) {
+
+}
+
+@media only screen and (min-width: 480), (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1140px) {
+
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+
+    .reward {
+        text-align: left;
+    }
+
+    .solution {
+        text-align: left;
+    }
+
+    .win {
+        text-align: left;
+    }
+
+    /*
+	Label the data
+	*/
+    td:nth-of-type(1):before {
+        content: "Titel";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(2):before {
+        content: "Deadline";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(3):before {
+        content: "Belønning";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(4):before {
+        content: "Din besvarelse";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(5):before {
+        content: "Vundet?";
+        font-weight: bold;
+    }
 }

@@ -3,6 +3,7 @@ import { BusinessService } from '../services/business.service';
 import { AccountService } from '../services/account.service';
 import { TaskService } from '../services/task.service';
 import { UtilService } from '../services/util.service';
+import { SolutionService } from '../services/solution.service';
 import { Router } from '@angular/router';
 import { Task } from '../model/task';
 import * as moment from 'moment';
@@ -20,7 +21,8 @@ export class BusinessManagerComponent implements AfterViewInit {
         private accountService: AccountService,
         private taskService: TaskService,
         private utilService: UtilService,
-        private router: Router) {
+        private router: Router,
+        private solutionService: SolutionService) {
 
     }
 
@@ -33,6 +35,7 @@ export class BusinessManagerComponent implements AfterViewInit {
     ngAfterViewInit() {
         this.utilService.loading.next(true);
         this.businessService.getBusinessWithTasks().subscribe((data) => {
+            console.log(data);
             if (data.tasks.length > 0) {
 
                 let now = moment();
@@ -62,8 +65,17 @@ export class BusinessManagerComponent implements AfterViewInit {
         this.router.navigateByUrl("business/createedittask/" + id);
     }
 
+    gotoTaskDetail(taskId) {
+        this.router.navigate(["/tasks/detail/" + taskId]);
+    }
+
     gotoSolutionsView(taskId) {
         this.router.navigateByUrl("business/solutions/" + taskId);
     }
 
+    gotoWinnerSolutionDownload(winnerSolutionId: number) {
+        this.solutionService.getSolution(winnerSolutionId).subscribe(res => {
+            this.router.navigate(["business/solutions/" + res.taskId + "/download/" + res.studentId]);
+        });
+    }
 }
