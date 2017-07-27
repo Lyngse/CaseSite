@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 *ngIf="!edit" class="heading1">Opret ny opgave</h1>
-            <h1 *ngIf="edit" class="heading1">Redigér opgave</h1>
+            <h1 *ngIf="edit" class="heading1">Rediger opgave</h1>
             <form novalidate (ngSubmit)="onSubmit()" #f="ngForm" style="padding: 0 15px;" class="panel panel-default">
                 <div class="panel-body">
                     <div class="form-group" style="margin-top:20px;"
@@ -109,7 +109,7 @@
                          'has-success': workPlace.valid && (workPlace.dirty || workPlace.touched)
                          }">
                         <label for="workPlace" class="control-label">Hvordan skal opgaven løses? *</label>
-                        <select class="form-control" id="workPlace" name="workPlace" [(ngModel)]="model.workPlace" #workPlace="ngModel" required>
+                        <select class="form-control" id="workPlace" name="workPlace" [(ngModel)]="model.workPlace" #workPlace="ngModel" [disabled]="edit" required>
                             <option value="1">Løsningen udarbejdes hjemme hos den studerende</option>
                             <option value="2">Løsningen udarbejdes hos virksomheden</option>
                         </select>
@@ -158,14 +158,39 @@
                         </div>
                     </div>
 
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': description.invalid && (description.dirty || description.touched),
+                         'has-success': description.valid && (description.dirty || description.touched)
+                         }">
+                        <label for="description" class="control-label">
+                            Opgavebeskrivelse *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad opgaven går ud på. I kan evt. tilføje links til sider, hvor studerende kan downloade PDF-udgaver af en beskrivelse eller sider med mere information">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
+                        <textarea style="resize:none;" class="form-control" rows="8" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
+                        <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
+                            <p *ngIf="description.errors.required">Opgavebeskrivelsen skal udfyldes</p>
+                        </div>
+                    </div>
+
                     <div *ngIf="model.workPlace" class="form-group"
                          [ngClass]="{
                          'has-error': contactDescription.invalid && (contactDescription.dirty || contactDescription.touched),
                          'has-success': contactDescription.valid && (contactDescription.dirty || contactDescription.touched)
                          }">
-                        <label for="contactDescription" class="control-label" style="display:flex;align-items:center;">
+                        <label *ngIf="model.workPlace === '1'" for="contactDescription" class="control-label" style="display:flex;align-items:center;">
                             Hvordan indsendes løsningsforslagene? *
                             <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvordan løsningsforslagene skal sendes til jer. Eksempelvis ”Løsningsforslagene skal sendes til…” Derudover kan der tilføjes en mail eller telefonnummer, såfremt I ønsker, at de studerende skal kunne kontakte jer med spørgsmål">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
+                        <label *ngIf="model.workPlace === '2'" for="contactDescription" class="control-label" style="display:flex;align-items:center;">
+                            Hvordan indsendes ansøgningerne *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvordan ansøgningerne skal sendes til jer. Eksempelvis ”Ansøgningerne skal sendes til…” Derudover kan der tilføjes en mail eller telefonnummer, såfremt I ønsker, at de studerende skal kunne kontakte jer med spørgsmål">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>
@@ -177,22 +202,6 @@
                         </div>
                     </div>
                     
-                    <div class="form-group"
-                         [ngClass]="{
-                         'has-error': description.invalid && (description.dirty || description.touched),
-                         'has-success': description.valid && (description.dirty || description.touched)
-                         }">
-                        <label for="description" class="control-label">Opgavebeskrivelse *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad opgaven går ud på. I kan evt. tilføje links til sider, hvor studerende kan downloade PDF-udgaver af en beskrivelse eller sider med mere information">
-                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </label>
-                        <textarea style="resize:none;" class="form-control" rows="8" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
-                        <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
-                            <p *ngIf="description.errors.required">Opgavebeskrivelsen skal udfyldes</p>
-                        </div>
-                    </div>
                     <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'. Hvis problemer skulle opstå, så kontakt os på info@unifacto.com.</p>
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? !f.dirty || f.invalid : f.invalid" style="margin-bottom:20px">{{edit ? 'Gem opgave' : 'Opret opgave'}}</button>
