@@ -25,6 +25,23 @@ namespace CaseSite.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet("getcounts")]
+        public async Task<IActionResult> GetCounts()
+        {
+            int businessCount = await _context.Business.CountAsync();
+            int studentCount = await _context.Student.CountAsync();
+            int taskCount = await _context.Task.CountAsync();
+            int solutionCount = await _context.Solution.CountAsync();
+
+            List<dynamic> counts = new List<dynamic>();
+            counts.Add(businessCount);
+            counts.Add(studentCount);
+            counts.Add(taskCount);
+            counts.Add(solutionCount);
+
+            return Ok(counts);
+        }
+
         [HttpGet("getallbusinesses")]
         [Authorize]
         public async Task<IActionResult> GetAllBusinesses(string query = "")

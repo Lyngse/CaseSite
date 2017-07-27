@@ -32,7 +32,6 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 
-                <!--<li><a routerLink="/tasks">Opgaver</a></li>-->
                 <li *ngIf="business" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{business.name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -42,7 +41,15 @@
                         <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
-                <li *ngIf="!business && !student"><a routerLink="/login">Log ind</a></li>
+                <li *ngIf="isAdmin" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Unifacto Administrator<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/admin">Administrator panel</a></li>
+                        <!--<li class="divider" style="margin:5px 0;"></li>-->
+                        <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="!business && !student && !isAdmin"><a routerLink="/login">Log ind</a></li>
             </ul>
             <ul *ngIf="student" class="nav navbar-nav navbar-right nav-student">
                 <li *ngIf="student" class="dropdown">

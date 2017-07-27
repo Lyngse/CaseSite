@@ -16,6 +16,7 @@ import * as $ from 'jquery';
 export class HeaderComponent implements OnInit {
     business: Business;
     student: Student;
+    isAdmin: boolean = false;
 
     constructor(private utilService: UtilService, private accountService: AccountService, private businessService: BusinessService, private router: Router, private studentService: StudentService) {
         accountService.loggedIn.subscribe(newValue => {
@@ -29,6 +30,9 @@ export class HeaderComponent implements OnInit {
                     console.log(res);
                     this.student = res;
                 });
+            }
+            else if (newValue === "admin") {
+                this.isAdmin = true;
             }
             else {
                 this.business = null;
@@ -66,8 +70,8 @@ export class HeaderComponent implements OnInit {
         this.utilService.loading.next(true);
         this.accountService.logout().subscribe((response) => {
             this.utilService.loading.next(false);
-            this.router.navigate(['/']
-            );
+            this.router.navigate(['/']);
+            this.isAdmin = false;
         }, err => {
             this.utilService.loading.next(true);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });

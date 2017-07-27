@@ -19,6 +19,12 @@ export class AccountService {
             .subscribe(value => this.loggedIn.next(value.json().role));
     }
 
+    makeAdmin(username: string, password: string, email: string): Observable<any> {
+        return this.http
+            .post('api/account/registeradminuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
+            .catch(this.handleError);
+    }
+
     changePassword(currentPassword: string, newPassword: string): Observable<any> {
         return this.http
             .post('api/account/changepassword/', JSON.stringify({ currentPassword: currentPassword, newPassword: newPassword }), this.options)
@@ -41,6 +47,13 @@ export class AccountService {
         return this.http
             .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
             .map(res => { this.loggedIn.next("business"); this.updateToken(); return res; })
+            .catch(this.handleError);
+    }
+
+    adminLogin(username: string, password: string): Observable<any> {
+        return this.http
+            .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
+            .map(res => { this.loggedIn.next("admin"); this.updateToken(); return res; })
             .catch(this.handleError);
     }
 

@@ -25,6 +25,7 @@ import { UtilService } from './services/util.service';
 import { BlobService } from './services/blob.service';
 import { StudentService } from './services/student.service';
 import { SolutionService } from './services/solution.service';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -55,7 +56,7 @@ import { SolutionService } from './services/solution.service';
 
     ],
 
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService, AdminService]
 })
 export class AppModule {
 }

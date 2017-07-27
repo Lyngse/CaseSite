@@ -12,13 +12,20 @@ import { Business } from '../model/business';
 import { Task } from '../model/task';
 
 @Injectable()
-export class BusinessService {
+export class AdminService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
 
     constructor(private http: Http, private router: Router) {
 
+    }
+
+    getCounts(): Observable<any> {
+        return this.http
+            .get('api/admin/getcounts', this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
     }
 
     getAllBusinesses(query?: string): Observable<Business[]> {

@@ -22,6 +22,9 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
 import { UploadSolutionComponent } from './upload-solution/upload-solution.component';
 import { DownloadSolutionComponent } from './business-manager/download-solution/download-solution.component';
 import { FAQComponent } from './faq/faq.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminBusinessComponent } from './admin/admin-business/admin-business.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -47,6 +50,8 @@ const routes: Routes = [
     { path: 'student', component: StudentProfileComponent },
     { path: 'student/uploadsolution/:taskId', component: UploadSolutionComponent },
     { path: 'faq', component: FAQComponent },
+    { path: 'admin', component: AdminComponent },
+    { path: 'adminlogin', component: AdminLoginComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -77,5 +82,8 @@ export const routingComponents = [
     TermsComponent,
     StudentProfileComponent,
     UploadSolutionComponent,
-    FAQComponent
+    FAQComponent,
+    AdminComponent,
+    AdminBusinessComponent,
+    AdminLoginComponent
 ]
