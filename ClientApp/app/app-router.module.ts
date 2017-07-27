@@ -20,7 +20,8 @@ import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { UploadSolutionComponent } from './upload-solution/upload-solution.component';
-import { DownloadSolutionComponent } from './business-manager/download-solution/download-solution.component'
+import { DownloadSolutionComponent } from './business-manager/download-solution/download-solution.component';
+import { FAQComponent } from './faq/faq.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -45,6 +46,7 @@ const routes: Routes = [
     { path: 'terms', component: TermsComponent },
     { path: 'student', component: StudentProfileComponent },
     { path: 'student/uploadsolution/:taskId', component: UploadSolutionComponent },
+    { path: 'faq', component: FAQComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -75,4 +77,5 @@ export const routingComponents = [
     TermsComponent,
     StudentProfileComponent,
     UploadSolutionComponent,
+    FAQComponent
 ]
