@@ -17,12 +17,12 @@ import { FormatTextPipe } from './shared/pipes/formatText.pipe';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 
-import { CookieService } from 'angular2-cookie/services';
 import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
 import { UtilService } from './services/util.service';
 import { BlobService } from './services/blob.service'
+import { CookieService } from 'angular2-cookie/services';
 
 @NgModule({
     bootstrap: [ AppComponent ],

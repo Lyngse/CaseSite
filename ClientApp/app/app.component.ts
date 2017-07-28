@@ -50,7 +50,6 @@ export class AppComponent {
         } else {
             this.acceptCookie = true;
         }
-        
     }
 
     setCookie() {
