@@ -2,6 +2,15 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("../../wwwroot/assets/font-awesome/css/font-awesome.css");
 
+.alert-global {
+    position: fixed;
+    bottom: 0;
+    right: 5px;
+    left: 5px;
+    margin-bottom: -15px;
+    z-index: 5000;
+}
+
 .padding0 {
     padding: 0 !important;
 }
@@ -29,7 +38,7 @@
 }
 
 .cookie {
-    height: 250px;
+    height: 180px;
     background-color: #000;
     opacity: .9;
     color: white;
