@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("../../wwwroot/assets/font-awesome/css/font-awesome.css");
 
+.loader {
+    background-color: red;
+}
+
 .alert-global {
     position: fixed;
     bottom: 0;
