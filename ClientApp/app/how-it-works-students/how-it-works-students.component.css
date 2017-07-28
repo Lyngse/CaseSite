@@ -1,4 +1,29 @@
-﻿.hiw-header {
+﻿.text {
+    padding: 30px;
+}
+
+.img {
+    position: absolute;
+    left: 50%;
+    top: calc(-109px + 50%);
+}
+
+.ikon {
+    padding-top: 15px;
+    color: white;
+    text-align: center;
+}
+
+.ikon i {
+    font-size: 500%;
+}
+
+.ikon p {
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.hiw-header {
     background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/assets/images/UCN1.png);
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/assets/images/UCN1.png);
     background-size: cover;
@@ -6,6 +31,7 @@
     padding: 50px;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
 .hiw-header-title {
@@ -27,25 +53,22 @@
 }
 
 .hiw-content {
+    position: relative;
 }
 
 
-.reward {
+.reward {   
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    padding: 30px 20px;
 }
 
-.reward-icons {
+.reward-card {
     flex: 1 1 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.reward-icons i {
-    margin: 10px;
 }
 
 .reward-text {
@@ -56,6 +79,33 @@
     align-items: center;
     padding: 0 40px;
     text-align: center;
+}
+
+.icon-box {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    -webkit-flex: 1 1 33.33%;
+    -ms-flex: 1 1 33.33%;
+    flex: 1 1 33.33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.icon i {
+    font-size: 500%;
+}
+
+.icon p {
+    font-size: 20px;
+    margin-top: 5px;
 }
 
 .hiw-headers {
@@ -163,6 +213,45 @@
     .hiw-info {
         width: 90%;
     }
+
+    .reward {
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .reward-card {
+        flex: 1 1 100%;
+    }
+
+    .reward-text {
+        flex: 1 1 100%;
+    }
+
+    .icon i {
+        font-size: 400%;
+    }
+
+    .icon p {
+        font-size: 20px;
+        margin-top: 5px;
+    }
+
+    .reward-card img {
+        width: 300px;
+        height: auto;
+    }
+    .img {
+        position: relative;
+        left: unset;
+        top: unset;
+        margin-bottom: 30px;
+    }
+
+        .img img {
+            width: 300px;
+            height: auto;
+        }
 }
 
 /* Extra Small Devices, Phones */
@@ -189,6 +278,29 @@
 
     .hiw-info {
         width: 90%;
+    }
+
+    .reward {
+        flex-direction: column;
+    }
+
+    .reward-card {
+        flex: 1 1 100%;
+    }
+
+    .reward-text {
+        flex: 1 1 100%;
+    }
+
+    .hiw-item {
+        width: 100%;
+    }
+
+    .img {
+        position: relative;
+        left: unset;
+        top: unset;
+        margin-bottom: 30px;
     }
 }
 

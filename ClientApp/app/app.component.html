@@ -1,4 +1,4 @@
-<shared-header></shared-header>
+﻿<shared-header></shared-header>
 <div class="content">
     <router-outlet (deactivate)="onDeactivate()"></router-outlet>
 </div>
@@ -11,5 +11,21 @@
         </alert>
     </div>
 </div>
+
+<div class="cookie-alert" *ngIf="!acceptCookie">
+    <div [@flyInOut]="'in'">
+        <div class="cookie">
+            <div class="contentRow">
+                <div>
+                    <p>Vi anvender cookies på Unifacto til at gemme dine indstillinger og gøre din brugeroplevelse lettere og bedre. Denne information bruges ikke af tredjepart.</p>
+                </div>
+                <div class="text-center">
+                    <button (click)="setCookie()" class="butn butn-ghost-white cookie-btn">Accepter cookies</button>
+                </div>               
+            </div>
+        </div>
+    </div>
+</div>
+
 <spinner *ngIf="loading" [size]="100" [tickness]="10" [color]="'#337ab7'"></spinner>
 <div *ngIf="loading" class="loading-background"></div>

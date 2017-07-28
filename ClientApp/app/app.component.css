@@ -45,7 +45,7 @@ section {
 
 .content {
     margin-top: 55px;
-    min-height: calc(100vh - 307px);
+    min-height: calc(100vh - 331px);
 }
 
 @media (max-width: 767px) {

@@ -17,6 +17,7 @@ import { HowItWorksBusinessComponent } from './how-it-works-business/how-it-work
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
+import { FAQComponent } from './faq/faq.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -37,6 +38,7 @@ const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'terms', component: TermsComponent },
+    { path: 'faq', component: FAQComponent },
     { path: '**', redirectTo: 'frontpage' }
 ];
 
@@ -62,5 +64,6 @@ export const routingComponents = [
     HowItWorksBusinessComponent,
     AboutComponent,
     ContactComponent,
-    TermsComponent
+    TermsComponent,
+    FAQComponent
 ]

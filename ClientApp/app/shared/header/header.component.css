@@ -85,6 +85,12 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     transform: rotate(25deg);
 }
 
+.navbar-nav > li > .dropdown-menu {
+    margin-top: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
 @media only screen and (max-width: 768px){
     .beta-text{
         left: 65px;

@@ -10,13 +10,14 @@ import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
-import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule } from 'ngx-bootstrap';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
 
 import { EqualValidator } from './directives/equal-validator.directive';
 
+import { CookieService } from 'angular2-cookie/services';
 import { BusinessService } from './services/business.service';
 import { AccountService } from './services/account.service';
 import { TaskService } from './services/task.service';
@@ -48,9 +49,10 @@ import { BlobService } from './services/blob.service'
         TimepickerModule.forRoot(),
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
+        AccordionModule.forRoot(),
 
     ],
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService]
 })
 export class AppModule {
 }

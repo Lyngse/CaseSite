@@ -1,52 +1,8 @@
-﻿
-<!--<div class="text-center card-box">
-    <div class="card-jobtype">
-        <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x" style="color:#006699;"></i>
-            <i class="fa fa-picture-o fa-stack-1x fa-inverse"></i>
-        </span>
-        <p>{{ task.type }}</p>
-    </div>
-    <div class="card-titel">
-        <h3>{{ task.title }}</h3>
-    </div>
-    <div class="card-firm">
-        <h4>{{ task.businessName }}</h4>
-    </div>
-    <div  class="card-location">
-        <p>
-            <span><i class="fa fa-map-marker"></i></span>
-            {{ task.city  }}
-        </p>
-    </div>
-    <div class="flexbox-nonewline">
-        <div class="flexitem card-workplace">
-            <p class="card-label">Arbejds lokation</p>
-            <p class="card-value">{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</p>
-        </div>
-        <div class="flexitem card-deadline">
-            <p class="card-label">Deadline</p>
-            <p class="card-value">{{ getDeadlineString() }}</p>
-        </div>
-    </div>
-
-    <div class="card-price">
-        <p class="card-label">Belønning</p>
-        <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">
-            <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-gift"></i></span>
-            <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-money"></i></span>
-            {{ task.rewardValue | danishcurrency }} kr
-        </p>
-        <p style="font-size:14px" *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</p>
-    </div>  
-           
-</div>-->
-
-<div class="task-card"> 
+﻿<div class="task-card"> 
     <div class="task-card-top">
         <div class="task-card-task">
             <p class="task-card-task-title">{{ task.title }}</p>
-            <p class="task-card-task-type">- {{ task.type }}</p>
+            <p class="task-card-task-type">{{ task.type }}</p>
         </div>      
     </div>
     <div class="task-card-mid">
