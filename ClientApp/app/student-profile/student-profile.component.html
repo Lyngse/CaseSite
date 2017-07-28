@@ -56,8 +56,8 @@
                             <td class="reward" *ngIf="ps.task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
                             <td class="solution"><i (click)="gotoUploadSolution(ps.task.id)" class="fa fa-file-text"></i></td>
                             <td class="win" *ngIf="ps.id === ps.task.winnerSolutionId"><i class="fa fa-trophy"></i></td>
-                            <td class="notwin" *ngIf="ps.id === ps.task.winnerSolutionId"><i class="fa fa-ban"></i></td>
-                            <td *ngIf="ps.task.winnerSolutionId === null">TBA</td>
+                            <td class="notwin" *ngIf="!ps.id === ps.task.winnerSolutionId"><i class="fa fa-ban"></i></td>
+                            <td *ngIf="!ps.task.winnerSolutionId">TBA</td>
                          </tr>
                     </tbody>
                 </table>

@@ -52,6 +52,7 @@ export class LoginComponent implements AfterViewInit {
             this.utilService.loading.next(true);
             this.accountService.login(this.username, this.password).subscribe((response) => {
                 this.utilService.loading.next(false);
+                console.log(response);
                 if (response.ok == true) {
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Login lykkedes" });
                     this.router.navigate(['/business']);
@@ -67,12 +68,6 @@ export class LoginComponent implements AfterViewInit {
 
     newBusiness() {
         this.router.navigate(['/business/register']);
-    }
-
-    getUserImage() {
-        if (this.student) {
-            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
-        }
     }
 
     forgotPassword() {

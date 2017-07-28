@@ -21,7 +21,7 @@
        </div>
        <div class="detail-task-info">
            <h2 class="task-title">{{ task.title }}</h2>
-           <p class="task-type">- {{ task.type }}</p>
+           <p class="task-type">{{ task.type }}</p>
 
            <div class="task-info">
                <div *ngIf="task.workPlace">
@@ -29,6 +29,7 @@
                    <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
                    <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
                 </div>
+               <p *ngIf="task.workPlace === '2'">Udarbejdelsen af opgaven kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>
                <p class="task-reward" style="font-size:14px;" *ngIf="task.rewardType">
                    Belønning ved bedste løsningsforslag:
                    <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-money"></i></span>
@@ -46,14 +47,13 @@
            <h3 class="task-info-title" *ngIf="task.workPlace === '2'">Hvor sender jeg min ansøgning?</h3>
            <h3 class="task-info-title" *ngIf="task.workPlace === '1'">Hvor sender jeg mit løsningsforslag?</h3>
            <p class="task-contactDescription" [innerHTML]="task.contactDescription | formattext"></p>
-           <p *ngIf="task.workPlace === '2'">Udarbejdelsen af løsningsforslaget kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>
 
-           <h3 class="task-info-title" *ngIf="files">Tilknyttede filer</h3>
-           <div class="uploaded-files" *ngIf="files">
-               <div style="display:flex;" *ngFor="let file of files">
-                   <a class="file-pill" href="{{file.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
+           <h3 class="task-info-title" *ngIf="attachments">Tilknyttede filer</h3>
+           <div class="uploaded-files" *ngIf="attachments">
+               <div style="display:flex;" *ngFor="let a of attachments">
+                   <a class="file-pill" href="{{a.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
                        <div class="file-pill-text">
-                           <p>{{file.fileName}}</p>
+                           <p>{{a.fileName}}</p>
                        </div>
                        <div class="file-pill-icon" >
                            <i class="fa fa-download"></i>

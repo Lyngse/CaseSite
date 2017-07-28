@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using System.IO.Compression;
+using System.IO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -90,9 +92,9 @@ namespace CaseSite.Controllers
                 {
                     CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
                     await container.CreateIfNotExistsAsync();
-                    CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+                    CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetDirectoryReference("taskfiles");
 
-                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/tasks/" + task.Id + @"/" + file.FileName);
+                    CloudBlockBlob blockBlob = container.GetBlockBlobReference(@"businesses/" + business.Id + @"/tasks/" + task.Id + @"/taskfiles/" + file.FileName);
                     await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
 
                 }
@@ -123,7 +125,7 @@ namespace CaseSite.Controllers
 
             CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
             await container.CreateIfNotExistsAsync();
-            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetDirectoryReference("taskfiles");
 
             CloudBlockBlob blobToDelete = taskFilesDirectory.GetBlockBlobReference(fileName);
             if (blobToDelete == null)
@@ -149,7 +151,7 @@ namespace CaseSite.Controllers
                 return NotFound(new { businessError = "Busineess not found" });
             }
             CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
-            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetDirectoryReference("taskfiles");
             var blobs = (await taskFilesDirectory.ListBlobsSegmentedAsync(true, BlobListingDetails.All, 500, null, null, null)).Results;
     
             if (blobs == null)
@@ -176,7 +178,7 @@ namespace CaseSite.Controllers
             }
 
             CloudBlobContainer container = blobClient.GetContainerReference("unifactoblobcontainer");
-            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString());
+            CloudBlobDirectory taskFilesDirectory = container.GetDirectoryReference("businesses").GetDirectoryReference(business.Id.ToString()).GetDirectoryReference("tasks").GetDirectoryReference(task.Id.ToString()).GetDirectoryReference("taskfiles");
             var blobs = (await taskFilesDirectory.ListBlobsSegmentedAsync(true, BlobListingDetails.All, 500, null, null, null)).Results;
             if (blobs == null)
             {

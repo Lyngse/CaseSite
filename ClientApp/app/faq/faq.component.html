@@ -1,0 +1,142 @@
+﻿<div class="faq-header">
+    <div class="contentRow">
+        <h1 class="faq-title">FAQ</h1>
+    </div>
+</div>
+<div class="faq-content">
+    <div class="container-fluid contentRow">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="faq-accordions">
+                    <h2>Virksomheder</h2>
+                    <accordion>
+                        <accordion-group #group1>
+                            <div accordion-heading>
+                                Q: Koster det noget at bruge platformen?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group1?.isOpen, 'glyphicon-plus': !group1?.isOpen}"></i>
+                            </div>
+                            <p>A: Det koster ikke noget, for at bruge platformen.</p>
+                        </accordion-group>
+                        <accordion-group #group2>
+                            <div accordion-heading>
+                                Q: Skal jeg som virksomhed vælge én af de studerende som ansøger om at udarbejde løsningsforslaget hos os?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group2?.isOpen, 'glyphicon-plus': !group2?.isOpen}"></i>
+                            </div>
+                            <p>A: Hvis de studerende ikke lever op til jeres kriterier, skal I ikke udvælge en.</p>
+                        </accordion-group>
+                        <accordion-group #group3>
+                            <div accordion-heading>
+                                Q: Skal jeg give en belønning uanset antallet og kvaliteten af løsningsforslagene?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group3?.isOpen, 'glyphicon-plus': !group3?.isOpen}"></i>
+                            </div>
+                            <p>A: Uanset antallet og kvaliteten af løsningsforslagene skal der gives én belønning.</p>
+                        </accordion-group>
+                        <accordion-group #group4>
+                            <div accordion-heading>
+                                Q: Kan jeg ændre/slette opgaven efter at den er oprettet?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group4?.isOpen, 'glyphicon-plus': !group4?.isOpen}"></i>
+                            </div>
+                            <p>A: Du kan ændre opgavetitlen, opgavetypen, hvordan løsningsforslaget/ansøgningen indsendes samt opgavebeskrivelsen. Du kan ikke ændre belønningstypen, belønningens værdi, deadlinen samt hvor opgaven skal løses. Desuden kan opgaven ikke slettes efter oprettelsen. </p>
+                        </accordion-group>
+                        <accordion-group #group5>
+                            <div accordion-heading>
+                                Q: Hvilke typer af opgaver kan jeg uploade til mine opgaver?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group5?.isOpen, 'glyphicon-plus': !group5?.isOpen}"></i>
+                            </div>
+                            <p>A: Du kan uploade opgaver inden for branding, events, grafik og design, markedsanalyse, målgruppeanalyse, online marketing og kommunikation, PR, strategi, tekstforfatning og video/billede. Det er dog også muligt, at vælge ”Andet”, så længe at det er en marketing- eller kommunikationsopgave.</p>
+                        </accordion-group>
+                        <accordion-group #group6>
+                            <div accordion-heading>
+                                Q: Hvis belønningen er et honorar, hvordan skal dette opgives?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group6?.isOpen, 'glyphicon-plus': !group6?.isOpen}"></i>
+                            </div>
+                            <p>A: Det skal opgives som B-indkomst.</p>
+                        </accordion-group>
+                        <accordion-group #group7>
+                            <div accordion-heading>
+                                Q: Hvor lang tid har jeg til at udvælge det bedste løsningsforslag/ansøgning?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group7?.isOpen, 'glyphicon-plus': !group7?.isOpen}"></i>
+                            </div>
+                            <p>A: Det bedste løsningsforslag/ansøgning skal udvælges inden for fem arbejdsdage.</p>
+                        </accordion-group>
+                        <accordion-group #group8>
+                            <div accordion-heading>
+                                Q: Hvornår skal den studerende modtage belønningen?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': group8?.isOpen, 'glyphicon-plus': !group8?.isOpen}"></i>
+                            </div>
+                            <p>A: Belønningen skal være den studerende i hænde inden for 10 arbejdsdage efter deadlinen/når samarbejdsperioden er afsluttet.</p>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid contentRow">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="faq-accordions">
+                    <h2>Studerende</h2>
+                    <accordion>
+                        <accordion-group #item1>
+                            <div accordion-heading>
+                                Q: Koster det noget at bruge platformen?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': item1?.isOpen, 'glyphicon-plus': !item1?.isOpen}"></i>
+                            </div>
+                            <p>A: Det koster ikke noget, for at bruge platformen.</p>
+                        </accordion-group>
+                        <accordion-group #item2>
+                            <div accordion-heading>
+                                Q: Hvornår får jeg at vide om jeg har udarbejdet det bedste løsningsforslag?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': item2?.isOpen, 'glyphicon-plus': !item2?.isOpen}"></i>
+                            </div>
+                            <p>A: Du får svar fra virksomheden inden for fem arbejdsdage efter deadline, om du har udarbejdet det bedste løsningsforslag.</p>
+                        </accordion-group>
+                        <accordion-group #item3>
+                            <div accordion-heading>
+                                Q: Hvornår får jeg at vide om jeg er kommet i betragtning til at udarbejde løsningsforslaget hos virksomheden?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': item3?.isOpen, 'glyphicon-plus': !item3?.isOpen}"></i>
+                            </div>
+                            <p>A: Du får svar fra virksomheden inden for fem arbejdsdage efter deadline, om du er kommet i betragtning.</p>
+                        </accordion-group>
+                        <accordion-group #item4>
+                            <div accordion-heading>
+                                Q: Kan jeg ændre mit løsningsforslag/ansøgning?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': item4?.isOpen, 'glyphicon-plus': !item4?.isOpen}"></i>
+                            </div>
+                            <p>A: Du kan ændre dit løsningsforslag/ansøgning indtil deadlinen er overskredet.</p>
+                        </accordion-group>
+                        <accordion-group #item5>
+                            <div accordion-heading>
+                                Q: Hvordan opgives honorar?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': item5?.isOpen, 'glyphicon-plus': !item5?.isOpen}"></i>
+                            </div>
+                            <p>A: Honoraret opgives som B-indkomst.</p>
+                        </accordion-group>
+                        <accordion-group #item6>
+                            <div accordion-heading>
+                                Q: Hvor lang tid går der før at jeg modtager min belønning?
+                                <i class="pull-right float-xs-right glyphicon"
+                                   [ngClass]="{'glyphicon-minus': item6?.isOpen, 'glyphicon-plus': !item6?.isOpen}"></i>
+                            </div>
+                            <p>A: Du modtager belønningen 10 arbejdsdage efter deadlinen/endt samarbejdsperiode.</p>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

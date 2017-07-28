@@ -57,7 +57,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
                     if (res.id && res.business) {
                         this.task = res;
                         this.business = res.business;
-                        this.getAttachments(res.business.id);
+                        this.getAttachments(res.id);
                     } else {
                         this.utilService.loading.next(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
@@ -72,12 +72,15 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     }
 
     getAttachments(id) {
+        console.log("her");
         this.utilService.loading.next(true);
         this.blobService.getAttachments(id).subscribe(res => {
-            this.attachments = res;
-            this.attachments.forEach((f) => {
-                f.fileName = this.formatFileName(f.name)
-            });
+            if (res.length > 0) {
+                this.attachments = res;
+                this.attachments.forEach((f) => {
+                    f.fileName = this.formatFileName(f.name)
+                });
+            }
             this.utilService.loading.next(false);
         }, (err) => {
             this.utilService.loading.next(false);

@@ -70,7 +70,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.model.rewardValue = 0;
             }
 
-        })
+        });
     }
 
     fileChange(event) {
@@ -193,10 +193,12 @@ export class CreateEditTaskComponent implements AfterViewInit {
 
     getAttachmentNames(id) {
         this.blobService.getAttachmentNames(id).subscribe(res => {
+            console.log(res);
             this.attachmentNames = res;
             for (let i = 0; i < this.attachmentNames.length; i++) {
                 this.attachmentNames[i] = this.formatFileName(this.attachmentNames[i]);
             }
+            console.log(this.attachmentNames);
         });  
     }
 

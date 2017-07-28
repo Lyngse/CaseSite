@@ -1,7 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from "@angular/http";
+import { Http, Headers, RequestOptions, Response } from "@angular/http";
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -56,7 +57,7 @@ export class BusinessService {
     getBusinessWithTasks(): Observable<Business> {
         return this.http
             .get('api/businesses/withtasks', this.options)
-            .map(res => res.json())
+            .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
@@ -72,6 +73,22 @@ export class BusinessService {
             .get('api/businesses', this.options)
             .map(res => res.json())
             .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        var data = res.json();
+        if (!data) {
+            return {};
+        } else if (data.tasks.length > 1) {
+            data.tasks.forEach((d) => {
+                d.deadline = moment(d.deadline);
+                d.creationTime = moment(d.creationTime);
+            })
+        } else {
+            data.tasks[0].deadline = moment(data.tasks[0].deadline);
+            data.tasks[0].creationTime = moment(data.tasks[0].creationTime);
+        }
+        return data;
     }
 
     private handleError(error: any): Observable<any> {

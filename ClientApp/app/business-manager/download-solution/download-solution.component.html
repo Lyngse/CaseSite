@@ -1,0 +1,24 @@
+﻿<div class="contentRow">
+    <div class="download-header sidepadding">
+        <h1 *ngIf="student">{{ student.firstname }} {{ student.lastname }}'s løsningsforslag</h1>
+        <h1 *ngIf="!student">Løsningsforslag</h1>
+    </div>
+
+    <p class="sidepadding download-text">Så snart et løsningsforslag er blevet uploadet af en studerende, har du som virksomhed mulighed for at downloade filerne til løsningsforslaget. Vi vil dog gøre dig opmørksom på, at den studerende kan ændre sit løsningsforslag indtil deadlinen er overskredet og derfor kan filerne ændre sig. Vi vil derfor råde jer til ikke at dømme nogle løsningsforslag før deadlinen er overskredet.</p>
+
+    <div class="file-box sidepadding" *ngIf="solutions">
+        <h2>Filer til løsningsforslag</h2>
+        <div class="uploaded-files">
+            <div style="display:flex;" *ngFor="let s of solutions">
+                <a class="file-pill" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
+                    <div class="file-pill-text">
+                        <p>{{s.fileName}}</p>
+                    </div>
+                    <div class="file-pill-icon">
+                        <i class="fa fa-download"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

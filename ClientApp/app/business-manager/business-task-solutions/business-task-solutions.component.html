@@ -1,0 +1,71 @@
+﻿<div class="contentRow" *ngIf="business && task">
+    <div class="business-and-description">
+        <div class="business-logo">
+            <img class="business-img" [src]="business.logoUrl" />
+        </div> 
+        <div class="task-info">
+            <h2> {{task.title}} </h2>
+            <p> {{task.type}} </p>
+            <div *ngIf="task.workPlace">
+                <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
+                <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
+                <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
+            </div>
+            <p class="task-reward" style="font-size:14px;" *ngIf="task.rewardType">
+                Belønning ved bedste løsningsforslag:
+                <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-money"></i></span>
+                <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-gift"></i></span>
+                <span *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i></span>
+                <span><b *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">{{ task.rewardValue | danishcurrency }} kr</b></span>
+                <span><b *ngIf="task.rewardType === 'Anbefaling'">Anbefaling</b></span>
+            </p>
+        </div>
+    </div> 
+    <div class="solutions-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Navn på indsender</th>
+                    <th>Email på indsender</th>
+                    <th>Status på indsendelse</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let s of solutions">
+                    <td> {{s.student.firstname}} {{s.student.lastname}} </td>
+                    <td> {{s.student.user.email}} </td>
+                    <td> 
+                        <div *ngIf="task.winnerSolutionId == null">
+                            <button type="button" class="btn btn-primary" (click)="smModal.show()">Vælg som vinder</button>
+
+                                <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title pull-left">Small modal</h4>
+                                                <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Er dette den rette vinder? <br />
+                                                {{s.student.firstname}} {{s.student.lastname}} <br />
+                                                <div class="modal-buttons">
+                                                    <button type="button" class="btn btn-primary" (click)="submitWinner(s.studentId)"> Ja </button>
+                                                    <button type="button" class="btn btn-danger" (click)="smModal.hide()"> Nej </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p *ngIf="task.winnerSolutionId == s.id">Vinder <i class="fa fa-trophy win"></i></p>
+                            <p *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"></p>    
+                        </td>
+                    <td> <a class="download-link" (click)="gotoDownload(s.student.id)">Download løsningsforslag</a></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+</div>

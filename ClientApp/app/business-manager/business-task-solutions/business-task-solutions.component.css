@@ -1,0 +1,86 @@
+﻿.download-link {
+    color: #006699;
+    cursor: pointer;
+}
+
+.download-link:hover{
+    color: #004466;
+    text-decoration: none;
+}
+
+.download-link:visited,
+.download-link:focus,
+.download-link:active {
+    text-decoration: none;
+    color: #006699;
+}
+
+.win {
+    color: #FFEB3B;
+}
+    
+.business-and-description {
+    display: flex;
+    align-content: center;
+}
+
+.business-logo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 200px;
+    width: 200px;
+}
+
+.business-img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: scale-down;
+}
+
+.task-info {
+    flex-direction: column;
+}
+
+.solutions-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+    /* Zebra striping */
+tr:nth-of-type(odd) {
+        background: #fff;
+    }
+
+th {
+    background: #006699;
+    color: #fafafa;
+    font-weight: bold;
+}
+
+td, th {
+    padding: 6px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.task-reward {
+    flex: 0 0 100%;
+}
+
+.modal-buttons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}

@@ -2,6 +2,14 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("../../wwwroot/assets/font-awesome/css/font-awesome.css");
 
+.padding0 {
+    padding: 0 !important;
+}
+
+.margin0 {
+    margin: 0 !important;
+}
+
 .alert-global {
     position: fixed;
     bottom: 0;
@@ -9,6 +17,36 @@
     left: 5px;
     margin-bottom: -15px;
     z-index: 5000;
+}
+
+.cookie-alert {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin-bottom: -15px;
+    z-index: 5000;
+}
+
+.cookie {
+    height: 250px;
+    background-color: #000;
+    opacity: .9;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 5px solid #006699;
+    padding: 0 30px;
+}
+
+.cookie-btn {
+    margin-top: 20px;
+    width: 250px;
+    background: transparent;
+    padding: 15px 30px;
+    border: 1px solid #fff;
 }
 
 /* ------------------------------- */
@@ -41,7 +79,7 @@ section {
 
 .content {
     margin-top: 55px;
-    min-height: calc(100vh - 307px);
+    min-height: calc(100vh - 331px);
 }
 
 @media (max-width: 767px) {
@@ -80,6 +118,10 @@ section {
 .heading3 {
     font-size: 110%;
     margin-bottom: 15px;
+}
+
+.sidepadding {
+    padding: 0 15px;
 }
 
 /* ----- Buttons ----- */

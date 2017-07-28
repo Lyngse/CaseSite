@@ -27,6 +27,13 @@ export class SolutionService {
             .catch(this.handleError);
     }
 
+    getSolution(id: number): Observable<Solution> {
+        return this.http
+            .post('api/solutions/getsolution/' + id, this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     getTaskSolutions(taskId: number): Observable<Solution[]> {
         return this.http
             .get('api/solutions/gettasksolutions/' + taskId, this.options)
@@ -38,6 +45,12 @@ export class SolutionService {
         return this.http
             .get('api/solutions/getstudentsolutions', this.options)
             .map(res => this.extractData(res))
+            .catch(this.handleError);
+    }
+
+    selectWinner(taskId: number, studentId: number): Observable<any> {
+        return this.http
+            .post('api/solutions/selectwinner', JSON.stringify({ taskId: taskId, studentId: studentId }), this.options)
             .catch(this.handleError);
     }
 

@@ -23,8 +23,14 @@ export class StudentService {
         return this.http
             .get("api/student", this.options)
             .map(res => res.json())
+            .catch(this.handleError);      
+    }
+
+    getStudentFromId(studentId: number): Observable<Student> {
+        return this.http
+            .get("api/student/" + studentId, this.options)
+            .map(res => res.json)
             .catch(this.handleError);
-            
     }
 
     private handleError(error: any): Observable<any> {
