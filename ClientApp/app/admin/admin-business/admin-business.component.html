@@ -2,19 +2,51 @@
 
 <div class="col-xs-12 control-bar">
     <div class="col-xs-12 search">
-        <input type="search" class="search-input" placeholder="Søg..." />
+        <form method="post" action="?">
+            <input type="search" name="search" [(ngModel)]="query" class="search-input" placeholder="Søg..." />
+            <button type="submit" (click)="search()" class="search-btn">Søg</button>
+        </form>
     </div>
 </div>
 
-<table>
+<table class="table table-striped" *ngIf="businesses">
     <thead>
         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>#</th>
+            <th>Navn</th>
+            <th>Email</th>
             <th></th>
             <th></th>
         </tr>
     </thead>
-
+    <tbody>
+        <tr  *ngFor="let b of businesses">
+            <td>{{ b.id }}</td>
+            <td>{{ b.name }}</td>
+            <td>{{ b.user.email}}</td>
+            <td class="delete">
+                <button type="button" class="btn btn-danger btn-sm" (click)="smModal.show()"><i class="fa fa-trash"></i></button>
+                <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title pull-left">Small modal</h4>
+                                <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Er du sikker på du vil slette {{ b.name}}?
+                                <div class="modal-buttons">
+                                    <button type="button" class="btn btn-primary" (click)="deleteBusiness(b.id)"> Ja </button>
+                                    <button type="button" class="btn btn-danger" (click)="smModal.hide()"> Nej </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="edit"><button type="button" class="btn btn-primary btn-sm" (click)="gotoBusinessEdit(b.id)"><i class="fa fa-pencil"></i></button></td>
+        </tr>
+    </tbody>
 </table>

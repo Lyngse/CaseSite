@@ -22,14 +22,17 @@ export class BusinessService {
 
     updateBusiness(b: Business): Observable<Business> {
         let business = {
+            Id: b.id,
             Name: b.name,
             LogoUrl: b.logoUrl,
             Description: b.description,
             Address: b.address,
             Zip: b.zip,
-            City: b.city
+            City: b.city,
+            UserId: b.userId
         };
         let user = {
+            Id: b.userId,
             UserName: b.username,
             Email: b.email
         };

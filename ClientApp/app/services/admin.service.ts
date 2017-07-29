@@ -28,27 +28,41 @@ export class AdminService {
             .catch(this.handleError);
     }
 
-    getAllBusinesses(query?: string): Observable<Business[]> {
+    getAllBusinesses(): Observable<Business[]> {
         return this.http
-            .get('api/admin/getallbusinesses', this.options)
+            .post('api/admin/getallbusinesses', this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
-    getAllTasks(query?: string): Observable<Task[]> {
+    searchBusiness(query: string): Observable<Business[]> {
         return this.http
-            .get('api/admin/getalltasks', this.options)
+            .post('api/admin/getallbusinesses', JSON.stringify({ query: query}), this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    getAllTasks(): Observable<Task[]> {
+        return this.http
+            .post('api/admin/getalltasks', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    deleteBusiness(businessId: number): Observable<Business> {
+    searchTask(query: string): Observable<Task[]> {
         return this.http
-            .delete('api/admin/deletebusiness' + businessId, this.options)
+            .post('api/admin/getalltasks', JSON.stringify({ query: query }), this.options)
+            .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
-    deleteTask(taskId: number): Observable<Task> {
+    deleteBusiness(businessId: number): Observable<any> {
+        return this.http
+            .delete('api/admin/deletebusiness/' + businessId, this.options)
+            .catch(this.handleError);
+    }
+
+    deleteTask(taskId: number): Observable<any> {
         return this.http
             .delete('api/admin/deletetask/' + taskId, this.options)
             .catch(this.handleError);
@@ -94,14 +108,15 @@ export class AdminService {
         var data = res.json();
         if (!data) {
             return {};
-        } else if (data.tasks.length > 1) {
-            data.tasks.forEach((d) => {
+        }
+        else if (data.length > 1) {
+            data.forEach((d) => {
                 d.deadline = moment(d.deadline);
                 d.creationTime = moment(d.creationTime);
             })
         } else {
-            data.tasks[0].deadline = moment(data.tasks[0].deadline);
-            data.tasks[0].creationTime = moment(data.tasks[0].creationTime);
+            data.deadline = moment(data.deadline);
+            data.creationTime = moment(data.creationTime);
         }
         return data;
     }

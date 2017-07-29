@@ -13,6 +13,7 @@ export class Business {
     zip: number;
     city: string;
     tasks: Task[];
+    userId: number;
 
     constructor() {
     

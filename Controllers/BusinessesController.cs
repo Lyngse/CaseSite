@@ -39,7 +39,13 @@ namespace CaseSite.Controllers
                 return NotFound();
             }
 
-            return Ok(toClientBusiness(business, false));
+            business.User = await _context.Users.SingleOrDefaultAsync(u => u.Id == business.UserId);
+            if(business.User == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(toClientBusiness(business));
         }
 
         [HttpGet]
@@ -110,13 +116,15 @@ namespace CaseSite.Controllers
                 return BadRequest(ModelState);
             }
 
-            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+            //var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+            var serverUser = await _context.Users.SingleOrDefaultAsync(u => u.Id == business.UserId);
 
             if (serverUser == null)
             {
                 return NotFound(new { userError = "user not found" });
             }
 
+          
             serverUser.UserName = user.UserName;
             serverUser.Email = user.Email;
 
@@ -124,11 +132,10 @@ namespace CaseSite.Controllers
 
             var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == serverUser.Id);
 
-            if(serverBusiness == null)
+            if (serverBusiness == null)
             {
                 return NotFound();
             }
-
             serverBusiness.Name = business.Name;
             serverBusiness.Description = business.Description;
             serverBusiness.Address = business.Address;
@@ -136,10 +143,11 @@ namespace CaseSite.Controllers
             serverBusiness.Zip = business.Zip;
 
             _context.Entry(serverBusiness).State = EntityState.Modified;
-            
+
             await _context.SaveChangesAsync();
 
             return Ok(toClientBusiness(serverBusiness));
+            
         }
 
         // POST: api/Businesses
@@ -196,6 +204,7 @@ namespace CaseSite.Controllers
             result.city = business.City;
             result.zip = business.Zip;
             result.logoUrl = business.LogoUrl;
+            result.userId = business.UserId;
 
             var tasks = new List<dynamic>();
             if(business.Tasks != null && join)

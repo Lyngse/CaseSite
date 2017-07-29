@@ -11,6 +11,8 @@ import { TaskCardComponent } from './tasks/task-list/task-card/task-card.compone
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule } from 'ngx-bootstrap';
+import { AdminBusinessComponent } from './admin/admin-business/admin-business.component';
+import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -41,6 +43,8 @@ import { CookieService } from 'angular2-cookie/services';
         EqualValidator,
         DanishCurrencyPipe,
         FormatTextPipe,
+        AdminTaskComponent,
+        AdminBusinessComponent,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
             else {
                 this.business = null;
                 this.student = null;
+                this.isAdmin = false;
             }
                 
         });
