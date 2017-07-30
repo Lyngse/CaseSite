@@ -47,24 +47,27 @@ export class AdminTaskComponent implements AfterViewInit {
     }
 
     gotoTaskEdit(id) {
-        //this.router.navigate(['/business/businessSettings/' + id]);
-        console.log("Wuhu! Edit!");
+        this.router.navigate(['business/createedittask/' + id]);
+    }
+
+    gotoWinnerSolutionDownload(taskId: number, studentId: number) {
+        this.router.navigate(['business/solutions/' + taskId + '/download/' + studentId]);
     }
 
     deleteTask(taskId) {
         this.utilService.loading.next(true);
-        this.adminService.deleteBusiness(taskId).subscribe(res => {
+        this.adminService.deleteTask(taskId).subscribe(res => {
             if (res.ok) {
-                this.utilService.alert.next({ type: "success", titel: "Succes", message: "Virksomheden er blevet slettet" });
+                this.utilService.alert.next({ type: "success", titel: "Succes", message: "Opgaven er blevet slettet" });
                 this.query = null;
                 this.search();
             } else {
                 this.utilService.loading.next(false);
-                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af virksomheden" });
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af opgaven" });
             }
         }, (err) => {
             this.utilService.loading.next(false);
-            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af virksomheden" });
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af opgaven" });
         });
     }
 }

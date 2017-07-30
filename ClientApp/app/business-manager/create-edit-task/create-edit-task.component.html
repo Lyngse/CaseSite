@@ -201,23 +201,6 @@
                             <p *ngIf="contactDescription.errors.required">'Hvordan indsendes løsningsforslagene?' skal udfyldes</p>
                         </div>
                     </div>
-                    
-                    <div class="form-group"
-                         [ngClass]="{
-                         'has-error': description.invalid && (description.dirty || description.touched),
-                         'has-success': description.valid && (description.dirty || description.touched)
-                         }">
-                        <label for="description" class="control-label">Opgavebeskrivelse *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvad opgaven går ud på. I kan evt. tilføje links til sider, hvor studerende kan downloade PDF-udgaver af en beskrivelse eller sider med mere information">
-                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </label>
-                        <textarea style="resize:none;" class="form-control" rows="8" id="description" name="description" [(ngModel)]="model.description" #description="ngModel" required></textarea>
-                        <div class="form-feedback" *ngIf="description.errors && (description.dirty || description.touched)">
-                            <p *ngIf="description.errors.required">Opgavebeskrivelsen skal udfyldes</p>
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="fileInput" class="control-label">Upload filer</label>
@@ -237,7 +220,8 @@
                     </div>
                     <p *ngIf="!edit">OBS! - Når I har oprettet en ny opgave, kan I ikke længere ændre opgavens deadline, belønningstype eller belønningens værdi. Sørg derfor for at disse oplysninger er korrekte før der trykkes på 'Opret opgave'. Hvis problemer skulle opstå, så kontakt os på info@unifacto.com.</p>
                     <div class="text-center" style="margin-top:10px;">
-                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? (!f.dirty || f.invalid) && !filesChanged : f.invalid && !filesChanged" style="margin-bottom:20px">{{edit ? 'Gem opgave' : 'Opret opgave'}}</button>
+                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? (!f.dirty || f.invalid) && !filesChanged : f.invalid && !filesChanged" style="margin-bottom:20px" *ngIf="!edit && !isAdmin">Opret opgave</button>
+                        <button type="submit" class="btn btn-success btn-lg" [disabled]="edit ? (!f.dirty || f.invalid) && !filesChanged : f.invalid && !filesChanged" style="margin-bottom:20px" *ngIf="edit || isAdmin">Gem opgave</button>
                     </div>
                 </div>  
             </form>

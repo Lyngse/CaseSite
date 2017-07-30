@@ -49,6 +49,12 @@
     color: white;
 }
 
+.menu-advanced li a:focus,
+.menu-advanced li a:active {
+    outline: none;
+    text-decoration: none;
+}
+
 .menu-advanced li a .fa {
     color: #b6b7b8;
     font-size: 13px;

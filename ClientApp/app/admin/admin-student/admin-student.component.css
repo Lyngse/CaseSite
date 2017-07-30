@@ -1,0 +1,59 @@
+﻿h2 {
+    margin: 0;
+}
+
+.search {
+    margin: 15px;
+    flex: 2;
+    display: flex;
+}
+
+form {
+    width: 100%;
+}
+
+.search-input {
+    height: 42px;
+    border: none;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    padding: 0 0 0 10px;
+    flex: 1 1;
+    width: calc(-60px + 100%);
+}
+
+.search-btn {
+    border: none;
+    width: 60px;
+    background-color: #E0E0E0;
+    transition: all 0.2s;
+    height: 100%;
+    padding: 0;
+    margin-left: -4px;
+}
+
+    .search-btn:hover {
+        background-color: #BDBDBD;
+    }
+
+.control-bar {
+    background-color: #006699;
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.edit,
+.delete {
+    text-align: center;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}

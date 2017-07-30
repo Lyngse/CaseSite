@@ -33,6 +33,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
     @ViewChild('f') form: any;
     attachments: any;
     attachmentNames: any;
+    isAdmin: boolean = false;
 
     constructor(private taskService: TaskService,
         private route: ActivatedRoute,
@@ -42,10 +43,20 @@ export class CreateEditTaskComponent implements AfterViewInit {
         private utilService: UtilService,
         private blobService: BlobService) {
         accountService.loggedIn.subscribe(newValue => {
-            if (newValue)
+            if (newValue === "business") {
                 this.getBusiness();
-            else
+            }
+            else if (newValue === "student") {
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Du har ikke tilladelse til at se dette indhold" });
+                this.router.navigate(['/frontpage']);
+            }
+            else if (newValue === "admin") {
+                this.isAdmin = true;
                 this.business = null;
+            }
+            else {
+                this.business = null;
+            }
         });
     }
 
@@ -57,11 +68,15 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.taskService.getTask(id).subscribe(res => {
                     this.utilService.loading.next(false);
                     this.model = res;
-                    this.edit = true;
-                    this.isEdit = res.deadline.toDate();
                     this.now = res.deadline.toDate();
                     this.selectedDate = res.deadline.toDate();
                     this.selectedTime = res.deadline.toDate();
+                    if (!this.isAdmin) {
+                        this.edit = true;
+                        this.isEdit = res.deadline.toDate();
+                    } else {
+                        this.edit = false;
+                    }
                 });
                 //this.getAttachments(id);
                 this.getAttachmentNames(id);
@@ -69,7 +84,6 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.edit = false;
                 this.model.rewardValue = 0;
             }
-
         });
     }
 
@@ -96,19 +110,25 @@ export class CreateEditTaskComponent implements AfterViewInit {
                 this.taskService.createTask(this.model).subscribe((data) => {
                     console.log(data);
                     if (data.id) {
-                        this.blobService.uploadAttachments(this.formData, data.id).subscribe((res) => {
-                            if (res.ok) {
-                                this.utilService.loading.next(false);
-                                this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
-                                this.router.navigateByUrl('business');
-                            } else {
+                        if (this.filesChanged) {
+                            this.blobService.uploadAttachments(this.formData, data.id).subscribe((res) => {
+                                if (res.ok) {
+                                    this.utilService.loading.next(false);
+                                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
+                                    this.router.navigateByUrl('business');
+                                } else {
+                                    this.utilService.loading.next(false);
+                                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
+                                }
+                            }, (err) => {
                                 this.utilService.loading.next(false);
                                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
-                            }
-                        }, (err) => {
+                            });
+                        } else {
                             this.utilService.loading.next(false);
-                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
-                        });
+                            this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
+                            this.router.navigateByUrl('business');
+                        }
                     } else {
                         this.utilService.loading.next(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgave ikke oprettet" });
@@ -126,19 +146,37 @@ export class CreateEditTaskComponent implements AfterViewInit {
                     this.model.rewardValue = this.formatRewardValue(this.model.rewardValue);
 
                 this.taskService.updateTask(this.model).subscribe((data) => {
-                    this.blobService.uploadAttachments(this.formData, this.model.id).subscribe((res) => {
-                        if (res.ok) {
+                    if (this.filesChanged) {
+                        this.blobService.uploadAttachments(this.formData, this.model.id).subscribe((res) => {
+                            if (res.ok) {
+                                if (!this.isAdmin) {
+                                    this.utilService.loading.next(false);
+                                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
+                                    this.router.navigateByUrl('business');
+                                } else {
+                                    this.utilService.loading.next(false);
+                                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
+                                    this.router.navigateByUrl('admin/tasks');
+                                }
+                            } else {
+                                this.utilService.loading.next(false);
+                                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
+                            }
+                        }, (err) => {
+                            this.utilService.loading.next(false);
+                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
+                        })
+                    } else {
+                        if (!this.isAdmin) {
                             this.utilService.loading.next(false);
                             this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
                             this.router.navigateByUrl('business');
                         } else {
                             this.utilService.loading.next(false);
-                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
+                            this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
+                            this.router.navigateByUrl('admin/tasks');
                         }
-                    }, (err) => {
-                            this.utilService.loading.next(false);
-                            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
-                        })
+                    }
 
                 }, (err) => {
                     this.utilService.loading.next(false);
@@ -219,12 +257,17 @@ export class CreateEditTaskComponent implements AfterViewInit {
         let _date: moment.Moment = moment(this.selectedDate).startOf("day");
         let _time: moment.Moment = moment(this.selectedTime);
         _date.add(_time.hours(), "h").add(_time.minutes(), "m");
-        if (_date.isAfter(moment())) {
+        if (!this.isAdmin) {
+            if (_date.isAfter(moment())) {
+                this.model.deadline = _date;
+                this.statusMessage = '';
+            }
+            else {
+                this.statusMessage = "Tiden for din deadline skal ligge efter nuværende tidspunkt";
+            }   
+        } else {
             this.model.deadline = _date;
             this.statusMessage = '';
         }
-        else {
-            this.statusMessage = "Tiden for din deadline skal ligge efter nuværende tidspunkt";
-        }   
     }
 }

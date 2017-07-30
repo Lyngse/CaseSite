@@ -19,6 +19,7 @@ export class DownloadSolutionComponent implements AfterViewInit {
     business: Business;
     student: Student;
     solutions: any[];
+    isAdmin: boolean = false;
 
     constructor(
         private businessService: BusinessService,
@@ -30,10 +31,20 @@ export class DownloadSolutionComponent implements AfterViewInit {
         private accountService: AccountService,
         private router: Router) {
         accountService.loggedIn.subscribe(newValue => {
-            if (newValue)
+            if (newValue === "business") {
                 this.getBusiness();
-            else
+            }
+            else if (newValue === "student") {
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Du har ikke tilladelse til at se dette indhold" });
+                this.router.navigate(['/frontpage']);
+            }
+            else if (newValue === "admin") {
+                this.isAdmin = true;
                 this.business = null;
+            }
+            else {
+                this.business = null;
+            }
         });
     }
 
