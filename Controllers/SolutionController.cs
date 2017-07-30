@@ -74,7 +74,7 @@ namespace CaseSite.Controllers
                 return NotFound(new { solutionError = "Solution not found" });
             }
 
-            return Ok(solution);
+            return Ok(toClientSolution(solution));
         }
 
         [HttpGet("gettasksolutions/{taskId}")]

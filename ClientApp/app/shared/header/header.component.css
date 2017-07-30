@@ -4,6 +4,12 @@
     box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
 }
 
+.navbar-brand img {
+    width: 50px;
+    height: auto;
+    margin-top: -13px;
+}
+
 nav.navbar-findcond ul.navbar-nav a.active,
 nav.navbar-findcond ul.navbar-nav a:hover {
     background: #082a3b;
