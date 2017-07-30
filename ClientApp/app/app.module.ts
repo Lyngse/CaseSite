@@ -11,6 +11,7 @@ import { TaskCardComponent } from './tasks/task-list/task-card/task-card.compone
 import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule } from 'ngx-bootstrap';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -50,7 +51,7 @@ import { CookieService } from 'angular2-cookie/services';
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
         AccordionModule.forRoot(),
-
+        Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     ],
     providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService]
 })

@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { UtilService } from './services/util.service';
 import { CookieService } from 'angular2-cookie/core';
+import { Angulartics2GoogleAnalytics } from 'angulartics2';
 import * as moment from 'moment';
 
 @Component({
@@ -31,7 +32,7 @@ export class AppComponent {
     alerts = [];
     acceptCookie = false;
 
-    constructor(private utilService: UtilService, private cookieService: CookieService) {
+    constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
             if (newValue.titel && newValue.type) {
