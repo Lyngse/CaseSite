@@ -319,6 +319,74 @@
     padding: 20px 30px;
 }
 
+
+/* ----- Testimonials ----- */
+.fp-testimonials {
+    background: -moz-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,102,153,1)), color-stop(100%, rgba(0,119,179,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(271deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* ie10+ */
+    background: linear-gradient(179deg, rgba(0,102,153,1) 0%, rgba(0,119,179,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006699', endColorstr='#0077b3',GradientType=0 ); /* ie6-9 */
+}
+
+.fp-testimonials-content {
+    padding: 40px;
+    color: white;
+    display: flex;
+
+}
+
+.fp-testimonials-quote {
+    flex: 1 1 70%;
+}
+
+.quote {
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.quote-start{
+    font-size: 200%;
+}
+
+.quote-start {
+
+}
+
+.quote-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    flex: 1 1 30%;
+    margin: 0 20px;
+}
+
+
+.fp-testimonials-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px #009de6, 0 12px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.fp-testimonials-img img {
+    height:  125px;
+    width: auto;
+}
+
+.fp-testimonials-name {
+    margin: 0;
+}
+
 @media only screen and (max-width : 360px) {
     .fp-hiw-card {
         flex-direction: column;
@@ -403,6 +471,11 @@
     .fp-social-btn {
         margin: 10px 20px;
     }
+
+    .fp-testimonials-content {
+        flex-direction: column;
+        padding: 30px 15px;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -430,6 +503,10 @@
 
     .fp-hiw-card {
         flex: 1 1 100%;
+    }
+
+    .fp-testimonials-content {
+        flex-direction: column;
     }
 
 }
