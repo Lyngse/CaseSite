@@ -75,17 +75,6 @@
     width: auto;
 }
 
-.picture1 {
-    background-image: url("../../../wwwroot/assets/images/hiw1.jpg");
-}
-
-.picture2 {
-    background-image: url("../../../wwwroot/assets/images/UCN2.png");
-}
-
-.picture3 {
-    background-image: url("../../../wwwroot/assets/images/UCN1.png");
-}
 
 .picture1,
 .picture2,
@@ -111,8 +100,8 @@
 }
 
 .hiw-header {
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/assets/images/UCN1.png);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/assets/images/UCN1.png);
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/assets/images/cb3.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(/assets/images/cb3.jpg);
     background-size: cover;
     background-position: center;
     padding: 50px;
