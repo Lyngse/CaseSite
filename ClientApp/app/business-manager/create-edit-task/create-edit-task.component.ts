@@ -211,8 +211,12 @@ export class CreateEditTaskComponent implements AfterViewInit {
             if (res.ok) {
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet fra opgaven" });
                 this.getAttachmentNames(this.model.id);
+            } else {
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl da filen skulle slettes" });
             }
-        });
+        }, (err) => {
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl da filen skulle slettes" });
+            });
     }
 
     /*getAttachments(id) {
