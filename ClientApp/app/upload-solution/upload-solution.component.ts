@@ -5,7 +5,9 @@ import { StudentService } from '../services/student.service';
 import { UtilService } from '../services/util.service';
 import { BlobService } from '../services/blob.service';
 import { SolutionService } from '../services/solution.service';
+import { TaskService } from '../services/task.service';
 import { Student } from '../model/student';
+import * as moment from 'moment';
 
 @Component({
     selector: 'upload-solution',
@@ -19,6 +21,8 @@ export class UploadSolutionComponent implements AfterViewInit {
     formData: FormData = new FormData();
     filesChanged: boolean = false;
     solutionsLoaded: boolean = false;
+    enableUpload: boolean = true;
+
 
     constructor(private router: Router,
         private studentService: StudentService,
@@ -26,7 +30,8 @@ export class UploadSolutionComponent implements AfterViewInit {
         private utilService: UtilService,
         private blobService: BlobService,
         private route: ActivatedRoute,
-        private solutionService: SolutionService) {
+        private solutionService: SolutionService,
+        private taskService: TaskService) {
         this.accountService.loggedIn.subscribe(newValue => {
             if (newValue === "student")
                 this.studentService.getStudentFromUser().subscribe(res => {
@@ -36,6 +41,9 @@ export class UploadSolutionComponent implements AfterViewInit {
                         this.getSolutionFiles();
                     }
                 });
+            else {
+                this.router.navigate(['/frontpage']);
+            }
         });
         this.solutionService
     }
@@ -85,20 +93,29 @@ export class UploadSolutionComponent implements AfterViewInit {
 
     getSolutionFiles() {
         this.utilService.loading.next(true);
-        this.blobService.getSolutionFiles(this.taskId, this.student.id).subscribe(res => {
-            if (res != null) {
-                this.utilService.loading.next(false);
-                this.solutions = res;
-                this.solutions.forEach((f) => {
-                    f.fileName = this.formatFileName(f.name)
+        this.taskService.getTask(this.taskId).subscribe(res => {
+            if (res.deadline > moment()) {
+                this.blobService.getSolutionFiles(this.taskId, this.student.id).subscribe(res => {
+                    if (res != null) {
+                        this.utilService.loading.next(false);
+                        this.solutions = res;
+                        this.solutions.forEach((f) => {
+                            f.fileName = this.formatFileName(f.name)
+                        });
+                        console.log(res);
+                        this.solutionsLoaded = true;
+                    }
+                }, (err) => {
+                    this.utilService.loading.next(false);
+                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente allerede uploadede filer" });
                 });
-                console.log(res);
-                this.solutionsLoaded = true;
             }
-        }, (err) => {
-            this.utilService.loading.next(false);
-            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente allerede uploadede filer" });
-        });
+            else {
+                this.enableUpload = false;
+                this.utilService.loading.next(false);
+            }
+        })
+
     }
 
     deleteSolution(fileName: string) {
