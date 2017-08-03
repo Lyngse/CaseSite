@@ -13,6 +13,8 @@ import { ResetPasswordComponent } from './login/resetpassword/resetpassword.comp
 import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule } from 'ngx-bootstrap';
 import { AdminBusinessComponent } from './admin/admin-business/admin-business.component';
 import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
+import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -45,6 +47,7 @@ import { CookieService } from 'angular2-cookie/services';
         FormatTextPipe,
         AdminTaskComponent,
         AdminBusinessComponent,
+        AdminStudentComponent,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -57,7 +60,7 @@ import { CookieService } from 'angular2-cookie/services';
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
         AccordionModule.forRoot(),
-
+        Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     ],
 
     providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService, AdminService]

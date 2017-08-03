@@ -53,3 +53,11 @@ a:active {
         color: #D32F2F;
         transform: rotateZ(-90deg);
     }
+
+.upload-content {
+    padding: 20px;
+}
+
+.past-deadline {
+    margin-top: 20px;
+}

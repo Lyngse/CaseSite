@@ -75,6 +75,7 @@ export class BusinessManagerComponent implements AfterViewInit {
 
     gotoWinnerSolutionDownload(winnerSolutionId: number) {
         this.solutionService.getSolution(winnerSolutionId).subscribe(res => {
+            console.log(res);
             this.router.navigate(["business/solutions/" + res.taskId + "/download/" + res.studentId]);
         });
     }

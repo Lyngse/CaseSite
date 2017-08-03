@@ -1,6 +1,8 @@
 ﻿import { Component, AfterViewInit, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../services/admin.service';
+import { UtilService } from '../services/util.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
     selector: 'admin',
@@ -17,7 +19,7 @@ export class AdminComponent implements AfterViewInit, OnChanges {
     showStudents: boolean = false;
     showSolutions: boolean = false;
 
-    constructor(private adminService: AdminService, private activatedRoute: ActivatedRoute) {
+    constructor(private adminService: AdminService, private activatedRoute: ActivatedRoute, private utilService: UtilService, private router: Router, private accountService: AccountService) {
         this.activatedRoute.params.subscribe((params) => {
             let subpage = params['subpage'];
             if (subpage == 'solutions') {
@@ -49,7 +51,6 @@ export class AdminComponent implements AfterViewInit, OnChanges {
 
     ngAfterViewInit() {
         this.adminService.getCounts().subscribe(res => {
-            console.log(res);
             this.businessCount = res[0];
             this.studentCount = res[1];
             this.taskCount = res[2];
@@ -64,6 +65,17 @@ export class AdminComponent implements AfterViewInit, OnChanges {
             this.studentCount = res[1];
             this.taskCount = res[2];
             this.solutionCount = res[3];
+        });
+    }
+
+    logout() {
+        this.utilService.loading.next(true);
+        this.accountService.logout().subscribe((response) => {
+            this.utilService.loading.next(false);
+            this.router.navigate(['/']);
+        }, err => {
+            this.utilService.loading.next(true);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
         });
     }
 }

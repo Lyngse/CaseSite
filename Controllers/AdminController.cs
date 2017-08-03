@@ -42,6 +42,54 @@ namespace CaseSite.Controllers
             return Ok(counts);
         }
 
+        [HttpPost("getallstudents")]
+        [Authorize]
+        public async Task<IActionResult> GetAllStudents([FromBody] JObject obj)
+        {
+            string query = (string)obj["query"];
+            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+            if (serverUser == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+
+            if (serverUser.UserName == "unifactoadministrator")
+            {
+                if (query == null)
+                {
+                    var students = await _context.Student.ToListAsync();
+                    foreach (var s in students)
+                    {
+                        s.User = await _context.Users.SingleOrDefaultAsync(u => u.Id == s.UserId);
+                        s.Solutions = await _context.Solution.Where(so => so.StudentId == s.Id).ToListAsync();
+                        foreach (var so in s.Solutions)
+                        {
+                            so.Task = await _context.Task.SingleOrDefaultAsync(t => t.Id == so.TaskId);
+                        }
+                        StudentController.toClientStudent(s);
+                    }
+                    return Ok(students);
+                }
+                else
+                {
+                    query = query.ToLower();
+                    var students = await _context.Student.Where(s => s.Firstname.ToLower().Contains(query) || s.Lastname.ToLower().Contains(query) || s.Id.ToString().Equals(query)).ToListAsync();
+                    foreach (var s in students)
+                    {
+                        s.User = await _context.Users.SingleOrDefaultAsync(u => u.Id == s.UserId);
+                        s.Solutions = await _context.Solution.Where(so => so.StudentId == s.Id).ToListAsync();
+                        foreach (var so in s.Solutions)
+                        {
+                            so.Task = await _context.Task.SingleOrDefaultAsync(t => t.Id == so.TaskId);
+                        }
+                        StudentController.toClientStudent(s);
+                    }
+                    return Ok(students);
+                }
+            }
+            return NotFound(new { roleError = "You need to be an admin to have access here" });
+        }
+
         [HttpPost("getallbusinesses")]
         [Authorize]
         public async Task<IActionResult> GetAllBusinesses([FromBody] JObject obj)
@@ -52,9 +100,9 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            //if(serverUser.Roles.ToString() == "admin")
-            //{
-                if(query == null)
+            if (serverUser.UserName == "unifactoadministrator")
+            {
+                if (query == null)
                 {
                     var businesses = await _context.Business.ToListAsync();
                     foreach (var b in businesses)
@@ -65,6 +113,7 @@ namespace CaseSite.Controllers
                     return Ok(businesses);
                 } else
                 {
+                    query = query.ToLower();
                     var businesses = await _context.Business.Where(b => b.Name.ToLower().Contains(query) || b.Id.ToString().Equals(query)).ToListAsync();
                     foreach (var b in businesses)
                     {
@@ -73,8 +122,8 @@ namespace CaseSite.Controllers
                     }
                     return Ok(businesses);
                 }
-            //}
-            //return NotFound(new { roleError ="You need to be an admin to have access here" });
+        }
+            return NotFound(new { roleError ="You need to be an admin to have access here" });
         }
 
         [HttpPost("getalltasks")]
@@ -88,8 +137,8 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            //if (serverUser.Roles.ToString() == "admin")
-            //{
+            if (serverUser.UserName == "unifactoadministrator")
+            {
                 if (query == null)
                 {
                     var tasks = await _context.Task.ToListAsync();
@@ -103,7 +152,8 @@ namespace CaseSite.Controllers
                 }
                 else
                 {
-                    var tasks = await _context.Task.Where(t => t.Title.Contains(query) || t.Id.ToString().Equals(query) || t.Business.Name.ToString().Contains(query) || t.Business.City.Contains(query)).ToListAsync();
+                    query = query.ToLower();
+                    var tasks = await _context.Task.Where(t => t.Title.ToLower().Contains(query) || t.Id.ToString().Equals(query) || t.Business.Name.ToLower().Contains(query) || t.Business.City.ToLower().Contains(query)).ToListAsync();
                     foreach (var t in tasks)
                     {
                         t.Business = await _context.Business.SingleOrDefaultAsync(b => b.Id == t.BusinessId);
@@ -112,8 +162,8 @@ namespace CaseSite.Controllers
                     }
                     return Ok(tasks);
                 }
-            //}
-            //return NotFound(new { roleError = "You need to be an admin to have access here" });
+            }
+            return NotFound(new { roleError = "You need to be an admin to have access here" });
         }
 
         [HttpDelete("deletetask/{taskId}")]
@@ -126,12 +176,22 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            if (serverUser.Roles.ToString() == "admin")
+            if (serverUser.UserName == "unifactoadministrator")
             {
                 var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
                 if (task == null)
                 {
                     return NotFound();
+                }
+                task.WinnerSolution = null;
+                task.WinnerSolutionId = null;
+                task.Solutions = await _context.Solution.Where(s => s.TaskId == task.Id).ToListAsync();
+                if(task.Solutions.Count()  > 0)
+                {
+                    foreach (var s in task.Solutions)
+                    {
+                        _context.Solution.Remove(s);
+                    }
                 }
 
                 _context.Task.Remove(task);
@@ -181,89 +241,89 @@ namespace CaseSite.Controllers
             return NotFound(new { roleError = "You need to be an admin to have access here" });
         }
 
-        [HttpPut]
-        [Authorize]
-        public async Task<IActionResult> UpdateTask([FromBody] Models.Task task)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[HttpPut]
+        //[Authorize]
+        //public async Task<IActionResult> UpdateTask([FromBody] Models.Task task)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+        //    var serverUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (serverUser == null)
-            {
-                return NotFound(new { userError = "user not found" });
-            }
-            if (serverUser.Roles.ToString() == "admin")
-            {
-                var serverTask = await _context.Task.SingleOrDefaultAsync(j => j.Id == task.Id);
+        //    if (serverUser == null)
+        //    {
+        //        return NotFound(new { userError = "user not found" });
+        //    }
+        //    if (serverUser.Roles.ToString() == "admin")
+        //    {
+        //        var serverTask = await _context.Task.SingleOrDefaultAsync(j => j.Id == task.Id);
 
-                if (serverTask == null)
-                {
-                    return NotFound();
-                }
+        //        if (serverTask == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-                serverTask.Deadline = task.Deadline;
-                serverTask.Description = task.Description;
-                serverTask.Type = task.Type;
-                serverTask.RewardValue = task.RewardValue;
-                serverTask.Title = task.Title;
-                serverTask.WorkPlace = task.WorkPlace;
-                serverTask.Address = task.Address;
-                serverTask.City = task.City;
-                serverTask.ContactDescription = task.ContactDescription;
-                serverTask.RewardType = task.RewardType;
-                serverTask.Zip = task.Zip;
-                serverTask.CreationTime = task.CreationTime;
+        //        serverTask.Deadline = task.Deadline;
+        //        serverTask.Description = task.Description;
+        //        serverTask.Type = task.Type;
+        //        serverTask.RewardValue = task.RewardValue;
+        //        serverTask.Title = task.Title;
+        //        serverTask.WorkPlace = task.WorkPlace;
+        //        serverTask.Address = task.Address;
+        //        serverTask.City = task.City;
+        //        serverTask.ContactDescription = task.ContactDescription;
+        //        serverTask.RewardType = task.RewardType;
+        //        serverTask.Zip = task.Zip;
+        //        serverTask.CreationTime = task.CreationTime;
 
 
-                _context.Entry(serverTask).State = EntityState.Modified;
+        //        _context.Entry(serverTask).State = EntityState.Modified;
 
-                await _context.SaveChangesAsync();
+        //        await _context.SaveChangesAsync();
 
-                return Ok(TasksController.toClientTask(serverTask));
-            }
-            return NotFound(new { roleError = "You need to be an admin to have access here" });
-        }
+        //        return Ok(TasksController.toClientTask(serverTask));
+        //    }
+        //    return NotFound(new { roleError = "You need to be an admin to have access here" });
+        //}
 
-        [HttpPut]
-        [Authorize]
-        public async Task<IActionResult> UpdateBusiness([FromBody] JObject obj)
-        {
+        //[HttpPut]
+        //[Authorize]
+        //public async Task<IActionResult> UpdateBusiness([FromBody] JObject obj)
+        //{
 
-            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+        //    var serverUser = await _userManager.GetUserAsync(HttpContext.User);
 
-            if (serverUser == null)
-            {
-                return NotFound(new { userError = "user not found" });
-            }
-            if (serverUser.Roles.ToString() == "admin")
-            {
-                Business business = obj["business"].ToObject<Business>();
+        //    if (serverUser == null)
+        //    {
+        //        return NotFound(new { userError = "user not found" });
+        //    }
+        //    if (serverUser.Roles.ToString() == "admin")
+        //    {
+        //        Business business = obj["business"].ToObject<Business>();
 
-                var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == serverUser.Id);
+        //        var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == serverUser.Id);
 
-                if (serverBusiness == null)
-                {
-                    return NotFound( new { businessError = "Business not found" });
-                }
+        //        if (serverBusiness == null)
+        //        {
+        //            return NotFound( new { businessError = "Business not found" });
+        //        }
 
-                serverBusiness.Name = business.Name;
-                serverBusiness.Description = business.Description;
-                serverBusiness.Address = business.Address;
-                serverBusiness.City = business.City;
-                serverBusiness.Zip = business.Zip;
+        //        serverBusiness.Name = business.Name;
+        //        serverBusiness.Description = business.Description;
+        //        serverBusiness.Address = business.Address;
+        //        serverBusiness.City = business.City;
+        //        serverBusiness.Zip = business.Zip;
 
-                _context.Entry(serverBusiness).State = EntityState.Modified;
+        //        _context.Entry(serverBusiness).State = EntityState.Modified;
 
-                await _context.SaveChangesAsync();
+        //        await _context.SaveChangesAsync();
 
-                return Ok(BusinessesController.toClientBusiness(serverBusiness));
-            }
-            return NotFound(new { roleError = "You need to be an admin to have access here" });
-        }
+        //        return Ok(BusinessesController.toClientBusiness(serverBusiness));
+        //    }
+        //    return NotFound(new { roleError = "You need to be an admin to have access here" });
+        //}
 
 
     }
