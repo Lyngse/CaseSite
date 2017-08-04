@@ -334,12 +334,12 @@
 .fp-testimonials-content {
     padding: 40px;
     color: white;
-    display: flex;
 
 }
 
 .fp-testimonials-quote {
-    flex: 1 1 70%;
+    width: 65%;
+    display: inline-block;
 }
 
 .quote {
@@ -356,12 +356,10 @@
 }
 
 .quote-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:inline-block;
     text-align: center;
-    flex-direction: column;
-    flex: 1 1 30%;
+    vertical-align: central;
+    width: 30%;
     margin: 0 20px;
 }
 
@@ -370,16 +368,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 125px;
-    height: 125px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     box-shadow: 0 0 0 5px #009de6, 0 12px 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
 }
 
 .fp-testimonials-img img {
-    height:  125px;
+    height:  100px;
     width: auto;
 }
 
@@ -476,6 +474,15 @@
         flex-direction: column;
         padding: 30px 15px;
     }
+
+    .fp-testimonials-quote {
+        width: 100%;
+    }
+
+    .quote-info {
+        width: 100%;
+        margin: 0;
+    }
 }
 
 /* Extra Small Devices, Phones */
@@ -505,14 +512,32 @@
         flex: 1 1 100%;
     }
 
-    .fp-testimonials-content {
-        flex-direction: column;
+    .fp-testimonials-quote {
+        width: 100%;
+    }
+
+    .quote-info {
+        width: 100%;
+        margin: 0;
     }
 
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) and (max-width : 991px) {
+
+    .fp-testimonials-quote {
+        width: 60%;
+    }
+
+    .quote-info {
+        display: inline-block;
+        text-align: center;
+        vertical-align: central;
+        width: 30%;
+        margin: 0 20px;
+    }
+
 }
 
 /* Medium Devices, Desktops */
