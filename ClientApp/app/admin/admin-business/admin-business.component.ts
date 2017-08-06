@@ -45,7 +45,7 @@ export class AdminBusinessComponent implements AfterViewInit {
     }
 
     gotoBusinessEdit(id) {
-        this.router.navigate(['/business/businessSettings/' + id]);
+        this.router.navigate(['/business/settings/' + id]);
     }
 
     deleteBusiness(businessId) {

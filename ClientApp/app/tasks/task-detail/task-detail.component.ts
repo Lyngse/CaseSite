@@ -98,6 +98,6 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     }
 
     gotoUploadSolution(taskId) {
-        this.router.navigate(['/student/uploadsolution/' + taskId]);
+        this.router.navigate(['/student/upload-solution/' + taskId]);
     }
 }

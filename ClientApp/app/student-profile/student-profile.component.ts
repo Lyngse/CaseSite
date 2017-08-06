@@ -50,7 +50,7 @@ export class StudentProfileComponent implements AfterViewInit {
     }
 
     gotoUploadSolution(taskId) {
-        this.router.navigate(['student/uploadsolution/' + taskId]);
+        this.router.navigate(['student/upload-solution/' + taskId]);
     }
 
     gotoTaskDetail(taskId) {

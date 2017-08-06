@@ -30,7 +30,7 @@ export class AdminLoginComponent implements AfterViewInit {
                 console.log(response);
                 if (response.ok == true) {
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Login lykkedes" });
-                    this.router.navigate(['/admin']);
+                    this.router.navigate(['/admin/businesses']);
                 } else {
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
                 }

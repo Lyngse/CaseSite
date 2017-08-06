@@ -62,7 +62,7 @@ export class BusinessManagerComponent implements AfterViewInit {
     }    
 
     handleEditTask(id) {
-        this.router.navigateByUrl("business/createedittask/" + id);
+        this.router.navigateByUrl("business/create-edit-task/" + id);
     }
 
     gotoTaskDetail(taskId) {

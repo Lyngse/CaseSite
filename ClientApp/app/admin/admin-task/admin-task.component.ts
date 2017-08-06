@@ -47,7 +47,7 @@ export class AdminTaskComponent implements AfterViewInit {
     }
 
     gotoTaskEdit(id) {
-        this.router.navigate(['business/createedittask/' + id]);
+        this.router.navigate(['business/create-edit-task/' + id]);
     }
 
     gotoWinnerSolutionDownload(taskId: number, studentId: number) {
