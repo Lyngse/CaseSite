@@ -53,7 +53,7 @@ namespace CaseSite.Controllers
                 return NotFound(new { userError = "user not found" });
             }
 
-            if (serverUser.UserName == "unifactoadministrator")
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
             {
                 if (query == null)
                 {
@@ -100,7 +100,7 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            if (serverUser.UserName == "unifactoadministrator")
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
             {
                 if (query == null)
                 {
@@ -137,7 +137,7 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            if (serverUser.UserName == "unifactoadministrator")
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
             {
                 if (query == null)
                 {
@@ -176,7 +176,7 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            if (serverUser.UserName == "unifactoadministrator")
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
             {
                 var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
                 if (task == null)
@@ -212,7 +212,7 @@ namespace CaseSite.Controllers
             {
                 return NotFound(new { userError = "user not found" });
             }
-            if (serverUser.UserName == "unifactoadministrator")
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
             {
                 var business = await _context.Business.SingleOrDefaultAsync(b => b.Id == businessId);
                 if (business == null)
