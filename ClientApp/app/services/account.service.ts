@@ -52,7 +52,7 @@ export class AccountService {
 
     adminLogin(username: string, password: string): Observable<any> {
         return this.http
-            .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
+            .post('api/account/adminlogin/', JSON.stringify({ UserName: username, Password: password }), this.options)
             .map(res => { this.loggedIn.next("admin"); this.updateToken(); return res; })
             .catch(this.handleError);
     }

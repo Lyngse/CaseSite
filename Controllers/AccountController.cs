@@ -127,6 +127,28 @@ namespace CaseSite.Controllers
             return Ok();
         }
 
+        [HttpPost("adminlogin")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> AdminLogIn([FromBody] LogIn loginInfo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = await _userManager.FindByNameAsync(loginInfo.UserName);
+            if (user == null || !(await _userManager.IsInRoleAsync(user, "admin")))
+            {
+                return BadRequest(new { loginError = "login failed" });
+            }
+            var result = await _loginManager.PasswordSignInAsync(loginInfo.UserName, loginInfo.Password, false, false);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { loginError = "login failed" });
+            }
+            return Ok();
+
+        }
+
         [HttpPost("login")]
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> LogIn([FromBody] LogIn loginInfo)
@@ -134,6 +156,11 @@ namespace CaseSite.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+            var user = await _userManager.FindByNameAsync(loginInfo.UserName);
+            if (user == null || !(await _userManager.IsInRoleAsync(user, "business")))
+            {
+                return BadRequest(new { loginError = "login failed" });
             }
             var result = await _loginManager.PasswordSignInAsync(loginInfo.UserName, loginInfo.Password, false, false);
             if (!result.Succeeded)
