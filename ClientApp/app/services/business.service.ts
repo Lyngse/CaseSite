@@ -82,14 +82,11 @@ export class BusinessService {
         var data = res.json();
         if (!data) {
             return {};
-        } else if (data.tasks.length > 1) {
+        } else if (data.tasks.length > 0) {
             data.tasks.forEach((d) => {
                 d.deadline = moment(d.deadline);
                 d.creationTime = moment(d.creationTime);
             })
-        } else {
-            data.tasks[0].deadline = moment(data.tasks[0].deadline);
-            data.tasks[0].creationTime = moment(data.tasks[0].creationTime);
         }
         return data;
     }

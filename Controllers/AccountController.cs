@@ -71,7 +71,7 @@ namespace CaseSite.Controllers
                 return Ok();
             }
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var callbackUrl = Url.Action("resetpassword", "login", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            var callbackUrl = Url.Action("reset-password", "login", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
             var mimeMessage = new MimeMessage();
             mimeMessage.From.Add(new MailboxAddress("Unifacto Noreply", "noreply@unifacto.com"));
             mimeMessage.To.Add(new MailboxAddress("customer", email));
@@ -186,7 +186,10 @@ namespace CaseSite.Controllers
                 var emailClaim = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
 
                 if (emailClaim == null)
+                {
+                    Response.Cookies.Delete("Identity.External");
                     return Redirect("/login?error=noemail");
+                }
 
                 var email = emailClaim.Value;
 

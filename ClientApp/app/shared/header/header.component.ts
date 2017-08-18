@@ -23,9 +23,11 @@ export class HeaderComponent implements OnInit {
             if (newValue === "business") {
                 this.getBusiness();
                 this.student = null;
+                this.isAdmin = false;
             }
             else if (newValue === "student") {
                 this.business = null;
+                this.isAdmin = false;
                 this.studentService.getStudentFromUser().subscribe(res => {
                     console.log(res);
                     this.student = res;
@@ -33,6 +35,8 @@ export class HeaderComponent implements OnInit {
             }
             else if (newValue === "admin") {
                 this.isAdmin = true;
+                this.business = null;
+                this.student = null;
             }
             else {
                 this.business = null;

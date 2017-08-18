@@ -63,7 +63,7 @@ export class SolutionService {
                 d.task.deadline = moment(d.task.deadline);
                 d.task.creationTime = moment(d.task.creationTime);
             })
-        } else {
+        } else if (data.task) {
             data.task.deadline = moment(data.task.deadline);
             data.task.creationTime = moment(data.task.creationTime);
         }
