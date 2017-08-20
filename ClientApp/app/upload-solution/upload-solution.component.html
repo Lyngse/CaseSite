@@ -7,8 +7,8 @@
     </div>
 
     <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!formData || !enableUpload">Upload</button>
-    <div class="alert alert-info past-deadline">
-        <p *ngIf="!enableUpload">Deadlinen for denne opgave er udløbet og du kan derfor ikke lave flere ændringer til dit løsningsforslag. Hvis du mener at en eventuel ændring til dit løsningforslag vil have en stor betydning, kan du prøve at tage kontakt til virksomheden via deres email.</p>
+    <div *ngIf="!enableUpload" class="alert alert-info past-deadline">
+        <p>Deadlinen for denne opgave er udløbet og du kan derfor ikke lave flere ændringer til dit løsningsforslag. Hvis du mener at en eventuel ændring til dit løsningforslag vil have en stor betydning, kan du prøve at tage kontakt til virksomheden via deres email.</p>
     </div>
     <h2 *ngIf="solutions">Håndter uploadede løsningsforslag</h2>
     <div class="uploaded-files" *ngIf="solutions">

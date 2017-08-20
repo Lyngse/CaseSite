@@ -21,10 +21,11 @@
                 <tbody>
                     <tr *ngFor="let t of tasks">
                         <td class="title" (click)="gotoTaskDetail(t.id)">{{ t.title }}</td>
-                        <td>{{ t.task.deadline.format('DD/MM-YYYY') }} kl. {{ t.deadline.format('HH:mm') }}</td>
+                        <td>{{ t.deadline.format('DD/MM-YYYY') }} kl. {{ t.deadline.format('HH:mm') }}</td>
                         <td class="reward" *ngIf="t.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ t.rewardValue | danishcurrency }} kr</td>
                         <td class="reward" *ngIf="t.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ t.rewardValue | danishcurrency }} kr</td>
                         <td class="reward" *ngIf="t.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                        <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(t.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
                         <td class="edit"><i class="fa fa-pencil" (click)="handleEditTask(t.id)"></i></td>
                     </tr>
                 </tbody>
