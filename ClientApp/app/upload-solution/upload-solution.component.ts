@@ -35,7 +35,6 @@ export class UploadSolutionComponent implements AfterViewInit {
         this.accountService.loggedIn.subscribe(newValue => {
             if (newValue === "student")
                 this.studentService.getStudentFromUser().subscribe(res => {
-                    console.log(res);
                     this.student = res;
                     if (this.taskId && this.student.id && !this.solutionsLoaded) {
                         this.getSolutionFiles();
