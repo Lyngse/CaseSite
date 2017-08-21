@@ -18,6 +18,8 @@ namespace CaseSite.Models
 
         public string UserId { get; set; }
 
+        public bool TermsAccecpted { get; set; }
+
         public virtual IdentityUser User { get; set; }
 
         public virtual ICollection<Solution> Solutions { get; set; }

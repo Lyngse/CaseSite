@@ -91,6 +91,7 @@ namespace CaseSite.Controllers
             if(serverStudent == null)
             {
                 student.User = user;
+                student.TermsAccecpted = false;
                 _context.Student.Add(student);
                 await _context.SaveChangesAsync();
 
@@ -106,6 +107,7 @@ namespace CaseSite.Controllers
             result.firstname = student.Firstname;
             result.lastname = student.Lastname;
             result.facebookId = student.FacebookId;
+            result.termsAccepted = student.TermsAccecpted;
 
             var solutions = new List<dynamic>();
             if(student.Solutions != null && join)
