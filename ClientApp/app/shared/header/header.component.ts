@@ -78,8 +78,24 @@ export class HeaderComponent implements OnInit {
             this.router.navigate(['/']);
             this.isAdmin = false;
         }, err => {
-            this.utilService.loading.next(true);
+            this.utilService.loading.next(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
         });
+    }
+
+    acceptTerms() {
+        this.utilService.loading.next(true);
+        this.studentService.acceptTerms().subscribe(res => {
+            if (res.id) {
+                this.utilService.loading.next(false);
+                console.log("Accepted");
+            } else {
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke finde brugeren" });
+            }
+        }, err => {
+            this.utilService.loading.next(false);
+            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der gik noget galt" });
+            })
     }
 }

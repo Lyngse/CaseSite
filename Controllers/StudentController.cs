@@ -100,6 +100,32 @@ namespace CaseSite.Controllers
             return "Student already exists";    
         }
 
+        [HttpPost("studentacceptterms")]
+        public async Task<IActionResult> StudentAcceptTerms()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+
+            var student = await _context.Student.SingleOrDefaultAsync(s => s.UserId == user.Id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            student.TermsAccecpted = true;
+
+            _context.Entry(student).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(toClientStudent(student));
+        }
+
         static public dynamic toClientStudent(Student student, bool incUser = true, bool join = true)
         {
             dynamic result = new ExpandoObject();

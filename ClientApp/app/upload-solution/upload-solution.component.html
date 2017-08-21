@@ -6,7 +6,7 @@
         <p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag, upload dem gerne i en zip komprimeret mappe.</p>
     </div>
 
-    <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!formData || !enableUpload">Upload</button>
+    <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!formData">Upload</button>
     <div *ngIf="!enableUpload" class="alert alert-info past-deadline">
         <p>Deadlinen for denne opgave er udløbet og du kan derfor ikke lave flere ændringer til dit løsningsforslag. Hvis du mener at en eventuel ændring til dit løsningforslag vil have en stor betydning, kan du prøve at tage kontakt til virksomheden via deres email.</p>
     </div>
