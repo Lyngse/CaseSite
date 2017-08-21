@@ -75,7 +75,7 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
             if (res.ok) {
                 this.getTasksAndSolutions(this.task.id);
                 this.utilService.loading.next(false);
-                this.utilService.alert.next({ type: "sucess", titel: "Succes", message: "Vinder af opgaven er blevet valgt" });
+                this.utilService.alert.next({ type: "success", titel: "Succes", message: "Vinder af opgaven er blevet valgt" });
             } else {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
