@@ -95,25 +95,25 @@ export class UploadSolutionComponent implements AfterViewInit {
         this.utilService.loading.next(true);
         this.taskService.getTask(this.taskId).subscribe(res => {
             if (res.deadline > moment()) {
-                this.blobService.getSolutionFiles(this.taskId, this.student.id).subscribe(res => {
-                    if (res != null) {
-                        this.utilService.loading.next(false);
-                        this.solutions = res;
-                        this.solutions.forEach((f) => {
-                            f.fileName = this.formatFileName(f.name)
-                        });
-                        console.log(res);
-                        this.solutionsLoaded = true;
-                    }
-                }, (err) => {
-                    this.utilService.loading.next(false);
-                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente allerede uploadede filer" });
-                });
+                this.enableUpload = true;
             }
             else {
                 this.enableUpload = false;
-                this.utilService.loading.next(false);
             }
+            this.blobService.getSolutionFiles(this.taskId, this.student.id).subscribe(res => {
+                if (res != null) {
+                    this.utilService.loading.next(false);
+                    this.solutions = res;
+                    this.solutions.forEach((f) => {
+                        f.fileName = this.formatFileName(f.name)
+                    });
+                    console.log(res);
+                    this.solutionsLoaded = true;
+                }
+            }, (err) => {
+                this.utilService.loading.next(false);
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente allerede uploadede filer" });
+            });
         })
 
     }
