@@ -73,21 +73,21 @@ export class UploadSolutionComponent implements AfterViewInit {
         this.utilService.loading.next(true);
         this.solutionService.createSolution(this.student.id, this.taskId).subscribe(res => {
             console.log(res);
-        });
-        this.blobService.uploadSolutionFiles(this.formData, this.taskId, this.student.id).subscribe(res => {
-            console.log(res);
-            if (res.ok) {
-                this.utilService.loading.next(false);
-                this.utilService.alert.next({ type: "success", titel: "Success", message: "Filer til løsningsforslag er blevet uploadet" });
-                this.router.navigate(['/student']);
-            } else {
+            this.blobService.uploadSolutionFiles(this.formData, this.taskId, this.student.id).subscribe(res => {
+                console.log(res);
+                if (res.ok) {
+                    this.utilService.loading.next(false);
+                    this.utilService.alert.next({ type: "success", titel: "Success", message: "Filer til løsningsforslag er blevet uploadet" });
+                    this.router.navigate(['/student']);
+                } else {
+                    this.utilService.loading.next(false);
+                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filerne" });
+                }
+            }, (err) => {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filerne" });
-            }
-        }, (err) => {
-            this.utilService.loading.next(false);
-            this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filerne" });
-            });
+                });
+        });
     }
 
     getSolutionFiles() {

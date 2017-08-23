@@ -43,6 +43,10 @@
     padding: 0 15px;
 }
 
+.profile-table {
+    margin-bottom: 20px;
+}
+
 .solutions {
     color: #006699;
     cursor: pointer;
