@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
 
     getUserImage() {
         if (this.student) {
-            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
+            return "https://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
         }
     }
 

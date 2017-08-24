@@ -59,7 +59,7 @@ export class StudentProfileComponent implements AfterViewInit {
 
     getUserImage() {
         if (this.student) {
-            return "http://graph.facebook.com/" + this.student.facebookId + "/picture?type=large";
+            return "https://graph.facebook.com/" + this.student.facebookId + "/picture?type=large";
         }
     }
 }

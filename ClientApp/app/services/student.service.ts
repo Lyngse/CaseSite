@@ -35,7 +35,7 @@ export class StudentService {
 
     acceptTerms(): Observable<Student> {
         return this.http
-            .post("api/student/studentacceptterms", this.options)
+            .get("api/student/studentacceptterms", this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }

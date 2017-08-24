@@ -100,7 +100,7 @@ namespace CaseSite.Controllers
             return "Student already exists";    
         }
 
-        [HttpPost("studentacceptterms")]
+        [HttpGet("studentacceptterms")]
         public async Task<IActionResult> StudentAcceptTerms()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
