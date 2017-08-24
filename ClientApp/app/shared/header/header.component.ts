@@ -87,8 +87,11 @@ export class HeaderComponent implements OnInit {
         this.utilService.loading.next(true);
         this.studentService.acceptTerms().subscribe(res => {
             if (res.id) {
-                this.utilService.loading.next(false);
-                console.log("Accepted");
+                this.studentService.getStudentFromUser().subscribe(res => {
+                    console.log(res);
+                    this.student = res;
+                    this.utilService.loading.next(false);
+                });
             } else {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke finde brugeren" });
