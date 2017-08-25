@@ -166,6 +166,64 @@ namespace CaseSite.Controllers
             return NotFound(new { roleError = "You need to be an admin to have access here" });
         }
 
+        [HttpPost("getallsolutions")]
+        [Authorize]
+        public async Task<IActionResult> GetAllSolutions([FromBody] JObject obj)
+        {
+            string query = (string)obj["query"];
+            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (serverUser == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
+            {
+                if (query == null)
+                {
+                    var solutions = await _context.Solution.ToListAsync();
+                    foreach (var s in solutions)
+                    {
+                        s.Student = await _context.Student.SingleOrDefaultAsync(st => st.Id == s.StudentId);
+                        s.Task = await _context.Task.SingleOrDefaultAsync(t => t.Id == s.TaskId);
+                        SolutionController.toClientSolution(s);
+                    }
+                    return Ok(solutions);
+                }
+                else
+                {
+                    query = query.ToLower();
+                    var solutions = await _context.Solution.Where(s => (s.Student.Firstname + ' ' + s.Student.Lastname).Contains(query) || s.Student.Firstname.ToLower().Contains(query) || s.Student.Lastname.ToLower().Contains(query) || s.Task.Title.ToLower().Contains(query)).ToListAsync();
+                    foreach (var s in solutions)
+                    {
+                        s.Student = await _context.Student.SingleOrDefaultAsync(st => st.Id == s.StudentId);
+                        s.Task = await _context.Task.SingleOrDefaultAsync(t => t.Id == s.TaskId);
+                        SolutionController.toClientSolution(s);
+                    }
+                    return Ok(solutions);
+                }
+            }
+            return NotFound(new { roleError = "You need to be an admin to have access here" });
+        }
+
+        [HttpGet("getsolutionsforstudent/{taskId}/{studentId}")]
+        [Authorize]
+        public async Task<IActionResult> GetSolutionForStudent([FromRoute] int taskId, [FromRoute]int studentId)
+        {
+            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (serverUser == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+            if (await _userManager.IsInRoleAsync(serverUser, "admin"))
+            {
+                
+            }
+            return NotFound(new { roleError = "You need to be an admin to have access here" });
+        }
+
         [HttpDelete("deletetask/{taskId}")]
         [Authorize]
         public async Task<IActionResult> DeleteTask([FromRoute] int taskId)

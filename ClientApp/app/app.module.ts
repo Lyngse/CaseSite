@@ -14,6 +14,7 @@ import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertMo
 import { AdminBusinessComponent } from './admin/admin-business/admin-business.component';
 import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
+import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
@@ -48,6 +49,7 @@ import { CookieService } from 'angular2-cookie/services';
         AdminTaskComponent,
         AdminBusinessComponent,
         AdminStudentComponent,
+        AdminSolutionComponent,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

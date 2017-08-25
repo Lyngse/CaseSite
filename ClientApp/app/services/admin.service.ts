@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 import { Business } from '../model/business';
 import { Task } from '../model/task';
 import { Student } from '../model/student';
+import { Solution } from '../model/solution';
 
 @Injectable()
 export class AdminService {
@@ -67,6 +68,20 @@ export class AdminService {
     searchStudent(query: string): Observable<Student[]> {
         return this.http
             .post('api/admin/getallstudents', JSON.stringify({ query: query }), this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    getAllSolutions(): Observable<Solution[]> {
+        return this.http
+            .post('api/admin/getallsolutions', this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    searchSolution(query: string): Observable<Solution[]> {
+        return this.http
+            .post('api/admin/getallsolutions', JSON.stringify({ query: query }), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
