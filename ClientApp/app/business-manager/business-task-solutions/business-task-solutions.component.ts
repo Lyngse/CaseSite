@@ -21,6 +21,7 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
     task: Task;
     solutions: Solution[] = [];
     winnerSolution: Solution;
+    now = moment();
 
     constructor(private businessService: BusinessService,
         private route: ActivatedRoute,

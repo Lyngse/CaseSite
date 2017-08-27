@@ -50,7 +50,7 @@
                             <td class="reward" *ngIf="pt.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="pt.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="pt.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
-                            <td><a class="solutions" (click)="gotoSolutionsView(pt.id)">Se løsningsforslag</a></td>
+                            <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(pt.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
                             <td *ngIf="pt.winnerSolutionId"><p class="winner-link" (click)="gotoWinnerSolutionDownload(pt.winnerSolutionId)">Gå til download</p></td>
                             <td *ngIf="!pt.winnerSolutionId">TBA</td>
                         </tr>
