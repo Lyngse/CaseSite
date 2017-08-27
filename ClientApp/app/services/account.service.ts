@@ -70,7 +70,7 @@ export class AccountService {
             .catch(this.handleError);
     }
 
-    private updateToken() {
+    updateToken() {
         this.http
             .get('api/account/updateTokens', this.options)
             .subscribe();

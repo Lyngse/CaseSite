@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
                     console.log(res);
                     this.student = res;
                 });
+                this.accountService.updateToken();
             }
             else if (newValue === "admin") {
                 this.isAdmin = true;
