@@ -47,7 +47,10 @@ export class AdminSolutionComponent implements AfterViewInit {
     }
 
     gotoSolution(studentId: number, taskId: number) {
-
+        let arr = { studentId: studentId, taskId: taskId };
+        this.utilService.dataArray = {};
+        this.utilService.dataArray = arr;
+        this.router.navigate(['/student/upload-solution/' + taskId]);
     }
 
 }

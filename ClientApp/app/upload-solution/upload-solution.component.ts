@@ -18,6 +18,7 @@ export class UploadSolutionComponent implements AfterViewInit {
     student: Student;
     solutions: any;
     taskId: number;
+    studentId: number;
     formData: FormData = new FormData();
     filesChanged: boolean = false;
     solutionsLoaded: boolean = false;
@@ -36,10 +37,19 @@ export class UploadSolutionComponent implements AfterViewInit {
             if (newValue === "student")
                 this.studentService.getStudentFromUser().subscribe(res => {
                     this.student = res;
-                    if (this.taskId && this.student.id && !this.solutionsLoaded) {
-                        this.getSolutionFiles();
+                    this.studentId = res.id;
+                    if (this.taskId && this.studentId && !this.solutionsLoaded) {
+                        this.getSolutionFiles(this.taskId, this.studentId);
                     }
                 });
+            else if (newValue === "admin") {
+                console.log(this.utilService.dataArray);
+                this.studentId = this.utilService.dataArray.studentId;
+                this.taskId = this.utilService.dataArray.taskId;
+                if (this.taskId && this.studentId && !this.solutionsLoaded) {
+                    this.getSolutionFiles(this.taskId, this.studentId);
+                }
+            }
             else {
                 this.router.navigate(['/frontpage']);
             }
@@ -90,16 +100,16 @@ export class UploadSolutionComponent implements AfterViewInit {
         });
     }
 
-    getSolutionFiles() {
+    getSolutionFiles(taskId, studentId) {
         this.utilService.loading.next(true);
-        this.taskService.getTask(this.taskId).subscribe(res => {
+        this.taskService.getTask(taskId).subscribe(res => {
             if (res.deadline > moment()) {
                 this.enableUpload = true;
             }
             else {
                 this.enableUpload = false;
             }
-            this.blobService.getSolutionFiles(this.taskId, this.student.id).subscribe(res => {
+            this.blobService.getSolutionFiles(taskId, studentId).subscribe(res => {
                 if (res != null) {
                     this.utilService.loading.next(false);
                     this.solutions = res;
@@ -119,11 +129,11 @@ export class UploadSolutionComponent implements AfterViewInit {
 
     deleteSolution(fileName: string) {
         this.utilService.loading.next(true);
-        this.blobService.deleteSolutionFile(this.taskId, this.student.id, fileName).subscribe(res => {
+        this.blobService.deleteSolutionFile(this.taskId, this.studentId, fileName).subscribe(res => {
             if (res.ok) {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet" });
-                this.getSolutionFiles();
+                this.getSolutionFiles(this.taskId, this.studentId);
             } else {
                 this.utilService.loading.next(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, filen kunne ikke slettes" });
