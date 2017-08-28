@@ -79,7 +79,7 @@ th {
 
 .notwin {
     text-align: center;
-    color: #F44336;
+    color: #555;
 }
 
 .title {
@@ -141,6 +141,7 @@ td, th {
 
     tr {
         border: 1px solid #ccc;
+        margin-bottom: 3px;
     }
 
     td {
@@ -170,7 +171,8 @@ td, th {
         text-align: left;
     }
 
-    .win {
+    .win,
+    .notwin{
         text-align: left;
     }
 
@@ -198,7 +200,7 @@ td, th {
     }
 
     td:nth-of-type(5):before {
-        content: "Vundet?";
+        content: "Status";
         font-weight: bold;
     }
 }

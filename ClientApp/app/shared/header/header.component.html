@@ -17,15 +17,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
-                <li ><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/tasks">Opgaver</a></li>
-                <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/about">Om os</a></li>
-                <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/contact">Kontakt</a></li>
+                <li ><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/tasks" (click)="hideMenu()">Opgaver</a></li>
+                <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/about" (click)="hideMenu()">Om os</a></li>
+                <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/contact" (click)="hideMenu()">Kontakt</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hvordan <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a routerLink="/how-it-works-students">For studerende</a></li>
-                        <li><a routerLink="/how-it-works-businesses">For virksomheder</a></li>
-                        <li><a routerLink="/faq">FAQ</a></li>
+                        <li><a routerLink="/how-it-works-students" (click)="hideMenu()">For studerende</a></li>
+                        <li><a routerLink="/how-it-works-businesses" (click)="hideMenu()">For virksomheder</a></li>
+                        <li><a routerLink="/faq" (click)="hideMenu()">FAQ</a></li>
                     </ul>
                 </li>
             </ul>
@@ -34,18 +34,18 @@
                 <li *ngIf="business" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{business.name}} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/business">Mine opgaver</a></li>
-                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="business/settings">Ret oplysninger</a></li>
+                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/business" (click)="hideMenu()">Mine opgaver</a></li>
+                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="business/settings" (click)="hideMenu()">Ret oplysninger</a></li>
                         <!--<li class="divider" style="margin:5px 0;"></li>-->
-                        <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
+                        <li><a style="cursor:pointer" (click)="logout(); hideMenu()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
                 <li *ngIf="isAdmin" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Unifacto Administrator<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/admin/businesses">Administrator panel</a></li>
+                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/admin/businesses" (click)="hideMenu()">Administrator panel</a></li>
                         <!--<li class="divider" style="margin:5px 0;"></li>-->
-                        <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
+                        <li><a style="cursor:pointer" (click)="logout(); hideMenu()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
                 <li *ngIf="!business && !student && !isAdmin"><a routerLink="/login">Log ind</a></li>
@@ -54,8 +54,8 @@
                 <li *ngIf="student" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img [src]="getUserImage()" class="student-img" /> {{student.firstname}} {{student.lastname}} <span class="caret"></span></a>
                     <ul class="dropdown-menu nav-student-dropdown" role="menu">
-                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/student">Mine uploads</a></li>
-                        <li><a style="cursor:pointer" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
+                        <li><a routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}" routerLink="/student" (click)="hideMenu()">Mine uploads</a></li>
+                        <li><a style="cursor:pointer" (click)="logout(); hideMenu()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
             </ul>

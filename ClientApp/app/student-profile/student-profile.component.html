@@ -17,7 +17,7 @@
                             <th>Titel</th>
                             <th>Deadline</th>
                             <th>Belønning</th>
-                            <th>Din besvarelse</th>
+                            <th>Uploads</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -33,7 +33,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <p *ngIf="solutions.length == 0">Du har ikke indsendte nogle løsningsforslag for nogle aktuelle opgaver.</p>
+                <p *ngIf="solutions.length == 0">Du har ikke nogle uploads for nogle aktuelle opgaver.</p>
             </div>
             <div class="profile-table">
                 <h2>Tidligere opgaver</h2>
@@ -43,7 +43,7 @@
                             <th>Titel</th>
                             <th>Deadline</th>
                             <th>Belønning</th>
-                            <th>Din besvarelse</th>
+                            <th>Uploads</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -56,12 +56,12 @@
                             <td class="reward" *ngIf="ps.task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
                             <td class="solution"><i (click)="gotoUploadSolution(ps.task.id)" class="fa fa-file-text"></i></td>
                             <td class="win" *ngIf="ps.id === ps.task.winnerSolutionId"><i class="fa fa-trophy"></i></td>
-                            <td class="notwin" *ngIf="!ps.id === ps.task.winnerSolutionId"><i class="fa fa-minus"></i></td>
+                            <td class="notwin" *ngIf="ps.id != ps.task.winnerSolutionId"><i class="fa fa-minus"></i></td>
                             <td *ngIf="!ps.task.winnerSolutionId"><i class="fa fa-clock-o"></i></td>
                          </tr>
                     </tbody>
                 </table>
-                <p *ngIf="pastSolutions.length == 0">Du har ikke indsendt nogle løsningsforslag for tidligere opgaver.</p>
+                <p *ngIf="pastSolutions.length == 0">Du har ikke nogle uploads for tidligere opgaver.</p>
             </div>
         </div>
     </div>

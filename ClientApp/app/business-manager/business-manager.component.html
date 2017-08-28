@@ -52,7 +52,7 @@
                             <td class="reward" *ngIf="pt.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
                             <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(pt.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
                             <td *ngIf="pt.winnerSolutionId"><p class="winner-link" (click)="gotoWinnerSolutionDownload(pt.winnerSolutionId)">Gå til download</p></td>
-                            <td *ngIf="!pt.winnerSolutionId">TBA</td>
+                            <td *ngIf="!pt.winnerSolutionId"><i class="fa fa-minus"></i></td>
                         </tr>
                     </tbody>
                 </table>

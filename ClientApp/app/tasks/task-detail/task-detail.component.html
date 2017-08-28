@@ -71,8 +71,11 @@
         <p style="font-size:12px;font-style:italic;color:#BDBDBD;">Unifacto står udelukkende for kontakten mellem den studerende og virksomheden. Virksomheden står selv for udleveringen af belønningen.</p>
     </div>
     <div style="display:flex;justify-content:center;margin: 30px 0;">
-        <button *ngIf="student" type="button" class="btn btn-primary btn-lg" (click)="gotoUploadSolution(task.id)">Upload et løsningsforslag</button>
-        <button *ngIf="!student" type="button" class="btn btn-primary btn-lg" routerLink="/login">Log ind for at uploade løsningsforslag</button>
+        <button *ngIf="student && task.workPlace === '1'" type="button" class="btn btn-primary btn-lg" (click)="gotoUploadSolution(task.id)">Upload et løsningsforslag</button>
+        <button *ngIf="!student && task.workPlace === '1'" type="button" class="btn btn-primary btn-lg" routerLink="/login">Log ind for at uploade løsningsforslag</button>
+
+        <button *ngIf="student && task.workPlace === '2'" type="button" class="btn btn-primary btn-lg" (click)="gotoUploadSolution(task.id)">Upload en ansøgning</button>
+        <button *ngIf="!student && task.workPlace === '2'" type="button" class="btn btn-primary btn-lg" routerLink="/login">Log ind for at uploade ansøgning</button>
     </div>
 </div>
 

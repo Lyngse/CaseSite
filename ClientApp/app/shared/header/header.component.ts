@@ -54,6 +54,10 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
     }
 
+    hideMenu() {
+        $('#bs-example-navbar-collapse-1').collapse('hide');
+    }
+
     getUserImage() {
         if (this.student) {
             return "https://graph.facebook.com/" + this.student.facebookId + "/picture?type=square";
