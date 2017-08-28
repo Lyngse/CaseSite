@@ -29,7 +29,7 @@
                             <td class="reward" *ngIf="s.task.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ s.task.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="s.task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
                             <td class="solution"><i (click)="gotoUploadSolution(s.task.id)" class="fa fa-file-text"></i></td>
-                            <td>TBA</td>
+                            <td><i class="fa fa-clock-o"></i></td>
                         </tr>
                     </tbody>
                 </table>

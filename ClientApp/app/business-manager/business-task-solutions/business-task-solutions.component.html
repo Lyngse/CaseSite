@@ -35,8 +35,8 @@
                 <tr *ngFor="let s of solutions">
                     <td> {{s.student.firstname}} {{s.student.lastname}} </td>
                     <td> {{s.student.user.email}} </td>
-                    <td *ngIf="now > s.deadline"> 
-                        <div *ngIf="task.winnerSolutionId == null">
+                    <td> 
+                        <div *ngIf="task.winnerSolutionId == null && now > s.task.deadline">
                             <button type="button" class="btn btn-primary" (click)="smModal.show()">Vælg som vinder</button>
                             <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
@@ -60,10 +60,8 @@
                             </div>
                         </div>
                         <p *ngIf="task.winnerSolutionId == s.id">Vinder <i class="fa fa-trophy win"></i></p>
-                        <p *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"></p>    
-                    </td>
-                    <td *ngIf="now < s.deadline">
-                        <button type="button" class="btn btn-primary" stlye="opacity: .55;cursor:not-allowed;">Vælg som vinder</button>
+                        <p *ngIf="task.winnerSolutionId != null || task.winnerSolutionId != s.id"></p>
+                        <p *ngIf="task.winnerSolutionId == null && now < s.task.deadline "><i class="fa fa-clock-o"></i></p>
                     </td>
                     <td> <a class="download-link" (click)="gotoDownload(s.student.id)">Download løsningsforslag</a></td>
                 </tr>
