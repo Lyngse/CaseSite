@@ -10,6 +10,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using System.Linq;
+using Microsoft.Extensions.Options;
+using System;
+using System.Threading.Tasks;
 
 namespace CaseSite
 {
@@ -48,6 +53,7 @@ namespace CaseSite
             {
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 8;
+                o.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<UnifactoContext>()
                 .AddDefaultTokenProviders();
@@ -77,7 +83,6 @@ namespace CaseSite
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            
             app.UseStaticFiles();
             app.UseIdentity();
             app.Use(next => context =>
@@ -89,6 +94,22 @@ namespace CaseSite
                     context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions { HttpOnly = false });
                 }
                 return next(context);
+            });
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = "113893632577611",
+                AppSecret = "4d86a81233ef0d34e622cab263fc9755",
+                Events = new OAuthEvents
+                {
+                    
+                    OnRemoteFailure = ctx =>
+                    {
+                        var querystring = ctx.Request.QueryString;
+                        ctx.Response.Redirect("/api/account/externallogincallback" + querystring);
+                        ctx.HandleResponse();
+                        return System.Threading.Tasks.Task.FromResult(0);
+                    }
+                }
             });
             app.UseMvc(routes =>
             {

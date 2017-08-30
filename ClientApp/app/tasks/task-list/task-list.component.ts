@@ -16,7 +16,7 @@ export class TaskListComponent {
     }
 
     taskClick(id) {
-        this.router.navigate(['business/createedittask/' + id]);
+        this.router.navigate(['business/create-edit-task/' + id]);
     }
     
 }

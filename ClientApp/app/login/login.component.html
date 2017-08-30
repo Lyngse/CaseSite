@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3 panel panel-default" style="margin-top:50px;"> 
             <div class="panel-body">
+                <h2>Log ind som virksomhed</h2>
                 <form novalidate (ngSubmit)="onLogin()" #f="ngForm">
                     <div class="col-sm-10 col-sm-offset-1">
                         <div class="form-group">
@@ -24,6 +25,15 @@
                     <button (click)="forgotPassword()" class="btn btn-link">Glemt din adgangskode?</button>
                 </div>
             </div>
+            
+            <span *ngIf="error" >{{error}}</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid contentRow">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 text-center">
+            <a href="/api/account/externallogin?provider=Facebook" class="btn btn-facebook"><i class="fa fa-facebook-official"></i>Log ind som studerende med Facebook</a>
         </div>
     </div>
 </div>

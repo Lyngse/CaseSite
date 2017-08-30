@@ -1,9 +1,63 @@
-﻿<div class="container-fluid contentRow" style="padding:0;">
+﻿<div class="container-fluid contentRow padding0" *ngIf="tasks && pastTasks">
     <div class="bm-header">
         <h1 class="heading1">Mine opgaver</h1>
-        <button class="btn btn-primary btn-lg btn-new" routerLink="/business/createedittask">
+        <button class="btn btn-primary btn-lg btn-new" routerLink="/business/create-edit-task">
             <i class="fa fa-plus"></i> Ny opgave
         </button>
     </div>
-    <task-list [showEdit]="true" [tasks]="tasks" (deleteTask)="handleDeleteTask($event)" (editTask)="handleEditTask($event)"></task-list>
+    <div class="profile-tasks">
+        <div class="profile-table">
+            <h2>Aktuelle opgaver</h2>
+            <table *ngIf="tasks.length > 0">
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Deadline</th>
+                        <th>Belønning</th>
+                        <th>Løsningsforslag</th>
+                        <th>Rediger</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let t of tasks">
+                        <td class="title" (click)="gotoTaskDetail(t.id)">{{ t.title }}</td>
+                        <td>{{ t.deadline.format('DD/MM-YYYY') }} kl. {{ t.deadline.format('HH:mm') }}</td>
+                        <td class="reward" *ngIf="t.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ t.rewardValue | danishcurrency }} kr</td>
+                        <td class="reward" *ngIf="t.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ t.rewardValue | danishcurrency }} kr</td>
+                        <td class="reward" *ngIf="t.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                        <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(t.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
+                        <td class="edit"><i class="fa fa-pencil" (click)="handleEditTask(t.id)"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p *ngIf="tasks.length == 0">Der er ikke fundet nogle aktuelle opgaver fra virksomheden.</p>
+            <div class="profile-table">
+                <h2>Tidligere opgaver</h2>
+                <table *ngIf="pastTasks.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Deadline</th>
+                            <th>Belønning</th>
+                            <th>Løsningsforslag</th>
+                            <th>Vinder løsning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pt of pastTasks">
+                            <td class="title" (click)="gotoTaskDetail(pt.id)">{{ pt.title }}</td>
+                            <td>{{ pt.deadline.format('DD/MM-YYYY') }} kl. {{ pt.deadline.format('HH:mm') }}</td>
+                            <td class="reward" *ngIf="pt.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
+                            <td class="reward" *ngIf="pt.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
+                            <td class="reward" *ngIf="pt.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                            <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(pt.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
+                            <td *ngIf="pt.winnerSolutionId"><p class="winner-link" (click)="gotoWinnerSolutionDownload(pt.winnerSolutionId)">Gå til download</p></td>
+                            <td *ngIf="!pt.winnerSolutionId"><i class="fa fa-minus"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--<task-list [showEdit]="true" [tasks]="tasks" (deleteTask)="handleDeleteTask($event)" (editTask)="handleEditTask($event)"></task-list>-->
 </div>

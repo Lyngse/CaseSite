@@ -1,7 +1,9 @@
 ﻿import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AccountService } from '../services/account.service';
+import { StudentService } from '../services/student.service';
 import { UtilService } from '../services/util.service';
+import { Student } from '../model/student';
 
 @Component({
     selector: 'login',
@@ -14,16 +16,35 @@ export class LoginComponent implements AfterViewInit {
     password: string = "";
     loginFailedMsg: string = "";
     @ViewChild('f') form: any;
+    student: Student = new Student();
+    error: string = "";
 
-    constructor(private accountService: AccountService, private utilService: UtilService, private router: Router) {
+    constructor(private accountService: AccountService, private studentService: StudentService, private utilService: UtilService, private router: Router, private activateRoute: ActivatedRoute) {
         this.accountService.loggedIn.subscribe(newValue => {
-            if (newValue)
+            if (newValue === "business")
                 this.router.navigate(['/business']);
+            if (newValue === "student")
+                this.studentService.getStudentFromUser().subscribe(res => {
+                    console.log(res);
+                    this.student = res;
+                });
         });
     }
 
     ngAfterViewInit() {
-        
+        this.activateRoute.queryParams.subscribe(params => {
+            let error = params['error'];
+            if (error) {
+                switch (error) {
+                    case 'noemail':
+                        this.error = "Du skal give os lov til at bruge din email. Gå ind på dine facebook appinstillinger, fjern unifacto og prøv igen"
+                        break;
+                    default:
+                        this.error = "noget gik galt: " + error;
+                        break;
+                }
+            }
+        })
     }
 
     onLogin() {
@@ -31,6 +52,7 @@ export class LoginComponent implements AfterViewInit {
             this.utilService.loading.next(true);
             this.accountService.login(this.username, this.password).subscribe((response) => {
                 this.utilService.loading.next(false);
+                console.log(response);
                 if (response.ok == true) {
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Login lykkedes" });
                     this.router.navigate(['/business']);
@@ -49,6 +71,12 @@ export class LoginComponent implements AfterViewInit {
     }
 
     forgotPassword() {
-        this.router.navigate(['/login/forgotpassword']);
+        this.router.navigate(['/login/forgot-password']);
+    }
+
+    fblogout() {
+        this.accountService.logout().subscribe(res => {
+            console.log(res);
+        })
     }
 }

@@ -1,0 +1,206 @@
+﻿.profile {
+    display: flex;
+}
+
+.profile-info {
+    flex: 1 1 30%;
+    display: block;
+    margin: 10px auto 10px auto;
+    padding: 10px;
+}
+
+.profile-info-box {
+    border: 1px solid #eeeeee;
+    margin: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-img-box {
+    padding: 5px;
+}
+
+.profile-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.profile-info-name {
+    color: white;
+    background-color: #006699;
+    padding: 10px;
+    text-align: center;
+    font-size: 120%;
+}
+
+.profile-info-name p {
+    margin: 0;
+}
+
+.profile-tasks {
+    flex: 1 1 70%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+/* Zebra striping */
+tr:nth-of-type(odd) {
+    background: #fff;
+}
+
+th {
+    background: #006699;
+    color: #fafafa;
+    font-weight: bold;
+}
+
+.reward {
+    text-align: center;
+}
+
+.solution {
+    text-align: center;
+    cursor: pointer;
+}
+
+.win {
+    text-align: center;
+    color: #FFEB3B;
+}
+
+.notwin {
+    text-align: center;
+    color: #555;
+}
+
+.title {
+    min-width: 200px;
+    cursor: pointer;
+}
+
+.title:hover {
+    color: #006699;
+}
+
+td, th {
+    padding: 6px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+
+@media only screen and (max-width : 479px) {
+    .profile-info-box {
+        width: 96% !important;
+    }
+}
+
+@media only screen and (min-width: 480), (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1140px) {
+    .profile-info {
+        flex: 1 1 100%;
+        margin: 10px auto;
+    }
+
+    .profile-info-box {
+    }
+
+    .profile-tasks {
+        flex: 1 0 100%;
+        
+        margin: 5px 10px;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+
+    }
+
+    tr {
+        border: 1px solid #ccc;
+        margin-bottom: 3px;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    .reward {
+        text-align: left;
+    }
+
+    .solution {
+        text-align: left;
+    }
+
+    .win,
+    .notwin{
+        text-align: left;
+    }
+
+        /*
+	Label the data
+	*/
+    td:nth-of-type(1):before {
+        content: "Titel";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(2):before {
+        content: "Deadline";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(3):before {
+        content: "Belønning";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(4):before {
+        content: "Din besvarelse";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(5):before {
+        content: "Status";
+        font-weight: bold;
+    }
+}

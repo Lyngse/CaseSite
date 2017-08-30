@@ -1,0 +1,68 @@
+﻿<div class="contentRow" *ngIf="student">
+    <div class="profile">
+        <div class="profile-info">
+            <div class="profile-info-box">
+                <img class="profile-img" [src]="getUserImage()"/>
+                <div class="profile-info-name">
+                    <p>{{student.firstname}} {{student.lastname}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="profile-tasks">
+            <div class="profile-table">
+                <h2>Aktuelle opgaver</h2>
+                <table *ngIf="solutions.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Deadline</th>
+                            <th>Belønning</th>
+                            <th>Uploads</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let s of solutions">
+                            <td class="title" (click)="gotoTaskDetail(s.task.id)">{{ s.task.title }}</td>
+                            <td>{{ s.task.deadline.format('DD/MM-YYYY') }} kl. {{ s.task.deadline.format('HH:mm') }}</td>
+                            <td class="reward" *ngIf="s.task.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ s.task.rewardValue | danishcurrency }} kr</td>
+                            <td class="reward" *ngIf="s.task.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ s.task.rewardValue | danishcurrency }} kr</td>
+                            <td class="reward" *ngIf="s.task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                            <td class="solution"><i (click)="gotoUploadSolution(s.task.id)" class="fa fa-file-text"></i></td>
+                            <td><i class="fa fa-clock-o"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p *ngIf="solutions.length == 0">Du har ikke nogle uploads for nogle aktuelle opgaver.</p>
+            </div>
+            <div class="profile-table">
+                <h2>Tidligere opgaver</h2>
+                <table *ngIf="pastSolutions.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Titel</th>
+                            <th>Deadline</th>
+                            <th>Belønning</th>
+                            <th>Uploads</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ps of pastSolutions">
+                            <td class="title" (click)="gotoTaskDetail(ps.task.id)">{{ ps.task.title }}</td>
+                            <td>{{ ps.task.deadline.format('DD/MM-YYYY') }} kl. {{ ps.task.deadline.format('HH:mm') }}</td>
+                            <td class="reward" *ngIf="ps.task.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ ps.task.rewardValue | danishcurrency }} kr</td>
+                            <td class="reward" *ngIf="ps.task.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ ps.task.rewardValue | danishcurrency }} kr</td>
+                            <td class="reward" *ngIf="ps.task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                            <td class="solution"><i (click)="gotoUploadSolution(ps.task.id)" class="fa fa-file-text"></i></td>
+                            <td class="win" *ngIf="ps.id === ps.task.winnerSolutionId"><i class="fa fa-trophy"></i></td>
+                            <td class="notwin" *ngIf="ps.id != ps.task.winnerSolutionId"><i class="fa fa-minus"></i></td>
+                            <td *ngIf="!ps.task.winnerSolutionId"><i class="fa fa-clock-o"></i></td>
+                         </tr>
+                    </tbody>
+                </table>
+                <p *ngIf="pastSolutions.length == 0">Du har ikke nogle uploads for tidligere opgaver.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@
     <div class="row">
         <h3 class="heading1" style="margin-right:15px;margin-left:15px;margin-bottom:0;">Opret virksomhed</h3>
         <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
-            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-top: 50px;">
+            <div class="col-sm-10 col-sm-offset-1 col-xs-12" style="margin-top: 50px;">
 
                 <div class="form-group"
                      [ngClass]="{
@@ -164,52 +164,15 @@
                 </div>
                 
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12" style="display:flex;justify-content:center;flex-wrap: wrap;">
-                <div class="terms-box panel panel-default">
-                    <div class="panel-heading" style="background-color:#006699; color:white;">Brugerbetingelser</div>
-                    <div class="terms-content panel-body">
-                        <p class="tc-title">Når I opretter virksomheden accepterer I følgende brugerbetingelser:</p>
-                        <p class="tc-header">Oprettelse og fjernelse af virksomhed:</p>
-                        <ul>
-                            <li>I bekræfter at jeres indtastede oplysninger er korrekte for virksomheden og at den eksisterer.</li>
-                            <li>Hvis I ønsker at fjerne virksomhedsprofilen kan dette først ske efter, at alle igangværende opgaver er udløbet.</li>
-                        </ul>
-                        <p class="tc-header">Oprettelse af opgave:</p>
-                        <ul>
-                            <li>Opgaven skal være kommunikations- og marketingsrelateret.</li>
-                            <li>Gavekortet skal kunne bruges og have relevans uafhængigt af køn og alder.</li>
-                            <li>Transaktions- og forsendelsesomkostninger dækkes af virksomheden, og det skal ikke indgå i værdien af pengepræmien eller gavekortet.</li>
-                            <li>I kan ikke slette opgaven efter oprettelsen.</li>
-                            <li>I kan ikke ændre pengepræmien, gavekortets værdi eller deadlinen efter oprettelsen af opgaven. Såfremt der opstår fejl eller problemer med oprettelsen, kontakt da venligst supporten på info@unifacto.com. </li>
-                        </ul>
-                        <p class="tc-header">Deadlinen er overskredet:</p>
-                        <p class="tc-subheader">Udarbejdelse af opgaven hjemme hos den studerende</p>
-                        <ul>
-                            <li>Pengepræmien, gavekortet eller anbefalingen skal være den studerende i hænde inden for 10 arbejdsdage efter modtagelsen af løsningsforslagene. Ved modtagelse af pengepræmie som belønning skal du huske at opgive dette som B-indkomst.</li>
-                            <li>Efter deadlinen af løsningsforslagene har I fem arbejdsdage til at finde det bedste løsningsforslag og orientere den studerende, med det bedste løsningsforslag, om jeres valg. Desuden skal Unifacto orienteres om hvem der udarbejdede det bedste løsningsforslag samt antallet af løsningsforslag.</li>
-                            <li>Uanset antallet af løsningsforslag og indholdet af dem skal der gives en belønning.</li>
-                        </ul>
-                        <p class="tc-subheader">Udarbejdelse af opgaven hos jer</p>
-                        <ul>
-                            <li>Ved ansøgninger om at udarbejde løsningsforslaget hos jer, skal I vælge en eller flere ansøgere inden for fem dage efter deadlinen. Unifacto skal orienteres om hvem den/de udvalgte studerende er, samt skal der tilsendes en kort beskrivelse af udarbejdelsesforløbet, når det er afsluttet, til os.</li>
-                            <li>Såfremt, at der ikke er nogen ansøgninger som passer til jeres kriterier, er I ikke nødsaget til at vælge en studerende, som skal udarbejde løsningsforslaget hos jer.</li>
-                            <li>Pengepræmien, gavekortet eller anbefalingen skal gives til den/de udvalgte studerende inden for 10 arbejdsdage efter at udarbejdelsesforløbet er afsluttet. Ved modtagelse af pengepræmie som belønning skal du huske at opgive dette som B-indkomst.</li>
-                            <li>Hvis I udvælger en studerende som skal udføre en opgave hos jer, skal aftalerne og belønningen overholdes mellem jer og den studerende.</li>
-                        </ul>
-                        <p class="tc-header">Markedsføring:</p>
-                        <ul>
-                            <li>I indvilliger i, at alle opgaver kan blive brugt i marketingssammenhæng for at promovere Unifacto. </li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-md-12" style="display: flex; justify-content: center; align-items: center; margin: 10px 0;">
                 <div class="form-group">
                     <div class="checkbox terms-cb">
                         <label>
-                            <input type="checkbox" name="isAccepted" [(ngModel)]="isAccepted"> Jeg accepterer brugerbetingelserne
+                            <input type="checkbox" name="isAccepted" [(ngModel)]="isAccepted"> Jeg har læst og accepterer <a class="link" routerLink="/terms" target="_blank">brugerbetingelserne</a>.
                         </label>
                     </div>
-                </div>               
-            </div>
+                </div> 
+            </div>              
             <div class="col-md-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;">
                 <button type="submit" class="btn btn-primary btn-lg" [disabled]="f.invalid || !isAccepted" style="margin-bottom:20px">Opret virksomhed</button>
             </div>

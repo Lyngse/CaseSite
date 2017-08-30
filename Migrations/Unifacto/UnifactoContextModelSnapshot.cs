@@ -42,6 +42,46 @@ namespace CaseSite.Migrations.Unifacto
                     b.ToTable("Business");
                 });
 
+            modelBuilder.Entity("CaseSite.Models.Solution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("StudentId");
+
+                    b.Property<int>("TaskId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TaskId");
+
+                    b.ToTable("Solution");
+                });
+
+            modelBuilder.Entity("CaseSite.Models.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FacebookId");
+
+                    b.Property<string>("Firstname");
+
+                    b.Property<string>("Lastname");
+
+                    b.Property<bool>("TermsAccecpted");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Student");
+                });
+
             modelBuilder.Entity("CaseSite.Models.Task", b =>
                 {
                     b.Property<int>("Id")
@@ -69,6 +109,8 @@ namespace CaseSite.Migrations.Unifacto
 
                     b.Property<string>("Type");
 
+                    b.Property<int?>("WinnerSolutionId");
+
                     b.Property<string>("WorkPlace");
 
                     b.Property<int>("Zip");
@@ -76,6 +118,8 @@ namespace CaseSite.Migrations.Unifacto
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessId");
+
+                    b.HasIndex("WinnerSolutionId");
 
                     b.ToTable("Task");
                 });
@@ -244,12 +288,36 @@ namespace CaseSite.Migrations.Unifacto
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("CaseSite.Models.Solution", b =>
+                {
+                    b.HasOne("CaseSite.Models.Student", "Student")
+                        .WithMany("Solutions")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CaseSite.Models.Task", "Task")
+                        .WithMany("Solutions")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CaseSite.Models.Student", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("CaseSite.Models.Task", b =>
                 {
                     b.HasOne("CaseSite.Models.Business", "Business")
                         .WithMany("Tasks")
                         .HasForeignKey("BusinessId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CaseSite.Models.Solution", "WinnerSolution")
+                        .WithMany()
+                        .HasForeignKey("WinnerSolutionId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

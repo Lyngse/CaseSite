@@ -41,6 +41,45 @@
     display: flex;
 }
 
+.uploaded-files {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.file-pill {
+    padding: 5px 5px 5px 15px;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.file-pill-text {
+    font-size: 16px;
+    display: inline-block;
+}
+
+.file-pill-text p {
+    margin: 0;
+}
+
+.file-pill-icon {
+    width: 30px;
+    display: inline-block;
+    text-align: center;
+    padding: 4px;
+    transition: transform ease 0.5s;
+}
+
+.file-pill-icon:hover {
+    color: #D32F2F;
+    transform: rotateZ(-90deg);
+}
+
 @media only screen and (max-width : 700px) {
     .datetime-container {
         display: block;

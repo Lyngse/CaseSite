@@ -1,0 +1,178 @@
+﻿.download-link {
+    color: #006699;
+    cursor: pointer;
+}
+
+.download-link:hover{
+    color: #004466;
+    text-decoration: none;
+}
+
+.download-link:visited,
+.download-link:focus,
+.download-link:active {
+    text-decoration: none;
+    color: #006699;
+}
+
+.win {
+    color: #FFEB3B;
+}
+    
+.business-and-description {
+    display: flex;
+    align-content: center;
+}
+
+.business-logo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 200px;
+    width: 200px;
+}
+
+.business-img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: scale-down;
+}
+
+.task-info {
+    flex-direction: column;
+}
+
+.solutions-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr {
+    background-color: #fafafa;
+}
+
+    /* Zebra striping */
+tr:nth-of-type(odd) {
+        background: #fff;
+    }
+
+th {
+    background: #006699;
+    color: #fafafa;
+    font-weight: bold;
+}
+
+td, th {
+    padding: 6px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.task-reward {
+    flex: 0 0 100%;
+}
+
+.modal-buttons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media only screen and (min-width: 480), (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1140px) {
+
+    .business-and-description {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    .business-logo {
+        flex:  1 1 100%;
+    }
+
+    .task-info {
+        flex: 1 1 100%;
+    }
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+    tr {
+        border: 1px solid #ccc;
+        margin: 0 5px 3px 5px;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+
+    .reward {
+        text-align: left;
+    }
+
+    .solution {
+        text-align: left;
+    }
+
+    .win {
+        text-align: left;
+    }
+
+    /*
+	Label the data
+	*/
+    td:nth-of-type(1):before {
+        content: "Titel";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(2):before {
+        content: "Deadline";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(3):before {
+        content: "Belønning";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(4):before {
+        content: "Din besvarelse";
+        font-weight: bold;
+    }
+
+    td:nth-of-type(5):before {
+        content: "Vundet?";
+        font-weight: bold;
+    }
+}

@@ -39,7 +39,13 @@ namespace CaseSite.Controllers
                 return NotFound();
             }
 
-            return Ok(toClientBusiness(business, false));
+            business.User = await _context.Users.SingleOrDefaultAsync(u => u.Id == business.UserId);
+            if(business.User == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(toClientBusiness(business));
         }
 
         [HttpGet]
@@ -53,12 +59,47 @@ namespace CaseSite.Controllers
                 return NotFound(new { userError = "user not found" });
             }
 
+
+
             var business = await _context.Business.SingleOrDefaultAsync(b => b.UserId == user.Id);
 
             if (business == null)
             {
                 return NotFound();
             }
+
+            return Ok(toClientBusiness(business));
+        }
+
+        [HttpGet("withtasks")]
+        [Authorize]
+        public async Task<IActionResult> GetBusinessWithTasks()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                return NotFound(new { userError = "user not found" });
+            }
+
+            var business = await _context.Business.Include(b => b.Tasks).SingleOrDefaultAsync(b => b.UserId == user.Id);
+
+            if (business == null)
+            {
+                return NotFound();
+            }
+
+            var tasks = business.Tasks;
+            foreach (var t in tasks)
+            {
+                t.Solutions = await _context.Solution.Where(s => s.TaskId == t.Id).ToListAsync();
+                foreach (var s in t.Solutions)
+                { 
+                    s.Student = await _context.Student.SingleOrDefaultAsync(st => st.Id == s.StudentId);
+                }
+            }
+            
+            business.Tasks = tasks;
 
             return Ok(toClientBusiness(business));
         }
@@ -75,13 +116,15 @@ namespace CaseSite.Controllers
                 return BadRequest(ModelState);
             }
 
-            var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+            //var serverUser = await _userManager.GetUserAsync(HttpContext.User);
+            var serverUser = await _context.Users.SingleOrDefaultAsync(u => u.Id == business.UserId);
 
             if (serverUser == null)
             {
                 return NotFound(new { userError = "user not found" });
             }
 
+          
             serverUser.UserName = user.UserName;
             serverUser.Email = user.Email;
 
@@ -89,11 +132,10 @@ namespace CaseSite.Controllers
 
             var serverBusiness = await _context.Business.SingleOrDefaultAsync(b => b.UserId == serverUser.Id);
 
-            if(serverBusiness == null)
+            if (serverBusiness == null)
             {
                 return NotFound();
             }
-
             serverBusiness.Name = business.Name;
             serverBusiness.Description = business.Description;
             serverBusiness.Address = business.Address;
@@ -101,10 +143,11 @@ namespace CaseSite.Controllers
             serverBusiness.Zip = business.Zip;
 
             _context.Entry(serverBusiness).State = EntityState.Modified;
-            
+
             await _context.SaveChangesAsync();
 
             return Ok(toClientBusiness(serverBusiness));
+            
         }
 
         // POST: api/Businesses
@@ -151,7 +194,7 @@ namespace CaseSite.Controllers
             return Ok(toClientBusiness(business));
         }
 
-        private dynamic toClientBusiness(Business business, bool incUser = true)
+        static public dynamic toClientBusiness(Business business, bool incUser = true, bool join = true)
         {
             dynamic result = new ExpandoObject();
             result.id = business.Id;
@@ -161,6 +204,17 @@ namespace CaseSite.Controllers
             result.city = business.City;
             result.zip = business.Zip;
             result.logoUrl = business.LogoUrl;
+            result.userId = business.UserId;
+
+            var tasks = new List<dynamic>();
+            if(business.Tasks != null && join)
+            {
+                foreach (var task in business.Tasks)
+                {
+                    tasks.Add(TasksController.toClientTask(task, join: false));
+                }
+            }
+            result.tasks = tasks;
 
             if (incUser)
             {

@@ -1,4 +1,6 @@
-﻿export class Business {
+﻿import { Task } from './task';
+
+export class Business {
 
     id: number;
     name: string;
@@ -10,6 +12,8 @@
     address: string;
     zip: number;
     city: string;
+    tasks: Task[];
+    userId: number;
 
     constructor() {
     

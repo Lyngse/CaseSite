@@ -4,18 +4,25 @@ import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Student } from '../model/student'
 
 @Injectable()
 export class AccountService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
-    public loggedIn: BehaviorSubject<Boolean> = new BehaviorSubject(false);
+    public loggedIn: BehaviorSubject<String> = new BehaviorSubject("void");
 
     constructor(private http: Http, private router: Router) {
         this.http
             .get('api/account/status', this.options)
             .catch(this.handleError)
-            .subscribe(value => this.loggedIn.next(value.json()));
+            .subscribe(value => this.loggedIn.next(value.json().role));
+    }
+
+    makeAdmin(username: string, password: string, email: string): Observable<any> {
+        return this.http
+            .post('api/account/registeradminuser', JSON.stringify({ UserName: username, Password: password, Email: email }), this.options)
+            .catch(this.handleError);
     }
 
     changePassword(currentPassword: string, newPassword: string): Observable<any> {
@@ -39,14 +46,21 @@ export class AccountService {
     login(username: string, password: string): Observable<any> {
         return this.http
             .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
-            .map(res => { this.loggedIn.next(true); this.updateToken(); return res; })
+            .map(res => { this.loggedIn.next("business"); this.updateToken(); return res; })
+            .catch(this.handleError);
+    }
+
+    adminLogin(username: string, password: string): Observable<any> {
+        return this.http
+            .post('api/account/adminlogin/', JSON.stringify({ UserName: username, Password: password }), this.options)
+            .map(res => { this.loggedIn.next("admin"); this.updateToken(); return res; })
             .catch(this.handleError);
     }
 
     logout(): Observable<any> {
         return this.http
             .post('api/account/logout', this.options)
-            .map(res => { this.loggedIn.next(false); this.updateToken(); return res; })
+            .map(res => { this.loggedIn.next("void"); this.updateToken(); return res; })
             .catch(this.handleError);
     }
 
@@ -56,7 +70,7 @@ export class AccountService {
             .catch(this.handleError);
     }
 
-    private updateToken() {
+    updateToken() {
         this.http
             .get('api/account/updateTokens', this.options)
             .subscribe();

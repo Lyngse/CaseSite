@@ -144,6 +144,10 @@ section {
     margin-bottom: 15px;
 }
 
+.sidepadding {
+    padding: 0 15px;
+}
+
 /* ----- Buttons ----- */
 .butn:link,
 .butn:visited,

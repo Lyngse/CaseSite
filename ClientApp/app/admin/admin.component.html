@@ -1,0 +1,58 @@
+﻿<div class="container-fluid contentRow padding0">
+    <div class="admin-header">
+        <h1 class="heading1">Administrator panel</h1>
+    </div>
+</div>
+<div class="container-fluid contentRow padding0 admin-content">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="widget">
+                <ul class="menu-advanced">
+                    <li routerLinkActive="active"><a routerLink="/admin/businesses"><i class="fa fa-calendar"></i> Virksomheder</a></li>
+                    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/admin/students"><i class="fa fa-credit-card"></i> Studerende</a></li>
+                    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/admin/tasks"><i class="fa fa-key"></i> Opgaver</a></li>
+                    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/admin/solutions"><i class="fa fa-credit-card"></i> Løsningsforslag</a></li>
+                    <li><a style="cursor: pointer;" (click)="logout()"><i class="fa fa-sign-out"></i> Log ud</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-sm-12 padding0">
+                <div class="widget">
+                    <div class="counter">
+                        <p class="counter-title">Virksomheder</p>
+                        <p class="counter-value">{{ businessCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-12 padding0">
+                <div class="widget">
+                    <div class="counter">
+                        <p class="counter-title">Studerende</p>
+                        <p class="counter-value">{{ studentCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-12 padding0">
+                <div class="widget">
+                    <div class="counter">
+                        <p class="counter-title">Opgaver</p>
+                        <p class="counter-value">{{ taskCount }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-12 padding0">
+                <div class="widget">
+                    <div class="counter">
+                        <p class="counter-title">Løsningsforslag</p>
+                        <p class="counter-value">{{ solutionCount }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <admin-business *ngIf="showBusinesses"></admin-business>
+            <admin-task *ngIf="showTasks"></admin-task>
+            <admin-student *ngIf="showStudents"></admin-student>
+            <admin-solution *ngIf="showSolutions"></admin-solution>
+        </div>
+    </div>
+</div>

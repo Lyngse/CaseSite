@@ -18,4 +18,5 @@ export class UtilService {
         "Video/Billede",
         "Andet"
     ];
+    public dataArray: any = {};
 }

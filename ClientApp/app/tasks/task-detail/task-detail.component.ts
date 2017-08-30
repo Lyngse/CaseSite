@@ -1,9 +1,14 @@
 ﻿import { Component, AfterViewInit, Input, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Business } from '../../model/business';
 import { Task } from '../../model/task';
+import { Student } from '../../model/student';
 import { BusinessService } from '../../services/business.service';
 import { TaskService } from '../../services/task.service';
+import { BlobService } from '../../services/blob.service';
+import { UtilService } from '../../services/util.service';
+import { StudentService } from '../../services/student.service';
+import { AccountService } from '../../services/account.service';
 import * as moment from 'moment';
 
 @Component({
@@ -16,13 +21,26 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     @Input('business') inputBusiness: Business;
     task: Task;
     business: Business;
+    attachments: any;
+    student: Student;
 
     constructor(
         private businessService: BusinessService,
         private taskService: TaskService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private utilService: UtilService,
+        private blobService: BlobService,
+        private studentService: StudentService,
+        private accountService: AccountService,
+        private router: Router
     ) {
-
+        this.accountService.loggedIn.subscribe(newValue => {
+            if (newValue === "student")
+                this.studentService.getStudentFromUser().subscribe(res => {
+                    console.log(res);
+                    this.student = res;
+                });
+        });
     }
 
     ngOnChanges(changes) {
@@ -34,17 +52,52 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
         this.route.params.subscribe(params => {
             let id = params['id'];
             if (id) {
-                this.taskService.getTask(id).subscribe(res => {
-                    this.task = res;
-                    this.businessService.getBusinessFromId(res.businessId).subscribe(res => this.business = res);
+                this.utilService.loading.next(true);
+                this.taskService.getTaskWithBusiness(id).subscribe(res => {
+                    if (res.id && res.business) {
+                        this.task = res;
+                        this.business = res.business;
+                        this.getAttachments(res.id);
+                    } else {
+                        this.utilService.loading.next(false);
+                        this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
+                    }
+                    
+                }, (err) => {
+                    this.utilService.loading.next(false);
+                    this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                 });
             }
         });
+    }
+
+    getAttachments(id) {
+        console.log("her");
+        this.utilService.loading.next(true);
+        this.blobService.getAttachments(id).subscribe(res => {
+            if (res.length > 0) {
+                this.attachments = res;
+                this.attachments.forEach((f) => {
+                    f.fileName = this.formatFileName(f.name)
+                });
+            }
+            this.utilService.loading.next(false);
+        }, (err) => {
+            this.utilService.loading.next(false);
+        });
+    }
+
+    formatFileName(filePath: string) {
+        return filePath.slice(filePath.lastIndexOf('/') + 1, filePath.length);
     }
 
     getDeadlineString() {
         if (this.task) {
             return this.task.deadline.format('HH:mm - DD/MM-YYYY');
         }
+    }
+
+    gotoUploadSolution(taskId) {
+        this.router.navigate(['/student/upload-solution/' + taskId]);
     }
 }
