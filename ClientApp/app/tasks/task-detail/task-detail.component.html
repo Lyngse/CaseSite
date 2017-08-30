@@ -44,9 +44,9 @@
                <p class="task-description" [innerHTML]="task.description | formattext"></p>
            </div>
 
-           <h3 class="task-info-title" *ngIf="task.workPlace === '2'">Hvor sender jeg min ansøgning?</h3>
-           <h3 class="task-info-title" *ngIf="task.workPlace === '1'">Hvor sender jeg mit løsningsforslag?</h3>
-           <p class="task-contactDescription" [innerHTML]="task.contactDescription | formattext"></p>
+           <h3 class="task-info-title" *ngIf="task.workPlace === '2' && task.contactDescription">Hvor sender jeg min ansøgning?</h3>
+           <h3 class="task-info-title" *ngIf="task.workPlace === '1' && task.contactDescription">Hvor sender jeg mit løsningsforslag?</h3>
+           <p class="task-contactDescription" *ngIf="task.contactDescription" [innerHTML]="task.contactDescription | formattext"></p>
 
            <h3 class="task-info-title" *ngIf="attachments">Tilknyttede filer</h3>
            <div class="uploaded-files" *ngIf="attachments">
