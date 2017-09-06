@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     }
 
     hideMenu() {
-        $('#bs-example-navbar-collapse-1').collapse('hide');
+        (<any>$('#bs-example-navbar-collapse-1')).collapse('hide');
     }
 
     getUserImage() {
