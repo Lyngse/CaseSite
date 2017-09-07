@@ -15,6 +15,7 @@ using System.Dynamic;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.Extensions.Logging;
 
 namespace CaseSite.Controllers
 {
@@ -26,19 +27,23 @@ namespace CaseSite.Controllers
         private readonly SignInManager<IdentityUser> _loginManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UnifactoContext _context;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> loginManager, RoleManager<IdentityRole> roleManager, UnifactoContext context)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> loginManager, 
+            RoleManager<IdentityRole> roleManager, UnifactoContext context, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _loginManager = loginManager;
             _roleManager = roleManager;
             _context = context;
+            _logger = logger;
         }
 
         [HttpPost("changepassword")]
         [Authorize]
         public async Task<IActionResult> ChangePassword([FromBody] JObject obj)
         {
+
             string currentPassword = obj["currentPassword"].ToString();
             string newPassword = obj["newPassword"].ToString();
             if (!ModelState.IsValid)
@@ -107,15 +112,29 @@ namespace CaseSite.Controllers
         [HttpGet("status")]
         public async Task<IActionResult> Status()
         {
+            _logger.LogInformation("Getting status of logged in user");
             var user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null)
+            {
+                _logger.LogInformation("status: no user logged in");
                 return Ok(new { role = "void" });
+            }
             else if (await _userManager.IsInRoleAsync(user, "business"))
+            {
+                _logger.LogInformation("status: business user logged in");
                 return Ok(new { role = "business" });
+            }
             else if (await _userManager.IsInRoleAsync(user, "student"))
+            {
+                _logger.LogInformation("status: student user logged in");
                 return Ok(new { role = "student" });
+            }
             else if (await _userManager.IsInRoleAsync(user, "admin"))
+            {
+                _logger.LogInformation("status: admin user logged in");
                 return Ok(new { role = "admin" });
+            }
+            _logger.LogWarning("status: user has no valid role");
             return Ok(new { role = "void" });
         }
 
