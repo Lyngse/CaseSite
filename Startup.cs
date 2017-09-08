@@ -15,6 +15,7 @@ using System.Linq;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace CaseSite
 {
@@ -58,11 +59,28 @@ namespace CaseSite
                 .AddEntityFrameworkStores<UnifactoContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(opt =>
+            services.AddAuthentication()
+                .AddFacebook(Options =>
             {
-                opt.Cookies.ApplicationCookie.AutomaticChallenge = false;
+                Options.AppId = "113893632577611";
+                Options.AppSecret = "4d86a81233ef0d34e622cab263fc9755";
+                Options.Events = new OAuthEvents
+                {
+                    OnRemoteFailure = ctx =>
+                    {
+                        var querystring = ctx.Request.QueryString;
+                        ctx.Response.Redirect("/api/account/externallogincallback" + querystring);
+                        ctx.HandleResponse();
+                        return System.Threading.Tasks.Task.FromResult(0);
+                    }
+                };
             });
-           
+
+            //services.Configure<IdentityOptions>(opt =>
+            //{
+            //    opt.Cookies.ApplicationCookie.AutomaticChallenge = false;
+            //});
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,7 +95,8 @@ namespace CaseSite
             {
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
-                    HotModuleReplacement = true
+                    HotModuleReplacement = true,
+                    HotModuleReplacementEndpoint = "/dist/__webpack_hmr"
                 });
             }
             else
@@ -85,7 +104,7 @@ namespace CaseSite
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-            app.UseIdentity();
+            app.UseAuthentication();
             app.Use(next => context =>
             {
                 if (context.Request.Path == "/" || context.Request.Path == "/api/account/updateTokens")
@@ -96,22 +115,7 @@ namespace CaseSite
                 }
                 return next(context);
             });
-            app.UseFacebookAuthentication(new FacebookOptions()
-            {
-                AppId = "113893632577611",
-                AppSecret = "4d86a81233ef0d34e622cab263fc9755",
-                Events = new OAuthEvents
-                {
-                    
-                    OnRemoteFailure = ctx =>
-                    {
-                        var querystring = ctx.Request.QueryString;
-                        ctx.Response.Redirect("/api/account/externallogincallback" + querystring);
-                        ctx.HandleResponse();
-                        return System.Threading.Tasks.Task.FromResult(0);
-                    }
-                }
-            });
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
