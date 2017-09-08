@@ -230,16 +230,12 @@ namespace CaseSite.Controllers
                     await _roleManager.CreateAsync(role);
                 }
                 var emailClaim = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
+                string email = null;
+                if (emailClaim != null)
+                    email = emailClaim.Value;
+                var facebookId = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
 
-                if (emailClaim == null)
-                {
-                    Response.Cookies.Delete("Identity.External");
-                    return Redirect("/login?error=noemail");
-                }
-
-                var email = emailClaim.Value;
-
-                var user = new IdentityUser { UserName = email, Email = email };
+                var user = new IdentityUser { UserName = facebookId, Email = facebookId + "@facebook.com" };
                 var result2 = await _userManager.CreateAsync(user);
                 if (result2.Succeeded)
                 {
@@ -253,16 +249,30 @@ namespace CaseSite.Controllers
                             var student = new Student();
                             student.Firstname = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Value;
                             student.Lastname = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Value;
-                            student.FacebookId = info.Principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+                            student.FacebookId = facebookId;
+                            student.Email = email;
                             student.UserId = user.Id;
                             var result3 = await new StudentController(_context, _userManager).PostStudent(student);
                             if (result3 != "success")
+                            {
+                                Response.Cookies.Delete("Identity.External");
                                 return Redirect("/login?error=" + result3);
-                            return Redirect("/login");
+                            }
+                            //result = await _loginManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+                            //if (result.Succeeded)
+                            //{
+                               return Redirect("/student");
+                            //}
+                            //else
+                            //{
+                            //    return Redirect("/login?error=signInFailed");
+                            //}
+                            
                         }
                     }
                 }
-                return Redirect("/login?error=" + result2.Errors);
+                Response.Cookies.Delete("Identity.External");
+                return Redirect("/login?error=" + result2.Errors.First().Description);
             }
         }
 

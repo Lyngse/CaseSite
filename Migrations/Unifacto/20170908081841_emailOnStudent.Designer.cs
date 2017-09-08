@@ -8,9 +8,10 @@ using CaseSite.Models;
 namespace CaseSite.Migrations.Unifacto
 {
     [DbContext(typeof(UnifactoContext))]
-    partial class UnifactoContextModelSnapshot : ModelSnapshot
+    [Migration("20170908081841_emailOnStudent")]
+    partial class emailOnStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
