@@ -134,6 +134,7 @@ namespace CaseSite.Controllers
             result.lastname = student.Lastname;
             result.facebookId = student.FacebookId;
             result.termsAccepted = student.TermsAccecpted;
+            result.email = student.Email;
 
             var solutions = new List<dynamic>();
             if(student.Solutions != null && join)
@@ -144,12 +145,6 @@ namespace CaseSite.Controllers
                 }
             }
             result.solutions = student.Solutions;
-
-
-            if (incUser)
-            {
-                result.email = student.User.Email;
-            }
 
             return result;
         }
