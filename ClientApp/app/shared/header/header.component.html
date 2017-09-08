@@ -48,7 +48,7 @@
                         <li><a style="cursor:pointer" (click)="logout(); hideMenu()"><i class="fa fa-sign-out"></i> Log ud</a></li>
                     </ul>
                 </li>
-                <li *ngIf="!business && !student && !isAdmin"><a routerLink="/login">Log ind</a></li>
+                <li *ngIf="!business && !student && !isAdmin"><a routerLink="/login" (click)="hideMenu()">Log ind</a></li>
             </ul>
             <ul *ngIf="student" class="nav navbar-nav navbar-right nav-student">
                 <li *ngIf="student" class="dropdown">
