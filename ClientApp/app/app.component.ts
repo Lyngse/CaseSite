@@ -10,6 +10,7 @@ import {
 import { UtilService } from './services/util.service';
 import { CookieService } from 'angular2-cookie/core';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { AppInsightsService } from 'ng2-appinsights';
 import * as moment from 'moment';
 
 @Component({
@@ -32,7 +33,8 @@ export class AppComponent {
     alerts = [];
     acceptCookie = false;
 
-    constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
+    constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+        private appInsightsService: AppInsightsService) {
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
             if (newValue.titel && newValue.type) {
@@ -51,6 +53,9 @@ export class AppComponent {
         } else {
             this.acceptCookie = true;
         }
+        appInsightsService.Init({
+            instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
+        });
     }
 
     setCookie() {

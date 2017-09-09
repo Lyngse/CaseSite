@@ -16,6 +16,7 @@ import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
 import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights'
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -63,9 +64,10 @@ import { CookieService } from 'angular2-cookie/services';
         AlertModule.forRoot(),
         AccordionModule.forRoot(),
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+        AppInsightsModule
     ],
 
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService, AdminService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService, AdminService, AppInsightsService]
 })
 export class AppModule {
 }
