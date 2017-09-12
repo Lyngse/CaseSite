@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="fileInput">Upload filer til dit løsningsforslag</label>
         <input type="file" multiple id="fileInput" name="fileInput" value="Upload filer" (change)="fileChange($event)">
-        <p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag, upload dem gerne i en zip fil.</p>
+        <p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag</p>
     </div>
 
     <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!filesChanged || !enableUpload">Upload</button>
