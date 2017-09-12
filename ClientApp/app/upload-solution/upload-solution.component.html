@@ -10,15 +10,17 @@
     <div *ngIf="!enableUpload" class="alert alert-info past-deadline">
         <p>Deadlinen for denne opgave er udløbet og du kan derfor ikke lave flere ændringer til dit løsningsforslag. Hvis du mener at en eventuel ændring til dit løsningforslag vil have en stor betydning, kan du prøve at tage kontakt til virksomheden via deres email.</p>
     </div>
-    <h2 *ngIf="solutions.length > 0">Håndter uploadede løsningsforslag</h2>
-    <div class="uploaded-files" *ngIf="solutions">
-        <div class="display:flex"*ngFor="let s of solutions">
-            <div class="file-pill">
-                <a class="file-pill-text" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
-                    <p>{{s.fileName}}</p>
-                </a>
-                <div class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
-                    <i class="fa fa-times"></i>
+    <div *ngIf="solutions">
+        <h2 *ngIf="solutions.length > 0">Håndter uploadede løsningsforslag</h2>
+        <div class="uploaded-files" >
+            <div class="display:flex" *ngFor="let s of solutions">
+                <div class="file-pill">
+                    <a class="file-pill-text" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
+                        <p>{{s.fileName}}</p>
+                    </a>
+                    <div class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
+                        <i class="fa fa-times"></i>
+                    </div>
                 </div>
             </div>
         </div>

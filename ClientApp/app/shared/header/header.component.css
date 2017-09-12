@@ -100,9 +100,9 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 .beta-text {
     color: #FF9800;
     position: absolute;
-    top: 10px;
-    left: 50px;
-    transform: rotate(25deg);
+    top: 30px;
+    left: 27px;
+    transform: rotate(-40deg);
 }
 
 .student-img {
