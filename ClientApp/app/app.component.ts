@@ -48,7 +48,7 @@ export class AppComponent {
             else
                 this.loading = false;
         });
-        if (this.cookieService.get("AcceptCookies") != "Accept") {
+        if (localStorage.getItem("AcceptCookies") != "accept"){
             this.acceptCookie = false;
         } else {
             this.acceptCookie = true;
@@ -59,10 +59,10 @@ export class AppComponent {
     }
 
     setCookie() {
-        let value: string = "Accept";
+        let value: string = "accept";
         let key: string = "AcceptCookies";
         this.acceptCookie = true;
-        this.cookieService.put(key, value);
+        localStorage.setItem(key, value);
     }
 
     onDeactivate() {
