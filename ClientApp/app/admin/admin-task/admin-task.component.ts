@@ -54,9 +54,9 @@ export class AdminTaskComponent implements AfterViewInit {
         this.router.navigate(['business/solutions/' + taskId + '/download/' + studentId]);
     }
 
-    deleteTask(taskId) {
+    deleteTask(task: Task) {
         this.utilService.loading.next(true);
-        this.adminService.deleteTask(taskId).subscribe(res => {
+        this.adminService.deleteTask(task.id).subscribe(res => {
             if (res.ok) {
                 this.utilService.alert.next({ type: "success", titel: "Succes", message: "Opgaven er blevet slettet" });
                 this.query = null;

@@ -12,11 +12,11 @@ namespace CaseSite.Models
         public int Id { get; set; }
         
         public int TaskId { get; set; }
-        [Required]
+        
         public virtual Task Task { get; set; }
        
         public int StudentId { get; set; }
-        [Required]
+        
         public virtual Student Student { get; set; }
 
     }

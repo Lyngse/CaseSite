@@ -18,7 +18,7 @@
                     <a class="file-pill-text" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
                         <p>{{s.fileName}}</p>
                     </a>
-                    <div class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
+                    <div *ngIf="enableUpload" class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
                         <i class="fa fa-times"></i>
                     </div>
                 </div>
