@@ -59,7 +59,7 @@ export class BuisnessRegisterComponent {
             this.utilService.loading.next(true);
             this.accountService.registerUser(this.model.username, this.model.password, this.model.email).subscribe((response) => {  
                 if (response.ok) {
-                    let userId = response._body;
+                    let userId = response.json();
                     this.businessService.createBusiness(this.model, userId).subscribe((response) => {
 
                         if (this.logoAdded) {
@@ -74,7 +74,7 @@ export class BuisnessRegisterComponent {
                             }, err => {
                                 this.utilService.loading.next(false);
                                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved upload af logo" });
-                                this.utilService.alert.next({ type: "success", titel: "Success", message: "Din virksomhed er blevet oprettet, prøv oprettelsen af logo under 'Ret oplysninger'" });
+                                this.utilService.alert.next({ type: "success", titel: "Success", message: "Din virksomhed er blevet oprettet, prøv at uploade logo under 'Ret oplysninger'" });
                                 this.router.navigate(['/login']);
                             });
                         } else {

@@ -158,6 +158,7 @@ namespace CaseSite.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var userId = business.UserId.Trim('\"');
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == business.UserId);
             if (user == null)
             {
