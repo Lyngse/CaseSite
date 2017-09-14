@@ -107,7 +107,12 @@ namespace CaseSite
             app.UseAuthentication();
             app.Use(next => context =>
             {
-                if (context.Request.Path == "/" || context.Request.Path == "/api/account/updateTokens")
+                if (context.Request.Cookies["XSRF-TOKEN"] == null)
+                {
+                    var tokens = antiforgery.GetAndStoreTokens(context);
+                    context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions { HttpOnly = false });
+                }
+                if (context.Request.Path == "/api/account/updateTokens")
                 {
                     //send the request token as a JavaScript-readable cookie, and Angular will use it by default
                     var tokens = antiforgery.GetAndStoreTokens(context);
