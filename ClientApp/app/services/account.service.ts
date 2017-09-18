@@ -46,21 +46,21 @@ export class AccountService {
     login(username: string, password: string): Observable<any> {
         return this.http
             .post('api/account/login/', JSON.stringify({ UserName: username, Password: password }), this.options)
-            .map(res => { this.loggedIn.next("business"); this.updateToken(); return res; })
+            .map(res => { if (res.ok) { this.loggedIn.next("business"); this.updateToken(); } return res; })
             .catch(this.handleError);
     }
 
     adminLogin(username: string, password: string): Observable<any> {
         return this.http
             .post('api/account/adminlogin/', JSON.stringify({ UserName: username, Password: password }), this.options)
-            .map(res => { this.loggedIn.next("admin"); this.updateToken(); return res; })
+            .map(res => { if (res.ok) { this.loggedIn.next("admin"); this.updateToken(); } return res; })
             .catch(this.handleError);
     }
 
     logout(): Observable<any> {
         return this.http
             .post('api/account/logout', this.options)
-            .map(res => { this.loggedIn.next("void"); this.updateToken(); return res; })
+            .map(res => { if (res.ok) { this.loggedIn.next("void"); this.updateToken(); } return res; })
             .catch(this.handleError);
     }
 
