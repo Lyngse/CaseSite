@@ -99,15 +99,13 @@ namespace CaseSite.Controllers
                 {
                     return NotFound(new { solutionError = "Solutions not found" });
                 }
-
-                foreach (Solution s in task.Solutions)
+                foreach (Solution s in solutions)
                 {
                     s.Student = await _context.Student.SingleOrDefaultAsync(x => x.Id == s.StudentId);
                     s.Student.User = await _context.Users.SingleOrDefaultAsync(x => x.Id == s.Student.UserId);
                 }
 
-                task.Solutions = solutions;
-                return Ok(task.Solutions);
+                return Ok(solutions);
             }            
 
             return NotFound(new { notAllowed = "Not allowed" });
