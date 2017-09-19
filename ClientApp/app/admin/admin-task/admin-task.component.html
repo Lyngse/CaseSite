@@ -39,7 +39,7 @@
             <td class="text-center" *ngIf="t.winnerSolutionId"><button type="button" class="btn btn-success btn-sm" (click)="gotoWinnerSolutionDownload(t.id, t.winnerSolution.studentId)"><i class="fa fa-arrow-right"></i></button></td>
             <td class="text-center" *ngIf="!t.winnerSolutionId"><button type="button" [disabled]="true" class="btn btn-success btn-sm"><i class="fa fa-arrow-right"></i></button></td>
             <td class="delete">
-                <button type="button" class="btn btn-danger btn-sm" (click)="smModal.show()"><i class="fa fa-trash"></i></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="smModal.show()" [disabled]="t.solutions.length > 0"><i class="fa fa-trash"></i></button>
                 <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">

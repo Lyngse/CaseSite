@@ -56,6 +56,7 @@ export class AdminTaskComponent implements AfterViewInit {
 
     deleteTask(task: Task) {
         this.utilService.loading.next(true);
+        
         this.adminService.deleteTask(task.id).subscribe(res => {
             if (res.ok) {
                 this.utilService.alert.next({ type: "success", titel: "Succes", message: "Opgaven er blevet slettet" });

@@ -40,6 +40,7 @@ export class AppComponent {
             if (newValue.titel && newValue.type) {
                 this.alerts.push(newValue);
                 this.removeAlert(newValue);
+                appInsightsService.trackEvent(newValue.type, { "titel": newValue.titel, "message": newValue.message });
             }
         });
         utilService.loading.subscribe(newValue => {

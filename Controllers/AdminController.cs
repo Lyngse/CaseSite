@@ -236,20 +236,14 @@ namespace CaseSite.Controllers
             }
             if (await _userManager.IsInRoleAsync(serverUser, "admin"))
             {
-                var task = await _context.Task.SingleOrDefaultAsync(t => t.Id == taskId);
+                var task = await _context.Task.Include(t => t.Solutions).SingleOrDefaultAsync(t => t.Id == taskId);
                 if (task == null)
                 {
                     return NotFound();
                 }
-                task.WinnerSolution = null;
-                task.WinnerSolutionId = null;
-                task.Solutions = await _context.Solution.Where(s => s.TaskId == task.Id).ToListAsync();
-                if(task.Solutions.Count()  > 0)
+                if (task.Solutions != null)
                 {
-                    foreach (var s in task.Solutions)
-                    {
-                        _context.Solution.Remove(s);
-                    }
+                    return BadRequest(new { error = "tasks with solutions can not be deleted" });
                 }
 
                 _context.Task.Remove(task);

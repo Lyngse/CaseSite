@@ -153,10 +153,14 @@ namespace CaseSite.Controllers
                 return BadRequest(ModelState);
             }
 
-            var task = await _context.Task.SingleOrDefaultAsync(m => m.Id == id);
+            var task = await _context.Task.Include(t => t.Solutions).SingleOrDefaultAsync(m => m.Id == id);
             if (task == null)
             {
                 return NotFound();
+            }
+            if(task.Solutions != null)
+            {
+                return BadRequest(new { error = "tasks with solutions can not be deleted" });
             }
 
             _context.Task.Remove(task);
