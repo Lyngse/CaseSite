@@ -10,6 +10,7 @@ import {
 import { UtilService } from './services/util.service';
 import { CookieService } from 'angular2-cookie/core';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
+import { AppInsightsService } from 'ng2-appinsights';
 import * as moment from 'moment';
 
 @Component({
@@ -32,12 +33,14 @@ export class AppComponent {
     alerts = [];
     acceptCookie = false;
 
-    constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
+    constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+        private appInsightsService: AppInsightsService) {
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
             if (newValue.titel && newValue.type) {
                 this.alerts.push(newValue);
                 this.removeAlert(newValue);
+                appInsightsService.trackEvent(newValue.type, { "titel": newValue.titel, "message": newValue.message });
             }
         });
         utilService.loading.subscribe(newValue => {
@@ -46,18 +49,21 @@ export class AppComponent {
             else
                 this.loading = false;
         });
-        if (this.cookieService.get("AcceptCookies") != "Accept") {
+        if (localStorage.getItem("AcceptCookies") != "accept"){
             this.acceptCookie = false;
         } else {
             this.acceptCookie = true;
         }
+        appInsightsService.Init({
+            instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
+        });
     }
 
     setCookie() {
-        let value: string = "Accept";
+        let value: string = "accept";
         let key: string = "AcceptCookies";
         this.acceptCookie = true;
-        this.cookieService.put(key, value);
+        localStorage.setItem(key, value);
     }
 
     onDeactivate() {

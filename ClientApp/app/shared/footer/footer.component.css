@@ -124,6 +124,7 @@ ul li a:hover {
     }
 
     .footer-social-links {
+        margin-top: 10px;
         flex: 1 1 100%;
     }
 

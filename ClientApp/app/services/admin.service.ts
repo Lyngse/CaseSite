@@ -145,8 +145,8 @@ export class AdminService {
                 d.creationTime = moment(d.creationTime);
             })
         } else {
-            data.deadline = moment(data.deadline);
-            data.creationTime = moment(data.creationTime);
+            data[0].deadline = moment(data[0].deadline);
+            data[0].creationTime = moment(data[0].creationTime);
         }
         return data;
     }

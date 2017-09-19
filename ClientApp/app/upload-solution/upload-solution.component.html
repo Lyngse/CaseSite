@@ -3,22 +3,24 @@
     <div class="form-group">
         <label for="fileInput">Upload filer til dit løsningsforslag</label>
         <input type="file" multiple id="fileInput" name="fileInput" value="Upload filer" (change)="fileChange($event)">
-        <p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag, upload dem gerne i en zip fil.</p>
+        <p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag</p>
     </div>
 
     <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!filesChanged || !enableUpload">Upload</button>
     <div *ngIf="!enableUpload" class="alert alert-info past-deadline">
         <p>Deadlinen for denne opgave er udløbet og du kan derfor ikke lave flere ændringer til dit løsningsforslag. Hvis du mener at en eventuel ændring til dit løsningforslag vil have en stor betydning, kan du prøve at tage kontakt til virksomheden via deres email.</p>
     </div>
-    <h2 *ngIf="solutions.length > 0">Håndter uploadede løsningsforslag</h2>
-    <div class="uploaded-files" *ngIf="solutions">
-        <div class="display:flex"*ngFor="let s of solutions">
-            <div class="file-pill">
-                <a class="file-pill-text" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
-                    <p>{{s.fileName}}</p>
-                </a>
-                <div class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
-                    <i class="fa fa-times"></i>
+    <div *ngIf="solutions">
+        <h2 *ngIf="solutions.length > 0">Håndter uploadede løsningsforslag</h2>
+        <div class="uploaded-files" >
+            <div class="display:flex" *ngFor="let s of solutions">
+                <div class="file-pill">
+                    <a class="file-pill-text" href="{{s.uri}}" tooltip="Download filen" placement="bottom" style="cursor: pointer;">
+                        <p>{{s.fileName}}</p>
+                    </a>
+                    <div *ngIf="enableUpload" class="file-pill-icon" (click)="deleteSolution(s.fileName)" tooltip="Slet filen" placement="bottom" style="cursor: pointer;">
+                        <i class="fa fa-times"></i>
+                    </div>
                 </div>
             </div>
         </div>
