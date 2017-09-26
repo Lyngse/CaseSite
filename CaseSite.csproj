@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
     <PackageReference Include="WindowsAzure.Storage" Version="8.4.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
@@ -33,6 +34,7 @@
     <Content Remove="wwwroot/dist.zip" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Tests\Tests.csproj" />
     <None Include="wwwroot\assets\font-awesome\css\font-awesome.css" />
     <None Include="wwwroot\assets\font-awesome\css\font-awesome.min.css" />
     <None Include="wwwroot\assets\font-awesome\fonts\fontawesome-webfont.eot" />
