@@ -78,7 +78,8 @@ namespace CaseSite.Controllers
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callbackUrl = Url.Action("reset-password", "login", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
             var mimeMessage = new MimeMessage();
-            mimeMessage.From.Add(new MailboxAddress("Unifacto Noreply", "noreply@unifacto.com"));
+            //mimeMessage.From.Add(new MailboxAddress("Unifacto Noreply", "noreply@unifacto.com"));
+            mimeMessage.From.Add(new MailboxAddress("Unifacto Info", "info@unifacto.com"));
             mimeMessage.To.Add(new MailboxAddress("customer", email));
             mimeMessage.Subject = "Nulstil kodeord til Unifacto";
             var bodyBuilder = new BodyBuilder();
@@ -87,7 +88,8 @@ namespace CaseSite.Controllers
             using(var client = new SmtpClient())
             {
                 client.Connect("smtp.office365.com", 587, false);
-                client.Authenticate("noreply@unifacto.com", "Isbil42panda");
+                //client.Authenticate("noreply@unifacto.com", "Isbil42panda");
+                client.Authenticate("info@unifacto.com", "Unifacto9");
                 client.Send(mimeMessage);
                 client.Disconnect(true);
             }
