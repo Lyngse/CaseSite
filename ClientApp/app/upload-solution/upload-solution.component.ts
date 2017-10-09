@@ -80,28 +80,28 @@ export class UploadSolutionComponent implements AfterViewInit {
     }
 
     uploadSolution() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.solutionService.createSolution(this.student.id, this.taskId).subscribe(res => {
             console.log(res);
             this.blobService.uploadSolutionFiles(this.formData, this.taskId, this.student.id).subscribe(res => {
                 console.log(res);
                 if (res.ok) {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Filer til løsningsforslag er blevet uploadet" });
                     this.router.navigate(['/student']);
                 } else {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filerne" });
                 }
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filerne" });
                 });
         });
     }
 
     getSolutionFiles(taskId, studentId) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.taskService.getTask(taskId).subscribe(res => {
             if (res.deadline > moment()) {
                 this.enableUpload = true;
@@ -111,7 +111,7 @@ export class UploadSolutionComponent implements AfterViewInit {
             }
             this.blobService.getSolutionFiles(taskId, studentId).subscribe(res => {
                 if (res != null) {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.solutions = res;
                     this.solutions.forEach((f) => {
                         f.fileName = this.formatFileName(f.name)
@@ -120,7 +120,7 @@ export class UploadSolutionComponent implements AfterViewInit {
                     this.solutionsLoaded = true;
                 }
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente allerede uploadede filer" });
             });
         })
@@ -128,18 +128,18 @@ export class UploadSolutionComponent implements AfterViewInit {
     }
 
     deleteSolution(fileName: string) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.blobService.deleteSolutionFile(this.taskId, this.studentId, fileName).subscribe(res => {
             if (res.ok) {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Filen er blevet slettet" });
                 this.getSolutionFiles(this.taskId, this.studentId);
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, filen kunne ikke slettes" });
             }
         }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke slette filen" });
             });
     }   

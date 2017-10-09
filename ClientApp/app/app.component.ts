@@ -5,12 +5,18 @@ import {
     state,
     style,
     animate,
-    transition
+    transition,
+    PLATFORM_ID,
+    Inject,
+    OnInit,
+    Injector
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common'
+import { Router } from '@angular/router'
 import { UtilService } from './services/util.service';
-import { CookieService } from 'angular2-cookie/core';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
 import { AppInsightsService } from 'ng2-appinsights';
+import { TransferState } from '../modules/transfer-state/transfer-state';
 import * as moment from 'moment';
 
 @Component({
@@ -28,19 +34,24 @@ import * as moment from 'moment';
         ])
     ]
 })
-export class AppComponent {
-    loading = false;
+export class AppComponent implements OnInit {
+    loading: boolean;
     alerts = [];
-    acceptCookie = false;
+    acceptCookie = true;
+    private appInsightsService: AppInsightsService;
+    private isBrowser: boolean
 
-    constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-        private appInsightsService: AppInsightsService) {
+    constructor( @Inject(PLATFORM_ID) private platformId, private utilService: UtilService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+            private injector: Injector, private cache: TransferState, private router: Router) {
+        this.isBrowser = isPlatformBrowser(platformId);
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
             if (newValue.titel && newValue.type) {
                 this.alerts.push(newValue);
                 this.removeAlert(newValue);
-                appInsightsService.trackEvent(newValue.type, { "titel": newValue.titel, "message": newValue.message });
+                if (this.isBrowser) {
+                    this.appInsightsService.trackEvent(newValue.type, { "titel": newValue.titel, "message": newValue.message });
+                }
             }
         });
         utilService.loading.subscribe(newValue => {
@@ -49,14 +60,23 @@ export class AppComponent {
             else
                 this.loading = false;
         });
-        if (localStorage.getItem("AcceptCookies") != "accept"){
-            this.acceptCookie = false;
-        } else {
-            this.acceptCookie = true;
+        if (this.isBrowser) {
+            if (localStorage.getItem("AcceptCookies") != "accept") {
+                this.acceptCookie = false;
+            } else {
+                this.acceptCookie = true;
+            }
         }
-        appInsightsService.Init({
-            instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
-        });
+    }
+
+    ngOnInit() {
+        this.cache.set('cached', true);
+        if (this.isBrowser) {
+            this.appInsightsService = <AppInsightsService>this.injector.get(AppInsightsService);
+            this.appInsightsService.Init({
+                instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
+            });
+        }
     }
 
     setCookie() {

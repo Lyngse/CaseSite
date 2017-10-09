@@ -19,4 +19,10 @@ export class UtilService {
         "Andet"
     ];
     public dataArray: any = {};
+
+    displayLoading(value: boolean) {
+        setTimeout(() => {
+            this.loading.next(value);
+        })
+    }
 }

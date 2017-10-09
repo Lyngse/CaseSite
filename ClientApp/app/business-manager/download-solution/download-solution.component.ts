@@ -64,12 +64,12 @@ export class DownloadSolutionComponent implements AfterViewInit {
     }
 
     getBusiness() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (err.status === 401) {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Du skal være logget ind for at se dette indhold" });
                 this.router.navigateByUrl("login");
@@ -85,20 +85,20 @@ export class DownloadSolutionComponent implements AfterViewInit {
     }
 
     getSolutionFiles(taskId, studentId) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.blobService.getSolutionFiles(taskId, studentId).subscribe(res => {
             if (res != null) {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.solutions = res;
                 this.solutions.forEach((f) => {
                     f.fileName = this.formatFileName(f.name)
                 });
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der var ikke nogen filer til dette løsningsforslag at hente" });
             }
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente allerede uploadede filer" });
         });
     }

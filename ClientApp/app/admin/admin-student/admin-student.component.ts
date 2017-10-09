@@ -25,23 +25,23 @@ export class AdminStudentComponent implements AfterViewInit {
 
 
     search() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         if (!this.query) {
             this.adminService.getAllStudents().subscribe(res => {
                 this.students = res;
                 console.log(res);
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af de studerende" });
             });
         } else {
             this.adminService.searchStudent(this.query).subscribe(res => {
                 this.students = res;
                 console.log(res);
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af de studenrende" });
             });
         }

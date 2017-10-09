@@ -65,44 +65,44 @@ export class HeaderComponent implements OnInit {
     }
 
     getBusiness() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (err.status !== 401)
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
         });
     }
 
     logout() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.accountService.logout().subscribe((response) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.router.navigate(['/']);
             this.isAdmin = false;
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
         });
     }
 
     acceptTerms() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.studentService.acceptTerms().subscribe(res => {
             if (res.id) {
                 this.studentService.getStudentFromUser().subscribe(res => {
                     console.log(res);
                     this.student = res;
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                 });
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke finde brugeren" });
             }
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der gik noget galt" });
             })
     }

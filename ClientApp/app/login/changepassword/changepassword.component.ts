@@ -21,9 +21,9 @@ export class ChangePasswordComponent implements AfterViewInit {
     }
 
     onSubmit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.accountService.changePassword(this.currentPassword, this.newPassword).subscribe(res => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (res.ok === true) {
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Kodeord blev ændret" });
                 this.router.navigate(['/business']);
@@ -31,7 +31,7 @@ export class ChangePasswordComponent implements AfterViewInit {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
             }
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
         });
     }

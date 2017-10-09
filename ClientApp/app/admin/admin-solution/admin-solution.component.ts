@@ -24,23 +24,23 @@ export class AdminSolutionComponent implements AfterViewInit {
 
 
     search() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         if (!this.query) {
             this.adminService.getAllSolutions().subscribe(res => {
                 this.solutions = res;
                 console.log(res);
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af løsningsforslagene" });
             });
         } else {
             this.adminService.searchSolution(this.query).subscribe(res => {
                 this.solutions = res;
                 console.log(res);
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af løsningsforslagene" });
             });
         }

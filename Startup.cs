@@ -47,6 +47,8 @@ namespace CaseSite
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
+            services.AddNodeServices();
+
             services.AddDbContext<UnifactoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("UnifactoContext")));
 

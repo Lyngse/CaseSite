@@ -52,19 +52,19 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
         this.route.params.subscribe(params => {
             let id = params['id'];
             if (id) {
-                this.utilService.loading.next(true);
+                this.utilService.displayLoading(true);
                 this.taskService.getTaskWithBusiness(id).subscribe(res => {
                     if (res.id && res.business) {
                         this.task = res;
                         this.business = res.business;
                         this.getAttachments(res.id);
                     } else {
-                        this.utilService.loading.next(false);
+                        this.utilService.displayLoading(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                     }
                     
                 }, (err) => {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                 });
             }
@@ -73,7 +73,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
 
     getAttachments(id) {
         console.log("her");
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.blobService.getAttachments(id).subscribe(res => {
             if (res.length > 0) {
                 this.attachments = res;
@@ -81,9 +81,9 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
                     f.fileName = this.formatFileName(f.name)
                 });
             }
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         });
     }
 

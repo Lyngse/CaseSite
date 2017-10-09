@@ -28,7 +28,7 @@ export class StudentProfileComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.solutionService.getStudentSolutions().subscribe(res => {
             if (res.length > 0) {
                 let now = moment();
@@ -38,13 +38,13 @@ export class StudentProfileComponent implements AfterViewInit {
                     else
                         this.pastSolutions.push(s);
                 });
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 console.log(res);
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }
         }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl da vi forsøgte at hente dine løsningsforslag" });
             });
     }

@@ -49,9 +49,9 @@ export class LoginComponent implements AfterViewInit {
 
     onLogin() {
         if (this.form.valid) {
-            this.utilService.loading.next(true);
+            this.utilService.displayLoading(true);
             this.accountService.login(this.username, this.password).subscribe((response) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 console.log(response);
                 if (response.ok == true) {
                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Login lykkedes" });
@@ -60,7 +60,7 @@ export class LoginComponent implements AfterViewInit {
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
                 }
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Login mislykkedes" });
             });
         }

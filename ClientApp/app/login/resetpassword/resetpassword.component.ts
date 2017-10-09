@@ -27,9 +27,9 @@ export class ResetPasswordComponent implements AfterViewInit {
     }
 
     onSubmit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.accountService.resetPassword(this.userId, this.code, this.newPassword).subscribe(res => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (res.ok === true) {
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Kodeord blev ændret" });
                 this.router.navigate(['/login']);
@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements AfterViewInit {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
             }
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Ændring af kodeord mislykkedes" });
         });
     }

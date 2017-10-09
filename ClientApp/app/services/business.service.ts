@@ -1,5 +1,7 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { TransferHttp } from '../../modules/transfer-http/transfer-http';
+import { ORIGIN_URL } from '../shared/constants/baseurl.constants';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
@@ -16,7 +18,7 @@ export class BusinessService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private transferHttp: TransferHttp, @Inject(ORIGIN_URL) private baseUrl: string) {
 
     }
 
@@ -37,7 +39,7 @@ export class BusinessService {
             Email: b.email
         };
         return this.http
-            .put('api/businesses/', JSON.stringify({ business: business, user: user }), this.options)
+            .put(this.baseUrl + '/api/businesses/', JSON.stringify({ business: business, user: user }), this.options)
             .catch(this.handleError);
     }
 
@@ -52,28 +54,28 @@ export class BusinessService {
             UserId: userId
         }
         return this.http
-            .post('api/businesses/', JSON.stringify(business), this.options)
+            .post(this.baseUrl + '/api/businesses/', JSON.stringify(business), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     getBusinessWithTasks(): Observable<Business> {
         return this.http
-            .get('api/businesses/withtasks', this.options)
+            .get(this.baseUrl + '/api/businesses/withtasks', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     getBusinessFromId(id: number): Observable<Business> {
         return this.http
-            .get('api/businesses/' + id, this.options)
+            .get(this.baseUrl + '/api/businesses/' + id, this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     getBusinessFromUser(): Observable<Business> {
         return this.http
-            .get('api/businesses', this.options)
+            .get(this.baseUrl + '/api/businesses', this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }

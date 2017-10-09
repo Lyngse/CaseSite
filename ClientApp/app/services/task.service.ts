@@ -1,5 +1,7 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { TransferHttp } from '../../modules/transfer-http/transfer-http';
+import { ORIGIN_URL } from '../shared/constants/baseurl.constants';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
@@ -17,13 +19,13 @@ export class TaskService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private transferHttp: TransferHttp, @Inject(ORIGIN_URL) private baseUrl: string) {
 
     }
 
     getLatestTasks(): Observable<Task[]> {
         return this.http
-            .get('api/tasks/getlatest', this.options)
+            .get(this.baseUrl + '/api/tasks/getlatest', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
@@ -45,35 +47,35 @@ export class TaskService {
             CreationTime: t.creationTime
         };
         return this.http
-            .put('api/tasks', JSON.stringify(task), this.options)
+            .put(this.baseUrl + '/api/tasks', JSON.stringify(task), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     deleteTask(id: number): Observable<Task> {
         return this.http
-            .delete('api/tasks/' + id, this.options)
+            .delete(this.baseUrl + '/api/tasks/' + id, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     getTask(id: number): Observable<Task> {
         return this.http
-            .get('api/tasks/' + id, this.options)
+            .get(this.baseUrl + '/api/tasks/' + id, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     getAllTasks(): Observable<Task[]> {
         return this.http
-            .get('api/tasks', this.options)
+            .get(this.baseUrl + '/api/tasks', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     getTaskWithBusiness(taskId: number): Observable<Task> {
         return this.http
-            .get('api/tasks/withbusiness/' + taskId, this.options)
+            .get(this.baseUrl + '/api/tasks/withbusiness/' + taskId, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
@@ -95,7 +97,7 @@ export class TaskService {
             CreationTime: t.creationTime
         };
         return this.http
-            .post('api/tasks', JSON.stringify(task), this.options)
+            .post(this.baseUrl + '/api/tasks', JSON.stringify(task), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }

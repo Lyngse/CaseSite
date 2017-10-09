@@ -48,12 +48,12 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
     }
 
     getBusiness() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (err.status === 401) {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Du skal være logget ind for at se dette indhold" });
                 this.router.navigateByUrl("login");
@@ -71,18 +71,18 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
     }
 
     submitWinner(studentId) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.solutionService.selectWinner(this.task.id, studentId).subscribe(res => {
             if (res.ok) {
                 this.getTasksAndSolutions(this.task.id);
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "success", titel: "Succes", message: "Vinder af opgaven er blevet valgt" });
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
             }
         }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Vinder af opgaven er ikke blevet valgt" });
             });
     }
@@ -92,13 +92,13 @@ export class BusinessTaskSolutionsComponent implements AfterViewInit {
     }
 
     getTasksAndSolutions(id) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.taskService.getTask(id).subscribe(res => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.task = res;
             console.log(this.task);
             this.solutionService.getTaskSolutions(id).subscribe(data => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.solutions = data;
             });
         });

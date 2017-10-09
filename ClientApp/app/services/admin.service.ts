@@ -1,5 +1,7 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { TransferHttp } from '../../modules/transfer-http/transfer-http';
+import { ORIGIN_URL } from '../shared/constants/baseurl.constants';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
@@ -19,82 +21,82 @@ export class AdminService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     options = new RequestOptions({ headers: this.headers });
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private transferHttp: TransferHttp, @Inject(ORIGIN_URL) private baseUrl: string) {
 
     }
 
     getCounts(): Observable<any> {
         return this.http
-            .get('api/admin/getcounts', this.options)
+            .get(this.baseUrl + '/api/admin/getcounts', this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     getAllBusinesses(): Observable<Business[]> {
         return this.http
-            .post('api/admin/getallbusinesses', this.options)
+            .post(this.baseUrl + '/api/admin/getallbusinesses', this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     searchBusiness(query: string): Observable<Business[]> {
         return this.http
-            .post('api/admin/getallbusinesses', JSON.stringify({ query: query}), this.options)
+            .post(this.baseUrl + '/api/admin/getallbusinesses', JSON.stringify({ query: query}), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     getAllTasks(): Observable<Task[]> {
         return this.http
-            .post('api/admin/getalltasks', this.options)
+            .post(this.baseUrl + '/api/admin/getalltasks', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     searchTask(query: string): Observable<Task[]> {
         return this.http
-            .post('api/admin/getalltasks', JSON.stringify({ query: query }), this.options)
+            .post(this.baseUrl + '/api/admin/getalltasks', JSON.stringify({ query: query }), this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     getAllStudents(): Observable<Student[]> {
         return this.http
-            .post('api/admin/getallstudents', this.options)
+            .post(this.baseUrl + '/api/admin/getallstudents', this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     searchStudent(query: string): Observable<Student[]> {
         return this.http
-            .post('api/admin/getallstudents', JSON.stringify({ query: query }), this.options)
+            .post(this.baseUrl + '/api/admin/getallstudents', JSON.stringify({ query: query }), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     getAllSolutions(): Observable<Solution[]> {
         return this.http
-            .post('api/admin/getallsolutions', this.options)
+            .post(this.baseUrl + '/api/admin/getallsolutions', this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     searchSolution(query: string): Observable<Solution[]> {
         return this.http
-            .post('api/admin/getallsolutions', JSON.stringify({ query: query }), this.options)
+            .post(this.baseUrl + '/api/admin/getallsolutions', JSON.stringify({ query: query }), this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     deleteBusiness(businessId: number): Observable<any> {
         return this.http
-            .delete('api/admin/deletebusiness/' + businessId, this.options)
+            .delete(this.baseUrl + '/api/admin/deletebusiness/' + businessId, this.options)
             .catch(this.handleError);
     }
 
     deleteTask(taskId: number): Observable<any> {
         return this.http
-            .delete('api/admin/deletetask/' + taskId, this.options)
+            .delete(this.baseUrl + '/api/admin/deletetask/' + taskId, this.options)
             .catch(this.handleError);
     }
 
@@ -109,7 +111,7 @@ export class AdminService {
             Email: b.email
         };
         return this.http
-            .put('api/admin/updatebusiness', JSON.stringify({ business: business }), this.options)
+            .put(this.baseUrl + '/api/admin/updatebusiness', JSON.stringify({ business: business }), this.options)
             .catch(this.handleError);
     }
 
@@ -130,7 +132,7 @@ export class AdminService {
             CreationTime: t.creationTime
         };
         return this.http
-            .put('api/admin/updatetask', JSON.stringify({ task: task }), this.options)
+            .put(this.baseUrl + '/api/admin/updatetask', JSON.stringify({ task: task }), this.options)
             .catch(this.handleError);
     }
     

@@ -1,5 +1,5 @@
 ﻿import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { TasksComponent } from './tasks/tasks.component';
@@ -56,7 +56,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, {
+        useHash: false, preloadingStrategy: PreloadAllModules, initialNavigation: 'enabled'
+    })],
     exports: [RouterModule],
 })
 export class AppRoutingModule { }

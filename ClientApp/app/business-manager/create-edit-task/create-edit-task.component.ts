@@ -64,9 +64,9 @@ export class CreateEditTaskComponent implements AfterViewInit {
         this.route.params.subscribe(params => {
             let id = params['id'];
             if (id) {
-                this.utilService.loading.next(true);
+                this.utilService.displayLoading(true);
                 this.taskService.getTask(id).subscribe(res => {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.model = res;
                     this.now = res.deadline.toDate();
                     this.selectedDate = res.deadline.toDate();
@@ -100,7 +100,7 @@ export class CreateEditTaskComponent implements AfterViewInit {
 
     onSubmit() {
         if (this.form.valid) {
-            this.utilService.loading.next(true);
+            this.utilService.displayLoading(true);
             if (!this.model.id) {
                 if (this.model.rewardType === 'Anbefaling')
                     this.model.rewardValue = 0;
@@ -113,29 +113,29 @@ export class CreateEditTaskComponent implements AfterViewInit {
                         if (this.filesChanged) {
                             this.blobService.uploadAttachments(this.formData, data.id).subscribe((res) => {
                                 if (res.ok) {
-                                    this.utilService.loading.next(false);
+                                    this.utilService.displayLoading(false);
                                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
                                     this.router.navigateByUrl('business');
                                 } else {
-                                    this.utilService.loading.next(false);
+                                    this.utilService.displayLoading(false);
                                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
                                 }
                             }, (err) => {
-                                this.utilService.loading.next(false);
+                                this.utilService.displayLoading(false);
                                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer" });
                             });
                         } else {
-                            this.utilService.loading.next(false);
+                            this.utilService.displayLoading(false);
                             this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave oprettet" });
                             this.router.navigateByUrl('business');
                         }
                     } else {
-                        this.utilService.loading.next(false);
+                        this.utilService.displayLoading(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgave ikke oprettet" });
                     }
                     
                 }, (err) => {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgave ikke oprettet" });
                 });
                 //this.businessService.createBusiness(this.model);
@@ -150,36 +150,36 @@ export class CreateEditTaskComponent implements AfterViewInit {
                         this.blobService.uploadAttachments(this.formData, this.model.id).subscribe((res) => {
                             if (res.ok) {
                                 if (!this.isAdmin) {
-                                    this.utilService.loading.next(false);
+                                    this.utilService.displayLoading(false);
                                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
                                     this.router.navigateByUrl('business');
                                 } else {
-                                    this.utilService.loading.next(false);
+                                    this.utilService.displayLoading(false);
                                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
                                     this.router.navigateByUrl('admin/tasks');
                                 }
                             } else {
-                                this.utilService.loading.next(false);
+                                this.utilService.displayLoading(false);
                                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
                             }
                         }, (err) => {
-                            this.utilService.loading.next(false);
+                            this.utilService.displayLoading(false);
                             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl under upload af filer, men resten af opgaven er blevet opdateret." });
                         })
                     } else {
                         if (!this.isAdmin) {
-                            this.utilService.loading.next(false);
+                            this.utilService.displayLoading(false);
                             this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
                             this.router.navigateByUrl('business');
                         } else {
-                            this.utilService.loading.next(false);
+                            this.utilService.displayLoading(false);
                             this.utilService.alert.next({ type: "success", titel: "Success", message: "Opgave opdateret" });
                             this.router.navigateByUrl('admin/tasks');
                         }
                     }
 
                 }, (err) => {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Opgaven blev ikke opdateret" });
                 });
             }  
@@ -187,15 +187,15 @@ export class CreateEditTaskComponent implements AfterViewInit {
     }
 
     getBusiness() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.businessService.getBusinessFromUser().subscribe(res => {
             this.business = res;
             this.model.address = res.address;
             this.model.city = res.city;
             this.model.zip = res.zip;
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (err.status === 401) {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Du skal være logget ind for at se dette indhold" });
                 this.router.navigateByUrl("login");
@@ -220,16 +220,16 @@ export class CreateEditTaskComponent implements AfterViewInit {
     }
 
     /*getAttachments(id) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.blobService.getAttachments(id).subscribe(res => {
             this.attachments = res;
             this.attachments.forEach((f) => {
                 f.fileName = this.formatFileName(f.name)
             });
             //console.log(this.attachments);
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             });
     }*/
 

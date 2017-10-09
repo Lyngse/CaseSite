@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
-import { UniversalModule } from 'angular2-universal';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app-router.module';
 import { FormsModule } from '@angular/forms';
+import { MdButtonModule } from '@angular/material';
 import { SpinnerModule } from 'angular2-spinner';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
-import { LoginComponent } from './login/login.component';
-import { ResetPasswordComponent } from './login/resetpassword/resetpassword.component';
 import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule } from 'ngx-bootstrap';
 import { AdminBusinessComponent } from './admin/admin-business/admin-business.component';
 import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
 import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
-import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights'
+
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -31,7 +32,7 @@ import { BlobService } from './services/blob.service';
 import { StudentService } from './services/student.service';
 import { SolutionService } from './services/solution.service';
 import { AdminService } from './services/admin.service';
-import { CookieService } from 'angular2-cookie/services';
+import { TransferHttpModule } from '../modules/transfer-http/transfer-http.module';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -42,8 +43,6 @@ import { CookieService } from 'angular2-cookie/services';
         FooterComponent,
         TaskListComponent,
         TaskCardComponent,
-        LoginComponent,
-        ResetPasswordComponent,
         EqualValidator,
         DanishCurrencyPipe,
         FormatTextPipe,
@@ -53,8 +52,11 @@ import { CookieService } from 'angular2-cookie/services';
         AdminSolutionComponent,
     ],
     imports: [
-        UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+        CommonModule,
+        HttpModule,
+        RouterModule,
         AppRoutingModule,
+        MdButtonModule,
         FormsModule,
         SpinnerModule,
         ModalModule.forRoot(),
@@ -63,11 +65,11 @@ import { CookieService } from 'angular2-cookie/services';
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
         AccordionModule.forRoot(),
-        Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-        AppInsightsModule
+        TransferHttpModule, 
+        Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
     ],
 
-    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, CookieService, StudentService, SolutionService, AdminService, AppInsightsService]
+    providers: [BusinessService, AccountService, TaskService, UtilService, BlobService, StudentService, SolutionService, AdminService]
 })
-export class AppModule {
+export class AppModuleShared {
 }

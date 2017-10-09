@@ -11,6 +11,7 @@
     <PackageReference Include="MailKit" Version="1.18.1.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
@@ -24,6 +25,10 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\app\app.module.browser.ts" />
+    <None Remove="ClientApp\polyfills\polyfills.ts" />
+    <None Remove="ClientApp\polyfills\server.polyfills.ts" />
+    <None Remove="ClientApp\polyfills\temporary-aspnetcore-engine.ts" />
     <None Remove="yarn.lock" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
@@ -71,6 +76,13 @@
     <None Include="wwwroot\assets\font-awesome\scss\_screen-reader.scss" />
     <None Include="wwwroot\assets\font-awesome\scss\_stacked.scss" />
     <None Include="wwwroot\assets\font-awesome\scss\_variables.scss" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\app.module.browser.ts" />
+    <TypeScriptCompile Include="ClientApp\polyfills\polyfills.ts" />
+    <TypeScriptCompile Include="ClientApp\polyfills\browser.polyfills.ts" />
+    <TypeScriptCompile Include="ClientApp\polyfills\server.polyfills.ts" />
+    <TypeScriptCompile Include="ClientApp\polyfills\temporary-aspnetcore-engine.ts" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />

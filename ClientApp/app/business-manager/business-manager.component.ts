@@ -33,7 +33,7 @@ export class BusinessManagerComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.businessService.getBusinessWithTasks().subscribe((data) => {
             console.log(data);
             if (data.tasks.length > 0) {
@@ -47,10 +47,10 @@ export class BusinessManagerComponent implements AfterViewInit {
                         this.pastTasks.push(t);
                 });
             }
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
 
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
 
             if (err.status === 401) {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Du skal være logget ind for at se dette indhold" });

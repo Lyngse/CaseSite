@@ -69,12 +69,12 @@ export class AdminComponent implements AfterViewInit, OnChanges {
     }
 
     logout() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.accountService.logout().subscribe((response) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.router.navigate(['/']);
         }, err => {
-            this.utilService.loading.next(true);
+            this.utilService.displayLoading(true);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Noget gik galt" });
         });
     }

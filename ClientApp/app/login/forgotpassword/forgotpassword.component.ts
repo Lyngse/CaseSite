@@ -22,9 +22,9 @@ export class ForgotPasswordComponent implements AfterViewInit {
     }
 
     onSubmit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.accountService.forgotPassword(this.newEmail).subscribe(res => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             if (res.status == 200) {
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Reset link er sendt til " + this.newEmail });
                 this.form.reset();
@@ -32,7 +32,7 @@ export class ForgotPasswordComponent implements AfterViewInit {
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kodeordet blev ikke resat" });
             }
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kodeordet blev ikke resat" });
         });
     }

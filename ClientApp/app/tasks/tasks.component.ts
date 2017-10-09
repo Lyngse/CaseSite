@@ -30,14 +30,14 @@ export class TasksComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.taskService.getAllTasks().subscribe((data) => {
             this.tasks = data;
             this.tasksToShow = this.tasks;
             this.sort("Dato tilføjet");
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
         });
     }
 

@@ -16,12 +16,12 @@ export class FrontpageComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.taskService.getLatestTasks().subscribe(res => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.latestTasks = res;
         }, err => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             //this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kunne ikke hente nyeste opgaver" });
         })
     }

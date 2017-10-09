@@ -24,23 +24,23 @@ export class AdminTaskComponent implements AfterViewInit {
 
 
     search() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         if (!this.query) {
             this.adminService.getAllTasks().subscribe(res => {
                 console.log(res);
                 this.tasks = res;
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af opgaverne" });
             });
         } else {
             this.adminService.searchTask(this.query).subscribe(res => {
                 console.log(res);
                 this.tasks = res;
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af opgaverne" });
             });
         }
@@ -55,7 +55,7 @@ export class AdminTaskComponent implements AfterViewInit {
     }
 
     deleteTask(task: Task) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         
         this.adminService.deleteTask(task.id).subscribe(res => {
             if (res.ok) {
@@ -63,11 +63,11 @@ export class AdminTaskComponent implements AfterViewInit {
                 this.query = null;
                 this.search();
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af opgaven" });
             }
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af opgaven" });
         });
     }

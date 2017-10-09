@@ -24,21 +24,21 @@ export class AdminBusinessComponent implements AfterViewInit {
 
 
     search() {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         if (!this.query) {
             this.adminService.getAllBusinesses().subscribe(res => {
                 this.businesses = res;
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af virksomhederne" });
             });
         } else {
             this.adminService.searchBusiness(this.query).subscribe(res => {
                 this.businesses = res;
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
             }, (err) => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved hentningen af virksomhederne" });
             });
         }
@@ -49,18 +49,18 @@ export class AdminBusinessComponent implements AfterViewInit {
     }
 
     deleteBusiness(businessId) {
-        this.utilService.loading.next(true);
+        this.utilService.displayLoading(true);
         this.adminService.deleteBusiness(businessId).subscribe(res => {
             if (res.ok) {
                 this.utilService.alert.next({ type: "success", titel: "Succes", message: "Virksomheden er blevet slettet" });
                 this.query = null;
                 this.search();
             } else {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af virksomheden" });
             }
         }, (err) => {
-            this.utilService.loading.next(false);
+            this.utilService.displayLoading(false);
             this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved sletningen af virksomheden" });
             });
     }

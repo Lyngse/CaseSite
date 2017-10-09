@@ -56,7 +56,7 @@ export class BuisnessRegisterComponent {
 
     onSubmit() {
         if (this.form.valid) {
-            this.utilService.loading.next(true);
+            this.utilService.displayLoading(true);
             this.accountService.registerUser(this.model.username, this.model.password, this.model.email).subscribe((response) => {  
                 if (response.ok) {
                     let userId = response.json();
@@ -64,7 +64,7 @@ export class BuisnessRegisterComponent {
 
                         if (this.logoAdded) {
                             this.blobService.uploadLogo(this.formData, response.id).subscribe(res => {
-                                this.utilService.loading.next(false);
+                                this.utilService.displayLoading(false);
                                 if (res.ok == true) {
                                     this.router.navigate(['/login']);
                                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Oprettelse lykkedes" });
@@ -72,27 +72,27 @@ export class BuisnessRegisterComponent {
                                     this.utilService.alert.next({ type: "success", titel: "Success", message: "Virksomheden er blevet oprettet, men der skete en fejl ved upload af logo" });
                                 }
                             }, err => {
-                                this.utilService.loading.next(false);
+                                this.utilService.displayLoading(false);
                                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl ved upload af logo" });
                                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Din virksomhed er blevet oprettet, prøv at uploade logo under 'Ret oplysninger'" });
                                 this.router.navigate(['/login']);
                             });
                         } else {
-                            this.utilService.loading.next(false);
+                            this.utilService.displayLoading(false);
                             this.router.navigate(['/login']);
                             this.utilService.alert.next({ type: "success", titel: "Success", message: "Oprettelse lykkedes" });
                         }
                     }, err => {
                         //slet user!
-                        this.utilService.loading.next(false);
+                        this.utilService.displayLoading(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Oprettelse mislykkedes" });
                     });
                 } else {
-                    this.utilService.loading.next(false);
+                    this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Oprettelse mislykkedes" });
                 }
             }, err => {
-                this.utilService.loading.next(false);
+                this.utilService.displayLoading(false);
                 this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Oprettelse mislykkedes" });
             });
         }

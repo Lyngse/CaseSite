@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("../../wwwroot/assets/font-awesome/css/font-awesome.css");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .alert-global {
     position: fixed;

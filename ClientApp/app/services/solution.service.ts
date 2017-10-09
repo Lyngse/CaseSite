@@ -1,5 +1,7 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { TransferHttp } from '../../modules/transfer-http/transfer-http';
+import { ORIGIN_URL } from '../shared/constants/baseurl.constants';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { Solution } from '../model/solution';
@@ -17,40 +19,40 @@ export class SolutionService {
     options = new RequestOptions({ headers: this.headers });
 
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private transferHttp: TransferHttp, @Inject(ORIGIN_URL) private baseUrl: string) {
 
     }
 
     createSolution(studentId: number, taskId: number): Observable<Solution> {
         return this.http
-            .post('api/solutions/createsolution', JSON.stringify({ studentId: studentId, taskId: taskId }), this.options)
+            .post(this.baseUrl + '/api/solutions/createsolution', JSON.stringify({ studentId: studentId, taskId: taskId }), this.options)
             .catch(this.handleError);
     }
 
     getSolution(id: number): Observable<Solution> {
         return this.http
-            .get('api/solutions/getsolution/' + id, this.options)
+            .get(this.baseUrl + '/api/solutions/getsolution/' + id, this.options)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
     getTaskSolutions(taskId: number): Observable<Solution[]> {
         return this.http
-            .get('api/solutions/gettasksolutions/' + taskId, this.options)
+            .get(this.baseUrl + '/api/solutions/gettasksolutions/' + taskId, this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     getStudentSolutions(): Observable<Solution[]> {
         return this.http
-            .get('api/solutions/getstudentsolutions', this.options)
+            .get(this.baseUrl + '/api/solutions/getstudentsolutions', this.options)
             .map(res => this.extractData(res))
             .catch(this.handleError);
     }
 
     selectWinner(taskId: number, studentId: number): Observable<any> {
         return this.http
-            .post('api/solutions/selectwinner', JSON.stringify({ taskId: taskId, studentId: studentId }), this.options)
+            .post(this.baseUrl + '/api/solutions/selectwinner', JSON.stringify({ taskId: taskId, studentId: studentId }), this.options)
             .catch(this.handleError);
     }
 
