@@ -22,7 +22,7 @@ module.exports = (env) => {
                 //{ test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
                 {
                     test: /\.(png|jpe?g|gif|ico)$/,
-                    loader: 'file-loader?name=assets/[name].[hash].[ext]',
+                    loader: 'file-loader?name=assets/[name].[hash].[ext]'
                 },
                 {
                     test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -43,7 +43,7 @@ module.exports = (env) => {
                 {
                     test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                     loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-                },
+                }
             ]
         },
         plugins: [new CheckerPlugin()]

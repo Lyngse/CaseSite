@@ -15,6 +15,7 @@ import { AdminBusinessComponent } from './admin/admin-business/admin-business.co
 import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
 import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights'
 
@@ -51,6 +52,7 @@ import { CookieService } from 'angular2-cookie/services';
         AdminBusinessComponent,
         AdminStudentComponent,
         AdminSolutionComponent,
+        SidemenuComponent,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

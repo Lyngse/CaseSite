@@ -50,16 +50,20 @@ ul li a {
     border: 0;
     color: #888;
     -webkit-transition: color 0.4s;
+    -moz-transition: color 0.4s;
+    -o-transition: color 0.4s;
     transition: color 0.4s;
 }
 
-ul li {
-    text-decoration: none;
-    border: 0;
-    color: #888;
-    -webkit-transition: color 0.4s;
-    transition: color 0.4s;
-}
+    ul li {
+        text-decoration: none;
+        border: 0;
+        color: #888;
+        -webkit-transition: color 0.4s;
+        -moz-transition: color 0.4s;
+        -o-transition: color 0.4s;
+        transition: color 0.4s;
+    }
 
 ul li a:hover {
     color: white;
@@ -71,15 +75,17 @@ ul li a:hover {
     font-size: 30px;
     padding: 10px;
 }
-    
-  
+
+
 .social-facebook i,
 .social-twitter i,
 .social-snapchat i,
 .social-instagram i,
-.social-linkedin i{
+.social-linkedin i {
     -webkit-transition: color 0.4s;
     transition: color 0.4s;
+    -moz-transition: color 0.4s;
+    -o-transition: color 0.4s;
 }
 
 .social-facebook:hover i {

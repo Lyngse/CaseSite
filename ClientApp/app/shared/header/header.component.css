@@ -1,7 +1,7 @@
 ﻿.navbar {
-    -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
-    -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
-    box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 2px 10px 0 rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 2px 10px 0 rgba(0,0,0,0.4);
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.4);
 }
 
 .navbar-brand img {
@@ -10,10 +10,12 @@
     margin-top: -13px;
 }
 
-nav.navbar-findcond ul.navbar-nav a.active,
+nav.navbar-findcond ul.navbar-nav a:active,
 nav.navbar-findcond ul.navbar-nav a:hover {
     background: #082a3b;
     -webkit-transition: background-color 0.7s;
+    -moz-transition: background-color 0.7s;
+    -o-transition: background-color 0.7s;
     transition: background-color 0.7s;
 }
 
@@ -71,8 +73,10 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 
 .navbar-custom .navbar-nav > .open > a, .navbar-custom .navbar-nav > .open > a:hover, .navbar-custom .navbar-nav > .open > a:focus {
     background-color: #005580;
-    -webkit-transition: border-color 0.7s;
-    transition: border-color 0.7s;
+    -webkit-transition: background-color 0.7s;
+    -moz-transition: background-color 0.7s;
+    -o-transition: background-color 0.7s;
+    transition: background-color 0.7s;
 }
 
 .navbar-custom {
@@ -95,6 +99,7 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 
 .navbar-header {
     position: relative;
+    width: auto !important;
 }
 
 .beta-text {
@@ -121,7 +126,7 @@ nav.navbar-findcond ul.navbar-nav a:hover {
 
 @media only screen and (max-width: 768px){
     .beta-text{
-        left: 65px;
+        left: 40px;
     }
 }
 
@@ -164,4 +169,28 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     padding: 5px;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.burgermenu {
+    font-size: 30px;
+    float: right;
+    margin-top: 8px;
+    padding: 0 15px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.nav-logo {
+    height: 40px;
+    width: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-brand {
+        margin-top: 5px !important;
+    }
 }

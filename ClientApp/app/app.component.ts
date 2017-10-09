@@ -25,6 +25,18 @@ import * as moment from 'moment';
                 style({ transform: 'translateY(100%)' }),
                 animate(500)
             ])
+        ]),
+        trigger('slideInOut', [
+            state('in', style({
+                transform: 'translate3d(0, 0, 0)',
+                display: 'block'
+            })),
+            state('out', style({
+                transform: 'translate3d(100%, 0, 0)',
+                display: 'none'
+            })),
+            transition('in => out', animate('400ms ease-in-out')),
+            transition('out => in', animate('400ms ease-in-out'))
         ])
     ]
 })
@@ -32,6 +44,8 @@ export class AppComponent {
     loading = false;
     alerts = [];
     acceptCookie = false;
+    menuState: string = 'out';
+    showMenu: boolean = false;
 
     constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
         private appInsightsService: AppInsightsService) {
@@ -54,6 +68,18 @@ export class AppComponent {
         } else {
             this.acceptCookie = true;
         }
+
+        utilService.showSidemenu.subscribe(newValue => {
+            if (newValue) {
+                this.menuState = 'in';
+                this.showMenu = true;
+            }
+            else {
+                this.menuState = 'out';
+                this.showMenu = false;
+            }
+        });
+
         appInsightsService.Init({
             instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
         });
@@ -68,6 +94,15 @@ export class AppComponent {
 
     onDeactivate() {
         document.body.scrollTop = 0;
+    }
+
+    toggleSideMenu() {
+        this.menuState = this.menuState === 'out' ? 'in' : 'out';
+    }
+
+    closeSideMenu() {
+        this.showMenu = !this.showMenu;
+        this.utilService.displaySideMenu(this.showMenu);
     }
 
     removeAlert(alert) {

@@ -3,6 +3,8 @@
     <router-outlet (deactivate)="onDeactivate()"></router-outlet>
 </div>
 <shared-footer></shared-footer>
+<app-sidemenu [@slideInOut]="menuState"></app-sidemenu>
+<div class="shaded-background" *ngIf="showMenu" (click)="closeSideMenu()"></div>
 
 <div class="alert-global">
     <div [@flyInOut]="'in'" *ngFor=" let alert of alerts">

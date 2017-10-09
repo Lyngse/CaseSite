@@ -1,0 +1,39 @@
+<div style="margin-bottom: 10px;">
+  <a class="close-button" (click)="closeSideMenu()"><i class="fa fa-times"></i></a>
+</div>
+
+<a class="sidemenu-link" routerLink="/" (click)="closeSideMenu()">Forside</a>
+<a class="sidemenu-link" routerLink="/tasks" (click)="closeSideMenu()">Opgaver</a>
+<a class="sidemenu-link" routerLink="/about" (click)="closeSideMenu()">Om os</a>
+<a class="sidemenu-link" routerLink="/contact" (click)="closeSideMenu()">Kontakt</a>
+
+<p class="link-title">Hvordan det virker</p>
+<a class="sidemenu-link sublink" routerLink="/how-it-works-students" (click)="closeSideMenu()">For studerende</a>
+<a class="sidemenu-link sublink" routerLink="/how-it-works-businesses" (click)="closeSideMenu()">For virksomheder</a>
+<a class="sidemenu-link sublink" routerLink="/faq" (click)="closeSideMenu()">FAQ</a>
+
+<div *ngIf="business">
+    <p class="link-title">
+        {{ business.name }}
+    </p>
+    <a class="sidemenu-link sublink" routerLink="/business" (click)="closeSideMenu()">Mine opgaver</a>
+    <a class="sidemenu-link sublink" routerLink="business/settings" (click)="closeSideMenu()">Ret oplysninger</a>
+</div>
+<div *ngIf="student">
+    <p class="link-title">
+        <img class="user-image" [src]="getUserImage()">
+        <span> {{student.firstname}} {{student.lastname}}</span>
+    </p>
+    <a class="sidemenu-link sublink" routerLink="/student" (click)="closeSideMenu()">Mine uploads</a>
+</div>
+<div *ngIf="isAdmin">
+    <p class="link-title">
+        Unifacto Administrator
+    </p>
+    <a class="sidemenu-link sublink" routerLink="/admin/businesses" (click)="closeSideMenu()">Administrator panel</a>
+</div>
+<a *ngIf="student || business || isAdmin" class="sidemenu-link auth-link" (click)="logout(); closeSideMenu()">Log ud</a>
+<a *ngIf="!student && !business && !isAdmin" class="sidemenu-link auth-link" routerLink="/login" (click)="closeSideMenu()">Log ind</a>
+
+
+

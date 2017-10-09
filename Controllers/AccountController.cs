@@ -87,7 +87,7 @@ namespace CaseSite.Controllers
             mimeMessage.Body = bodyBuilder.ToMessageBody();
             using(var client = new SmtpClient())
             {
-                client.Connect("smtp.office365.com", 587, false);
+                client.Connect("smtp.office365.com", 587, true);
                 //client.Authenticate("noreply@unifacto.com", "Isbil42panda");
                 client.Authenticate("info@unifacto.com", "Unifacto9");
                 client.Send(mimeMessage);

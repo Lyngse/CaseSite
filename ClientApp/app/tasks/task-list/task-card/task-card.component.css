@@ -11,13 +11,13 @@
     width: auto;
     height: 340px;
     margin-bottom: 20px;
-    box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+    box-shadow: 12px 15px 20px 0 rgba(46,61,73,0.15);
     transition: box-shadow 0.3s ease-in-out;
     border-radius: 5px;
 }
 
 .card:hover {
-    box-shadow: 2px 7px 10px 0px rgba(46,61,73,0.15);
+    box-shadow: 2px 7px 10px 0 rgba(46,61,73,0.15);
 }
 
 .logo-container {
@@ -44,7 +44,8 @@
 }
 
 .task-card {
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     transition: box-shadow 0.3s ease-in-out;
     margin: 10px;
