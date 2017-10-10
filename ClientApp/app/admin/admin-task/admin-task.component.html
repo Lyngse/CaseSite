@@ -27,7 +27,7 @@
     <tbody>
         <tr *ngFor="let t of tasks">
             <td>{{ t.id }}</td>
-            <td>{{ t.title }}</td>
+            <td><a class="link" routerLink="/tasks/detail/{{t.id}}">{{ t.title }}</a></td>
             <td>{{ t.business.name }}</td>
             <td>{{ t.deadline.format('DD/MM-YYYY') }} - {{ t.deadline.format('HH:mm') }}</td>
             <td class="text-center" *ngIf="t.rewardType === 'Gave'"><i class="fa fa-gift"></i></td>

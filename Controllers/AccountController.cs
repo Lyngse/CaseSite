@@ -89,7 +89,7 @@ namespace CaseSite.Controllers
             {
                 client.Connect("smtp.office365.com", 587, true);
                 //client.Authenticate("noreply@unifacto.com", "Isbil42panda");
-                client.Authenticate("info@unifacto.com", "Unifacto9");
+                client.Authenticate("info@unifacto.com", "Unifacto10");
                 client.Send(mimeMessage);
                 client.Disconnect(true);
             }
