@@ -60,7 +60,7 @@ export class AccountService {
     logout(): Observable<any> {
         return this.http
             .post('api/account/logout', this.options)
-            .map(res => { if (res.ok) { this.loggedIn.next("void"); this.updateToken(); } return res; })
+            .map(res => { if (res.ok) { this.loggedIn.next("void"); } return res; })
             .catch(this.handleError);
     }
 

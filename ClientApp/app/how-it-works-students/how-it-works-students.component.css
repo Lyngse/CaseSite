@@ -120,20 +120,12 @@
 
 
 
-.hiw-home {
+.hiw-steps {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding-bottom: 40px;
 }
-
-.hiw-business {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding-bottom: 40px;
-}
-
 
 .hiw-step-home {
     flex: 0 0 33.3%;

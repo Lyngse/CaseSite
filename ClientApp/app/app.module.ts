@@ -17,7 +17,9 @@ import { AdminStudentComponent } from './admin/admin-student/admin-student.compo
 import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
-import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights'
+import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights';
+import { HIWStepFourComponent } from './shared/hiw-step-four/hiw-step-four.component';
+import { HIWStepThreeComponent } from './shared/hiw-step-three/hiw-step-three.component';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -53,6 +55,8 @@ import { CookieService } from 'angular2-cookie/services';
         AdminStudentComponent,
         AdminSolutionComponent,
         SidemenuComponent,
+        HIWStepFourComponent,
+        HIWStepThreeComponent,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

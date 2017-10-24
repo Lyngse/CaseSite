@@ -4,53 +4,6 @@
     </div>
 </div>
 <div class="hiw-content">
-    <!--<div class="hiw-register contentRow">
-        <div class="text">
-            <h2>Oprettelse af virksomhed</h2>
-            <p>Under fanen virksomhedslogin skal I trykke på opret virksomhed. Herefter skal I udfylde informationerne om jeres virksomhed, lave en virksomhedsbeskrivelse, der passer på jeres virksomhed og uploade jeres logo, så de studerende kan genkende jeres virksomhed.</p>
-        </div>
-        <div class="picture-box">
-            <div class="picture">
-                <img src="" alt="" />
-            </div>
-        </div>
-    </div>
-    <div class="hiw-tasktypes contentRow">
-        <div class="picture-box">
-            <div class="picture">
-                <img src="" alt="" />
-            </div>
-        </div>
-        <div class="text">
-            <h2>Opgavetyper</h2>
-            <p>Virksomheden kan oprette alle tænkelige opgaver, cases og problemstillinger indenfor kommunikation og marketing.</p>
-            <p>Disse opgavetyper kunne for eksempel være indenfor: Strategi, SoMe, AdWords, SEO, grafik og design, video marketing, e-mail marketing, markedsundersøgelser, PR, optimering af hjemmeside eller andet.</p>
-        </div>
-    </div>
-    <div class="hiw-work contentRow">
-        <div class="text">
-            <h2>Arbejdsformer</h2>
-            <p>De studerende arbejder med to forskellige arbejdsformer: hjemme og ude hos virksomheden. Afhængigt af virksomhedens behov og opsatte opgave, kan de studerende arbejde på løsningforslag hjemme  eller hos virksomheden.</p>
-            <p>Arbejder de studerende hjemme, fungerer de som ”studie-konsulenter”, der alle kommer med deres personlige løsningsforslag til virksomhedens opstillede kommunikations- og marketingopagve. Arbejder de studerende ude hos virksomheden, fungerer de som ”studie-konsulenter”, der ansøger om at udarbejde løsningsforlag ude hos virksomheden.</p>
-        </div>
-        <div class="picture-box">
-            <div class="picture">
-                <img src="" alt="" />
-            </div>
-        </div>
-    </div>
-
-    <div class="hiw-background hiw-price">
-        <div class="contentRow">
-            <div class="hiw-info color-white contentRow">
-                <h2>Pris for at oprette opgaver</h2>
-                <p>Det er gratis for virksomheder at uploade opgaver på Unifacto.com.</p>
-                <h3>Belønning til studerende</h3>
-                <p>Virksomheden tildeler en belønning, i form af honorar, gave eller anbefaling, til den studerende som, ifølge virksomheden, afleverer det bedste løsningsforslag. Der er dog ingen begræsning for at der udover honorar eller gave ikke også kan gives en anbefaling. Der sættes heller ikke nogen begrænsning på, at andre gode løsningsforslag ikke også kan modtage en anbefaling.</p>
-            </div>
-        </div>
-    </div>-->
-
     <div class="container-fluid contentRow info-section">
         <div class="row">
             <div class="col-xs-12 text-center">
@@ -111,43 +64,13 @@
 
     <div class="contentRow">
         <h3 class="hiw-headers heading2">Når studerende udarbejder løsningsforslaget hjemme</h3>
-        <div class="hiw-business">
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">1</p>
-                    <p class="hiw-title">I uploader en <br /> opgave</p>
-                </div>
-                <div class="hiw-description">
-                    <p>I uploader en opgave med deadline og belønning.</p>
-                </div>
-            </div>
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">2</p>
-                    <p class="hiw-title">Studerende uploader<br /> løsningsforslag</p>
-                </div>
-                <div class="hiw-description">
-                    <p>De studerende udarbejder løsningsforslag, som vil blive uploadet direkte til opgaven, som kan ses under ’Mine opgaver’.</p>
-                </div>
-            </div>
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">3</p>
-                    <p class="hiw-title">I vælger det bedste <br /> løsningsforslag</p>
-                </div>
-                <div class="hiw-description">
-                    <p>Når deadlinen er udløbet, udvælger I det bedste løsningsforslag ud fra de uploadede løsningsforslag.</p>
-                </div>
-            </div>
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">4</p>
-                    <p class="hiw-title">Belønning<br /> gives</p>
-                </div>
-                <div class="hiw-description">
-                    <p>Herefter sendes belønningen til den studerende, der har udarbejdet det bedste løsningsforslag.</p>
-                </div>
-            </div>
+        <div class="hiw-steps">
+            <hiw-step-four
+                            *ngFor="let ah of atHome"
+                            [number]="ah.number"
+                            [title]="ah.title"
+                            [description]="ah.description">
+            </hiw-step-four>
         </div>
     </div>
 
@@ -163,43 +86,13 @@
     
     <div class="contentRow">
         <h3 class="hiw-headers heading2">Når studerende udarbejder løsningsforslag hos jer</h3>
-        <div class="hiw-business">
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">1</p>
-                    <p class="hiw-title">I uploader en <br /> opgave</p>
-                </div>
-                <div class="hiw-description">
-                    <p>I uploader en opgave med beskrivelse, deadline og belønning.</p>
-                </div>
-            </div>
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">2</p>
-                    <p class="hiw-title">Studerende<br /> ansøger</p>
-                </div>
-                <div class="hiw-description">
-                    <p>De studerende ansøger om at udarbejde løsningsforslaget hos jer.</p>
-                </div>
-            </div>
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">3</p>
-                    <p class="hiw-title">I udvælger den bedste ansøger <br /> og samarbejdet begynder</p>
-                </div>
-                <div class="hiw-description">
-                    <p>Når deadlinen er overskredet udvælger I den bedste ansøger/ansøgere, som herefter påbegynder udarbejdelsen af løsningsforslaget hos jer.</p>
-                </div>
-            </div>
-            <div class="hiw-step-business">
-                <div class="hiw-circle">
-                    <p class="hiw-step-number">4</p>
-                    <p class="hiw-title">Belønning <br /> gives</p>
-                </div>
-                <div class="hiw-description">
-                    <p>Efter løsningsforslaget er blevet udarbejdet hos jer tildeles den studerende den oplyste belønning.</p>
-                </div>
-            </div>
+        <div class="hiw-steps">
+            <hiw-step-four
+                           *ngFor="let ab of atBusiness"
+                           [number]="ab.number"
+                           [title]="ab.title"
+                           [description]="ab.description">
+            </hiw-step-four>
         </div>
     </div>
     <div class="hiw-background">

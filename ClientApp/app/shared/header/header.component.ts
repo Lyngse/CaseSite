@@ -92,6 +92,7 @@ export class HeaderComponent implements AfterViewInit {
         this.accountService.logout().subscribe((response) => {
             this.utilService.loading.next(false);
             this.router.navigate(['/']);
+            this.accountService.updateToken();
             this.isAdmin = false;
         }, err => {
             this.utilService.loading.next(false);

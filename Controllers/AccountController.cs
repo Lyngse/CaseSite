@@ -107,8 +107,13 @@ namespace CaseSite.Controllers
                 return BadRequest(ModelState);
             }
             var user = await _userManager.FindByIdAsync(userId);
-            await _userManager.ResetPasswordAsync(user, code, newPassword);
-            return Ok();
+            var result = await _userManager.ResetPasswordAsync(user, code, newPassword);
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest(new { changePasswordError = "Something went wrong when changing your password", errors = result.Errors });
         }
 
         [HttpGet("status")]

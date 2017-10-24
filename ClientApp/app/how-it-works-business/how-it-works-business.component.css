@@ -138,24 +138,11 @@
     margin: 0 auto;
 }
 
-.hiw-home {
-    display: flex;
-    justify-content: space-around;
-}
-
-.hiw-business {
+.hiw-steps {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding-bottom: 40px;
-}
-
-
-.hiw-step-home {
-    flex: 0 0 33.3%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .hiw-step-business {
