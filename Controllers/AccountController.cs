@@ -58,7 +58,7 @@ namespace CaseSite.Controllers
             var result = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
             if (!result.Succeeded)
             {
-                return BadRequest(new { passwordError = "password change failed" });
+                return BadRequest(new { passwordError = "password change failed", errors = result.Errors });
             }
             return Ok();
         }
@@ -164,12 +164,12 @@ namespace CaseSite.Controllers
             var user = await _userManager.FindByNameAsync(loginInfo.UserName);
             if (user == null || !(await _userManager.IsInRoleAsync(user, "admin")))
             {
-                return BadRequest(new { loginError = "login failed" });
+                return BadRequest(new { loginError = "Login failed" });
             }
             var result = await _loginManager.PasswordSignInAsync(loginInfo.UserName, loginInfo.Password, false, false);
             if (!result.Succeeded)
             {
-                return BadRequest(new { loginError = "login failed" });
+                return BadRequest(new { loginError = "Login failed" });
             }
             return Ok();
 
