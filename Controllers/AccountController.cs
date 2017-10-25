@@ -16,6 +16,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Logging;
+using CaseSite.Controllers.Helpers;
+using Microsoft.Extensions.Options;
 
 namespace CaseSite.Controllers
 {
@@ -28,15 +30,19 @@ namespace CaseSite.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UnifactoContext _context;
         private readonly ILogger<AccountController> _logger;
+        private IOptions<EmailCredentials> _emailCredentials;
+        private EmailSender emailSender;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> loginManager, 
-            RoleManager<IdentityRole> roleManager, UnifactoContext context, ILogger<AccountController> logger)
+            RoleManager<IdentityRole> roleManager, UnifactoContext context, ILogger<AccountController> logger, IOptions<EmailCredentials> ec)
         {
             _userManager = userManager;
             _loginManager = loginManager;
             _roleManager = roleManager;
             _context = context;
             _logger = logger;
+            _emailCredentials = ec;
+            emailSender = new EmailSender(_emailCredentials);
         }
 
         [HttpPost("changepassword")]
@@ -77,22 +83,9 @@ namespace CaseSite.Controllers
             }
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callbackUrl = Url.Action("reset-password", "login", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-            var mimeMessage = new MimeMessage();
-            //mimeMessage.From.Add(new MailboxAddress("Unifacto Noreply", "noreply@unifacto.com"));
-            mimeMessage.From.Add(new MailboxAddress("Unifacto Info", "info@unifacto.com"));
-            mimeMessage.To.Add(new MailboxAddress("customer", email));
-            mimeMessage.Subject = "Nulstil kodeord til Unifacto";
-            var bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = "Nulstil dit kodeord til Unifacto igennem dette <a href='" + callbackUrl + "'>link</a>";
-            mimeMessage.Body = bodyBuilder.ToMessageBody();
-            using(var client = new SmtpClient())
-            {
-                client.Connect("smtp.office365.com", 587, false);
-                //client.Authenticate("noreply@unifacto.com", "Isbil42panda");
-                client.Authenticate("info@unifacto.com", "Unifacto10");
-                client.Send(mimeMessage);
-                client.Disconnect(true);
-            }
+
+            emailSender.ResetPassword(callbackUrl, email);
+            
             return Ok();
         }
 

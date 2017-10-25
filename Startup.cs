@@ -76,6 +76,10 @@ namespace CaseSite
                 };
             });
 
+            services.AddOptions();
+            services.Configure<EmailCredentials>(Configuration.GetSection("EmailCredentials"));
+          
+
             //services.Configure<IdentityOptions>(opt =>
             //{
             //    opt.Cookies.ApplicationCookie.AutomaticChallenge = false;

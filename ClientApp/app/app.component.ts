@@ -89,7 +89,12 @@ export class AppComponent {
         let value: string = "accept";
         let key: string = "AcceptCookies";
         this.acceptCookie = true;
-        localStorage.setItem(key, value);
+        try {
+            localStorage.setItem(key, value);
+        }
+        catch (e) {
+
+        }
     }
 
     onDeactivate() {
