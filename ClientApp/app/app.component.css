@@ -57,6 +57,23 @@
     border: 1px solid #fff;
 }
 
+mat-progress-spinner {
+    position: fixed !important;
+    top: calc(-50px + 50%);
+    left: calc(-50px + 50%);
+    z-index: 10001
+}
+
+.loading-background {
+    background-color: rgba(128, 128, 128, 0.4);
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 1000
+}
+
 /* ------------------------------- */
 /* ----- Global CSS Classes ----- */
 /* -------------------------------- */
@@ -217,22 +234,7 @@ input[type=submit]:active {
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-spinner {
-    position: fixed !important;
-    top: calc(-50px + 50%);
-    left: calc(-50px + 50%);
-    z-index: 10001
-}
 
-.loading-background {
-    background-color: rgba(128, 128, 128, 0.4);
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-    z-index: 1000
-}
 
 .background-primary {
     background-color: #006699;
