@@ -27,6 +27,7 @@ export class BuisnessRegisterComponent {
     loginFailedMsg: string = "";
     formData: FormData;
     model: Business = new Business();
+    _confirmPassword: string = "";
     @ViewChild('f') form: any;
     filePreviewPath: SafeUrl;
     logoAdded: boolean = false;
