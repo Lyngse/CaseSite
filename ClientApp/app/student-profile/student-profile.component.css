@@ -40,6 +40,7 @@
 
 .profile-tasks {
     flex: 1 1 70%;
+    margin: 10px;
 }
 
 table {
@@ -96,10 +97,48 @@ td, th {
     text-align: left;
 }
 
+.status-info {
+    border: 1px solid #F5F5F5;
+    background-color: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    font-size:14px;
+}
+
+.icon-infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-info {
+    text-align: center;
+    padding: 0 10px;
+    flex: 0 0 30%;}
+    .icon-info i {
+        font-size: 35px;}
+
 
 @media only screen and (max-width : 479px) {
     .profile-info-box {
         width: 96% !important;
+    }
+
+    .icon-infos {
+        flex-direction: column;
+    }
+
+    .icon-info {
+        flex: 1 1 100%;
+        padding: 0 30px;
+    }
+
+    .status-info h3 {
+        text-align: center;
     }
 }
 

@@ -9,8 +9,25 @@
             </div>
         </div>
         <div class="profile-tasks">
+            <div class="status-info">
+                <h3>Opgave status ikon og dets betydning</h3>
+                <div class="icon-infos">
+                    <div class="icon-info">
+                        <i class="fa fa-clock-o notwin"></i>
+                        <p>Der er endnu ikke fundet en vinder til opgaven</p>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa fa-minus notwin"></i>
+                        <p>En vinder er fundet og du har desævrre ikke vundet opgaven</p>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa fa-trophy win"></i>
+                        <p>En vinder er fundet og du har vundet opgaven</p>
+                    </div>
+                </div>
+            </div>
             <div class="profile-table">
-                <h2>Aktuelle opgaver</h2>
+                <h3>Aktuelle opgaver</h3>
                 <table *ngIf="solutions.length > 0">
                     <thead>
                         <tr>
@@ -36,7 +53,7 @@
                 <p *ngIf="solutions.length == 0">Du har ikke nogle uploads for nogle aktuelle opgaver.</p>
             </div>
             <div class="profile-table">
-                <h2>Tidligere opgaver</h2>
+                <h3>Tidligere opgaver</h3>
                 <table *ngIf="pastSolutions.length > 0">
                     <thead>
                         <tr>
