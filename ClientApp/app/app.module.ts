@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app-router.module';
 import { FormsModule } from '@angular/forms';
-import { MdButtonModule } from '@angular/material';
 import { SpinnerModule } from 'angular2-spinner';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -56,7 +55,6 @@ import { TransferHttpModule } from '../modules/transfer-http/transfer-http.modul
         HttpModule,
         RouterModule,
         AppRoutingModule,
-        MdButtonModule,
         FormsModule,
         SpinnerModule,
         ModalModule.forRoot(),
