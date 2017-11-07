@@ -100,6 +100,31 @@ namespace CaseSite.Controllers
             return "Student already exists";    
         }
 
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> PutStudent([FromBody] JObject obj)
+        {
+            Student student = obj["student"].ToObject<Student>();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var serverStudent = await _context.Student.SingleOrDefaultAsync(s => s.Id == student.Id);
+
+            if (serverStudent == null)
+            {
+                return NotFound(new { studentError = "Student not found" });
+            }
+            serverStudent.Email = student.Email;
+
+            _context.Entry(serverStudent).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(toClientStudent(serverStudent));
+        }
+
         [HttpGet("studentacceptterms")]
         public async Task<IActionResult> StudentAcceptTerms()
         {

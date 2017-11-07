@@ -61,3 +61,28 @@ a:active {
 .past-deadline {
     margin-top: 20px;
 }
+
+.contact-student {
+    padding: 20px 50px;
+    background-color: #006699;
+    color: white;
+    margin: 20px auto;
+    display: inline-block;
+}
+
+.link {
+    color: #FF9800;
+    text-decoration: none;
+}
+
+    .link:hover {
+        color: #F57C00;
+        text-decoration: none;
+    }
+
+    .link:active,
+    .link:focus,
+    .link:visited {
+        color: #FF9800;
+        text-decoration: none;
+    }

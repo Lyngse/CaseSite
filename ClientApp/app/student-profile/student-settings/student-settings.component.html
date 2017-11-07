@@ -1,0 +1,32 @@
+﻿<div class="contentRow" *ngIf="model">
+    <div class="form-container">
+        <h1>Ret oplysninger</h1>
+        <form novalidate (ngSubmit)="updateStudent()" #f="ngForm" class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group"
+                     [ngClass]="{
+                            'has-error': email.invalid && (email.dirty || email.touched)
+                        }">
+                    <label for="email" class="control-label">Email *</label>
+                    <input type="email"
+                           class="form-control"
+                           name="email"
+                           id="email"
+                           [(ngModel)]="model.email"
+                           required
+                           pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$"
+                           #email="ngModel">
+                    <div class="form-feedback"
+                         *ngIf="email.errors && (email.dirty || email.touched)">
+                        <p *ngIf="email.errors.required">Email skal være udfyldt</p>
+                        <p *ngIf="email.errors.pattern">Emailen skal være på formen navn@eksempel.dk</p>
+                    </div>
+                </div>
+
+                <div class="col-xs-12" style="display:flex;justify-content:center;flex-wrap:wrap;margin: 10px 0;">
+                    <button type="submit" class="btn btn-success btn-lg" [disabled]="f.invalid || !f.dirty" style="margin-bottom:20px">Gem</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

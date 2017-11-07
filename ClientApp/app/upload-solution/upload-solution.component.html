@@ -26,4 +26,10 @@
         </div>
     </div>
 
+    <div class="contact-student" *ngIf="student">
+        <p *ngIf="student.email">Virksomheden vil kontakte dig på <span style="font-weight:700;">{{ student.email}}</span>, hvis du skulle vinde denne opgave.</p>
+        <p *ngIf="!student.email">Du har ikke angivet nogen email, som virksomheden kan kontakte dig på, hvis du skulle vinde opgaven.</p>
+        <p>Du kan ændre din email <a routerLink="/student/settings" class="link">her</a><span *ngIf="student.email">, hvis dine oplysninger er forkerte.</span><span *ngIf="!student.email">.</span></p>
+    </div>
+
 </div>

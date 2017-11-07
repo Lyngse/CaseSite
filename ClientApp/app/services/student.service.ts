@@ -19,6 +19,21 @@ export class StudentService {
 
     }
 
+    updateStudent(s: Student): Observable<Student> {
+        let student = {
+            id: s.id,
+            firstname: s.firstname,
+            lastname: s.lastname,
+            email: s.email,
+            facebookId: s.facebookId,
+            userId: s.id
+        };
+        return this.http
+            .put('api/student/', JSON.stringify({ student: student }), this.options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     getStudentFromUser(): Observable<Student> {
         return this.http
             .get("api/student", this.options)

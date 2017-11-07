@@ -24,6 +24,7 @@ import { DownloadSolutionComponent } from './business-manager/download-solution/
 import { FAQComponent } from './faq/faq.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { StudentSettingsComponent } from './student-profile/student-settings/student-settings.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'frontpage', pathMatch: 'full' },
@@ -49,6 +50,7 @@ const routes: Routes = [
     { path: 'terms', component: TermsComponent },
     { path: 'student', component: StudentProfileComponent },
     { path: 'student/upload-solution/:taskId', component: UploadSolutionComponent },
+    { path: 'student/settings', component: StudentSettingsComponent},
     { path: 'faq', component: FAQComponent },
     { path: 'admin/:subpage', component: AdminComponent },
     { path: 'adminlogin', component: AdminLoginComponent },
@@ -84,5 +86,6 @@ export const routingComponents = [
     UploadSolutionComponent,
     FAQComponent,
     AdminComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    StudentSettingsComponent
 ]
