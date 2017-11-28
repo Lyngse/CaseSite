@@ -189,12 +189,16 @@ namespace CaseSite.Controllers
         private async Task<Student> getStudent()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+                return null;
             return await _context.Student.Include(s => s.Solutions).FirstOrDefaultAsync(b => b.UserId == user.Id);
         }
 
         private async Task<Business> getBusiness()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+                return null;
             return await _context.Business.Include(b => b.Tasks).FirstOrDefaultAsync(b => b.UserId == user.Id);
         }
 
