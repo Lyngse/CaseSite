@@ -37,17 +37,6 @@
                         </div>
                     </div>
 
-                    <!--<div class="form-group"
-                         [ngClass]="{
-                         'has-error': deadline.invalid && (deadline.dirty || deadline.touched),
-                         'has-success': deadline.valid && (deadline.dirty || deadline.touched)
-                         }">
-                        <label for="deadline" class="control-label">Deadline *</label>
-                        <input type="datetime-local" id="deadline" class="form-control" name="deadline" [value]="model.deadline.format('YYYY-MM-DDTHH:mm')" (change)="deadlineChanged()" [disabled]="edit" #deadline required />
-                        <div class="form-feedback" *ngIf="deadline.errors && (deadline.dirty || deadline.touched)">
-                            <p *ngIf="deadline.errors.required">Deadlinen for opgaven skal udfyldes</p>
-                        </div>
-                    </div>-->
                     <p style="margin-bottom: 5px;font-weight: bold;">Dato og tid for opgavens deadline *</p>
                     <div class="form-group datetime-container">
                         <div class="dp-box">
@@ -175,32 +164,6 @@
                             <p *ngIf="description.errors.required">Opgavebeskrivelsen skal udfyldes</p>
                         </div>
                     </div>
-
-                    <!--<div *ngIf="model.workPlace" class="form-group"
-                         [ngClass]="{
-                         'has-error': contactDescription.invalid && (contactDescription.dirty || contactDescription.touched),
-                         'has-success': contactDescription.valid && (contactDescription.dirty || contactDescription.touched)
-                         }">
-                        <label *ngIf="model.workPlace === '1'" for="contactDescription" class="control-label" style="display:flex;align-items:center;">
-                            Hvordan indsendes løsningsforslagene? *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvordan løsningsforslagene skal sendes til jer. Eksempelvis ”Løsningsforslagene skal sendes til…” Derudover kan der tilføjes en mail eller telefonnummer, såfremt I ønsker, at de studerende skal kunne kontakte jer med spørgsmål">
-                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </label>
-                        <label *ngIf="model.workPlace === '2'" for="contactDescription" class="control-label" style="display:flex;align-items:center;">
-                            Hvordan indsendes ansøgningerne *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Forklar hvordan ansøgningerne skal sendes til jer. Eksempelvis ”Ansøgningerne skal sendes til…” Derudover kan der tilføjes en mail eller telefonnummer, såfremt I ønsker, at de studerende skal kunne kontakte jer med spørgsmål">
-                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </label>
-                        <textarea style="resize:none;" class="form-control" rows="8" id="contactDescription" name="contactDescription" [(ngModel)]="model.contactDescription" #contactDescription="ngModel" required></textarea>
-                        <span class="help-block" style="font-size:16px;"></span>
-                        <div class="form-feedback" *ngIf="contactDescription.errors && (contactDescription.dirty || contactDescription.touched)">
-                            <p *ngIf="contactDescription.errors.required">'Hvordan indsendes løsningsforslagene?' skal udfyldes</p>
-                        </div>
-                    </div>-->
 
                     <div class="form-group">
                         <label for="fileInput" class="control-label">Upload filer</label>

@@ -5,7 +5,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
@@ -18,7 +19,8 @@
 .task-search-input {
     height: 42px;
     border: none;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     padding: 0 0 2px 10px;
     flex: 1;
@@ -32,7 +34,8 @@
 .task-sort-select {
     height: 42px;
     border: none;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     padding: 0 0 2px 10px;
     border-radius: 0;
@@ -47,7 +50,8 @@
     line-height: 1.3333333;
     text-rendering: optimizeLegibility;
     letter-spacing: 0.1px;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     border: none;
     height: 42px;
@@ -62,14 +66,12 @@
     line-height: 1.3333333;
     text-rendering: optimizeLegibility;
     letter-spacing: 0.1px;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     border: none;
     height: 42px;
     flex: 0;
-}
-
-.form-content {
 }
 
 .form-item {
@@ -79,7 +81,8 @@
 
 #filterbox {
     z-index: 999;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     font-size: 14px;
     position: absolute;
@@ -89,7 +92,8 @@
 .filterbox-content {
     padding: 19px;
     background-color: #fff;
-    webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 

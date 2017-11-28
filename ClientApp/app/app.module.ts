@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app-router.module';
 import { FormsModule } from '@angular/forms';
-import { MdButtonModule } from '@angular/material';
 import { SpinnerModule } from 'angular2-spinner';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -16,8 +15,11 @@ import { AdminBusinessComponent } from './admin/admin-business/admin-business.co
 import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
 import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
-
+import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights';
+import { HIWStepFourComponent } from './shared/hiw-step-four/hiw-step-four.component';
+import { HIWStepThreeComponent } from './shared/hiw-step-three/hiw-step-three.component';
 
 import { DanishCurrencyPipe } from './shared/pipes/danishcurrency.pipe';
 import { FormatTextPipe } from './shared/pipes/formatText.pipe';
@@ -50,6 +52,9 @@ import { TransferHttpModule } from '../modules/transfer-http/transfer-http.modul
         AdminBusinessComponent,
         AdminStudentComponent,
         AdminSolutionComponent,
+        SidemenuComponent,
+        HIWStepFourComponent,
+        HIWStepThreeComponent,
     ],
     imports: [
         CommonModule,
