@@ -29,6 +29,7 @@
     <None Remove="ClientApp\polyfills\polyfills.ts" />
     <None Remove="ClientApp\polyfills\server.polyfills.ts" />
     <None Remove="ClientApp\polyfills\temporary-aspnetcore-engine.ts" />
+    <None Remove="ClientApp\app\student-profile\student-settings\student-settings.component.ts" />
     <None Remove="yarn.lock" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
@@ -92,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\shared\hiw-step-four\hiw-step-four.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\student-profile\student-settings\student-settings.component.ts" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

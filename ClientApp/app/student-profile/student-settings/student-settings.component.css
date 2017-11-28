@@ -1,0 +1,14 @@
+﻿.form-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.form-container h1 {
+    padding-top: 20px;
+}
+
+@media only screen and (max-width : 479px) {
+    .form-container {
+        width: 90%;
+    }
+}
