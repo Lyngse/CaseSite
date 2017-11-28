@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routingComponents } from './app-router.module';
 import { FormsModule } from '@angular/forms';
-import { SpinnerModule } from 'angular2-spinner';
+import { MatProgressSpinnerModule } from '@angular/material';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TaskListComponent } from './tasks/task-list/task-list.component';
@@ -61,9 +61,8 @@ import { TransferHttpModule } from '../modules/transfer-http/transfer-http.modul
         HttpModule,
         RouterModule,
         AppRoutingModule,
-        MdButtonModule,
         FormsModule,
-        SpinnerModule,
+        MatProgressSpinnerModule,
         ModalModule.forRoot(),
         TooltipModule.forRoot(),
         TimepickerModule.forRoot(),

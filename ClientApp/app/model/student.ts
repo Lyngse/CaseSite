@@ -6,7 +6,7 @@ export class Student {
     lastname: string;
     email: string;
     facebookId: string;
-    termsAccecpted: boolean;
+    termsAccepted: boolean;
     solutions: Solution[];
 
     constructor() {
