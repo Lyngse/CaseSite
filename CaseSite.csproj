@@ -6,6 +6,7 @@
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8</AssetTargetFallback>
     <ApplicationInsightsResourceId>/subscriptions/8dbbb472-180b-455d-bfd3-f6042b172c7f/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/CaseSite</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/8dbbb472-180b-455d-bfd3-f6042b172c7f/resourcegroups/Default-ApplicationInsights-EastUS/providers/microsoft.insights/components/CaseSite</ApplicationInsightsAnnotationResourceId>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MailKit" Version="1.18.1.1" />
