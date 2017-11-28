@@ -31,9 +31,33 @@ module.exports = (env) => {
             rules: [
                 { test: /\.ts$/, use: isDevBuild ? ['awesome-typescript-loader?silent=true', 'angular2-template-loader', 'angular2-router-loader'] : '@ngtools/webpack' },
                 { test: /\.html$/, use: 'html-loader?minimize=false' },
-                { test: /\.css$/, use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize'] },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
-                ...sharedModuleRules
+                { test: /\.css$/, use: ['to-string-loader', 'css-loader'] },
+                //{ test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+                {
+                    test: /\.(png|jpe?g|gif|ico)$/,
+                    loader: 'file-loader?name=assets/[name].[hash].[ext]'
+                },
+                {
+                    test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+                },
+                {
+                    test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+                },
+                {
+                    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+                },
+                {
+                    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: 'file-loader'
+                },
+                {
+                    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                    loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
+                }
+
             ]
         },
         plugins: [new CheckerPlugin()]

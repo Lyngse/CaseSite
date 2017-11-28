@@ -16,6 +16,13 @@
     transition: color ease 0.5s, border ease 0.5s;
 }
 
+.deadline-past {
+    margin: 0;
+    color: #F44336;
+    font-size: 24px;
+    font-weight: 500;
+}
+
 a {
     color: black;
     text-decoration: none;
@@ -124,9 +131,6 @@ a:active{
 .business-description-box-bot {
     padding: 10px;
     font-size: 14px;
-}
-
-.business-description {
 }
 
 

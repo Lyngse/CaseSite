@@ -11,7 +11,6 @@
 
 .profile-info-box {
     border: 1px solid #eeeeee;
-    margin: 10px;
     display: block;
     margin: 0 auto;
 }
@@ -41,6 +40,7 @@
 
 .profile-tasks {
     flex: 1 1 70%;
+    margin: 10px;
 }
 
 table {
@@ -108,9 +108,6 @@ td, th {
     .profile-info {
         flex: 1 1 100%;
         margin: 10px auto;
-    }
-
-    .profile-info-box {
     }
 
     .profile-tasks {

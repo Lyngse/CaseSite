@@ -23,6 +23,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     business: Business;
     attachments: any;
     student: Student;
+    now = moment();
 
     constructor(
         private businessService: BusinessService,
@@ -72,7 +73,6 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     }
 
     getAttachments(id) {
-        console.log("her");
         this.utilService.displayLoading(true);
         this.blobService.getAttachments(id).subscribe(res => {
             if (res.length > 0) {
@@ -93,7 +93,11 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
 
     getDeadlineString() {
         if (this.task) {
-            return this.task.deadline.format('HH:mm - DD/MM-YYYY');
+            if (this.task.deadline < this.now) {
+                return "Deadlinen er udløbet";
+            } else {
+                return this.task.deadline.format('HH:mm - DD/MM-YYYY');
+            }
         }
     }
 

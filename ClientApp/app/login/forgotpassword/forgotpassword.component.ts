@@ -29,7 +29,7 @@ export class ForgotPasswordComponent implements AfterViewInit {
                 this.utilService.alert.next({ type: "success", titel: "Success", message: "Reset link er sendt til " + this.newEmail });
                 this.form.reset();
             } else {
-                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Kodeordet blev ikke resat" });
+                this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Reset link blev ikke sendt" });
             }
         }, err => {
             this.utilService.displayLoading(false);

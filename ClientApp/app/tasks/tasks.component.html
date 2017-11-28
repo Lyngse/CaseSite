@@ -1,5 +1,4 @@
-﻿
-<div class="container-fluid contentRow" style="padding:0;">
+﻿<div class="container-fluid contentRow" style="padding:0;">
     <div class="row">
         <form class="form-content">
             <div class="col-xs-12 task-control-bar">
@@ -33,23 +32,23 @@
                             </div>
                             
                         </div>
-                            <div class="col-sm-3 col-xs-6" style="padding:0;">
-                                <h4>Belønningstype</h4>
-                                <div class="form-group flexbox-column">
-                                    <div class="checkbox" *ngFor="let rType of rewardTypes">
-                                        <label><input (change)="rewardTypeFilter(rType, $event.target.checked)" type="checkbox" id="foo">{{rType}}</label>
-                                    </div>
+                        <div class="col-sm-3 col-xs-6" style="padding:0;">
+                            <h4>Belønningstype</h4>
+                            <div class="form-group flexbox-column">
+                                <div class="checkbox" *ngFor="let rType of rewardTypes">
+                                    <label><input (change)="rewardTypeFilter(rType, $event.target.checked)" type="checkbox" id="foo">{{rType}}</label>
                                 </div>
+                            </div>
 
-                            </div>
-                            <div class="col-sm-3 col-xs-6" style="padding:0;">
-                                <h4>Arbejdssted</h4>
-                                <div class="form-group flexbox-column">
-                                    <div class="checkbox" *ngFor="let place of workPlaces">
-                                        <label><input (change)="workPlaceFilter(place, $event.target.checked)" type="checkbox" id="foo">{{place}}</label>
-                                    </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-6" style="padding:0;">
+                            <h4>Arbejdssted</h4>
+                            <div class="form-group flexbox-column">
+                                <div class="checkbox" *ngFor="let place of workPlaces">
+                                    <label><input (change)="workPlaceFilter(place, $event.target.checked)" type="checkbox" id="foo">{{place}}</label>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>

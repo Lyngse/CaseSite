@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs/Rx';
 export class UtilService {
     public alert: BehaviorSubject<{ type: string, titel: string, message: string }> = new BehaviorSubject({ type: null, titel: null, message: null });
     public loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public showSidemenu: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public static readonly taskTypes = [
         "Branding",
         "Events",
@@ -23,6 +24,12 @@ export class UtilService {
     displayLoading(value: boolean) {
         setTimeout(() => {
             this.loading.next(value);
-        })
+        });
+    }
+
+    displaySideMenu(value: boolean) {
+        setTimeout(() => {
+            this.showSidemenu.next(value);
+        });
     }
 }
