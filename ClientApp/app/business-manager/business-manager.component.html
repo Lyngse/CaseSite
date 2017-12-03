@@ -25,6 +25,7 @@
                         <td class="reward" *ngIf="t.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ t.rewardValue | danishcurrency }} kr</td>
                         <td class="reward" *ngIf="t.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ t.rewardValue | danishcurrency }} kr</td>
                         <td class="reward" *ngIf="t.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                        <td class="reward" *ngIf="t.rewardType === 'Timeløn'"><i class="fa fa-clock-o"></i> {{ t.rewardValue | danishcurrency }} kr / t</td>
                         <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(t.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
                         <td class="edit"><i class="fa fa-pencil" (click)="handleEditTask(t.id)"></i></td>
                     </tr>
@@ -50,6 +51,7 @@
                             <td class="reward" *ngIf="pt.rewardType === 'Gave'"><i class="fa fa-gift"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="pt.rewardType === 'Honorar'"><i class="fa fa-money"></i> {{ pt.rewardValue | danishcurrency }} kr</td>
                             <td class="reward" *ngIf="pt.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</td>
+                            <td class="reward" *ngIf="pt.rewardType === 'Timeløn'"><i class="fa fa-clock-o"></i> {{ pt.rewardValue | danishcurrency }} kr / t</td>
                             <td><button type="button" class="btn btn-success btn-sm" (click)="gotoSolutionsView(pt.id)"><i class="fa fa-arrow-right" tooltip="Gå til løsningsforslag" placement="left"></i></button></td>
                             <td *ngIf="pt.winnerSolutionId"><p class="winner-link" (click)="gotoWinnerSolutionDownload(pt.winnerSolutionId)">Gå til download</p></td>
                             <td *ngIf="!pt.winnerSolutionId"><i class="fa fa-minus"></i></td>

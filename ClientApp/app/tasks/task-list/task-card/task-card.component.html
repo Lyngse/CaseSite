@@ -24,10 +24,11 @@
             <p>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</p> 
         </div>
         <div class="task-card-detail">
-            <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave'">
+            <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave' || task.rewardType === 'Timeløn'">
                 <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-money"></i></span>
                 <span *ngIf="task.rewardType === 'Gave'"><i class="fa fa-gift"></i></span>
-                {{ task.rewardValue | danishcurrency }} kr
+                <span *ngIf="task.rewardType === 'Timeløn'"><i class="fa fa-clock-o"></i></span>
+                {{ task.rewardValue | danishcurrency }} kr <span *ngIf="task.rewardType === 'Timeløn'"> / t</span>
             </p>
             <p style="font-size:14px" *ngIf="task.rewardType === 'Anbefaling'"><i class="fa fa-file-text-o"></i> Anbefaling</p>
         </div>

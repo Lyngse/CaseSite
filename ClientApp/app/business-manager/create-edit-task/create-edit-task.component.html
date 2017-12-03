@@ -56,44 +56,6 @@
 
                     <div class="form-group"
                          [ngClass]="{
-                         'has-error': rewardType.invalid && (rewardType.dirty || rewardType.touched),
-                         'has-success': rewardType.valid && (rewardType.dirty || rewardType.touched)
-                         }">
-                        <label for="rewardType" class="control-label">Belønningstypen * 
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Hvilke type belønning den bedste løsning eller ansøgning modtager.">
-                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </label>
-                        <select class="form-control" id="rewardType" name="rewardType" [(ngModel)]="model.rewardType" [disabled]="edit" #rewardType="ngModel" required>
-                            <option value="Honorar">Honorar</option>
-                            <option value="Gave">Gave</option>
-                            <option value="Anbefaling">Anbefaling</option>
-                        </select>
-                        <div class="form-feedback" *ngIf="rewardType.errors && (rewardType.dirty || rewardType.touched)">
-                            <p *ngIf="rewardType.errors.required">Belønningstypen skal udfyldes</p>
-                        </div>
-                    </div>
-
-                    <div *ngIf="model.rewardType === 'Honorar' || model.rewardType  === 'Gave'" class="form-group"
-                         [ngClass]="{
-                         'has-error': rewardValue.invalid && (rewardValue.dirty || rewardValue.touched),
-                         'has-success': rewardValue.valid && (rewardValue.dirty || rewardValue.touched)
-                         }">
-                        <label for="rewardValue" class="control-label">Belønningens værdi * 
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten gaven eller honoraret">
-                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
-                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </label>
-                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" step="any" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required [disabled]="edit" />
-                        <div class="form-feedback" *ngIf="rewardValue.errors && (rewardValue.dirty || rewardValue.touched)">
-                            <p *ngIf="rewardValue.errors.required">Værdien for belønningen skal udfyldes</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group"
-                         [ngClass]="{
                          'has-error': workPlace.invalid && (workPlace.dirty || workPlace.touched),
                          'has-success': workPlace.valid && (workPlace.dirty || workPlace.touched)
                          }">
@@ -144,6 +106,47 @@
                         <input type="text" id="address" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" required />
                         <div class="form-feedback" *ngIf="address.errors && (address.dirty || address.touched)">
                             <p *ngIf="address.errors.required">Vejnavn og nummer skal udfyldes</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         [ngClass]="{
+                         'has-error': rewardType.invalid && (rewardType.dirty || rewardType.touched),
+                         'has-success': rewardType.valid && (rewardType.dirty || rewardType.touched)
+                         }">
+                        <label for="rewardType" class="control-label">
+                            Belønningstypen *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Hvilke type belønning den bedste løsning eller ansøgning modtager.">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
+                        <select class="form-control" id="rewardType" name="rewardType" [(ngModel)]="model.rewardType" [disabled]="edit" #rewardType="ngModel" required>
+                            <option value="Honorar">Honorar</option>
+                            <option value="Gave">Gave</option>
+                            <option value="Anbefaling">Anbefaling</option>
+                            <option value="Timeløn" *ngIf="model.workPlace ==='2'">Timeløn</option>
+                        </select>
+                        <div class="form-feedback" *ngIf="rewardType.errors && (rewardType.dirty || rewardType.touched)">
+                            <p *ngIf="rewardType.errors.required">Belønningstypen skal udfyldes</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="model.rewardType === 'Honorar' || model.rewardType  === 'Gave' || model.rewardType === 'Timeløn'" class="form-group"
+                         [ngClass]="{
+                         'has-error': rewardValue.invalid && (rewardValue.dirty || rewardValue.touched),
+                         'has-success': rewardValue.valid && (rewardValue.dirty || rewardValue.touched)
+                         }">
+                        <label for="rewardValue" class="control-label">
+                            Belønningens værdi *
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten gaven eller honoraret">
+                                <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
+                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </label>
+                        <input type="number" min="0" max="5000" class="form-control" id="rewardValue" step="any" name="rewardValue" [(ngModel)]="model.rewardValue" #rewardValue="ngModel" required [disabled]="edit" />
+                        <div class="form-feedback" *ngIf="rewardValue.errors && (rewardValue.dirty || rewardValue.touched)">
+                            <p *ngIf="rewardValue.errors.required">Værdien for belønningen skal udfyldes</p>
                         </div>
                     </div>
 
