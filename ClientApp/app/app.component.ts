@@ -11,6 +11,7 @@ import { UtilService } from './services/util.service';
 import { CookieService } from 'angular2-cookie/core';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
 import { AppInsightsService } from 'ng2-appinsights';
+import { Router, NavigationEnd } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -48,7 +49,7 @@ export class AppComponent {
     showMenu: boolean = false;
 
     constructor(private utilService: UtilService, private cookieService: CookieService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
-        private appInsightsService: AppInsightsService) {
+        private appInsightsService: AppInsightsService, private router: Router) {
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
             if (newValue.titel && newValue.type) {
@@ -82,6 +83,12 @@ export class AppComponent {
 
         appInsightsService.Init({
             instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
+        });
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0);
         });
     }
 
