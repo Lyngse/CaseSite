@@ -9,20 +9,11 @@
     height: auto;
     margin-top: -13px;
 }
-
-nav.navbar-findcond ul.navbar-nav a:active,
-nav.navbar-findcond ul.navbar-nav a:hover {
-    background: #082a3b;
-    -webkit-transition: background-color 0.7s;
-    -moz-transition: background-color 0.7s;
-    -o-transition: background-color 0.7s;
-    transition: background-color 0.7s;
-}
-
 .navbar-nav > li > .dropdown-menu {
     margin-top: -1px !important;
 }
 
+.navbar-btn,
 .navbar-right li,
 .navbar-left li {
     cursor: pointer;
@@ -39,12 +30,14 @@ nav.navbar-findcond ul.navbar-nav a:hover {
     color: white;
 }
 
+.navbar-btn,
 .navbar-right li a,
 .navbar-left li a {
     padding-top: 20.5px;
     color: white;
 }
 
+.navbar-btn,
 .navbar-right li a:active,
 .navbar-right li a:hover,
 .navbar-left li a:active,

@@ -10,7 +10,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { TaskCardComponent } from './tasks/task-list/task-card/task-card.component';
-import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule } from 'ngx-bootstrap';
+import { ModalModule, TooltipModule, TimepickerModule, DatepickerModule, AlertModule, AccordionModule, BsDropdownModule  } from 'ngx-bootstrap';
 import { AdminBusinessComponent } from './admin/admin-business/admin-business.component';
 import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
 import { AdminStudentComponent } from './admin/admin-student/admin-student.component';
@@ -70,6 +70,7 @@ import { TransferHttpModule } from '../modules/transfer-http/transfer-http.modul
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
         AccordionModule.forRoot(),
+        BsDropdownModule.forRoot(),
         TransferHttpModule, 
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
     ],
