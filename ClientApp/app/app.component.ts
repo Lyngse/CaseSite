@@ -9,7 +9,8 @@ import {
     PLATFORM_ID,
     Inject,
     OnInit,
-    Injector
+    Injector,
+    AfterViewInit
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common'
 import { Router } from '@angular/router'
@@ -18,6 +19,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppInsightsService } from 'ng2-appinsights';
 import { TransferState } from '../modules/transfer-state/transfer-state';
 import * as moment from 'moment';
+import * as jQuery from 'jquery';
 
 @Component({
     selector: 'app',
@@ -44,7 +46,7 @@ import * as moment from 'moment';
         ])
     ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
     loading: boolean;
     alerts = [];
     private appInsightsService: AppInsightsService;
@@ -104,6 +106,11 @@ export class AppComponent implements OnInit {
         this.appInsightsService.Init({
             instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
         });
+    }
+
+    ngAfterViewInit() {
+        jQuery(".server-loading-background").remove();
+        jQuery(".spinner").remove();
     }
 
     setCookie() {
