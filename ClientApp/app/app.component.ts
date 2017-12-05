@@ -13,7 +13,7 @@ import {
     AfterViewInit
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common'
-import { Router } from '@angular/router'
+import { Router, NavigationEnd } from '@angular/router'
 import { UtilService } from './services/util.service';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppInsightsService } from 'ng2-appinsights';
@@ -105,6 +105,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 
         this.appInsightsService.Init({
             instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
+        });
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
         });
     }
 
