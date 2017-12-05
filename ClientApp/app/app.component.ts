@@ -115,8 +115,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        jQuery(".server-loading-background").remove();
-        jQuery(".spinner").remove();
+        setTimeout(() => {
+            jQuery(".server-loading-background").remove();
+            jQuery(".spinner").remove();
+        }, 500);
     }
 
     setCookie() {
