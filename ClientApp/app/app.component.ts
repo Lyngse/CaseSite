@@ -12,8 +12,9 @@ import {
     Injector,
     AfterViewInit
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common'
-import { Router, NavigationEnd } from '@angular/router'
+import { Meta } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
 import { UtilService } from './services/util.service';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppInsightsService } from 'ng2-appinsights';
@@ -55,7 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     menuState: string = 'out';
     showMenu: boolean = false;
 
-    constructor( @Inject(PLATFORM_ID) private platformId, private utilService: UtilService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    constructor( @Inject(PLATFORM_ID) private platformId, private utilService: UtilService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private metaService: Meta,
             private injector: Injector, private cache: TransferState, private router: Router) {
         this.isBrowser = isPlatformBrowser(platformId);
         moment.locale('da');
@@ -81,6 +82,22 @@ export class AppComponent implements OnInit, AfterViewInit {
                 this.acceptCookie = true;
             }
         }
+
+        this.metaService.addTags([
+            { property: "og:image", content: "http://i.imgur.com/Cxl1Ii0.png" },
+            { name: "image", content: "http://i.imgur.com/Cxl1Ii0.png" },
+            { property: "og:description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { name: "description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { property: "og:title", content: "Unifacto" },
+            { name: "title", content: "Unifacto" },
+            { property: "og:url", content: "https://www.unifacto.com/" },
+            { property: "og:type", content: "website" },
+            { property: "fb:app_id", content: "113893632577611" },
+            { name: "twitter:title", content: "Unifacto" },
+            { name: "twitter:description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { name: "twitter:image", content: "http://i.imgur.com/Cxl1Ii0.png" }
+        ]);
+
     }
 
     ngOnInit() {
