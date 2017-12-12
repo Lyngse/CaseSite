@@ -1,5 +1,6 @@
 ﻿import { Component, AfterViewInit, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 import { Business } from '../../model/business';
 import { Task } from '../../model/task';
 import { Student } from '../../model/student';
@@ -33,6 +34,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
         private blobService: BlobService,
         private studentService: StudentService,
         private accountService: AccountService,
+        private metaService: Meta,
         private router: Router
     ) {
         this.accountService.loggedIn.subscribe(newValue => {
@@ -42,14 +44,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
                     this.student = res;
                 });
         });
-    }
 
-    ngOnChanges(changes) {
-        this.task = this.inputTask;
-        this.business = this.inputBusiness;
-    }
-
-    ngAfterViewInit() {
         this.route.params.subscribe(params => {
             let id = params['id'];
             if (id) {
@@ -59,17 +54,41 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
                         this.task = res;
                         this.business = res.business;
                         this.getAttachments(res.id);
+                        this.setMetaTags();
                     } else {
                         this.utilService.displayLoading(false);
                         this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                     }
-                    
+
                 }, (err) => {
                     this.utilService.displayLoading(false);
                     this.utilService.alert.next({ type: "danger", titel: "Fejl", message: "Der skete en fejl, kunne ikke finde opgaven" });
                 });
             }
         });
+    }
+
+    setMetaTags() {
+        this.metaService.updateTag({ content: this.business.logoUrl.replace(/ /g, "%20") }, "property='og:image'");
+        this.metaService.updateTag({ content: this.business.logoUrl.replace(/ /g, "%20") }, "name='image'");
+        this.metaService.updateTag({ content: this.business.logoUrl.replace(/ /g, "%20") }, "name='twitter:image'");
+        this.metaService.updateTag({ content: this.task.title }, "name='description'");
+        this.metaService.updateTag({ content: this.task.title }, "property='og:description'");
+        this.metaService.updateTag({ content: this.task.title }, "name='twitter:description'");
+        this.metaService.updateTag({ content: this.task.title }, "name='description'");
+        this.metaService.updateTag({ content: "Se opgaven fra: " + this.business.name }, "name='title'");
+        this.metaService.updateTag({ content: "Se opgaven fra: " + this.business.name }, "property='og:title'");
+        this.metaService.updateTag({ content: "Se opgaven fra: " + this.business.name }, "name='twitter:title'");
+        this.metaService.updateTag({ content: "https://unifactodev.azurewebsites.net/tasks/detail/" + this.task.id }, "property='og:url'");
+    }
+
+    ngOnChanges(changes) {
+        this.task = this.inputTask;
+        this.business = this.inputBusiness;
+    }
+
+    ngAfterViewInit() {
+        
     }
 
     getAttachments(id) {
