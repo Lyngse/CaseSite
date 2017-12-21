@@ -14,11 +14,11 @@ import {
 } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, NavigationEnd } from '@angular/router';
 import { UtilService } from './services/util.service';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { AppInsightsService } from 'ng2-appinsights';
 import { TransferState } from '../modules/transfer-state/transfer-state';
+import { Router, NavigationEnd } from '@angular/router';
 import * as moment from 'moment';
 import * as jQuery from 'jquery';
 
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     showMenu: boolean = false;
 
     constructor( @Inject(PLATFORM_ID) private platformId, private utilService: UtilService, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private metaService: Meta,
-            private injector: Injector, private cache: TransferState, private router: Router) {
+        private injector: Injector, private cache: TransferState, private router: Router) {
         this.isBrowser = isPlatformBrowser(platformId);
         moment.locale('da');
         utilService.alert.subscribe(newValue => {
@@ -123,12 +123,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.appInsightsService.Init({
             instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
         });
-        this.router.events.subscribe((evt) => {
-            if (!(evt instanceof NavigationEnd)) {
-                return;
-            }
-            window.scrollTo(0, 0)
-        });
     }
 
     ngAfterViewInit() {
@@ -136,7 +130,9 @@ export class AppComponent implements OnInit, AfterViewInit {
             jQuery(".server-loading-background").remove();
             jQuery(".spinner").remove();
         }, 500);
-    }
+            window.scrollTo(0, 0);
+        };
+
 
     setCookie() {
         let value: string = "accept";
