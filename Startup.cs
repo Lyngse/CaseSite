@@ -80,7 +80,15 @@ namespace CaseSite
 
             services.AddOptions();
             services.Configure<EmailCredentials>(Configuration.GetSection("EmailCredentials"));
-          
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return System.Threading.Tasks.Task.CompletedTask;
+                };
+            });
 
             //services.Configure<IdentityOptions>(opt =>
             //{

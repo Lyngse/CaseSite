@@ -344,7 +344,7 @@ namespace CaseSite.Controllers
         [HttpGet("updateTokens")]
         public IActionResult updateTokens()
         {
-            return Ok();
+            return Ok(new object());
         }
 
         [HttpPost("register/role/{roleName}")]
