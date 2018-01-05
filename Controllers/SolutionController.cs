@@ -116,12 +116,12 @@ namespace CaseSite.Controllers
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var student = await _context.Student.FirstOrDefaultAsync(s => s.UserId == user.Id);
-            List<Solution> solutions = await _context.Solution.Include(so => so.Task).Where(so => so.StudentId == student.Id).ToListAsync();
+            
             if (student == null)
             {
                 return NotFound(new { studentError = "Student not found" });
             }
-
+            List<Solution> solutions = await _context.Solution.Include(so => so.Task).Where(so => so.StudentId == student.Id).ToListAsync();
             return Ok(solutions);
         }
 

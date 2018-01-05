@@ -79,7 +79,7 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
         this.metaService.updateTag({ content: "Se opgaven fra: " + this.business.name }, "name='title'");
         this.metaService.updateTag({ content: "Se opgaven fra: " + this.business.name }, "property='og:title'");
         this.metaService.updateTag({ content: "Se opgaven fra: " + this.business.name }, "name='twitter:title'");
-        this.metaService.updateTag({ content: "https://unifactodev.azurewebsites.net/tasks/detail/" + this.task.id }, "property='og:url'");
+        this.metaService.updateTag({ content: "https://www.unifacto.com/tasks/detail/" + this.task.id }, "property='og:url'");
     }
 
     ngOnChanges(changes) {
