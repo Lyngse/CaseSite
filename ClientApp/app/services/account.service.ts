@@ -15,10 +15,13 @@ export class AccountService {
     public loggedIn: BehaviorSubject<String> = new BehaviorSubject("void");
 
     constructor(private http: Http, private router: Router, private transferHttp: TransferHttp, @Inject(ORIGIN_URL) private baseUrl: string) {
-        this.transferHttp
+        this.http
             .get(this.baseUrl + '/api/account/status', this.options)
             .catch(this.handleError)
-            .subscribe(value => this.loggedIn.next(value.role));
+            .subscribe(res => {
+                res = res.json();
+                this.loggedIn.next(res.role);
+            });
     }
 
     makeAdmin(username: string, password: string, email: string): Observable<any> {
@@ -73,7 +76,7 @@ export class AccountService {
     }
 
     updateToken() {
-        this.transferHttp
+        this.http
             .get(this.baseUrl + '/api/account/updateTokens', this.options)
             .subscribe();
     }
