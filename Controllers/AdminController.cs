@@ -26,6 +26,7 @@ namespace CaseSite.Controllers
         }
 
         [HttpGet("getcounts")]
+        [Authorize]
         public async Task<IActionResult> GetCounts()
         {
             int businessCount = await _context.Business.CountAsync();

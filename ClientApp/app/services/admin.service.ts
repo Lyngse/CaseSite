@@ -29,75 +29,75 @@ export class AdminService {
         return this.http
             .get(this.baseUrl + '/api/admin/getcounts', this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     getAllBusinesses(): Observable<Business[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getallbusinesses', this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     searchBusiness(query: string): Observable<Business[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getallbusinesses', JSON.stringify({ query: query}), this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     getAllTasks(): Observable<Task[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getalltasks', this.options)
             .map(res => this.extractData(res))
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     searchTask(query: string): Observable<Task[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getalltasks', JSON.stringify({ query: query }), this.options)
             .map(res => this.extractData(res))
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     getAllStudents(): Observable<Student[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getallstudents', this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     searchStudent(query: string): Observable<Student[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getallstudents', JSON.stringify({ query: query }), this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     getAllSolutions(): Observable<Solution[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getallsolutions', this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     searchSolution(query: string): Observable<Solution[]> {
         return this.http
             .post(this.baseUrl + '/api/admin/getallsolutions', JSON.stringify({ query: query }), this.options)
             .map(res => res.json())
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     deleteBusiness(businessId: number): Observable<any> {
         return this.http
             .delete(this.baseUrl + '/api/admin/deletebusiness/' + businessId, this.options)
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     deleteTask(taskId: number): Observable<any> {
         return this.http
             .delete(this.baseUrl + '/api/admin/deletetask/' + taskId, this.options)
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     updateBusiness(b: Business): Observable<Business> {
@@ -112,7 +112,7 @@ export class AdminService {
         };
         return this.http
             .put(this.baseUrl + '/api/admin/updatebusiness', JSON.stringify({ business: business }), this.options)
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
 
     updateTask(t: Task): Observable<Task> {
@@ -133,7 +133,7 @@ export class AdminService {
         };
         return this.http
             .put(this.baseUrl + '/api/admin/updatetask', JSON.stringify({ task: task }), this.options)
-            .catch(this.handleError);
+            .catch(this.handleError.bind(this));
     }
     
     private extractData(res: Response) {
@@ -154,6 +154,9 @@ export class AdminService {
     }
 
     private handleError(error: any): Observable<any> {
+        if (error && error.status === 401) {
+            this.router.navigate(['/']);
+        }
         console.error('An error occurred', error); // for demo purposes only
         return Observable.throw(error.message || error)
     }
