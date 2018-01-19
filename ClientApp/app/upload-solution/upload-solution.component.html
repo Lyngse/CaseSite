@@ -1,9 +1,9 @@
 ﻿<div class="upload-content contentRow">
-    <h2>Upload af løsningsforslag</h2>
+    <h2>Upload her for at komme i betragtning til opgaven</h2>
     <div class="form-group">
-        <label for="fileInput">Upload filer til dit løsningsforslag</label>
+        <label for="fileInput">Upload filer</label>
         <input type="file" multiple id="fileInput" name="fileInput" value="Upload filer" (change)="fileChange($event)">
-        <p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag</p>
+        <!--<p class="help-block">Vælg de filer du gerne vil tilknytte til dit løsningsforslag</p>-->
     </div>
 
     <button type="button" class="btn btn-success" (click)="uploadSolution()" [disabled]="!filesChanged || !enableUpload">Upload</button>
@@ -11,7 +11,7 @@
         <p>Deadlinen for denne opgave er udløbet og du kan derfor ikke lave flere ændringer til dit løsningsforslag. Hvis du mener at en eventuel ændring til dit løsningforslag vil have en stor betydning, kan du prøve at tage kontakt til virksomheden via deres email.</p>
     </div>
     <div *ngIf="solutions">
-        <h2 *ngIf="solutions.length > 0">Håndter uploadede løsningsforslag</h2>
+        <h2 *ngIf="solutions.length > 0">Uploadede filer</h2>
         <div class="uploaded-files" >
             <div class="display:flex" *ngFor="let s of solutions">
                 <div class="file-pill">
@@ -27,8 +27,8 @@
     </div>
 
     <div class="contact-student" *ngIf="student">
-        <p *ngIf="student.email">Virksomheden vil kontakte dig på <span style="font-weight:700;">{{ student.email}}</span>, hvis du skulle vinde denne opgave.</p>
-        <p *ngIf="!student.email">Du har ikke angivet nogen email, som virksomheden kan kontakte dig på, hvis du skulle vinde opgaven.</p>
+        <p *ngIf="student.email">Virksomheden vil kontakte dig på <span style="font-weight:700;">{{ student.email}}</span>, hvis du skulle blive valgt.</p>
+        <p *ngIf="!student.email">Du har ikke angivet nogen email, som virksomheden kan kontakte dig på, hvis du skulle blive valgt. Du kan ændre din email her.</p>
         <p>Du kan ændre din email <a routerLink="/student/settings" class="link">her</a><span *ngIf="student.email">, hvis dine oplysninger er forkerte.</span><span *ngIf="!student.email">.</span></p>
     </div>
 

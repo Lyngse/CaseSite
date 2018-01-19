@@ -14,9 +14,9 @@ export class HowItWorksBusinessComponent {
     ];
     atBusiness = [
         { number: 1, title: "I uploader en <br /> opgave", description: "I uploader en opgave med beskrivelse, deadline og belønning." },
-        { number: 2, title: "Studerende<br /> ansøger", description: "De studerende ansøger om at udarbejde løsningsforslaget hos jer." },
-        { number: 3, title: "I udvælger den bedste ansøger <br /> og samarbejdet begynder", description: "Når deadlinen er overskredet udvælger I den bedste ansøger/ansøgere, som herefter påbegynder udarbejdelsen af løsningsforslaget hos jer." },
-        { number: 4, title: "Belønning <br /> gives", description: "Efter løsningsforslaget er blevet udarbejdet hos jer tildeles den studerende den oplyste belønning." },
+        { number: 2, title: "Studerende<br /> ansøger", description: "De studerende ansøger om at udarbejde løsningsforslaget i samarbejde med jer." },
+        { number: 3, title: "I udvælger den bedste ansøger <br /> og samarbejdet begynder", description: "Når deadlinen er overskredet udvælger I den bedste ansøger/ansøgere, som herefter påbegynder udarbejdelsen af løsningsforslaget." },
+        { number: 4, title: "Belønning <br /> gives", description: "Efter løsningsforslaget er blevet udarbejdet tildeles den studerende den oplyste belønning." },
     ];
 
     constructor() {

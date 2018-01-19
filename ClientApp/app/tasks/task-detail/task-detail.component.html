@@ -38,11 +38,11 @@
 
            <div class="task-info">
                <div *ngIf="task.workPlace">
-                   <p class="task-workplace">Løsningen udarbejdes: <b>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</b></p>
+                   <p class="task-workplace">Opgavens type: <b>{{ task.workPlace === "2" ? "Ansøgning" : "Løsningsforslag" }}</b></p>
                    <p class="task-deadline" *ngIf="task.workPlace === '2'">Frist for ansøgning: <b>{{ getDeadlineString() }}</b></p>
                    <p class="task-deadline" *ngIf="task.workPlace === '1'">Frist for løsningsforslag: <b>{{ getDeadlineString() }}</b></p>
                 </div>
-               <p *ngIf="task.workPlace === '2'">Udarbejdelsen af opgaven kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>
+               <!--<p *ngIf="task.workPlace === '2'">Udarbejdelsen af opgaven kommer til at finde sted på: {{ task.address }}, {{ task.zip }} {{ task.city }}</p>-->
                <p class="task-reward" style="font-size:14px;" *ngIf="task.rewardType">
                    Belønning ved bedste løsningsforslag:
                    <span *ngIf="task.rewardType === 'Honorar'"><i class="fa fa-money"></i></span>

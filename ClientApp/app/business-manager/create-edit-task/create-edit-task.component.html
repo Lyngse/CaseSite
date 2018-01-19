@@ -61,15 +61,15 @@
                          }">
                         <label for="workPlace" class="control-label">Hvordan skal opgaven løses? *</label>
                         <select class="form-control" id="workPlace" name="workPlace" [(ngModel)]="model.workPlace" #workPlace="ngModel" [disabled]="edit" required>
-                            <option value="1">Løsningen udarbejdes hjemme hos den studerende</option>
-                            <option value="2">Løsningen udarbejdes hos virksomheden</option>
+                            <option value="1">Jeg ønsker at modtage forslag til opgaven</option>
+                            <option value="2">Jeg ønsker at modtage ansøgninger om udarbejdelsen af opgaven</option>
                         </select>
                         <div class="form-feedback" *ngIf="workPlace.errors && (workPlace.dirty || workPlace.touched)">
-                            <p *ngIf="workPlace.errors.required">Arbejdsstedet for opgaven skal udfyldes</p>
+                            <p *ngIf="workPlace.errors.required">Løsningsmetoden for opgaven skal udfyldes</p>
                         </div>
                     </div>
 
-                    <p *ngIf="model.workPlace ==='2'">Firmaadressen hvor opgaven skal udføres</p>
+                    <p *ngIf="model.workPlace ==='2'">Jeres addresse skal udfyldes</p>
 
                     <div class="form-group" *ngIf="model.workPlace ==='2'"
                             [ngClass]="{
@@ -140,7 +140,7 @@
                          }">
                         <label for="rewardValue" class="control-label">
                             Belønningens værdi *
-                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten gaven eller honoraret">
+                            <span class="fa-stack" style="font-size:10px;" tooltip="Belønningens værdi for enten gaven, honoraret eller timelønnen">
                                 <i class="fa fa-circle fa-stack-2x" style="color:#006699"></i>
                                 <i class="fa fa-info fa-stack-1x fa-inverse"></i>
                             </span>

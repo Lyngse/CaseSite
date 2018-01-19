@@ -21,7 +21,7 @@
     </div>
     <div class="task-card-bot">
         <div class="task-card-detail">
-            <p>{{ task.workPlace === "2" ? "Hos virksomheden" : "Hjemme" }}</p> 
+            <p>{{ task.workPlace === "2" ? "Ansøgning" : "Forslag" }}</p> 
         </div>
         <div class="task-card-detail">
             <p style="font-size:14px;" *ngIf="task.rewardType === 'Honorar' || task.rewardType === 'Gave' || task.rewardType === 'Timeløn'">
