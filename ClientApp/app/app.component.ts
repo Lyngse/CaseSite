@@ -107,6 +107,12 @@ export class AppComponent implements OnInit, AfterViewInit {
             this.appInsightsService.Init({
                 instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
             });
+            this.router.events.subscribe((evt) => {
+                if (!(evt instanceof NavigationEnd)) {
+                    return;
+                }
+                window.scrollTo(0, 0);
+            });
         }
 
         this.utilService.showSidemenu.subscribe(newValue => {
