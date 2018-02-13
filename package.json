@@ -27,6 +27,7 @@
     "@angular/platform-browser-dynamic": "^4.3.0",
     "@angular/platform-server": "^4.3.0",
     "@angular/router": "^4.3.0",
+    "@markpieszak/ng-application-insights": "^2.4.2",
     "@nguniversal/aspnetcore-engine": "^1.0.0-beta.2",
     "@ngx-translate/core": "^6.0.1",
     "@ngx-translate/http-loader": "0.0.3",

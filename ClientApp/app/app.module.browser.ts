@@ -7,7 +7,7 @@ import { AppModuleShared } from './app.module';
 import { AppComponent } from './app.component';
 import { REQUEST } from './shared/constants/request';
 import { BrowserTransferStateModule } from '../modules/transfer-state/browser-transfer-state.module';
-import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights'
+import { ApplicationInsightsModule, AppInsightsService } from '@markpieszak/ng-application-insights'
 import { BrowserPrebootModule } from 'preboot/browser';
 
 export function getOriginUrl() {
@@ -28,7 +28,9 @@ export function getRequest() {
         BrowserPrebootModule.replayEvents(),
         BrowserAnimationsModule,
         BrowserTransferStateModule,
-        AppInsightsModule,
+        ApplicationInsightsModule.forRoot({
+            instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
+        }),
         // Our Common AppModule
         AppModuleShared
     ],

@@ -16,7 +16,7 @@ import { Meta } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 import { UtilService } from './services/util.service';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-import { AppInsightsService } from 'ng2-appinsights';
+import { AppInsightsService } from '@markpieszak/ng-application-insights';
 import { TransferState } from '../modules/transfer-state/transfer-state';
 import { Router, NavigationEnd } from '@angular/router';
 import * as moment from 'moment';
@@ -104,9 +104,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.cache.set('cached', true);
         if (this.isBrowser) {
             this.appInsightsService = <AppInsightsService>this.injector.get(AppInsightsService);
-            this.appInsightsService.Init({
-                instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
-            });
+            
             this.router.events.subscribe((evt) => {
                 if (!(evt instanceof NavigationEnd)) {
                     return;
@@ -124,10 +122,6 @@ export class AppComponent implements OnInit, AfterViewInit {
                 this.menuState = 'out';
                 this.showMenu = false;
             }
-        });
-
-        this.appInsightsService.Init({
-            instrumentationKey: '7b0358cc-cf4c-4c1b-9b6c-658e45bf66df'
         });
     }
 
