@@ -14,7 +14,7 @@ namespace CaseSite
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseApplicationInsights()
+                //.UseApplicationInsights()
                 .UseStartup<Startup>()
                 .Build();
     }

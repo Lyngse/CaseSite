@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 this.alerts.push(newValue);
                 this.removeAlert(newValue);
                 if (this.isBrowser) {
-                    this.appInsightsService.trackEvent(newValue.type, { "titel": newValue.titel, "message": newValue.message });
+                   this.appInsightsService.trackEvent(newValue.titel, { "titel": newValue.titel, "message": newValue.message });
                 }
             }
         });
