@@ -100,7 +100,7 @@ export class AdminService {
             .catch(this.handleError.bind(this));
     }
 
-    updateBusiness(b: Business): Observable<Business> {
+    updateBusiness(b: Business): Observable<any> {
         let business = {
             Name: b.name,
             LogoUrl: b.logoUrl,
@@ -115,7 +115,7 @@ export class AdminService {
             .catch(this.handleError.bind(this));
     }
 
-    updateTask(t: Task): Observable<Task> {
+    updateTask(t: Task): Observable<any> {
         let task = {
             Id: t.id,
             Title: t.title,

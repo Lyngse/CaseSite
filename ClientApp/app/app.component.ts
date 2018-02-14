@@ -86,15 +86,15 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.metaService.addTags([
             { property: "og:image", content: "http://i.imgur.com/Cxl1Ii0.png" },
             { name: "image", content: "http://i.imgur.com/Cxl1Ii0.png" },
-            { property: "og:description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
-            { name: "description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { property: "og:description", content: "Unifacto bringer studerende og virksomheder tï¿½ttere pï¿½ hinanden" },
+            { name: "description", content: "Unifacto bringer studerende og virksomheder tï¿½ttere pï¿½ hinanden" },
             { property: "og:title", content: "Unifacto" },
             { name: "title", content: "Unifacto" },
             { property: "og:url", content: "https://www.unifacto.com/" },
             { property: "og:type", content: "website" },
             { property: "fb:app_id", content: "113893632577611" },
             { name: "twitter:title", content: "Unifacto" },
-            { name: "twitter:description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { name: "twitter:description", content: "Unifacto bringer studerende og virksomheder tï¿½ttere pï¿½ hinanden" },
             { name: "twitter:image", content: "http://i.imgur.com/Cxl1Ii0.png" }
         ]);
 

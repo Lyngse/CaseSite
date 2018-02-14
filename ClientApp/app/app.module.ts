@@ -18,7 +18,6 @@ import { AdminSolutionComponent } from './admin/admin-solution/admin-solution.co
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-import { AppInsightsModule, AppInsightsService } from 'ng2-appinsights';
 import { HIWStepFourComponent } from './shared/hiw-step-four/hiw-step-four.component';
 import { HIWStepThreeComponent } from './shared/hiw-step-three/hiw-step-three.component';
 
