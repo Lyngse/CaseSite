@@ -25,7 +25,7 @@ import * as jQuery from 'jquery';
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('flyInOut', [
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     loading: boolean;
     alerts = [];
     private appInsightsService: AppInsightsService;
-    private isBrowser: boolean;
+    public isBrowser: boolean;
     acceptCookie = false;
     menuState: string = 'out';
     showMenu: boolean = false;
