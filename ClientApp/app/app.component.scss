@@ -1,0 +1,8 @@
+$navbar-default-bg: #312312;
+$light-orange: #ff8c00;
+$navbar-default-color: $light-orange;
+
+/* Import Bootstrap & Fonts */
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "app.component.css";

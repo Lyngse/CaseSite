@@ -9,16 +9,12 @@
     <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="1.18.1.1" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
     <PackageReference Include="WindowsAzure.Storage" Version="8.4.0" />
-    <PackageReference Include="xunit" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
@@ -91,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientApp\app\shared\hiw-step-three\" />
+    <Folder Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\shared\hiw-step-four\hiw-step-four.component.ts" />

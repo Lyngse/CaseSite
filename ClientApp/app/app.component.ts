@@ -25,7 +25,7 @@ import * as jQuery from 'jquery';
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('flyInOut', [
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     loading: boolean;
     alerts = [];
     private appInsightsService: AppInsightsService;
-    private isBrowser: boolean;
+    public isBrowser: boolean;
     acceptCookie = false;
     menuState: string = 'out';
     showMenu: boolean = false;
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 this.alerts.push(newValue);
                 this.removeAlert(newValue);
                 if (this.isBrowser) {
-                    this.appInsightsService.trackEvent(newValue.type, { "titel": newValue.titel, "message": newValue.message });
+                   this.appInsightsService.trackEvent(newValue.titel, { "titel": newValue.titel, "message": newValue.message });
                 }
             }
         });
@@ -86,15 +86,15 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.metaService.addTags([
             { property: "og:image", content: "http://i.imgur.com/Cxl1Ii0.png" },
             { name: "image", content: "http://i.imgur.com/Cxl1Ii0.png" },
-            { property: "og:description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
-            { name: "description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { property: "og:description", content: "Unifacto bringer studerende og virksomheder tï¿½ttere pï¿½ hinanden" },
+            { name: "description", content: "Unifacto bringer studerende og virksomheder tï¿½ttere pï¿½ hinanden" },
             { property: "og:title", content: "Unifacto" },
             { name: "title", content: "Unifacto" },
             { property: "og:url", content: "https://www.unifacto.com/" },
             { property: "og:type", content: "website" },
             { property: "fb:app_id", content: "113893632577611" },
             { name: "twitter:title", content: "Unifacto" },
-            { name: "twitter:description", content: "Unifacto bringer studerende og virksomheder tættere på hinanden" },
+            { name: "twitter:description", content: "Unifacto bringer studerende og virksomheder tï¿½ttere pï¿½ hinanden" },
             { name: "twitter:image", content: "http://i.imgur.com/Cxl1Ii0.png" }
         ]);
 

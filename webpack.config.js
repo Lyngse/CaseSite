@@ -13,6 +13,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const AotPlugin = require('@ngtools/webpack').AotPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const { sharedModuleRules } = require('./webpack.additions');
 
@@ -22,7 +23,7 @@ module.exports = (env) => {
     const sharedConfig = {
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: ['.js', '.ts'] },
+        resolve: { extensions: [ '.js', '.ts' ] },
         output: {
             filename: '[name].js',
             publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
@@ -31,33 +32,9 @@ module.exports = (env) => {
             rules: [
                 { test: /\.ts$/, use: isDevBuild ? ['awesome-typescript-loader?silent=true', 'angular2-template-loader', 'angular2-router-loader'] : '@ngtools/webpack' },
                 { test: /\.html$/, use: 'html-loader?minimize=false' },
-                { test: /\.css$/, use: ['to-string-loader', 'css-loader'] },
-                //{ test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
-                {
-                    test: /\.(png|jpe?g|gif|ico)$/,
-                    loader: 'file-loader?name=assets/[name].[hash].[ext]'
-                },
-                {
-                    test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                    loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-                },
-                {
-                    test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                    loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-                },
-                {
-                    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                    loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
-                },
-                {
-                    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                    loader: 'file-loader'
-                },
-                {
-                    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                    loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-                }
-
+                { test: /\.css$/, use: [ 'to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize' ] },
+                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' },
+                ...sharedModuleRules
             ]
         },
         plugins: [new CheckerPlugin()]
@@ -80,19 +57,20 @@ module.exports = (env) => {
                 moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
             })
         ] : [
-                // Plugins that apply in production builds only
-                new webpack.optimize.UglifyJsPlugin(),
-                new AotPlugin({
-                    tsConfigPath: './tsconfig.json',
-                    entryModule: path.join(__dirname, 'ClientApp/app/app.module.browser#AppModule'),
-                    exclude: ['./**/*.server.ts']
-                })
-            ])
+            // new BundleAnalyzerPlugin(),
+            // Plugins that apply in production builds only
+            new webpack.optimize.UglifyJsPlugin(),
+            new AotPlugin({
+                tsConfigPath: './tsconfig.json',
+                entryModule: path.join(__dirname, 'ClientApp/app/app.module.browser#AppModule'),
+                exclude: ['./**/*.server.ts']
+            })
+        ])
     });
 
     // Configuration for server-side (prerendering) bundle suitable for running in Node
     const serverBundleConfig = merge(sharedConfig, {
-        resolve: { mainFields: ['main'] },
+        // resolve: { mainFields: ['main'] },
         entry: { 'main-server': './ClientApp/boot.server.ts' },
         plugins: [
             new webpack.DllReferencePlugin({
@@ -102,6 +80,10 @@ module.exports = (env) => {
                 name: './vendor'
             })
         ].concat(isDevBuild ? [] : [
+            new webpack.optimize.UglifyJsPlugin({
+              compress: false,
+              mangle: false
+            }),
             // Plugins that apply in production builds only
             new AotPlugin({
                 tsConfigPath: './tsconfig.json',
@@ -114,7 +96,7 @@ module.exports = (env) => {
             path: path.join(__dirname, './ClientApp/dist')
         },
         target: 'node',
-        devtool: 'inline-source-map'
+        devtool: isDevBuild ? 'inline-source-map': false
     });
 
     return [clientBundleConfig, serverBundleConfig];

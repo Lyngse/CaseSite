@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CaseSite.Models;
-using MailKit.Net.Smtp;
-using MimeKit;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.Dynamic;

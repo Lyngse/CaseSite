@@ -1,4 +1,4 @@
-﻿<shared-header></shared-header>
+<shared-header></shared-header>
 <div class="content">
     <router-outlet (deactivate)="onDeactivate()"></router-outlet>
 </div>
@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="cookie-alert" *ngIf="!acceptCookie">
+<div class="cookie-alert" *ngIf="!acceptCookie && isBrowser">
     <div [@flyInOut]="'in'">
         <div class="cookie">
             <div class="contentRow">
