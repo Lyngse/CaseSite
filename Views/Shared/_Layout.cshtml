@@ -1,45 +1,46 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <base href="/" />
-        <title>@ViewData["Title"]</title>
-        <meta charset="utf-8" />
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
-        <meta name="keywords" content="Unifacto,BrandCase,Casen,CV,Design,Erhverv,Erhvervserfaring,Freelance,Internetplatform,Job,Karriere,Katalog,Kommunikation,Konceptforslag,Konceptudvikling,Konkurrence,Konsulent,Konsulenten,Konsulentarbejde,Konsulentarbejdet,Konsulentjob,Konsulentjobbet,Konsulentplatform,Konsulentplatformen,Løsning,Løsninger,Løsningsforslag,Løsningsudarbejdelse,Markedsanalyse,Markedsføring,Marketing,Marketingforslag,Opgave,Opgaveløsning,Studerende,Studiearbejde,Studiejob,Studieliv,Studieopgaver,Studieorganisation,Studier,Studierelevant,Studierelevante" />
-        <meta name="application-name" content="Unifacto" />
-        <!--<meta name="image" content="http://imgur.com/nCDhPfE" />-->
-        
-        
-        @Html.Raw(ViewData["Meta"])
-        @Html.Raw(ViewData["Links"])
-        <link rel="icon" type="image/x-icon" href="~/favicon.ico">
-        @*<link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />*@
+<head>
+  <base href="/" />
+  <title>Unifacto</title>
+  <!--<title>@ViewData["Title"]</title>-->
+  <meta charset="utf-8" />
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="keywords" content="Unifacto,BrandCase,Casen,CV,Design,Erhverv,Erhvervserfaring,Freelance,Internetplatform,Job,Karriere,Katalog,Kommunikation,Konceptforslag,Konceptudvikling,Konkurrence,Konsulent,Konsulenten,Konsulentarbejde,Konsulentarbejdet,Konsulentjob,Konsulentjobbet,Konsulentplatform,Konsulentplatformen,Løsning,Løsninger,Løsningsforslag,Løsningsudarbejdelse,Markedsanalyse,Markedsføring,Marketing,Marketingforslag,Opgave,Opgaveløsning,Studerende,Studiearbejde,Studiejob,Studieliv,Studieopgaver,Studieorganisation,Studier,Studierelevant,Studierelevante" />
+  <meta name="application-name" content="Unifacto" />
+  <!--<meta name="image" content="http://imgur.com/nCDhPfE" />-->
 
-        <script async type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
-        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        @Html.Raw(ViewData["Styles"])
-    @*@Html.Raw(JavaScriptSnippet.FullScript)*@
-    </head>
-    <body>
-        @RenderBody()
 
-        @Html.Raw(ViewData["TransferData"])
-        @Html.Raw(ViewData["Scripts"])
+  @Html.Raw(ViewData["Meta"])
+  @Html.Raw(ViewData["Links"])
+  <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+  @*<link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />*@
 
-        @RenderSection("scripts", required: false)
-        <script>
-            (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  <script async type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script>
+  <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  @Html.Raw(ViewData["Styles"])
+  @*@Html.Raw(JavaScriptSnippet.FullScript)*@
+</head>
+  <body>
+    @RenderBody()
 
-            ga('create', 'UA-103666925-1', 'auto');
-            ga('send', 'pageview');
+    @Html.Raw(ViewData["TransferData"])
+    @Html.Raw(ViewData["Scripts"])
 
-        </script>
-    </body>
+    @RenderSection("scripts", required: false)
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-103666925-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+  </body>
 </html>
