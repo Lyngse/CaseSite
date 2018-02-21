@@ -1,4 +1,4 @@
-﻿import { Component, AfterViewInit, Input, OnChanges } from '@angular/core';
+import { Component, AfterViewInit, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meta } from '@angular/platform-browser';
 import { Business } from '../../model/business';
@@ -69,9 +69,6 @@ export class TaskDetailComponent implements AfterViewInit, OnChanges {
     }
 
     setMetaTags() {
-        this.metaService.updateTag({ content: this.business.logoUrl.replace(/ /g, "%20") }, "property='og:image'");
-        this.metaService.updateTag({ content: this.business.logoUrl.replace(/ /g, "%20") }, "name='image'");
-        this.metaService.updateTag({ content: this.business.logoUrl.replace(/ /g, "%20") }, "name='twitter:image'");
         this.metaService.updateTag({ content: this.task.title }, "name='description'");
         this.metaService.updateTag({ content: this.task.title }, "property='og:description'");
         this.metaService.updateTag({ content: this.task.title }, "name='twitter:description'");
