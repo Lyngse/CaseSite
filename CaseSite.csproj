@@ -27,6 +27,9 @@
     <None Remove="ClientApp\polyfills\server.polyfills.ts" />
     <None Remove="ClientApp\polyfills\temporary-aspnetcore-engine.ts" />
     <None Remove="ClientApp\app\student-profile\student-settings\student-settings.component.ts" />
+    <None Remove="Properties\PublishProfiles\CaseSite - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\Unifacto - FTP.pubxml" />
+    <None Remove="Properties\PublishProfiles\Unifacto - Web Deploy.pubxml" />
     <None Remove="yarn.lock" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
@@ -88,6 +91,7 @@
   <ItemGroup>
     <Folder Include="ClientApp\app\shared\hiw-step-three\" />
     <Folder Include="Connected Services\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\shared\hiw-step-four\hiw-step-four.component.ts" />

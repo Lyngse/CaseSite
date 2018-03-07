@@ -1,4 +1,4 @@
-﻿h2 {
+h2 {
     margin: 0;
 }
 
@@ -24,7 +24,7 @@ form {
 
 .search-btn {
     border: none;
-    width: 60px;
+    width: 59px;
     background-color: #E0E0E0;
     transition: all 0.2s;
     height: 100%;
